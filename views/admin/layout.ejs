@@ -1,0 +1,32 @@
+<%- include('../_partial/head') %>
+<div id="main">
+          <% if (layout == 'dashboard') { %>
+            <%- include('../admin/_partial/dashboard') %>
+          <% } else if (layout == 'announcement') { %>
+            <%- include('../admin/_partial/announcement') %>
+          <% } else if (layout == 'contests') { %>
+            <%- include('../admin/_partial/contests') %>
+          <% } else if (layout == 'accounts') { %>
+            <%- include('../admin/_partial/account') %>
+          <% } else if (layout == 'grade') { %>
+            <%- include('../admin/_partial/grade') %>
+          <% } else if (layout == 'problems') { %>
+            <%- include('../admin/_partial/problems') %>
+          <% } else if (layout == 'edit_problem') { %>
+            <%- include('../admin/_partial/problem') %>
+          <% } else if (layout == 'edit_contest') { %>
+            <%- include('../admin/_partial/contest') %>
+          <% } else if (layout == 'new_problem') { %>
+            <%- include('../admin/_partial/newproblem') %>
+          <% } else if (layout == 'new_contest') { %>
+            <%- include('../admin/_partial/newcontest') %>
+          <% } else if (layout == 'new_account') { %>
+            <%- include('../admin/_partial/newaccount') %>
+          <% } %>
+</div>
+
+    <%- include('../_partial/mobile-nav') %>
+    <%- include('../_partial/footer') %>
+    <%- include('../_partial/after-footer') %>
+</body>
+</html>

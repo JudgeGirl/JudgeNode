@@ -1,0 +1,38 @@
+<div class="header">
+	<h1 class='article-title'>Edit Profile</h1>
+	<h2>Update your profile so friends can find you.</h2>
+</div>
+<div class="content">
+
+<h2><%- sysmsg %></h2>
+
+<form action="edit" method="post" class="pure-form  pure-form-aligned">
+    <fieldset>
+        <legend>Profile</legend>
+
+        <div class="pure-control-group">
+			<label for="lgn"><%= __('Username') %></label>
+			<input class="pure-input-2-3" type="text" name="lgn" id="lgn" style="opacity: 0.5;" value="<%-  userinfo.info.lgn %>" disabled/>
+		</div>
+
+		<div class="pure-control-group">
+			<label for="pwd"><%= __('New Password') %></label>
+			<input class="pure-input-2-3" type="password" name="pwd" id="pwd" />
+		</div>
+
+		<div class="pure-control-group">
+			<label for="repwd"><%= __('Retype New Password') %></label>
+			<input class="pure-input-2-3" type="password" name="repwd" id="repwd" />
+		</div>
+
+		<div class="pure-control-group">
+			<label for"motto><%= __('Motto') %></label>
+			<textarea class="pure-input-2-3" name="motto" id="motto"><%- userinfo.info.motto %></textarea>
+		</div>
+
+		<div class="pure-controls">
+        	<button type="submit" name="submit" id="submit" class="pure-button pure-button-primary"><%= __('Submit') %></button>
+        </div>
+    </fieldset>
+</form>
+</div>

@@ -1,0 +1,48 @@
+<div class="header">
+	<h1 class='article-title'><%= __('User') %></h1>
+	<h2><%- userinfo.info.lgn  %></h2>
+</div>
+<div class="content">
+
+<table class="pure-table pure-table-bordered" style='width: 100%;'>
+	<tbody>
+	<tr>
+		<th><%= __('Class') %></th>
+		<% if (userinfo.info.class == null || userinfo.info.class == '') { %>
+			<td><%= __('Administrator') %></td>
+		<% } else { %>
+			<% if (userinfo.info.class <= 2) { %>
+				<td><%= __('Class {{number}}', {number: userinfo.info.class}) %></td>
+			<% } else { %>
+				<td><%= __('Visitor Class {{number}}', {number: userinfo.info.class-2}) %></td>
+			<% } %>
+		<% } %>
+	</tr>
+	<tr>
+			<th><%= __('Motto') %></td>
+			<td><%= userinfo.info.motto %></td>
+	</tr>
+	<tr>
+		<th><%= __('#Solved List') %></td>
+		<td>
+			<% for (var i = 0; i < userinfo.solve.length; i++) { %>
+				<a href='/submissions?pid=<%- userinfo.solve[i].pid %>&uid=<%- userinfo.info.uid %>'><%- userinfo.solve[i].pid %></a>
+			<% } %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= __('#Solved') %></th>
+		<td><%- userinfo.solve.length %></td>
+	</tr>
+	<tr>
+		<th><%= __('IP') %></th>
+		<td><%- userinfo.info.ip %></td>
+	</tr>
+	<tr>
+		<th><%= __('Last Login') %></th>
+		<td><%- config.unitConvert('date', new Date(userinfo.info.ts2)) %></td>
+	</tr>
+	</tbody>
+</table>
+</div>
+

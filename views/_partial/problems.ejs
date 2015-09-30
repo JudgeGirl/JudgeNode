@@ -1,0 +1,85 @@
+<%
+	for (var row = 0 ; row < problem_list.length ; row++) {
+		problem_list[row].score = -1;
+	}
+%>
+<%
+	for (var row = 0 ; row < score.length ; row++ ) {
+		var tmp = problem_list.filter(function(x){ return x.pid === score[row].pid});
+		if (tmp.length == 0)
+			continue;
+		for (var i in tmp)
+			tmp[i].score = score[row].score;
+	}
+%>
+<%
+	problem_list = problem_list.filter(function(x){
+		var all_depend = depend.filter(function(d){
+			return d.pid === x.pid;
+		});
+		if (user["uid"] >= 0 && user["class"] == null)
+			return true;
+		for( var row = 0 ; row < all_depend.length ; row++ ){
+			if( problem_list.filter(function(y){ return y.pid === all_depend[row].depend_pid;})[0].score !== 100 ){
+				return false;
+			}
+		}
+
+		return true;
+	});
+
+	for( var row = 0 ; row < problem_list.length ; row++ ){
+		var tmp = submissions.filter(function(x){ return x.pid == problem_list[row].pid; });
+		problem_list[row].count = 0;
+		for (var i in tmp)
+			problem_list[row].count = tmp[i].submissions_count;
+	}
+
+%>
+<div class="header">
+	<h1><%= __('Problems') %></h1>
+	<h2>You have to belive in yourself. That's the secret of success. </h2>
+</div>
+<div class="content">
+<% for (var level = 0 ; level < level_list.length ; level++ ) { %>
+	<h2 class="content-subhead"> Level <%- level_list[level].level %>. <%- level_list[level].ttl %> </h2>
+	<div class="pure-g">
+		<div class="pure-u-1-1">
+		<table class="pure-table" style="width: 100%">
+			<thead>
+			<tr>
+				<th style="width: 5%"></th>
+	           	<th style="width: 5%">#</th>
+	            <th style="width: 75%"><%= __('Problem Title') %></th>
+	            <th style="width: 15%"><%= __('Subs') %></th>
+	        </tr>
+	        </thead>
+		<tbody>
+		<% var original_problem_list = problem_list; %>
+		<% problem_list = problem_list.filter(function(x){ return x.level == level_list[level].level; }); %>
+		<% for (var row = 0; row < problem_list.length; row++ ) { %>
+			<tr class="<%- row%2 == 0 ? "" : "pure-table-odd" %>">
+	            <% var score = problem_list[row].score; %>
+				<td>
+					<% if (score == 100) { %>
+						<i class="fa fa-check" style="color: green;"></i>
+					<% } else if (score >= 0) { %>
+						<i class="fa fa-times" style="color: red;"></i>
+					<% } %>
+				</td>
+				<td><%- problem_list[row].pid %></td>
+	            <td>
+	            	<a href="problem/0/<%- problem_list[row].pid %>" class="name">
+						<%- problem_list[row].ttl %> 
+					</a>
+	            </td>
+	            <td><%- problem_list[row].count %></td>
+			</tr>
+		<% } %>
+		<% problem_list = original_problem_list; %>
+		</tbody>
+		</table>
+		</div>
+	</div>
+<% } %>
+</div>

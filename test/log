@@ -1,0 +1,3330 @@
+[ RowDataPacket {
+    uid: 239,
+    ts1: null,
+    ts2: 1442800889125,
+    lgn: 'B00401005',
+    pwd: '3b160c7e72763158fe44ac2bb8b0486f275a1bf2',
+    motto: 'I want a Lamborghini LP 750-4',
+    email: 'b01902093@ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:36.230.242.213' } ]
+[ RowDataPacket {
+    uid: 228,
+    ts1: null,
+    ts2: 1442805482723,
+    lgn: 'B00902094',
+    pwd: '6aa26db11e1d63066193533411df3e19bc9032fa',
+    motto: '',
+    email: 'B00902094@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.158' } ]
+[ RowDataPacket {
+    uid: 222,
+    ts1: null,
+    ts2: null,
+    lgn: 'B01902136',
+    pwd: 'c0cf542707f6dba265cf5f52fa09b8f99b8c535b',
+    motto: '',
+    email: 'B01902136@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 230,
+    ts1: null,
+    ts2: 1443022194672,
+    lgn: 'B02902019',
+    pwd: '8cb2237d0679ca88db6464eac60da96345513964',
+    motto: 'yeeeeeeee',
+    email: 'B02902019@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:180.177.35.64' } ]
+[ RowDataPacket {
+    uid: 251,
+    ts1: null,
+    ts2: 1443147011894,
+    lgn: 'B02902027',
+    pwd: 'ceea1e9b5308cdeafc72a82db9cb4611212cc61b',
+    motto: '',
+    email: 'B02902027@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 149,
+    ts1: null,
+    ts2: null,
+    lgn: 'B02902040',
+    pwd: '9a602750c98222bc3f9d1886934e6486fdf140ee',
+    motto: '',
+    email: 'B02902040@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 252,
+    ts1: null,
+    ts2: 1443075766524,
+    lgn: 'B02902045',
+    pwd: 'b05cec1d2890cdfb4d62d858931e4306c5d8c74c',
+    motto: '',
+    email: 'B02902045@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 223,
+    ts1: null,
+    ts2: 1443013886786,
+    lgn: 'B02902080',
+    pwd: 'e5cc0fa2053db7e21aebf36a013a7e78cefd101c',
+    motto: '',
+    email: 'B02902080@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.218.69' } ]
+[ RowDataPacket {
+    uid: 233,
+    ts1: null,
+    ts2: 1443097162332,
+    lgn: 'B02902095',
+    pwd: '4d20a0cead4636c2c90fe3e53d5d2dac27711f9f',
+    motto: '------------------------',
+    email: 'B02902095@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.103' } ]
+[ RowDataPacket {
+    uid: 309,
+    ts1: null,
+    ts2: 1442926571853,
+    lgn: 'B02902113',
+    pwd: 'f2233a65028a98819ec45027d87854fd73abace2',
+    motto: '??!!',
+    email: 'B02902113@ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.252.217' } ]
+[ RowDataPacket {
+    uid: 225,
+    ts1: null,
+    ts2: 1442919665080,
+    lgn: 'B02902120',
+    pwd: 'cf76e89ba82fac9391c594407248c6b6dfb47f6f',
+    motto: 'Tetap Bersemangat!!!!',
+    email: 'B02902120@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 226,
+    ts1: null,
+    ts2: 1442804543339,
+    lgn: 'B02902122',
+    pwd: '18fd663583856494b5bf110f09a01ecc73073aa1',
+    motto: '',
+    email: 'B02902122@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.158' } ]
+[ RowDataPacket {
+    uid: 227,
+    ts1: null,
+    ts2: 1443115214359,
+    lgn: 'B02902128',
+    pwd: '744a06fa83f8dd286211d3b2e65e8790d5c238e2',
+    motto: '',
+    email: 'B02902128@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.250.78' } ]
+[ RowDataPacket {
+    uid: 232,
+    ts1: null,
+    ts2: 1443106428755,
+    lgn: 'B03303087',
+    pwd: 'b9cd6e1af414804dd8bc3b9db30191baa6bf18c9',
+    motto: '',
+    email: 'B03303087@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:1.161.230.77' } ]
+[ RowDataPacket {
+    uid: 229,
+    ts1: null,
+    ts2: 1442927671138,
+    lgn: 'B03501025',
+    pwd: '3ceb553d8a4737467cfa43084c65af14d136b252',
+    motto: '',
+    email: 'B03501025@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 253,
+    ts1: null,
+    ts2: 1442926711812,
+    lgn: 'B03502040',
+    pwd: '1e00ad5c8ad74cc4b7a975ee51a89d12cafd9c52',
+    motto: 'for the serendipity',
+    email: 'B03502040@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:220.137.19.40' } ]
+[ RowDataPacket {
+    uid: 267,
+    ts1: null,
+    ts2: 1443096009491,
+    lgn: 'B03504051',
+    pwd: 'e60eea48ebb9c69c08a6b69b7c3e34f81689ed9c',
+    motto: '',
+    email: 'B03504051@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.250.38' } ]
+[ RowDataPacket {
+    uid: 224,
+    ts1: null,
+    ts2: 1443096277074,
+    lgn: 'B02902110',
+    pwd: '83bc2f22f599f56a450aba7f5cc4fa180cdf434c',
+    motto: 'work hard play hard',
+    email: 'B02902110@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.248.38' } ]
+[ RowDataPacket {
+    uid: 262,
+    ts1: null,
+    ts2: 1443141914244,
+    lgn: 'B03902001',
+    pwd: '0d694821dfc4253e315fb2a2c2140617f6722480',
+    motto: '',
+    email: 'B03902001@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.155' } ]
+[ RowDataPacket {
+    uid: 244,
+    ts1: null,
+    ts2: 1442804942652,
+    lgn: 'B03902002',
+    pwd: 'bcfa897a47ab788c34a0776449761478482dae0a',
+    motto: '',
+    email: 'B03902002@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.156' } ]
+[ RowDataPacket {
+    uid: 241,
+    ts1: null,
+    ts2: 1442894817428,
+    lgn: 'B03902014',
+    pwd: '1710763d4feb0d877fd0a3c8115e1e75c4840b98',
+    motto: 'PANGFENG ROCKS',
+    email: 'B03902014@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.99' } ]
+[ RowDataPacket {
+    uid: 216,
+    ts1: null,
+    ts2: 1443117022596,
+    lgn: 'B03902016',
+    pwd: '6bf8d3eec95a27c48f71c7be23530f08cc5781d2',
+    motto: '',
+    email: 'B03902016@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:58.114.184.104' } ]
+[ RowDataPacket {
+    uid: 150,
+    ts1: null,
+    ts2: null,
+    lgn: 'B03902018',
+    pwd: '08ba2938b49a762ab51ea02f34aabbda6d13cb14',
+    motto: '',
+    email: 'B03902018@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 254,
+    ts1: null,
+    ts2: 1443113596223,
+    lgn: 'B03902020',
+    pwd: 'da8a23cf02223bea72177d8d2f21dcd0d6173e96',
+    motto: 'second time, hope to be the last time',
+    email: 'B03902020@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:223.136.106.159' } ]
+[ RowDataPacket {
+    uid: 297,
+    ts1: null,
+    ts2: 1443099673469,
+    lgn: 'B03902021',
+    pwd: '9bc70694a9930ef858e65f212b4806652cbeac47',
+    motto: 'keep coding',
+    email: 'B03902021@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.5.182' } ]
+[ RowDataPacket {
+    uid: 217,
+    ts1: null,
+    ts2: 1443143473229,
+    lgn: 'B03902026',
+    pwd: '012bf1ed44290cacf70aa43b7bb7d1dff61ae3cc',
+    motto: '',
+    email: 'B03902026@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 259,
+    ts1: null,
+    ts2: 1443005850677,
+    lgn: 'B03901078',
+    pwd: 'f972c9f6b2fdda1260bb209272fba7899799d89a',
+    motto: '',
+    email: 'B03901078@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.248.61' } ]
+[ RowDataPacket {
+    uid: 245,
+    ts1: null,
+    ts2: 1443064785853,
+    lgn: 'B03902032',
+    pwd: '291fd099b6820ddb6e5739c8864421579158b31b',
+    motto: '',
+    email: 'B03902032@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.99' } ]
+[ RowDataPacket {
+    uid: 250,
+    ts1: null,
+    ts2: 1443099450901,
+    lgn: 'B03902037',
+    pwd: '5c4ef69ced10b74279493b59241e7db6d0308c7c',
+    motto: '',
+    email: 'B03902037@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.1.50' } ]
+[ RowDataPacket {
+    uid: 266,
+    ts1: null,
+    ts2: 1442804583468,
+    lgn: 'B03902041',
+    pwd: 'cf30b9944158c0bff9aa9f4a4c4b19e9d34ffaa4',
+    motto: '',
+    email: 'B03902041@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.158' } ]
+[ RowDataPacket {
+    uid: 218,
+    ts1: null,
+    ts2: null,
+    lgn: 'B03902052',
+    pwd: 'c8dc97f7dd84ce3a78989da9a83fc91b28a4efcd',
+    motto: '',
+    email: 'B03902052@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 219,
+    ts1: null,
+    ts2: 1443147830778,
+    lgn: 'B03902056',
+    pwd: '05510aaf4f6639eee60de84d0291789d1a64eb38',
+    motto: '',
+    email: 'B03902056@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.106' } ]
+[ RowDataPacket {
+    uid: 260,
+    ts1: null,
+    ts2: 1442851808021,
+    lgn: 'B03902058',
+    pwd: 'a6bc25036520f648d928351d277eeb4ddb4d45c3',
+    motto: 'Louyeeeees Vuyeeeeetton',
+    email: 'B03902058@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.244.227' } ]
+[ RowDataPacket {
+    uid: 249,
+    ts1: null,
+    ts2: 1443111714622,
+    lgn: 'B03902065',
+    pwd: '51d2a88a81281223bb84d62b7dfb76ab206cac57',
+    motto: '',
+    email: 'B03902065@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.193.250' } ]
+[ RowDataPacket {
+    uid: 248,
+    ts1: null,
+    ts2: 1443079031924,
+    lgn: 'B03902031',
+    pwd: 'a3d4ffb52712b5005d14e7f7843fa8b9b560c3ee',
+    motto: '',
+    email: 'B03902031@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.3.101' } ]
+[ RowDataPacket {
+    uid: 258,
+    ts1: null,
+    ts2: 1442824715194,
+    lgn: 'B03902067',
+    pwd: '45298614ee2a1c7227105c33d561372012dda939',
+    motto: '',
+    email: 'B03902067@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.3.194' } ]
+[ RowDataPacket {
+    uid: 220,
+    ts1: null,
+    ts2: 1443143959032,
+    lgn: 'B03902088',
+    pwd: '571568263b9bae46da14ef87a4e46a4d49050230',
+    motto: '',
+    email: 'B03902088@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.99' } ]
+[ RowDataPacket {
+    uid: 264,
+    ts1: null,
+    ts2: 1443088528623,
+    lgn: 'B03902093',
+    pwd: 'ebb675a839ab2fc5216525ae873c232c82d788c8',
+    motto: '',
+    email: 'B03902093@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.1.12' } ]
+[ RowDataPacket {
+    uid: 242,
+    ts1: null,
+    ts2: 1443078280713,
+    lgn: 'B03902096',
+    pwd: 'df6db7f348d39b2f9e51b423fc7277b19fbe08bc',
+    motto: '&&&&&&&&&&--------------------Daddy\'s comming------------------&&&&&&&&&&',
+    email: 'B03902096@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 255,
+    ts1: null,
+    ts2: 1442807154404,
+    lgn: 'B03902098',
+    pwd: '3cf241256d405da6c0a0d73786bb318974653f66',
+    motto: 'as above, so below',
+    email: 'B03902098@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.158' } ]
+[ RowDataPacket {
+    uid: 246,
+    ts1: null,
+    ts2: 1442927600855,
+    lgn: 'B03902099',
+    pwd: '3633080cde949faa559f271ae93ed22a83a1803a',
+    motto: '',
+    email: 'B03902099@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:180.176.123.40' } ]
+[ RowDataPacket {
+    uid: 296,
+    ts1: null,
+    ts2: null,
+    lgn: 'B03902101',
+    pwd: '580f9313e0c2bf1c8300bc68cf20355396806904',
+    motto: '',
+    email: 'B03902101@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 261,
+    ts1: null,
+    ts2: 1443147144690,
+    lgn: 'B03902103',
+    pwd: '845de44a5483ec0d6e38093d709ed23fbb9978bb',
+    motto: 'I will pass this class!!!',
+    email: 'B03902103@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:49.214.18.188' } ]
+[ RowDataPacket {
+    uid: 231,
+    ts1: null,
+    ts2: 1443103544684,
+    lgn: 'B03902084',
+    pwd: 'aadf8de53ed208e844b1ed79d706a48aca3b3808',
+    motto: '',
+    email: 'B03902084@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:36.225.237.121' } ]
+[ RowDataPacket {
+    uid: 256,
+    ts1: null,
+    ts2: 1443024670453,
+    lgn: 'B03902123',
+    pwd: 'e0c95748a455c27a80fd289269120d4944d1f318',
+    motto: 'unlimited blade works',
+    email: 'B03902123@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.217.18' } ]
+[ RowDataPacket {
+    uid: 263,
+    ts1: null,
+    ts2: 1443104242369,
+    lgn: 'B03902126',
+    pwd: '068ff160ac6d49b480f8203e581c80183d509604',
+    motto: 'WA shall be slaughtered',
+    email: 'B03902126@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:111.240.223.17' } ]
+[ RowDataPacket {
+    uid: 278,
+    ts1: null,
+    ts2: 1442946728786,
+    lgn: 'B03902129',
+    pwd: '3722b7bc7c38ed65afe4bae11121dd6737ecf9d7',
+    motto: 'Hudi',
+    email: 'B03902129@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:61.230.128.11' } ]
+[ RowDataPacket {
+    uid: 243,
+    ts1: null,
+    ts2: 1442805430867,
+    lgn: 'B03B02011',
+    pwd: '3640f37afb966a097bc9430d226bcc91dcef9f40',
+    motto: 'Nighteye',
+    email: 'B03B02011@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.158' } ]
+[ RowDataPacket {
+    uid: 151,
+    ts1: null,
+    ts2: 1443102699020,
+    lgn: 'B04902002',
+    pwd: 'faac39a1bc3f3b7cd572adeb76068c7ce7814d09',
+    motto: 'I want to improve my programming skill!!!',
+    email: 'B04902002@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:1.162.62.114' } ]
+[ RowDataPacket {
+    uid: 152,
+    ts1: null,
+    ts2: 1443096778015,
+    lgn: 'B04902004',
+    pwd: 'd3346e73db93b103dfc78e79b531bde47d7f7da8',
+    motto: 'Gan Lin Lao Shih',
+    email: 'B04902004@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:123.193.42.128' } ]
+[ RowDataPacket {
+    uid: 153,
+    ts1: null,
+    ts2: 1443096099656,
+    lgn: 'B04902006',
+    pwd: '074069ce79513f707db9bcd2a0feb3e1e01a67b4',
+    motto: 'blablablablabla',
+    email: 'B04902006@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.6.120' } ]
+[ RowDataPacket {
+    uid: 221,
+    ts1: null,
+    ts2: 1442825604843,
+    lgn: 'B03902114',
+    pwd: '7627145b9b367c36cd071d9573c8b9fc508fee1c',
+    motto: '',
+    email: 'B03902114@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.211.135' } ]
+[ RowDataPacket {
+    uid: 247,
+    ts1: null,
+    ts2: 1442804426723,
+    lgn: 'B03902112',
+    pwd: '6d944d9d522b5101f753a55949285d19320dd8da',
+    motto: '',
+    email: 'B03902112@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.158' } ]
+[ RowDataPacket {
+    uid: 155,
+    ts1: null,
+    ts2: 1443144989887,
+    lgn: 'B04902010',
+    pwd: '3ea5b2518af3c6a349bd28c14d5e608d2ce63483',
+    motto: 'Desperado',
+    email: 'B04902010@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 156,
+    ts1: null,
+    ts2: 1443087833530,
+    lgn: 'B04902012',
+    pwd: '6d136a27479a9f25c717fb30dc1c45f728c63df5',
+    motto: 'Harasho.',
+    email: 'B04902012@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.2.24' } ]
+[ RowDataPacket {
+    uid: 157,
+    ts1: null,
+    ts2: 1443145730550,
+    lgn: 'B04902014',
+    pwd: 'd8f0729064639c253ee256140fedd3436b739d6e',
+    motto: 'JJ',
+    email: 'B04902014@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.99' } ]
+[ RowDataPacket {
+    uid: 158,
+    ts1: null,
+    ts2: 1443104024849,
+    lgn: 'B04902016',
+    pwd: '3099c2b8f86b29e50b5d2cb458015775ff795b65',
+    motto: 'GGGGGGGGGGGGGGGGGGGGGGGGGG',
+    email: 'B04902016@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:223.137.11.203' } ]
+[ RowDataPacket {
+    uid: 159,
+    ts1: null,
+    ts2: 1443098480240,
+    lgn: 'B04902018',
+    pwd: 'c6a486ea2d22ce9a97477393064e924320b0239a',
+    motto: 'A Tool Man (NTUATM)',
+    email: 'B04902018@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:58.114.204.22' } ]
+[ RowDataPacket {
+    uid: 265,
+    ts1: null,
+    ts2: 1443141951441,
+    lgn: 'B04902019',
+    pwd: 'f0942e91d3be729f141d45e6d97d9d61c2e5ee43',
+    motto: '',
+    email: 'B04902019@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:61.231.178.43' } ]
+[ RowDataPacket {
+    uid: 160,
+    ts1: null,
+    ts2: 1443005938221,
+    lgn: 'B04902020',
+    pwd: '62712f408729b74d7441132d4094730d627cd25f',
+    motto: '',
+    email: 'B04902020@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:1.163.47.37' } ]
+[ RowDataPacket {
+    uid: 161,
+    ts1: null,
+    ts2: 1443144075226,
+    lgn: 'B04902022',
+    pwd: '0eae4942f48d4dff36aacffa559148704290241d',
+    motto: 'I, am, so, dead.',
+    email: 'B04902022@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 154,
+    ts1: null,
+    ts2: 1442914148211,
+    lgn: 'B04902008',
+    pwd: 'cc7793142bc884189f67f292ac96edfec8f0b638',
+    motto: '',
+    email: 'B04902008@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:117.19.21.73' } ]
+[ RowDataPacket {
+    uid: 163,
+    ts1: null,
+    ts2: 1443147406559,
+    lgn: 'B04902026',
+    pwd: '79631c02590ae7f54f8f0a85f544a2eb16b16e92',
+    motto: '',
+    email: 'B04902026@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:111.248.165.89' } ]
+[ RowDataPacket {
+    uid: 164,
+    ts1: null,
+    ts2: 1443113536626,
+    lgn: 'B04902028',
+    pwd: '999a306a173202a1ef5b113ddcf5032a6f6ada03',
+    motto: 'Welcome to the revelation',
+    email: 'B04902028@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:118.161.240.132' } ]
+[ RowDataPacket {
+    uid: 165,
+    ts1: null,
+    ts2: 1443009166084,
+    lgn: 'B04902030',
+    pwd: '851abc74efd37b281e18c114d29f9b4db5352650',
+    motto: 'INNERSOUND',
+    email: 'B04902030@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:220.136.38.107' } ]
+[ RowDataPacket {
+    uid: 167,
+    ts1: null,
+    ts2: 1443146603443,
+    lgn: 'B04902034',
+    pwd: '895b317c76b8e504c2fb32dbb4420178f60ce321',
+    motto: '',
+    email: 'B04902034@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:175.159.97.181' } ]
+[ RowDataPacket {
+    uid: 168,
+    ts1: null,
+    ts2: 1443140126316,
+    lgn: 'B04902036',
+    pwd: '59ace2323d52a66a114c88d3703f382693be366d',
+    motto: '',
+    email: 'B04902036@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.241.57' } ]
+[ RowDataPacket {
+    uid: 169,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902038',
+    pwd: 'cf0eeaeba8a5d48cd778c040c3c7d9bc6c6706b0',
+    motto: '',
+    email: 'B04902038@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 170,
+    ts1: null,
+    ts2: 1443011013245,
+    lgn: 'B04902040',
+    pwd: '6988b09ec6c1067e4c1d33ac3ed7483af1d6a202',
+    motto: '',
+    email: 'B04902040@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.105' } ]
+[ RowDataPacket {
+    uid: 162,
+    ts1: null,
+    ts2: 1442934341736,
+    lgn: 'B04902024',
+    pwd: '1e079939075558c20f5de865e7be83689cf05cc4',
+    motto: 'wintersnow',
+    email: 'B04902024@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:114.37.92.108' } ]
+[ RowDataPacket {
+    uid: 171,
+    ts1: null,
+    ts2: 1442884909984,
+    lgn: 'B04902042',
+    pwd: 'bb0860ed63b916b677bc49ea5b2651aa1c5cbf5c',
+    motto: 'el psy congroo',
+    email: 'B04902042@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.241.55' } ]
+[ RowDataPacket {
+    uid: 173,
+    ts1: null,
+    ts2: 1443148170212,
+    lgn: 'B04902046',
+    pwd: 'ef5538ab6fe5e08c38996fd4bc2e221177557078',
+    motto: 'coding',
+    email: 'B04902046@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:49.214.168.129' } ]
+[ RowDataPacket {
+    uid: 174,
+    ts1: null,
+    ts2: 1443011138345,
+    lgn: 'B04902048',
+    pwd: '16758660bd4ae402f269ae960afc6bf2216224e6',
+    motto: 'Join Ingress Resistance!',
+    email: 'B04902048@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.241.211' } ]
+[ RowDataPacket {
+    uid: 175,
+    ts1: null,
+    ts2: 1442846355558,
+    lgn: 'B04902050',
+    pwd: '78ba11366c216c319f2dac3bf238c0263acbcd56',
+    motto: '',
+    email: 'B04902050@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:223.136.67.206' } ]
+[ RowDataPacket {
+    uid: 176,
+    ts1: null,
+    ts2: 1443002108743,
+    lgn: 'B04902052',
+    pwd: '5cf3eca336c3093eb0be828259233bfadc5d7d4a',
+    motto: '',
+    email: 'B04902052@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.240.125' } ]
+[ RowDataPacket {
+    uid: 177,
+    ts1: null,
+    ts2: 1443109762276,
+    lgn: 'B04902054',
+    pwd: '836f7b206b53a31539504cedbdbe806f9262665d',
+    motto: 'TTT',
+    email: 'B04902054@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:101.14.180.144' } ]
+[ RowDataPacket {
+    uid: 178,
+    ts1: null,
+    ts2: 1443053719105,
+    lgn: 'B04902056',
+    pwd: 'a46b25dead4d9e399edd30f96801ed7458dbc755',
+    motto: '',
+    email: 'B04902056@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.239.160' } ]
+[ RowDataPacket {
+    uid: 179,
+    ts1: null,
+    ts2: 1443141932787,
+    lgn: 'B04902058',
+    pwd: '501ede16be3e3f396ba91ccb1a98c81f904774ec',
+    motto: '',
+    email: 'B04902058@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.196.65' } ]
+[ RowDataPacket {
+    uid: 181,
+    ts1: null,
+    ts2: 1443022943958,
+    lgn: 'B04902062',
+    pwd: '52ff060c4a7ade554e4395423c0085033d009557',
+    motto: 'Now you see me.',
+    email: 'B04902062@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.236.176' } ]
+[ RowDataPacket {
+    uid: 172,
+    ts1: null,
+    ts2: 1442921471357,
+    lgn: 'B04902044',
+    pwd: '0ab010134737f6b86469e668b715294e2d2bc871',
+    motto: '',
+    email: 'B04902044@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.105' } ]
+[ RowDataPacket {
+    uid: 182,
+    ts1: null,
+    ts2: 1443095807197,
+    lgn: 'B04902064',
+    pwd: '36a6b6fa8cd77e6653fcbda540acc0299106eb4e',
+    motto: 'Veni,  vidi, vici',
+    email: 'B04902064@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.196.94' } ]
+[ RowDataPacket {
+    uid: 183,
+    ts1: null,
+    ts2: 1443096975600,
+    lgn: 'B04902066',
+    pwd: '7e11f06c643a9b98b3253da2429fa20114b97e6f',
+    motto: '',
+    email: 'B04902066@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.196.163' } ]
+[ RowDataPacket {
+    uid: 184,
+    ts1: null,
+    ts2: 1443108181309,
+    lgn: 'B04902068',
+    pwd: '2f01f9a20860de7accc29720f6039dd76090aa2a',
+    motto: 'MMHOH',
+    email: 'B04902068@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.241.89' } ]
+[ RowDataPacket {
+    uid: 185,
+    ts1: null,
+    ts2: 1442836848709,
+    lgn: 'B04902070',
+    pwd: 'c502716b9c197f69524c248591a962df53c38186',
+    motto: '',
+    email: 'B04902070@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.240.184' } ]
+[ RowDataPacket {
+    uid: 186,
+    ts1: null,
+    ts2: 1443100064744,
+    lgn: 'B04902072',
+    pwd: '3575fac13f03b1bce469bbaeaeb5981f89b6ae45',
+    motto: '',
+    email: 'B04902072@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.105' } ]
+[ RowDataPacket {
+    uid: 187,
+    ts1: null,
+    ts2: 1443145637707,
+    lgn: 'B04902074',
+    pwd: 'ee89994622ba43b49454baebaca9854bc894ed9c',
+    motto: 'mars',
+    email: 'B04902074@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.239.27' } ]
+[ RowDataPacket {
+    uid: 188,
+    ts1: null,
+    ts2: 1443013241956,
+    lgn: 'B04902076',
+    pwd: 'dd01b8aef0ddd4153b351f325922d8ed5e6aacd9',
+    motto: '',
+    email: 'B04902076@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:175.182.141.14' } ]
+[ RowDataPacket {
+    uid: 180,
+    ts1: null,
+    ts2: 1443145518370,
+    lgn: 'B04902060',
+    pwd: '2031b1ed5ab03464dcff1ddcadd65756d40be1ee',
+    motto: '',
+    email: 'B04902060@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.239.221' } ]
+[ RowDataPacket {
+    uid: 189,
+    ts1: null,
+    ts2: 1443099800381,
+    lgn: 'B04902078',
+    pwd: 'd451e0a4f6dbee2e0577bba4687b974453c63a99',
+    motto: '',
+    email: 'B04902078@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:59.115.203.72' } ]
+[ RowDataPacket {
+    uid: 191,
+    ts1: null,
+    ts2: 1443143505717,
+    lgn: 'B04902082',
+    pwd: '9084ca024989cb9945f56d4cd1f022926f99c6fc',
+    motto: 'OAO',
+    email: 'B04902082@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.239.45' } ]
+[ RowDataPacket {
+    uid: 192,
+    ts1: null,
+    ts2: 1443088108882,
+    lgn: 'B04902084',
+    pwd: '13ada4d2b9731fcbca1838c6ea31c62a49d771f0',
+    motto: 'I\'m Sherlocked',
+    email: 'B04902084@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.5.222' } ]
+[ RowDataPacket {
+    uid: 193,
+    ts1: null,
+    ts2: 1443075715755,
+    lgn: 'B04902086',
+    pwd: '8f29f2dbd042722167c352b0f6ceeea2ab8af611',
+    motto: '',
+    email: 'B04902086@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.241.233' } ]
+[ RowDataPacket {
+    uid: 194,
+    ts1: null,
+    ts2: 1443143573828,
+    lgn: 'B04902088',
+    pwd: '806d0e6a385e6742353df40d8c7de5ac7574a639',
+    motto: '',
+    email: 'B04902088@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:218.161.0.187' } ]
+[ RowDataPacket {
+    uid: 195,
+    ts1: null,
+    ts2: 1443080953930,
+    lgn: 'B04902090',
+    pwd: '1266dd2744ea7f6138f161eb83095ba735f3d63f',
+    motto: 'Yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeè',
+    email: 'B04902090@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:119.14.36.72' } ]
+[ RowDataPacket {
+    uid: 196,
+    ts1: null,
+    ts2: 1443074236024,
+    lgn: 'B04902092',
+    pwd: '6bd7c846a3cc0007c9fc0a0bef7342f448b2d934',
+    motto: 'I \r\nI try 16 times on Mixed Fraction......',
+    email: 'B04902092@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 197,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902094',
+    pwd: '0953dba8e948bbdf1227b4a3310789ad407e5bb6',
+    motto: '',
+    email: 'B04902094@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 190,
+    ts1: null,
+    ts2: 1443112369309,
+    lgn: 'B04902080',
+    pwd: '2add772f2a2c5f27e23982ff0db7b44aae3e0941',
+    motto: '',
+    email: 'B04902080@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.240.146' } ]
+[ RowDataPacket {
+    uid: 200,
+    ts1: null,
+    ts2: 1443022239432,
+    lgn: 'B04902100',
+    pwd: '4f05d386b0deadc989cfe27d642d98eba36847e8',
+    motto: '',
+    email: 'B04902100@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:58.114.185.119' } ]
+[ RowDataPacket {
+    uid: 201,
+    ts1: null,
+    ts2: 1443096265476,
+    lgn: 'B04902102',
+    pwd: 'bd21f3d2986d1a4a822f36b9d44e3afb1b5274a6',
+    motto: '',
+    email: 'B04902102@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:10.5.5.102' } ]
+[ RowDataPacket {
+    uid: 202,
+    ts1: null,
+    ts2: 1442924876917,
+    lgn: 'B04902104',
+    pwd: '0d5a1a657ac2c0c75cf075a6de2dca759552785f',
+    motto: '',
+    email: 'B04902104@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.236.34' } ]
+[ RowDataPacket {
+    uid: 203,
+    ts1: null,
+    ts2: 1443148215435,
+    lgn: 'B04902106',
+    pwd: '2a70e36c075d690e985f4d6b6165fdfb244d7f61',
+    motto: '',
+    email: 'B04902106@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.240.75' } ]
+[ RowDataPacket {
+    uid: 204,
+    ts1: null,
+    ts2: 1443112344147,
+    lgn: 'B04902108',
+    pwd: 'b98b2f33e6630815d1308ce79d81c352271a5a2e',
+    motto: '',
+    email: 'B04902108@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:111.250.58.92' } ]
+[ RowDataPacket {
+    uid: 207,
+    ts1: null,
+    ts2: 1443091984414,
+    lgn: 'B04902114',
+    pwd: '2fe2f0472772e069faa2a5387dda0781fc198351',
+    motto: 'A wild JOHNCHEN902 appeared!',
+    email: 'B04902114@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.16.155' } ]
+[ RowDataPacket {
+    uid: 209,
+    ts1: null,
+    ts2: 1442809933950,
+    lgn: 'B04902118',
+    pwd: '74db99858bf42dca22969a0bd44c725b9f49493b',
+    motto: '',
+    email: 'B04902118@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.240.49' } ]
+[ RowDataPacket {
+    uid: 199,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902098',
+    pwd: 'd68092d9c9a48bba243394465debd801a5b51cb9',
+    motto: '',
+    email: 'B04902098@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 198,
+    ts1: null,
+    ts2: 1443085640133,
+    lgn: 'B04902096',
+    pwd: 'fab37301fcb0e531b67917a9565734e0c57d6022',
+    motto: 'Let me pass.',
+    email: 'B04902096@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:111.250.81.14' } ]
+[ RowDataPacket {
+    uid: 212,
+    ts1: null,
+    ts2: 1442931976746,
+    lgn: 'B04902124',
+    pwd: '5f079981221ce504832142e9526b623bbfb6e686',
+    motto: '',
+    email: 'B04902124@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.240.64' } ]
+[ RowDataPacket {
+    uid: 213,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902126',
+    pwd: 'a29b405b7e3b3e8b29390e3c4e14c673c8e97217',
+    motto: '',
+    email: 'B04902126@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 214,
+    ts1: null,
+    ts2: 1443001062487,
+    lgn: 'B04902128',
+    pwd: '460c62e0cba970f1d7dac4b7351df8889204b9a7',
+    motto: 'hello!!!!',
+    email: 'B04902128@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.105' } ]
+[ RowDataPacket {
+    uid: 257,
+    ts1: null,
+    ts2: 1443098653775,
+    lgn: 'R03944048',
+    pwd: 'f0fddb9352790242bbaa6f61eab883ab005f90ce',
+    motto: '',
+    email: 'R03944048@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.218.150' } ]
+[ RowDataPacket {
+    uid: 303,
+    ts1: null,
+    ts2: 1442978906986,
+    lgn: 'R04944045',
+    pwd: '54953efe2464f7979c1b10dc160cea3580a7ea4b',
+    motto: 'katncandix1',
+    email: 'R04944045@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.25.105' } ]
+[ RowDataPacket {
+    uid: 215,
+    ts1: null,
+    ts2: null,
+    lgn: 'T04902112',
+    pwd: 'f77997657e11399354b10b6f0a46813e98a29dc9',
+    motto: '',
+    email: 'T04902112@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 148,
+    ts1: null,
+    ts2: null,
+    lgn: 'B01902121',
+    pwd: 'c6865d1a2ac6a2958be15320b06ff6e62616c331',
+    motto: '',
+    email: 'B01902121@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 299,
+    ts1: null,
+    ts2: 1443109266398,
+    lgn: 'B02902046',
+    pwd: 'a9eb9d4faec342549acf416ab98fe0cf90d9b6e3',
+    motto: 'lol diamond IV player',
+    email: 'B02902046@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.252.114' } ]
+[ RowDataPacket {
+    uid: 210,
+    ts1: null,
+    ts2: 1442927606250,
+    lgn: 'B04902120',
+    pwd: '23a6330dcddb21f6e0a001227f71f69b38162d10',
+    motto: '',
+    email: 'B04902120@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '2',
+    ip: '::ffff:140.112.239.78' } ]
+[ RowDataPacket {
+    uid: 298,
+    ts1: null,
+    ts2: 1442911512448,
+    lgn: 'B03902073',
+    pwd: 'e0863b23d061848b4be54b6dfdea6120d6d45e08',
+    motto: 'EcuasYos',
+    email: 'B03902073@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.16.156' } ]
+[ RowDataPacket {
+    uid: 78,
+    ts1: null,
+    ts2: null,
+    lgn: 'B03902091',
+    pwd: 'b27446c2f3d46ea5c391619ce2f4f29eab92e150',
+    motto: '',
+    email: 'B03902091@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 79,
+    ts1: null,
+    ts2: null,
+    lgn: 'B03902095',
+    pwd: '95cbd6953f260f479445feb983a07b5a548d8226',
+    motto: '',
+    email: 'B03902095@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 80,
+    ts1: null,
+    ts2: 1443096625805,
+    lgn: 'B03902097',
+    pwd: '35675e68f4b5af7b995d9205ad0fc43842f16450',
+    motto: '',
+    email: 'B03902097@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:61.228.132.225' } ]
+[ RowDataPacket {
+    uid: 144,
+    ts1: null,
+    ts2: 1443148379460,
+    lgn: 'B03902117',
+    pwd: 'a1f4f1ab626061f9829a99d5aa0031616c8a4bc8',
+    motto: 'pies para que los quiero si tengo alas pa volar',
+    email: 'B03902117@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:123.193.18.131' } ]
+[ RowDataPacket {
+    uid: 145,
+    ts1: null,
+    ts2: 1442908894041,
+    lgn: 'B03902121',
+    pwd: 'db57ccbb158a82a2fa89b12f13cc2d9c9b4d8a1f',
+    motto: '',
+    email: 'B03902121@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.16.156' } ]
+[ RowDataPacket {
+    uid: 146,
+    ts1: null,
+    ts2: 1442987872813,
+    lgn: 'B03902125',
+    pwd: '6f0e11d6206d585c4eb1e9cef57a08bee9c38ac5',
+    motto: '',
+    email: 'B03902125@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:10.5.7.28' } ]
+[ RowDataPacket {
+    uid: 77,
+    ts1: null,
+    ts2: 1443147106936,
+    lgn: 'B03611034',
+    pwd: '5c4ed7b2c592eef0d18624711afa88f543ae20ae',
+    motto: '',
+    email: 'B03611034@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.217.45' } ]
+[ RowDataPacket {
+    uid: 147,
+    ts1: null,
+    ts2: 1442981488713,
+    lgn: 'B03902127',
+    pwd: '5227898bc1b5001439ed8d7f4ec4367847ada648',
+    motto: '',
+    email: 'B03902127@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.217.48' } ]
+[ RowDataPacket {
+    uid: 82,
+    ts1: null,
+    ts2: 1443144614325,
+    lgn: 'B04902003',
+    pwd: '75ccb0faf179df5e146afdf234c35aa1a1afdf12',
+    motto: 'what\'s wrong with judge girl?!?!?!?!?!',
+    email: 'B04902003@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:10.5.3.180' } ]
+[ RowDataPacket {
+    uid: 83,
+    ts1: null,
+    ts2: 1443005930385,
+    lgn: 'B04902005',
+    pwd: '77b782202a4c1158c6e9da9f8326daa6f4c59fca',
+    motto: '',
+    email: 'B04902005@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:118.160.12.18' } ]
+[ RowDataPacket {
+    uid: 84,
+    ts1: null,
+    ts2: 1443086590225,
+    lgn: 'B04902007',
+    pwd: 'c0e7790b6fb0f773bda45f73120b507ad22e57e3',
+    motto: 'psycho',
+    email: 'B04902007@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 85,
+    ts1: null,
+    ts2: 1443096316396,
+    lgn: 'B04902009',
+    pwd: 'a16ab31309e96df53b8030a48fb6ab84d4e73353',
+    motto: '',
+    email: 'B04902009@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:1.163.48.242' } ]
+[ RowDataPacket {
+    uid: 86,
+    ts1: null,
+    ts2: 1443144360761,
+    lgn: 'B04902011',
+    pwd: '06554925a99b823112e5bbfd5181d3cc26cc3d24',
+    motto: 'akatsuki no suiheisen ni shori o kizami nasai~',
+    email: 'B04902011@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:60.245.65.222' } ]
+[ RowDataPacket {
+    uid: 87,
+    ts1: null,
+    ts2: 1443118170039,
+    lgn: 'B04902013',
+    pwd: 'd3a15936ff094c34a8138556dff5f062b0dd36f5',
+    motto: '',
+    email: 'B04902013@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:1.171.52.192' } ]
+[ RowDataPacket {
+    uid: 88,
+    ts1: null,
+    ts2: 1443143886294,
+    lgn: 'B04902015',
+    pwd: '8b7ed6da60743c53a649dedbfd5d3c8b8eef1756',
+    motto: 'KaiKai',
+    email: 'B04902015@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 81,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902001',
+    pwd: 'f9a11c8ebfc9232210a861cf7412d76c516308d6',
+    motto: '',
+    email: 'B04902001@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 91,
+    ts1: null,
+    ts2: 1443106068045,
+    lgn: 'B04902023',
+    pwd: '7cd48d8edf4607efb147113fec14acd1b2d0cf4f',
+    motto: 'GJGJMIMIMEOW',
+    email: 'B04902023@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:111.240.6.85' } ]
+[ RowDataPacket {
+    uid: 92,
+    ts1: null,
+    ts2: 1443103981892,
+    lgn: 'B04902025',
+    pwd: '540761c1da6d397f3e689c81fcdec1ea743cdf49',
+    motto: '',
+    email: 'B04902025@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:61.228.30.223' } ]
+[ RowDataPacket {
+    uid: 93,
+    ts1: null,
+    ts2: 1443096271399,
+    lgn: 'B04902027',
+    pwd: '4e7be1385ce8c88afd8622fa6389bfb4ab098d9a',
+    motto: '',
+    email: 'B04902027@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:36.228.177.204' } ]
+[ RowDataPacket {
+    uid: 96,
+    ts1: null,
+    ts2: 1443078579723,
+    lgn: 'B04902033',
+    pwd: '78c7b4789f60d4cf4dc0836d40dd8a437977742c',
+    motto: 'nico~ nico~ ni~',
+    email: 'B04902033@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.25.106' } ]
+[ RowDataPacket {
+    uid: 97,
+    ts1: null,
+    ts2: 1443146137997,
+    lgn: 'B04902035',
+    pwd: '52a41085c20049a47bc00f9a12029160def2e6e9',
+    motto: '',
+    email: 'B04902035@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.239.165' } ]
+[ RowDataPacket {
+    uid: 98,
+    ts1: null,
+    ts2: 1443102068979,
+    lgn: 'B04902037',
+    pwd: '86336564fc444eeb71724e8e6398cdfdf733e704',
+    motto: 'A cactus may be what you are seeking',
+    email: 'B04902037@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.239.95' } ]
+[ RowDataPacket {
+    uid: 99,
+    ts1: null,
+    ts2: 1443144099381,
+    lgn: 'B04902039',
+    pwd: '8cb53378df952893c998103c40696069f962a198',
+    motto: 'winter snow',
+    email: 'B04902039@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.196.199' } ]
+[ RowDataPacket {
+    uid: 90,
+    ts1: null,
+    ts2: 1443018052870,
+    lgn: 'B04902021',
+    pwd: 'fa01d2cf50cd48d50a8461a354f545aebf71d6f9',
+    motto: 'pi ri ka pi ri ra ra',
+    email: 'B04902021@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:180.176.117.128' } ]
+[ RowDataPacket {
+    uid: 89,
+    ts1: null,
+    ts2: 1443144075698,
+    lgn: 'B04902017',
+    pwd: '219e3c31fa26c74ed02e8ad36fb033226c934441',
+    motto: 'kiwi',
+    email: 'B04902017@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 101,
+    ts1: null,
+    ts2: 1442979933358,
+    lgn: 'B04902043',
+    pwd: '49b37334208bc9fc2867de271d3c1f104fc690ca',
+    motto: 'Dinter',
+    email: 'B04902043@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.25.99' } ]
+[ RowDataPacket {
+    uid: 102,
+    ts1: null,
+    ts2: 1443148352913,
+    lgn: 'B04902045',
+    pwd: 'b0e2b89cb9e1409bd1a08a5689c6284a4d88eaf7',
+    motto: '',
+    email: 'B04902045@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.196.78' } ]
+[ RowDataPacket {
+    uid: 103,
+    ts1: null,
+    ts2: 1443147528551,
+    lgn: 'B04902047',
+    pwd: 'ef580b5795c47cf37188fd5199839bc2f1480935',
+    motto: '',
+    email: 'B04902047@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.25.121' } ]
+[ RowDataPacket {
+    uid: 104,
+    ts1: null,
+    ts2: 1443013625327,
+    lgn: 'B04902049',
+    pwd: '847f1861ced8958b86e3056bc243070301626400',
+    motto: 'raysbuck',
+    email: 'B04902049@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:111.248.146.242' } ]
+[ RowDataPacket {
+    uid: 105,
+    ts1: null,
+    ts2: 1443144404438,
+    lgn: 'B04902051',
+    pwd: '7a205e723070d6ba0213c951846195c6b462549f',
+    motto: 'practice makes perfect',
+    email: 'B04902051@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 106,
+    ts1: null,
+    ts2: 1443094168679,
+    lgn: 'B04902053',
+    pwd: '56fcadd4ff4ff514dec846dcc1e430832a070222',
+    motto: 'wintersnow',
+    email: 'B04902053@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.240.94' } ]
+[ RowDataPacket {
+    uid: 107,
+    ts1: null,
+    ts2: 1443075917621,
+    lgn: 'B04902055',
+    pwd: 'e709f51177036e36c43b34b1fa5f354eb7f0ec00',
+    motto: '',
+    email: 'B04902055@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.25.100' } ]
+[ RowDataPacket {
+    uid: 108,
+    ts1: null,
+    ts2: 1443009596991,
+    lgn: 'B04902057',
+    pwd: '51fd37a2518bfa6f69d25779cee62de246cd5aef',
+    motto: '',
+    email: 'B04902057@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.240.243' } ]
+[ RowDataPacket {
+    uid: 100,
+    ts1: null,
+    ts2: 1443094555160,
+    lgn: 'B04902041',
+    pwd: 'b931602a2d4a85dd8db522514397c26ace71ae6a',
+    motto: 'step by step',
+    email: 'B04902041@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.241.130' } ]
+[ RowDataPacket {
+    uid: 110,
+    ts1: null,
+    ts2: 1443110741422,
+    lgn: 'B04902061',
+    pwd: '00aaffdb6fa453a97c924a6b2c64fbf500769dc3',
+    motto: 'I have no idea',
+    email: 'B04902061@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.240.84' } ]
+[ RowDataPacket {
+    uid: 111,
+    ts1: null,
+    ts2: 1443075181263,
+    lgn: 'B04902063',
+    pwd: 'bce8596b791e06ec305b791a4dc1e3ce35239cc2',
+    motto: '',
+    email: 'B04902063@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.25.100' } ]
+[ RowDataPacket {
+    uid: 112,
+    ts1: null,
+    ts2: 1443099647530,
+    lgn: 'B04902065',
+    pwd: 'd0f5abf231eecab0c27e7f1863badcd564a211a8',
+    motto: '',
+    email: 'B04902065@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.196.60' } ]
+[ RowDataPacket {
+    uid: 113,
+    ts1: null,
+    ts2: 1443106706295,
+    lgn: 'B04902067',
+    pwd: '8547a88a0eb85ece0ba25389c24e577b541daa8b',
+    motto: '',
+    email: 'B04902067@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.196.181' } ]
+[ RowDataPacket {
+    uid: 114,
+    ts1: null,
+    ts2: 1443022012490,
+    lgn: 'B04902069',
+    pwd: 'f85df6453aac2383abfa8c66dc73778371ee6c8d',
+    motto: 'o w o',
+    email: 'B04902069@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.240.141' } ]
+[ RowDataPacket {
+    uid: 115,
+    ts1: null,
+    ts2: 1443105688904,
+    lgn: 'B04902071',
+    pwd: '76346fc752637e2ebd8a68f92d4a8c7274c9b138',
+    motto: '',
+    email: 'B04902071@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.196.208' } ]
+[ RowDataPacket {
+    uid: 116,
+    ts1: null,
+    ts2: 1442922363516,
+    lgn: 'B04902073',
+    pwd: '671369df41e8267e6b86e791af872509274bf257',
+    motto: 'HAKUNA MATATA',
+    email: 'B04902073@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '140.112.217.30' } ]
+[ RowDataPacket {
+    uid: 117,
+    ts1: null,
+    ts2: 1443099382474,
+    lgn: 'B04902075',
+    pwd: 'e4eb7366182f16cf82c20292f730da8645da136c',
+    motto: '',
+    email: 'B04902075@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:114.44.190.59' } ]
+[ RowDataPacket {
+    uid: 109,
+    ts1: null,
+    ts2: 1443094587102,
+    lgn: 'B04902059',
+    pwd: '23bee3c37b1d97181b6ced5f1bec5f4f58b43e72',
+    motto: 'Accepted ',
+    email: 'B04902059@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 119,
+    ts1: null,
+    ts2: 1443110587856,
+    lgn: 'B04902079',
+    pwd: 'c068939fa3b217e44b05f153b81aade37b592da1',
+    motto: '.___.',
+    email: 'B04902079@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.25.100' } ]
+[ RowDataPacket {
+    uid: 120,
+    ts1: null,
+    ts2: 1443010155999,
+    lgn: 'B04902081',
+    pwd: '583061ad3117fa6149e675278adbc1563b017900',
+    motto: 'I swallow Kugelschriber',
+    email: 'B04902081@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:110.30.95.253' } ]
+[ RowDataPacket {
+    uid: 121,
+    ts1: null,
+    ts2: 1443000656927,
+    lgn: 'B04902083',
+    pwd: '3002f332b8bcd4c7a4c970fce107fe8a905dd0a2',
+    motto: 'Azure',
+    email: 'B04902083@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 122,
+    ts1: null,
+    ts2: 1443103404798,
+    lgn: 'B04902085',
+    pwd: '1b8cfc3354f6328d897b02b7ecc169f2be1da869',
+    motto: '',
+    email: 'B04902085@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:114.36.245.185' } ]
+[ RowDataPacket {
+    uid: 123,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902087',
+    pwd: '021e5a18f16e41aca7d6936876e5856b50b729f3',
+    motto: '',
+    email: 'B04902087@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 124,
+    ts1: null,
+    ts2: 1443146146873,
+    lgn: 'B04902089',
+    pwd: '49349728fbb75def06881030c647daf3c913a6af',
+    motto: '',
+    email: 'B04902089@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:10.5.2.86' } ]
+[ RowDataPacket {
+    uid: 125,
+    ts1: null,
+    ts2: 1442922765634,
+    lgn: 'B04902091',
+    pwd: '266d61cb7a99958f1a67e2c212a2b5318644af09',
+    motto: 'CBD\'s fans',
+    email: 'B04902091@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.240.124' } ]
+[ RowDataPacket {
+    uid: 126,
+    ts1: null,
+    ts2: 1443024397508,
+    lgn: 'B04902093',
+    pwd: '7013fc9e06181c1fa0c2b5273c71eb8fdb2418d1',
+    motto: '',
+    email: 'B04902093@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:36.230.249.169' } ]
+[ RowDataPacket {
+    uid: 118,
+    ts1: null,
+    ts2: 1443106650050,
+    lgn: 'B04902077',
+    pwd: 'a44c3cc6579d79615db5b5ddac8a6e9833370c77',
+    motto: 'zolution',
+    email: 'B04902077@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:36.224.216.229' } ]
+[ RowDataPacket {
+    uid: 128,
+    ts1: null,
+    ts2: 1442968368262,
+    lgn: 'B04902097',
+    pwd: '5e721ef87c5c926af3760c1ab8093ef6c0aa2888',
+    motto: 'why is it so complicated',
+    email: 'B04902097@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.241.15' } ]
+[ RowDataPacket {
+    uid: 129,
+    ts1: null,
+    ts2: 1443096006134,
+    lgn: 'B04902099',
+    pwd: '488577984a4309ad09a660f1963a2922570da72b',
+    motto: '??',
+    email: 'B04902099@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:219.71.247.35' } ]
+[ RowDataPacket {
+    uid: 130,
+    ts1: null,
+    ts2: 1443097614536,
+    lgn: 'B04902101',
+    pwd: '97e45c448fbe8a404c3191d10f1be05676719ba3',
+    motto: 'CBD\'s fans',
+    email: 'B04902101@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.196.67' } ]
+[ RowDataPacket {
+    uid: 131,
+    ts1: null,
+    ts2: 1443087707913,
+    lgn: 'B04902103',
+    pwd: '3a83516e41c8c7f6d154cbb6a9823bba359df15d',
+    motto: 'YPHS yeee',
+    email: 'B04902103@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:10.5.4.33' } ]
+[ RowDataPacket {
+    uid: 132,
+    ts1: null,
+    ts2: 1443100937827,
+    lgn: 'B04902105',
+    pwd: 'f103fb1961dc48b7efbe6a16c4cfe402b2899364',
+    motto: 'truly beginner',
+    email: 'B04902105@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:114.36.24.124' } ]
+[ RowDataPacket {
+    uid: 133,
+    ts1: null,
+    ts2: 1443079370080,
+    lgn: 'B04902107',
+    pwd: '7c448127e9b163c8fecaca94d6878748cb7070bb',
+    motto: 'thisisajianda',
+    email: 'B04902107@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:223.136.38.100' } ]
+[ RowDataPacket {
+    uid: 134,
+    ts1: null,
+    ts2: 1443025012353,
+    lgn: 'B04902109',
+    pwd: '4fef13608c04991e574919bbd6326470884c9f6b',
+    motto: 'BS',
+    email: 'B04902109@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:49.214.151.237' } ]
+[ RowDataPacket {
+    uid: 137,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902115',
+    pwd: 'c8515d92b3872d0ddebf7444ef5a9e8e2006c818',
+    motto: '',
+    email: 'B04902115@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 127,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902095',
+    pwd: '41e7f1c300e619d99558746c94755a8e11c95090',
+    motto: '',
+    email: 'B04902095@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 139,
+    ts1: null,
+    ts2: 1443110409076,
+    lgn: 'B04902119',
+    pwd: 'bf007ceef627ca2ffbbcbe8e6512f014215cf504',
+    motto: '',
+    email: 'B04902119@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.196.234' } ]
+[ RowDataPacket {
+    uid: 140,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902121',
+    pwd: 'f08433d583a9d579f0337bffd99aea9cf12a4612',
+    motto: '',
+    email: 'B04902121@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 211,
+    ts1: null,
+    ts2: 1443145115342,
+    lgn: 'B04902122',
+    pwd: '47b5328441976f05ac604f9b39d6b43a900926cb',
+    motto: '',
+    email: 'B04902122@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.240.38' } ]
+[ RowDataPacket {
+    uid: 141,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902123',
+    pwd: 'e69393c1ec3e7a4d75f65b83519f7594cb638f08',
+    motto: '',
+    email: 'B04902123@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+[ RowDataPacket {
+    uid: 142,
+    ts1: null,
+    ts2: 1443105394519,
+    lgn: 'B04902125',
+    pwd: 'a73eb250a3716b10f0fbad8cf8788ee835ddf861',
+    motto: 'if (success > 9999) { printf ("HAPPY"); }',
+    email: 'B04902125@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.240.78' } ]
+[ RowDataPacket {
+    uid: 143,
+    ts1: null,
+    ts2: 1443079286661,
+    lgn: 'B04902127',
+    pwd: '785fae858889fab56cae96e5036de2014b02943e',
+    motto: '',
+    email: 'B04902127@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: '::ffff:140.112.4.234' } ]
+[ RowDataPacket {
+    uid: 234,
+    ts1: null,
+    ts2: null,
+    lgn: 'B70506014',
+    pwd: '2d733cf700ac22d3cfd23c5fcad2f33edfa664f8',
+    motto: '',
+    email: 'B70506014@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+[ RowDataPacket {
+    uid: 138,
+    ts1: null,
+    ts2: null,
+    lgn: 'B04902117',
+    pwd: 'd13867b7645602a1a2d13f01b6aa07722bde0cc6',
+    motto: '',
+    email: 'B04902117@csie.ntu.edu.tw',
+    nname: '',
+    ename: '',
+    class: '1',
+    ip: null } ]
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined
+{ [Error: ER_BAD_NULL_ERROR: Column 'uid' cannot be null]
+  code: 'ER_BAD_NULL_ERROR',
+  errno: 1048,
+  sqlState: '23000',
+  index: 0 }
+undefined

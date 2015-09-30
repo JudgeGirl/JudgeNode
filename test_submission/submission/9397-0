@@ -1,0 +1,18 @@
+#include <stdio.h> 
+int main(){ 
+    int a[102][102] = {0}, r, c; 
+    int i, j; 
+    scanf("%d %d", &r, &c); 
+    for(i = 1; i < r + 1; i++) 
+        for(j = 1; j < c + 1; j++) 
+            scanf("%d", &(a[i][j])); 
+    for(j = 1; j < c + 1; j++) 
+        for(i = 1; i < r + 1; i++){ 
+            if(a[i][j] > a[i + 1][j]&&
+			   a[i][j] > a[i - 1][j]&&
+			   a[i][j] > a[i][j + 1]&&
+			   a[i][j] > a[i][j - 1])
+				printf("%d\n", a[i][j]);
+        } 
+        
+}

@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<div class="header">
+	<h1 class='article-title'>Progress Report</h1>
+    <h2>Well, life isn't always what one likes, isn't it ?</h2>
+</div>
+<div class="content">
+
+<%
+	var stats = {};
+	for (var i = 0; i < rank_list.length; i++)
+		stats[rank_list[i].slv] = 0;
+	for (var i = 0; i < rank_list.length; i++)
+		stats[rank_list[i].slv]++;
+
+	var data = [];
+	for (var i in stats) {
+		data.push({ solved:  i, user:  stats[i] });
+	} 
+%>
+
+<div id="bar-progress"></div>
+<script>
+Morris.Bar({
+  element: 'bar-progress',
+  data: <%- JSON.stringify(data) %>,
+  xkey: 'solved',
+  ykeys: ['user'],
+  labels: ['#users']
+});
+</script>
+<table class="pure-table pure-table-bordered" width="100%">
+	<thead>
+		<tr>
+			<th>Solved</th>
+			<th>Users</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% data = data.reverse(); %>
+		<% for (var i = 0 ; i < data.length ; i++ ) { %>
+			<tr class='normal'>
+				<td><%- data[i].solved %></td>
+				<td><%- data[i].user %></td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+</div>

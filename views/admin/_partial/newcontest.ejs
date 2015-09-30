@@ -1,0 +1,106 @@
+<div class="header">
+	<h1 class='article-title'><%= __('Add Contest') %></h1>
+    <h2>Be Careful to do.</h2>
+</div>
+<div class="content">
+	<%- include('../_partial/widget/nav')%>
+
+    <form action="/admin/new/contest" method="post" class="pure-form pure-form-stacked">
+    <fieldset>
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend>Contest Config</legend>
+
+               <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="pub"><%= __('View Public/Private') %></label>
+                        <select name="pub" class="pure-u-23-24">
+                            <option value="1"> <%= __('Public') %> </option>
+                            <option value="0" selected> <%= __('Private') %> </option>
+                        </select>
+                    </div>
+                    <div class="pure-u-1-1">
+                        <label for="ttl"><%= __('Contest Title') %></label>
+                        <input type="text" name="ttl" id="ttl" class="pure-input-1" value="" placeholder="ex. Week 1, Exam">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend><%= __('Contest Date') %></legend>
+
+               <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="ts1"><%= __('Start Date') %></label>
+                        <input class="pure-u-23-24" type="text" name="ts1" id="ts1" value="" placeholder="<%- new Date() %>">
+                    </div>
+                    <div class="pure-u-1-2">
+                        <label for="ts2"><%= __('End Date') %></label>
+                        <input class="pure-u-23-24" type="text" name="ts2" id="ts2" value="" placeholder="<%- new Date(new Date().getTime()+60*60*1000) %>">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend><%= __('Problem Set') %></legend>
+               <div class="pure-g">
+                    <div class="pure-u-1-1">
+                        <label for="pid"><%= __('Problem ID') %></label>
+                        <input class="pure-u-23-24" type="text" name="pid" id="pid" value="" placeholder="ex. 3,4,5">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend><%= __('Assign Participants') %></legend>
+               <div class="pure-g">
+                    <div class="pure-u-1-1">
+                        <input type="checkbox" name="participants" value="0" checked> Administrator
+                        <input type="checkbox" name="participants" value="1"> Class 1
+                        <input type="checkbox" name="participants" value="2"> Class 2
+                        <input type="checkbox" name="participants" value="3"> Class 3
+                        <input type="checkbox" name="participants" value="4"> Class 4
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div class="pure-controls">
+                    <button type="submit" name="submit" id="submit" class="pure-button pure-button-primary button-warning"><%= __('Create') %></button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+</div>
+
+<script>
+$(document).delegate('#textbox', 'keydown', function(e) {
+  var keyCode = e.keyCode || e.which;
+
+  if (keyCode == 9) {
+    e.preventDefault();
+    var start = $(this).get(0).selectionStart;
+    var end = $(this).get(0).selectionEnd;
+
+    // set textarea value to: text before caret + tab + text after caret
+    $(this).val($(this).val().substring(0, start)
+                + "\t"
+                + $(this).val().substring(end));
+
+    // put caret at right position again
+    $(this).get(0).selectionStart =
+    $(this).get(0).selectionEnd = start + 1;
+  }
+});
+</script>

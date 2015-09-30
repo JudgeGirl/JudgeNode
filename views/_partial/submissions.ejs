@@ -1,0 +1,112 @@
+<meta http-equiv="refresh" content="10" />
+<style>
+table .problem-title a {
+	display: block;
+	white-space: nowrap;
+	width: 250px; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+</style>
+<div class="header">
+	<h1 class='article-title'>Submission</h1>
+    <h2>Update page each 10 seconds</h2>
+</div>
+	<% if (config.CONTEST_MODE == true) { %>
+	<div class="sysmsg">考試正在進行</div>
+	<% } %>
+	<div class="pure-g">
+		<div class="pure-u-1-1">
+	<table class="pure-table pure-table-bordered" sytle="width: 150%">
+		<thead>
+			<tr>
+				<th class='sid-header' style="width: 5%">#</th>
+				<th style="width: 5%"></th>
+				<th style="width: 30%">Problem Title</th>
+				<th style="width: 15%">Username</th>
+				<th style="width: 20%">Verdict</th>
+				<th style="width: 0%"></th>
+				<th style="width: 10%">Len</th>
+				<th class='date-header' style="width: 30%">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% var sl = submission_list; %>
+			<% for (var i = 0; i < sl.length; i++) { %>
+				<tr class='normal'>
+					<td class='sid'><%- sl[i].sid %></td>
+					<td><%- sl[i].pid %></td>
+					<td class='problem-title'><a href='problem/<%- sl[i].cid %>/<%- sl[i].pid %>'><%- sl[i].ttl %></a></td>
+					<td><a href='user/<%- sl[i].uid %>'><%- sl[i].lgn %></td>
+					<% if (config.CONTEST_MODE == true) { %>
+						<td>
+							<% if (sl[i].ip.indexOf("::ffff:140.112.16.155") >= 0 || sl[i].ip.indexOf("::ffff:140.112.16.156") >= 0 || sl[i].ip.indexOf("::ffff:140.112.16.158") >= 0 ) { %>
+								<i class="fa fa-check" style="color: green;"></i>
+							<% } else { %>
+								<i class="fa fa-exclamation-triangle" style="color: orange;"></i>
+							<% } %>
+						</td>
+					<% } %>
+					<% 
+						var text = '';
+						text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
+						text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + config.res[sl[i].res] + "</span>";
+						if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
+							text += " (";
+							if (sl[i].res != 7) {
+								text += "score: " + sl[i].scr;
+							} else {
+								text += config.unitConvert('cpu', sl[i].cpu);
+								text += ","
+								text += config.unitConvert('mem', sl[i].mem);
+							}
+							text += ")";
+						}
+						text += "</a>";
+						if (sl[i].res == 0 || sl[i].res == 8)
+							text += ' <i class="fa fa-spinner fa-pulse"></i>';
+						text += '</td>';
+					%>
+					<%- text %>
+					<td>
+						<% if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) { %>
+							<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %></a>
+						<% } else { %>
+							<%- config.lng[sl[i].lng] %>
+						<% } %>
+					</td>
+					<td><%- config.unitConvert('mem', sl[i].len) %></td>
+					<td class='date'><%- config.unitConvert('date', new Date(sl[i].ts)) %></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+	</div></div>
+
+	<div class="pure-g">
+			<%
+				var page = query_filter['page'];
+				var arg_query = '';
+				if (query_filter['uid'] != undefined)
+					arg_query += '&uid=' + query_filter['uid'];
+				if (query_filter['pid'] != undefined)
+					arg_query += '&pid=' + query_filter['pid'];
+				if (query_filter['cid'] != undefined)
+					arg_query += '&cid=' + query_filter['cid'];
+			%>
+			<div class="pure-u-12-24">
+			<% if (page != undefined && page != null && parseInt(page) > 1) { %>
+				<a class="pure-button pure-button-primary" style="width:100%" rel="prev" href="/submissions?page=<%- parseInt(page)-1 %>">« Prev</a>
+			<% } else { %>
+				<a class="" style="width:100%"></a>
+			<% } %>
+			</div>
+			<div class="pure-u-12-24">
+			<% if (page == undefined || page == null) { %>
+				<a class="pure-button pure-button-primary" style="width:100%" rel="next" href="/submissions?page=2<%- arg_query %>">Next »</a>
+			<% } else { %>
+				<a class="pure-button pure-button-primary" style="width:100%" rel="next" href="/submissions?page=<%- parseInt(page)+1 %><%- arg_query %>">Next »</a>
+			<% } %>
+			</div>
+	</div>
+

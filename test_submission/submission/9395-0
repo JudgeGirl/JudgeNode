@@ -1,0 +1,91 @@
+//
+//  main.c
+//  lottery
+//
+//  Created by 吳柏承 on 2015/9/22.
+//  Copyright (c) 2015年 吳柏承. All rights reserved.
+//
+
+#include <stdio.h>
+
+int main(int argc, const char * argv[]) {
+    int spec,spec2,spec3,first1,first2,first3,input,j=10000000,count=0,count2=0,prize=0,count3;
+    int m[100000],n[100000],p[100000],h=8,s[100000],s2[100000],s3[100000],o[10000];
+    int i=1;
+    scanf("%d%d%d%d%d%d",&spec,&spec2,&spec3,&first1,&first2,&first3);
+    while(scanf("%d",&input)!=EOF)
+    {
+        j=10000000;
+        h=8;
+        while(j>=1)
+        {
+            m[h]=(first1/j)%10;
+            n[h]=(first2/j)%10;
+            o[h]=(first3/j)%10;
+            s[h]=(spec/j)%10;
+            s2[h]=(spec2/j)%10;
+            s3[h]=(spec3/j)%10;
+            p[h]=(input/j)%10;
+            h--;
+            j/=10;
+        }
+        int flags=1;
+        for(int ax=8;ax>=1;ax--)
+                if(s[ax]!=p[ax])flags=-1;
+                if(flags==1)prize+=2000000;
+        int flags2=1;
+        for(int ax=8;ax>=1;ax--)
+            if(s2[ax]!=p[ax])flags2=-1;
+        if(flags2==1)prize+=2000000;
+
+        int flags3=1;
+        for(int ax=8;ax>=1;ax--)
+            if(s3[ax]!=p[ax])flags3=-1;
+        if(flags3==1)prize+=2000000;
+
+        count=0;
+            for(int ff1=1;ff1<=8;ff1++)
+            {
+                if(m[ff1]==p[ff1])
+                    count++;
+                else break;
+            }
+            if(count==3)prize+=200;
+            if(count==4)prize+=1000;
+            if(count==5)prize+=4000;
+            if(count==6)prize+=10000;
+            if(count==7)prize+=40000;
+            if(count==8)prize+=200000;
+        count2=0;
+            for(int ff2=1;ff2<=8;ff2++)
+            {
+                if(n[ff2]==p[ff2])
+                    count2++;
+                else break;
+            }
+            if(count2==3)prize+=200;
+            if(count2==4)prize+=1000;
+            if(count2==5)prize+=4000;
+            if(count2==6)prize+=10000;
+            if(count2==7)prize+=40000;
+            if(count2==8)prize+=200000;
+
+        count3=0;
+        for(int ff3=1;ff3<=8;ff3++)
+        {
+            if(o[ff3]==p[ff3])
+                count3++;
+            else break;
+        }
+        if(count3==3)prize+=200;
+        if(count3==4)prize+=1000;
+        if(count3==5)prize+=4000;
+        if(count3==6)prize+=10000;
+        if(count3==7)prize+=40000;
+        if(count3==8)prize+=200000;
+
+    }
+    printf("%d\n",prize);
+    
+    return 0;
+}

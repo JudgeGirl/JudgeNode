@@ -1,0 +1,30 @@
+<%- include('_partial/head') %>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <section id="main">
+            <div class="header">
+				<h1 class='article-title'>NOT FOUND</h1>
+			    <h2></h2>
+			</div>
+			<div class="content">
+				<div class="pure-g">
+					<div class="pure-u-1-1">
+						<img class="pure-img-responsive alt="" src="http://i.imgur.com/XE220WR.png"></img>
+					</div>
+				</div>
+				<p><%= message %></p>
+				<p><%= error.status %></p>
+				<p>
+				<pre><%= error.stack %></pre>
+				</p>
+			</div>
+        </section>
+      </div>
+      <%- include('_partial/mobile-nav') %>
+    </div>
+    <%- include('_partial/footer') %>
+    <%- include('_partial/after-footer') %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<div class="header">
+	<h1 class='article-title'><%= __('Add Account') %></h1>
+    <h2>Administrator</h2>
+</div>
+<div class="content">
+	<%- include('../_partial/widget/nav')%>
+
+<form action="/admin/new/account" method="post" class="pure-form pure-form-stacked">
+    <fieldset>
+    <div class="pure-g">
+            <div class="pure-u-1-1">
+               <div class="pure-g">
+               		<div class="pure-u-1-4">
+                        <label for="lgn"><%= __('Username') %></label>
+                        <input type="text" name="lgn" class="pure-u-23-24" value="" placeholder="B04922221">
+                    </div>
+                    <div class="pure-u-1-4">
+                        <label for="pwd"><%= __('Password') %></label>
+                        <input type="text" name="pwd" class="pure-u-23-24" value="">
+                    </div>
+                    <div class="pure-u-1-4">
+                        <label for="class">Class</label>
+                        <input type="text" name="class" class="pure-u-23-24" value="" placeholder="ex. 1, 2, or 3">
+                    </div>
+                    <div class="pure-u-1-4">
+                        <label for="emial">Email</label>
+                        <input type="text" name="email" class="pure-u-23-24" value="" placeholder="example@example.com.tw">
+                    </div>
+                    <div class="pure-controls pure-u-1-1">
+                		<button type="submit" name="submit" id="submit" class="pure-button pure-button-primary button-warning"><%= __('Create') %></button>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+				
+</div>

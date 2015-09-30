@@ -1,0 +1,24 @@
+<div class="header">
+	<h1 class='article-title'>Score</h1>
+	<h2><%- userinfo.info.lgn  %></h2>
+</div>
+<div class="content">
+
+<table class="pure-table pure-table-bordered" style='width: 100%;'>
+	<thead>
+	<tr>
+		<th>Student</th>
+		<th>Week 2 Exam</td>
+	</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0; score && i < score.length; i++) { %>
+			<tr>
+				<td><strong><%- score[i].lgn %></strong></td>
+				<td><%- score[i].exam2 %></td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+</div>
+

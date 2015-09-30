@@ -1,0 +1,51 @@
+<%- include('_partial/head') %>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <section id="main">
+                  <% if (layout == 'archive') { %>
+                    <%- include('_partial/archive') %>
+                  <% } else if (layout == 'login') { %>
+                    <%- include('_partial/login') %>
+                  <% } else if (layout == 'edit') { %>
+                    <%- include('_partial/edit') %>
+                  <% } else if (layout == 'register') { %>
+                    <%- include('_partial/register') %>
+                  <% } else if (layout == 'ranklist') { %>
+                    <%- include('_partial/ranklist') %>
+                  <% } else if (layout == 'progress') { %>
+                    <%- include('_partial/progress') %>
+                  <% } else if (layout == 'problems') { %>
+                    <%- include('_partial/problems') %>
+                  <% } else if (layout == 'submissions') { %>
+                    <%- include('_partial/submissions') %>
+                  <% } else if (layout == 'problem') { %>
+                    <%- include('_partial/problem') %>
+                  <% } else if (layout == 'user') { %>
+                    <%- include('_partial/user') %>
+                  <% } else if (layout == 'contests') { %>
+                    <%- include('_partial/contests') %>
+                  <% } else if (layout == 'contest') { %>
+                    <%- include('_partial/contest') %>
+                  <% } else if (layout == 'scoreboard') { %>
+                    <%- include('_partial/scoreboard') %>
+                  <% } else if (layout == 'live') { %>
+                    <%- include('_partial/livesubmission') %>
+                  <% } else if (layout == 'highlight') { %>
+                    <%- include('_partial/highlight') %>
+                  <% } else if (layout == 'detail') { %>
+                    <%- include('_partial/judgeresult') %>
+                  <% } else if (layout == 'problem_statistic') { %>
+                    <%- include('_partial/problem-statistics') %>
+                  <% } else if (layout == 'score') { %>
+                    <%- include('_partial/score') %>
+                  <% } %>
+          </section>
+      </div>
+      <%- include('_partial/mobile-nav') %>
+    </div>
+    <%- include('_partial/footer') %>
+    <%- include('_partial/after-footer') %>
+  </div>
+</body>
+</html>

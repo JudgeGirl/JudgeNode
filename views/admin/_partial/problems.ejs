@@ -1,0 +1,40 @@
+<div class="header">
+	<h1 class='article-title'><%= __('Manage Problem Set') %></h1>
+    <h2>Administrator</h2>
+</div>
+<div class="content">
+	<%- include('../_partial/widget/nav')%>
+	<div class="pure-g">
+		<div class="pure-u-1-3">
+			<a class="pure-button pure-button-primary" class="pure-u-1-1" href="/admin/new/problem">+ <%= __('New Problem') %></a>
+		</div>
+	</div>
+
+	<table class="pure-table pure-table-bordered" style="width: 100%">
+		<thead>
+		    <tr>
+				<th style="width: 5%"></th>
+				<th style="width: 5%">#</th>
+				<th><%= __('Problem Title') %></th>
+				<th style="width: 5%"><%= __('Options') %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for (var row in prob_list) { %>
+			<tr>
+				<% var prob = prob_list[row]; %>
+				<td>
+					<% if (prob.pub == 1) { %>
+						<i class="fa fa-eye"></i>
+					<% } else { %>
+						<i class="fa fa-eye-slash"></i>
+					<% } %>
+				</td>
+				<td><%- prob.pid %></td>
+				<td><a href="/problem/0/<%- prob.pid%>"><%- prob.ttl %></a></td>
+				<td><a class="pure-button pure-button-primary" href="/admin/edit/problem/<%- prob.pid%>"><i class="fa fa-cog"></i> <%= __('Edit') %></a></td>
+			</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,25 @@
+<div class="header">
+	<h1 class='article-title'>Login</h1>
+	<h2>If you have any login problem, please contact TA.</h2>
+</div>
+<div class="content">
+
+<form class="pure-form pure-form-aligned" action="login" method="post" style="float: center;">
+    <fieldset>
+        <legend>Login</legend>
+        <div class="pure-control-group">
+        	<label for="lgn"><%= __('Username') %></label>
+			<input class="pure-input-1-2" type="text" name="lgn" id="lgn" placeholder="B049123456"/>
+		</div>
+
+		<div class="pure-control-group">
+        	<label for="pwd"><%= __('Passward') %></label>
+			<input class="pure-input-1-2" type="password" name="pwd" id="pwd" />
+		</div>
+
+		<div class="pure-controls">
+        	<button type="submit" name="submit" id="submit" class="pure-button pure-button-primary"><%= __('Login') %></button>
+        </div>
+    </fieldset>
+</form>
+</div>

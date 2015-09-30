@@ -1,0 +1,157 @@
+<div class="header">
+	<h1 class='article-title'><%= __('Edit Contest') %></h1>
+    <h2><%- contest_config.config.cid %>. <%- contest_config.config.ttl %></h2>
+</div>
+<div class="content">
+	<%- include('../_partial/widget/nav')%>
+
+    <form action="/admin/update/contest/<%- cid %>" method="post" class="pure-form pure-form-stacked">
+    <fieldset>
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend>Contest Config</legend>
+
+               <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="pid"><%= __('Contest ID') %></label>
+                        <input class="pure-u-23-24" type="text" name="cid" id="cid" style="opacity: 0.5;" value="<%- contest_config.config.cid %>" disabled/>
+                    </div>
+                    <div class="pure-u-1-2">
+                        <label for="pub"><%= __('View Public/Private') %></label>
+                        <select name="pub" class="pure-u-23-24">
+                            <option value="1" <%- contest_config.config.pub == 1 ? "selected" : "" %> > Public </option>
+                            <option value="0" <%- contest_config.config.pub == 0 ? "selected" : "" %> > Private </option>
+                        </select>
+                    </div>
+                    <div class="pure-u-1-1">
+                        <label for="ttl"><%= __('Contest Title') %></label>
+                        <input type="text" name="ttl" id="ttl" class="pure-input-1" value="<%= contest_config.config.ttl %>">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend><%= __('Contest Date') %></legend>
+
+               <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="pid"><%= __('Start Date') %></label>
+                        <input class="pure-u-23-24" type="text" name="ts1" id="ts1" value="<%- new Date(contest_config.config.ts1) %>" >
+                    </div>
+                    <div class="pure-u-1-2">
+                        <label for="pub"><%= __('End Date') %></label>
+                        <input class="pure-u-23-24" type="text" name="ts2" id="ts2" value="<%- new Date(contest_config.config.ts2) %>" >
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend><%= __('Problem Set') %></legend>
+               <% 
+                    var prob_arr = [];
+                    for (row in contest_config.problem)
+                        prob_arr.push(contest_config.problem[row].pid);
+               %>
+               <div class="pure-g">
+                    <div class="pure-u-1-1">
+                        <label for="pid"><%= __('Problem ID') %></label>
+                        <input class="pure-u-23-24" type="text" name="pid" id="pid" value="<%- prob_arr.join(',') %>" >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+               <legend><%= __('Assign Participants') %></legend>
+               <div class="pure-g">
+                    <div class="pure-u-1-1">
+                        <input type="checkbox" name="participants" value="0" checked> Administrator
+                        <input type="checkbox" name="participants" value="1"> Class 1
+                        <input type="checkbox" name="participants" value="2"> Class 2
+                        <input type="checkbox" name="participants" value="3"> Class 3
+                        <input type="checkbox" name="participants" value="4"> Class 4
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div class="pure-controls">
+                    <button type="submit" name="submit" id="submit" class="pure-button pure-button-primary button-warning"><%= __('Update') %></button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+    <h2>Contest Problem Set</h2>
+    <table class="pure-table pure-table-bordered" style="width: 100%">
+        <thead>
+            <th style="width: 5%">#</th>
+            <th>Problem Title</th>
+        </thead>
+        <tbody>
+            <% for (row in contest_config.problem) { %>
+            <tr>
+                <% var prob = contest_config.problem[row]; %>
+                <td><%- prob.pid %></td>
+                <td><a href="/problem/<%- cid %>/<%- prob.pid %>"><%- prob.ttl %></a></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <h2>Assign Participants</h2>
+    <table class="pure-table pure-table-bordered" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Class</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (row in contest_config.user) { %>
+            <tr>
+                <% var user = contest_config.user[row]; %>
+                <td><a href="/user/<%- user.uid %>"><%- user.lgn %></a></td>
+                <td>
+                <% if (user.class == null) { %>
+                    <%= __('Administrator') %>
+                <% } else if (user.class <= 2) { %>
+                    <%= __('Class {{number}}', {number: user.class}) %>
+                <% } else { %>
+                    <%= __('Visitor Class {{number}}', {number: user.class-2}) %>
+                <% } %>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<script>
+$(document).delegate('#textbox', 'keydown', function(e) {
+  var keyCode = e.keyCode || e.which;
+
+  if (keyCode == 9) {
+    e.preventDefault();
+    var start = $(this).get(0).selectionStart;
+    var end = $(this).get(0).selectionEnd;
+
+    // set textarea value to: text before caret + tab + text after caret
+    $(this).val($(this).val().substring(0, start)
+                + "\t"
+                + $(this).val().substring(end));
+
+    // put caret at right position again
+    $(this).get(0).selectionStart =
+    $(this).get(0).selectionEnd = start + 1;
+  }
+});
+</script>

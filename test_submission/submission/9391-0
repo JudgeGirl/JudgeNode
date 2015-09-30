@@ -1,0 +1,23 @@
+#include <stdio.h>
+int main(){
+	int r, c;
+	int i, j;
+	scanf("%d%d", &r, &c);
+	int num[r][c];
+	for(i=0;i<r;i++){
+		for(j=0;j<c;j++){
+			scanf("%d", &num[i][j]);
+		}
+	}
+	for(i=0;i<r;i++){
+		for(j=0;j<c;j++){
+			int judge = 1;
+			if(i > 0 && num[i][j] < num[i-1][j])	judge = 0;
+			if(j > 0 && num[i][j] < num[i][j-1])	judge = 0;
+			if(i < r-1 && num[i][j] < num[i+1][j])	judge = 0;
+			if(j < c-1 && num[i][j] < num[i][j+1])	judge = 0;
+			if(judge)	printf("%d\n", num[i][j]);
+		}
+	}
+	return 0;
+}

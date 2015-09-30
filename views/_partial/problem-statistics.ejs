@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<div class="header">
+	<h1 class='article-title'><%= __('Statistics') %></h1>
+    <h2><%- pid %>. <%- ttl %></h2>
+</div>
+<div class="content">
+	<div id="submission-donut"></div>
+	<div class="pure-g">
+		<div class="pure-u-1-1">
+	<% 
+		var total = 0, accepted = 0;
+		for (var key in tried_config.user) {
+			total += tried_config.user[key].count;
+			if (tried_config.user[key].score == 100)
+				accepted = tried_config.user[key].count;
+		}
+	%>
+	<table class="pure-table" style="width: 100%">
+		<thead>
+			<tr>
+				<th><%= __('Total Submission') %></th>
+				<th><%= __('Users that tried it') %></th>
+				<th><%= __('Users that solved it') %></th>
+			</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%- tried_config.count %></td>
+				<td><%- total %></td>
+				<td><%- accepted %></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	</div>
+	<div class="pure-g">
+		<div class="pure-u-1-1">
+	<h2 class="content-subhead"><%= __('Top 20') %></h2>
+	<table class="pure-table pure-table-bordered" style="width: 100%">
+		<thead>
+			<tr>
+				<th style="width: 5%"></th>
+				<th style="width: 10%"><%= __('Account') %></th>
+				<th style="width: 25%"><%= __('Verdict') %></th>
+				<th style="width: 15%"><%= __('Len') %></th>
+				<th style="width: 0%"></th>
+				<th style="width: 35%"><%= __('Date') %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for (var row in best_config) { %>
+				<tr>
+					<td><%- (parseInt(row)+1) %></td>
+					<td><a href="/user/<%- best_config[row].uid %>"><%- best_config[row].lgn %></a></td>
+					<td><%- config.unitConvert('cpu', best_config[row].cpu) %>, <%- config.unitConvert('mem', best_config[row].mem) %></td>
+					<td><%- config.unitConvert('mem', best_config[row].len) %></td>
+					<td><a href='/source/highlight/<%- best_config[row].sid %>'><%- config.lng[best_config[row].lng] %></a></td>
+					<td class='date'><%- config.unitConvert('date', new Date(best_config[row].ts)) %></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+	<% 
+		var donut = [], donut_color = [];
+		var ddcolor = ['#000000', '#AAAA00', '#000000', '#000000', '#00AAAA', '#0000FF', '#FF0000', '#00AA00', '#000000'];
+		for (var key in donut_config.donut) {
+		  	donut.push({label: config.res[donut_config.donut[key].res], value: donut_config.donut[key].count});
+		  	donut_color.push(ddcolor[donut_config.donut[key].res]);
+		}
+	%>
+	<script>
+		Morris.Donut({
+		 	element: 'submission-donut',
+			data: <%- JSON.stringify(donut) %>,
+			colors: <%- JSON.stringify(donut_color) %>,
+			resize: true
+		});
+	</script>
+
+	<table>
+	</table>
+</div>

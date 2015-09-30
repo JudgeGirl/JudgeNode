@@ -1,0 +1,50 @@
+<div class="header">
+	<h1 class='article-title'><%= __('Rank') %></h1>
+	<h2>I thought that solving problem would last forever. I was wrong.</h2>
+</div>
+<div class="content">
+	<div class="pure-menu pure-menu-horizontal">
+		<ul class="pure-menu-list">
+			<li class="pure-menu-item"><a class="pure-menu-link" href="/progress">Progress Report</a></li>
+			<li class="pure-menu-item"><a class="pure-menu-link" href="#">Site Statistics</a></li>
+		</ul>
+	</div>
+</div>
+<div class="content-table">
+	<div class="pure-g">
+		<div class="pure-u-1-1">
+	<table class="pure-table pure-table-bordered" style="width: 100%">
+		<thead>
+			<tr>
+				<th style="width: 10%"><%= __('Rank') %></th>
+				<th style="width: 15%"><%= __('Account') %></th>
+				<th style="width: 20%"><%= __('Class') %></th>
+				<th style="width: 10%"><%= __('#Solved') %></th>
+				<th style="width: 45%"><%= __('Motto') %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% var rl = rank_list, rank = 1; %>
+			<% for (var i = 0; i < rl.length; i++) { %>
+				<% if( i !== 0 && rl[i].slv < rl[i-1].slv ) rank++; %>
+				<tr class='<%- i%2 == 0 ? "pure-table-odd" : "" %>'>
+					<td><%- rank %></td>
+					<td><a href='user/<%- rl[i].uid %>' class='nav_a'><%- rl[i].lgn %></a></td>
+					<% if (rl[i].class === null || rl[i].class == 0) { %>
+						<td><%= __('Administrator') %></td>
+					<% } else { %>
+						<% if (rl[i].class <= 2) { %>
+							<td><%= __('Class {{number}}', {number: __(rl[i].class == 1 ? "Tue." : "Mon.") }) %></td>
+						<% } else { %>
+							<td><%= __('Visitor Class {{number}}', {number: __(rl[i].class-2 == 1 ? "Tue." : "Mon.") }) %></td>
+						<% } %>
+					<% } %>
+					<td><%- rl[i].slv %></td>
+					<td class='motto'><span><%= rl[i].motto.substr(0, 80) %></span></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+	</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+#include<stdio.h>
+int main() {
+
+	char A[5] = {0};
+	char B[5] = {0};
+	int n = 0,m = 0;
+	int i = 0,j = 0;
+
+	scanf("%s", A);
+	scanf("%s", B);
+
+	for(i = 0; i < 4; i++)
+		if(A[i] == B[i])
+			n++;
+	for(i = 0; i < 4; i++)
+		for(j = 0; j < 4; j++)
+			if(A[i] == B[j] && A[i] != B[i])
+				m++;
+
+	printf("%dA%dB", n,m);
+
+ 	return 0;
+}

@@ -1,0 +1,48 @@
+<article class='article article-type-post'>
+	<div class='article-meta'></div>
+	<div class='article-inner'>
+		<header class='article-header'>
+			<h1 class='article-title'>Register</h1>
+		</header>
+		<div class='article-entry'>
+			<h1><%- sysmsg %></h1>
+			<form action="register" method="post" class="form-style-7" style="text-align: center">
+				<ul>
+				<li>
+					<label for="lgn">學號</label>
+					<input type="text" name="lgn" id="lgn" maxlength="16"/>
+					<span>Example. R0412345</span>
+				</li>
+				<li>
+					<label for="pwd">密碼</label>
+					<input type="password" name="pwd" id="pwd"/>
+					<span>Enter your password</span>
+				</li>
+				<li>
+					<label for="pwd2">重複輸入密碼</label>
+					<input type="password" name="pwd2" id="pwd2" />
+					<span>Repeat your password</span>
+				</li>
+				<li>
+					<label for="nname">真實姓名</label>
+					<input type="text" name="nname" id="nname"/>
+					<span>Example. 王大明</span>
+				</li>
+				<li>
+					<label for="email">郵件信箱地址</label>
+					<input type="text" name="email" id="email"/>
+					<span>Example. example@gmail.com</span>
+				</li>
+				<li>
+					<label for="code">註冊碼</label>
+					<input type="text" name="code" id="code"/>
+					<span>Example. xxxxx</span>
+				</li>
+				<li>
+					<input type="submit" name="submit" id="submit" value="註冊" />
+				</li>
+				<ul>
+			</form>
+		</div>
+	</div>
+</article>
