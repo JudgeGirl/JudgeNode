@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css" />
+<%
+	var uid = user.uid,
+		pid = solution_config.config.pid,
+		ttl = solution_config.config.ttl;
+%>
+<div class="header">
+	<h1 class='article-title'>Solution Idea</h1>
+    <h2><%- solution_config.config.pid + ". " + solution_config.config.ttl %></h2>
+</div>
+<div class="content">
+
+<div class="pure-menu pure-menu-horizontal">
+
+<ul class="pure-menu-list">
+<% if (uid != undefined) { %>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/submissions?pid=<%- pid %>&uid=<%- uid %>'><%= __('My Status') %></a></li>
+<% } %>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/submissions?pid=<%- pid %>'><%= __('Status') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/statistic/problem/0/<%- pid %>'><%= __('Statistics') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/problem/0/<%- pid %>'><%= __('Problem') %></a></li>
+<% if (user["uid"] >= 0 && user["class"] == null) { %>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/admin/edit/problem/<%- pid %>'><%= __('Edit') %></a></li>
+<% } %>
+</ul>
+</div>
+<% if (solution_config.content) { %>
+	<%- solution_config.content %>
+<% } else { %>
+	<h2><div class="sysmsg">解法思路未提供</div></h2>
+<% } %>
+
+<h2> Discussion</h2>
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+</div>

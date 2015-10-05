@@ -1,15 +1,17 @@
 <%
-	var problem_list = problem_config.list;
-	for (var row = 0 ; row < problem_list.length; row++)
-		problem_list[row].score = -1;
-	for (var row = 0 ; row < problem_config.score.length; row++ ) {
-		var tmp = problem_list.filter(function(x) { 
-			return x.pid === problem_config.score[row].pid
-		});
-		if (tmp.length == 0)
-			continue;
-		tmp[0].score = problem_config.score[row].score;
-		tmp[0].submits = problem_config.score[row].submits;
+	if (problem_config.list) {
+		var problem_list = problem_config.list;
+		for (var row = 0 ; row < problem_list.length; row++)
+			problem_list[row].score = -1;
+		for (var row = 0 ; row < problem_config.score.length; row++ ) {
+			var tmp = problem_list.filter(function(x) { 
+				return x.pid === problem_config.score[row].pid
+			});
+			if (tmp.length == 0)
+				continue;
+			tmp[0].score = problem_config.score[row].score;
+			tmp[0].submits = problem_config.score[row].submits;
+		}
 	}
 %>
 <div class="header">
@@ -21,9 +23,11 @@
 <div class="pure-menu pure-menu-horizontal">
 	<ul class="pure-menu-list">
 		<li class="pure-menu-item"><a class="pure-menu-link" href='/scoreboard/contest/<%- contest_config.cid %>'><%= __('Scoreboard') %></a></li>
+		<% if (user["uid"] >= 0 && user["class"] == null) { %>
+		<li class="pure-menu-item"><a class="pure-menu-link" href='/admin/edit/contest/<%- contest_config.cid %>'><%= __('Edit') %></a></li>
+		<% } %>
 	</ul>
 </div>
-
 
 <h2 id="-">考試規則</h2>
 	<ul>
@@ -34,7 +38,7 @@
 	<li>請勿將帳號轉交給其他人代考，遭查獲作弊者將依校規嚴懲。</li>
 	</ul>
 <% if (sysmsg.length != 0) { %>
-	<div class="sysmsg"><%- sysmsg %></div>	
+	<h2><div class="sysmsg"><%- sysmsg %></div></h2>
 <% } else { %>
 	<table class="pure-table pure-table-bordered" style="width: 100%;">
 		<thead>
@@ -62,7 +66,7 @@
 					<% } %>
 				</td>
 				<td><%- problem_list[row].pid %></td>
-				<td><a href="<%- "/problem/" + contest_config.cid + "/" + problem_list[row].pid %>" ><%- problem_list[row].pid %>. <%- problem_list[row].ttl %></a></td>
+				<td><a href="<%- "/problem/" + contest_config.cid + "/" + problem_list[row].pid %>" ><%- problem_list[row].ttl %></a></td>
 				<td></td>
 				<td><%- config.CONTEST_SUBMIT_LIMIT - submits %></td>
 			</tr>

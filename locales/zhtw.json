@@ -85,6 +85,9 @@
 	"New Account": "新增帳號",
 	"Password": "密碼",
 	"Add Account": "加入帳號",
-	"Manage Problem": "Manage Problem",
-	"Scoreboard": "Scoreboard"
+	"Manage Problem": "管理題目",
+	"Scoreboard": "分數板",
+	"Recent Comments": "最近評論",
+	"Solution": "解題思路",
+	"Problem": "題目"
 }

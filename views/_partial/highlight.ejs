@@ -1,24 +1,42 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css" />
 
-<div class="header" style='background: #1b2426;'>
+<div class="header">
   <h1 class='article-title'>Source Code</h1>
   <h2>Share your idea. You will get more.</h2>
 </div>
 <div class="content">
-  <div><i class="fa fa-file">
-    </i> <a href="/source/<%- sid %>" target="_blank" style="text-decoration: none; font-family: Consolas, Bitstream Vera Sans Mono, Courier New, Courier, monospace !important;">plain</a>
-  </div>
-  <table class="pure-table" style="width: 100%">
-      <thead>
-          <tr>
-              <th>Source C++</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td><pre class='dp-highlighter'><%- html_code %></pre></td>
-          <tr>
-      </tbody>
-  </table>
+<div class="pure-menu pure-menu-horizontal">
+
+<ul class="pure-menu-list">
+  <li class="pure-menu-item"><a class="pure-menu-link" href="/source/<%- sid %>" target="_blank" style="text-decoration: none; font-family: Consolas, Bitstream Vera Sans Mono, Courier New, Courier, monospace !important;"><i class="fa fa-file"></i> plain</a></li>
+</ul>
+
 </div>
+
+  <div class="pure-g">
+
+      <div class="pure-u-5-5">
+          <%- html_code %>
+      </div>
+  </div>
+
+  <div class="pure-g">
+      <div class="pure-u-5-5">
+      <div id="disqus_thread" class="dsq-widget"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
+  </div>
+</div>
+
 

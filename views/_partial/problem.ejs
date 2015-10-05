@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css" />
 <div class="header">
 	<h1 class='article-title'><%- pid + ". " + ttl %></h1>
     <h2>I'm a slow walker, but I never walk backwards. </h2>
@@ -12,6 +13,10 @@
 <% } %>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='/submissions?pid=<%- pid %>'><%= __('Status') %></a></li>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='/statistic/problem/<%- cid %>/<%- pid %>'><%= __('Statistics') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/solution/problem/<%- pid %>'><%= __('Solution') %></a></li>
+<% if (user["uid"] >= 0 && user["class"] == null) { %>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/admin/edit/problem/<%- pid %>'><%= __('Edit') %></a></li>
+<% } %>
 </ul>
 
 </div>
@@ -34,14 +39,14 @@
 
 			<div class="pure-control-group">
 				<label for="lng"><%= __('Source Code') %></label>
-				<input class="pure-input-2-3" name="code" type="file">
+				<input class="pure-input-2-3" name="code0" type="file">
 			</div>
 
 		<% } else { %>
 			<% for( var i = 0 ; i < psubmit.length ; i++ ){ %>
 				<div class="pure-control-group">
-					<label for="code"><%- psubmit[i] %></label>
-					<input class="pure-input-2-3" name="code" type="file">
+					<label for="code<%- i %>"><%- psubmit[i] %></label>
+					<input class="pure-input-2-3" name="code<%- i %>" type="file">
 				</div>
 			<% } %>
 		<% } %>
@@ -59,7 +64,7 @@
 <% } %>
 
 <h2> Discussion</h2>
-			<div id="disqus_thread"></div>
+			<div id="disqus_thread" class="dsq-widget"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'ntucsiecprogramming';

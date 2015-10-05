@@ -5,7 +5,6 @@ var config = require('../lib/const');
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');
-var hl = require('node-syntaxhighlighter');
 
 /* GET home page, default /archive */
 router.get('/', function(req, res, next) {
@@ -35,19 +34,23 @@ router.post('/login', function(req, res, next) {
 		lgn : req.body.lgn,
 		pwd : req.body.pwd
 	};
-	var getIpAddress = function (req) {
-	   return (req.headers["X-Forwarded-For"] ||
-	            req.headers["x-forwarded-for"] ||
-	            '').split(',')[0] ||
-	           req.client.remoteAddress;
-	};
-	var ip = getIpAddress(req);
+	var iplist = ["::ffff:140.112.16.155", "::ffff:140.112.16.156", "::ffff:140.112.16.158"];
+	var ip = req.ip;
 	dblink.user.login(user, req.session, function(status) {
 		if (status == 1) {
 			var uid = req.session.uid;
-			dblink.user.update_login(uid, ip, function() {
-				res.redirect('/');
+			var filter_ip = iplist.filter(function(valid_ip) {
+				return ip == valid_ip;
 			});
+			if (config.CONTEST_MODE == false || filter_ip.length != 0 || req.session['class'] == null) {
+				dblink.user.update_login(uid, ip, function() {
+					res.redirect('/');
+				});
+			} else {
+				req.session.regenerate(function(err) {
+					res.redirect('/login');
+				});
+			}
 		} else {
 			res.render('layout', { layout: 'login', user: req.session });
 		}
@@ -126,8 +129,11 @@ router.get('/progress', function(req, res, next) {
 	});
 })
 router.get('/submissions?', function(req, res, next) {
+	var uid = req.session.uid;
 	dblink.submission.list(req.query, function(slist) {
-		res.render('layout', { layout: 'submissions', user: req.session, query_filter: req.query, config: config,  submission_list: slist });
+		dblink.problem.score(uid, function(ac_list) {
+			res.render('layout', { layout: 'submissions', user: req.session, query_filter: req.query, config: config,  submission_list: slist, ac_list: ac_list});
+		});
 	});
 });
 router.get('/live', function(req, res, next) {
@@ -151,16 +157,30 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
 		pid = req.params.pid,
 		uid = req.session.uid;
 	dblink.helper.canread(cid, pid, uid, function(can) {
-		if (!can) {
-			res.redirect('/problems');
-			return 0;
-		}
+		if (uid != undefined && req.session['class'] == null)
+			can = true;
+		if (!can)
+			return res.redirect('/problems');
 		dblink.problem.problem(cid, pid, function(pcontent, pinfo, psubmit) {
 			dblink.helper.cansubmit(cid, pid, uid, function(cansubmit){
 				if (uid != undefined && req.session['class'] == null)
 					cansubmit = true;
 				res.render('layout', { layout: 'problem', user: req.session , problem_content: pcontent, ttl: pinfo && pinfo[0] && pinfo[0].ttl, cid: cid, pid: pid, uid: uid, psubmit: psubmit, canSubmit: cansubmit, config: config});
 			});
+		});
+	});
+});
+router.get('/solution/problem/:pid', function(req, res, next) {
+	var cid = 0, 
+		pid = req.params.pid,
+		uid = req.session.uid;
+	dblink.helper.canread(cid, pid, uid, function(can) {
+		if (uid != undefined && req.session['class'] == null)
+			can = true;
+		if (!can)
+			return res.redirect('/problems');
+		dblink.problem.solution(cid, pid, function(solution_config) {
+			res.render('layout', { layout: 'solution', user: req.session, config: config, solution_config: solution_config});
 		});
 	});
 });
@@ -195,9 +215,15 @@ router.get('/contest/:cid', function(req, res, next) {
 	var cid = req.params.cid,
 		uid = req.session.uid;
 	dblink.contest.enable(cid, uid, function(status, contest_config, sysmsg) {
-		dblink.contest.problemlist(cid, uid, function(status, problem_config) {
-			res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, problem_config: problem_config});
-		});
+		if (uid != undefined && req.session['class'] == null)
+			status = 1;	// can
+		if (status == 1) {
+			dblink.contest.problemlist(cid, uid, function(status, problem_config) {
+				res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, problem_config: problem_config});
+			});
+		} else {
+			res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, problem_config: {} });
+		}
 	});
 });
 router.get('/scoreboard/contest/:cid', function(req, res, next) {
@@ -214,37 +240,42 @@ router.get('/scoreboard/contest/:cid', function(req, res, next) {
 	})
 });
 
-router.post('/submit', upload.array('code'), function(req, res, next){
-	if( req.session.uid < 0 || req.session.uid === undefined ){
-		res.redirect("/login");
-		return 0;
+router.post('/submit', 
+	upload.fields([{name: 'code0', maxCount: 1}, {name: 'code1', maxCount: 1},
+				   {name: 'code2', maxCount: 1}, {name: 'code3', maxCount: 1},
+				   {name: 'code4', maxCount: 1}, {name: 'code5', maxCount: 1},
+				   {name: 'code6', maxCount: 1}, {name: 'code7', maxCount: 1}]), 
+	function(req, res, next){
+	if (req.session.uid < 0 || req.session.uid === undefined) {
+		return res.redirect("/login");
 	}
 	
 	var cid = req.body.cid;
 	var pid = req.body.pid;
 	var lng = req.body.lng;
 	var uid = req.session.uid;	
-
+	if (lng == undefined) // multi file
+		lng = 0;
 	dblink.helper.cansubmit( cid, pid, uid, function(canSubmit) {
 		if (req.session['class'] == null)
 			canSubmit = true;
-		if( !canSubmit ){
-			res.redirect("/");
-			return 0;
-		}
+		if (!canSubmit)
+			return res.redirect("/");
 
-		dblink.problem.problem_config( pid, function(source_list){
-			if( source_list.length === 0 ){
+		dblink.problem.problem_config( pid, function(source_list) {
+			if (source_list.length === 0) {
 				source_list.push("source");
 			}
 			
+			console.log(source_list);
 			var size = 0;
-			for( var i = 0 ; i < source_list.length ; i++ ){
-				if (req.files[i] == null || req.files[i] == undefined) {
-					res.redirect("/");
-					return 0;
+			for (var i = 0 ; i < source_list.length; i++) {
+				if (req.files['code' + i] == null || req.files['code' + i] == undefined || 
+					req.files['code' + i][0] == null || req.files['code' + i][0] == undefined) {
+					console.log('NOT FOUND FILE ' + i);
+					return res.redirect("/");
 				}
-				size += req.files[i].size;
+				size += req.files['code' + i][0].size;
 			}	
 			
 			var subinfo = {
@@ -260,21 +291,17 @@ router.post('/submit', upload.array('code'), function(req, res, next){
 				mem: 0 
 			};
 
-			dblink.judge.insert_submission(subinfo, function(sid){
-				for( var i = 0 ; i < source_list.length ; i++ ){
-					fs.writeFileSync( config.JUDGE_PATH + "submission/" + sid + "-" + i,  fs.readFileSync(req.files[i].path) );
-					fs.unlinkSync(req.files[i].path);
+			dblink.judge.insert_submission(subinfo, function(sid) {
+				for (var i = 0 ; i < source_list.length ; i++) {
+					fs.writeFileSync(config.JUDGE_PATH + "submission/" + sid + "-" + i,  fs.readFileSync(req.files['code' + i][0].path) );
+					fs.unlinkSync(req.files['code' + i][0].path);
 				}
 				
-				dblink.judge.update_waiting_submission(sid, function(err){
-					if( cid === "0" ){
-						res.redirect("/submissions");
-						return 0;
-					}
-					else {
-						res.redirect("/submissions?cid=" + cid);
-						return 0;
-					}
+				dblink.judge.update_waiting_submission(sid, function(err) {
+					if (cid === "0")
+						return res.redirect("/submissions");
+					else
+						return res.redirect("/submissions?cid=" + cid);
 				});	
 				
 			});
@@ -299,13 +326,22 @@ router.get('/source/:sid', function(req, res, next) {
 	var sid = req.params.sid;
 	dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
 		res.type('text/plain');
-		res.send(source_code);
+		var text = '';
+		for (var i in source_code)
+			text += source_code[i].code + '\n';
+		res.send(text);
 	});
 });
+var markdown = require('../lib/plugin/markdown');
 router.get('/source/highlight/:sid', function(req, res, next) {
 	var sid = req.params.sid;
 	dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
-		res.render('layout', {layout: 'highlight', user: req.session, config: config, sid: sid, html_code: hl.highlight(source_code, hl.getLanguage('cpp')) });
+		var text = '';
+		for (var i in source_code) {
+			text += '## ' + source_code[i].title + ' ##\n';
+			text += '```cpp\n' + source_code[i].code + '```\n';
+		}
+		res.render('layout', {layout: 'highlight', user: req.session, config: config, sid: sid, html_code: markdown.post_marked(text) });
 	});
 });
 

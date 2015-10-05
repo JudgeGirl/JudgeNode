@@ -59,12 +59,20 @@
         <div class="pure-g">
             <div class="pure-u-1-1">
                 <legend><%= __('Description') %> (Markdown)</legend>
+                <textarea name="textbox" id="textbox" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= prob_config.md %></textarea>
 
-        			<textarea name="textbox" id="textbox" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= prob_config.md %></textarea>
+                <legend><%= __('Solution Description') %> (Markdown)</legend>
+                <textarea name="textbox2" id="textbox2" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 600px;"><%= prob_config.solution_md %></textarea>
 
         		<div class="pure-controls">
                 	<button type="submit" name="submit" id="submit" class="pure-button pure-button-primary button-warning"><%= __('Update') %></button>
                 </div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                
             </div>
         </div>
     </fieldset>
@@ -74,6 +82,24 @@
 
 <script>
 $(document).delegate('#textbox', 'keydown', function(e) {
+  var keyCode = e.keyCode || e.which;
+
+  if (keyCode == 9) {
+    e.preventDefault();
+    var start = $(this).get(0).selectionStart;
+    var end = $(this).get(0).selectionEnd;
+
+    // set textarea value to: text before caret + tab + text after caret
+    $(this).val($(this).val().substring(0, start)
+                + "\t"
+                + $(this).val().substring(end));
+
+    // put caret at right position again
+    $(this).get(0).selectionStart =
+    $(this).get(0).selectionEnd = start + 1;
+  }
+});
+$(document).delegate('#textbox2', 'keydown', function(e) {
   var keyCode = e.keyCode || e.which;
 
   if (keyCode == 9) {

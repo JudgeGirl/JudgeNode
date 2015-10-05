@@ -72,5 +72,22 @@
 	"IP": "IP",
 	"Last Login": "Last Login",
 	"Scoreboard": "Scoreboard",
-	"#Remain": "#Remain"
+	"#Remain": "#Remain",
+	"Problem ID": "Problem ID",
+	"View Public/Private": "View Public/Private",
+	"Public": "Public",
+	"Private": "Private",
+	"Difficult Level": "Difficult Level",
+	"Level Order": "Level Order",
+	"Dependency": "Dependency",
+	"Description": "Description",
+	"Contest ID": "Contest ID",
+	"Contest Date": "Contest Date",
+	"Problem Set": "Problem Set",
+	"Assign Participants": "Assign Participants",
+	"Comming": "Comming",
+	"Solution": "Solution",
+	"Problem": "Problem",
+	"Solution Description": "Solution Description",
+	"Recent Comments": "Recent Comments"
 }

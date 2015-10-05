@@ -14,6 +14,23 @@ body {
   position: relative;
   text-align: center;
 }
+.dsq-widget {
+  background: none repeat scroll 0% 0% #333534;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+  border: 1px solid color-border;
+  border-radius: 3px;
+  color: white;
+  padding: 10px;
+}
+.sysmsg {
+  color: #0055BB;
+  background-position: 4px top;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-top: 3px solid #84A7DB;
+  border-bottom: 3px solid #84A7DB;
+}
 /* button */
 .button-success,
 .button-error,
@@ -42,14 +59,14 @@ body {
 /* code block */
 .content .syntaxhighlighter {
   background: #2d2d2d;
-  padding: 10px;
+  padding: 5px;
   margin: 0px;
   border-style: solid;
   border-color: #696969;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   border-width: 1px 1px;
-  overflow: auto;
+  overflow: hidden;
   color: #ccc;
   line-height: 25.6px;
 }
@@ -62,6 +79,8 @@ body {
 .content pre,
 .content code {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace, "Microsoft YaHei";
+  margin: 0px 0px -30px 0px;
+  overflow: hidden;
 }
 .content code {
   padding: 2px 4px;
@@ -81,42 +100,6 @@ body {
   padding: 0;
   border: none;
   margin: 0px;
-}
-.content .syntaxhighlighter pre {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-.content .syntaxhighlighter table {
-  margin: 0;
-  width: auto;
-}
-.content .syntaxhighlighter td {
-  border: none;
-  padding: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.content .syntaxhighlighter figcaption {
-  font-size: 0.85em;
-  color: #999;
-  line-height: 1em;
-  margin-bottom: 1em;
-}
-.content .syntaxhighlighter figcaption:before,
-.content .syntaxhighlighter figcaption:after {
-  content: "";
-  display: table;
-}
-.content .syntaxhighlighter figcaption:after {
-  clear: both;
-}
-.content .syntaxhighlighter figcaption a {
-  float: right;
-}
-.content .syntaxhighlighter .gutter pre {
-  text-align: right;
-  padding-right: 20px;
 }
 
 /* table */
@@ -262,7 +245,7 @@ The content `<div>` is where all your content goes.
     }
 
 .content-subhead {
-    margin: 50px 0 20px 0;
+    margin: 20px 0 20px 0;
     color: black;
 }
 

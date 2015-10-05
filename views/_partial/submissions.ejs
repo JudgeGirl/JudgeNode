@@ -3,11 +3,17 @@
 table .problem-title a {
 	display: block;
 	white-space: nowrap;
-	width: 250px; 
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 </style>
+<% 
+	var ac_map = [];
+	for (var i in ac_list) {
+		if (ac_list[i].score == 100)
+			ac_map[ac_list[i].pid] = 1;
+	}
+%>
 <div class="header">
 	<h1 class='article-title'>Submission</h1>
     <h2>Update page each 10 seconds</h2>
@@ -23,9 +29,9 @@ table .problem-title a {
 				<th class='sid-header' style="width: 5%">#</th>
 				<th style="width: 5%"></th>
 				<th style="width: 30%">Problem Title</th>
-				<th style="width: 15%">Username</th>
+				<th style="width: 10%">Username</th>
 				<th style="width: 20%">Verdict</th>
-				<th style="width: 0%"></th>
+				<th style="width: 5%"></th>
 				<th style="width: 10%">Len</th>
 				<th class='date-header' style="width: 30%">Date</th>
 			</tr>
@@ -70,7 +76,9 @@ table .problem-title a {
 					<%- text %>
 					<td>
 						<% if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) { %>
-							<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %></a>
+							<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
+						<% } else if (ac_map[sl[i].pid] != undefined) { %>
+							<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
 						<% } else { %>
 							<%- config.lng[sl[i].lng] %>
 						<% } %>
@@ -96,7 +104,7 @@ table .problem-title a {
 			%>
 			<div class="pure-u-12-24">
 			<% if (page != undefined && page != null && parseInt(page) > 1) { %>
-				<a class="pure-button pure-button-primary" style="width:100%" rel="prev" href="/submissions?page=<%- parseInt(page)-1 %>">« Prev</a>
+				<a class="pure-button pure-button-primary" style="width:100%" rel="prev" href="/submissions?page=<%- parseInt(page)-1 %><%- arg_query %>">« Prev</a>
 			<% } else { %>
 				<a class="" style="width:100%"></a>
 			<% } %>

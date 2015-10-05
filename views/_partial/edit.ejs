@@ -4,7 +4,9 @@
 </div>
 <div class="content">
 
-<h2><%- sysmsg %></h2>
+<% if (sysmsg.length > 0) { %>
+<h2><div class='sysmsg'><%- sysmsg %></div></h2>
+<% } %>
 
 <form action="edit" method="post" class="pure-form  pure-form-aligned">
     <fieldset>

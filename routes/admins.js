@@ -76,7 +76,10 @@ router.get('/edit/problem/:pid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.load_problem_content(pid, function(prob_config) {
-			res.render('admin/layout', { layout: 'edit_problem', user: req.session, config: config, prob_config: prob_config, pid : pid});
+			dblink.admin.load_problem_solution(pid, function(sol_content) {
+				prob_config.solution_md = sol_content;
+				res.render('admin/layout', { layout: 'edit_problem', user: req.session, config: config, prob_config: prob_config, pid : pid});
+			});
 		});
 	});
 });
@@ -135,7 +138,7 @@ router.post('/new/problem', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.create_problem_content(config, function() {
-			res.redirect('/');
+			res.redirect('/admin/problems');
 		});
 	});
 });
@@ -156,7 +159,7 @@ router.post('/new/contest', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.create_contest_config(config, function() {
-			res.redirect('/');
+			res.redirect('/admin/contests');
 		});
 	});
 });
@@ -173,7 +176,7 @@ router.post('/new/account', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.create_account(config, function() {
-			res.redirect('/');
+			res.redirect('/admin/accounts');
 		});
 	});
 });
@@ -199,7 +202,8 @@ router.post('/update/problem/:pid', function(req, res, next) {
 		level : req.body.level,
 		porder : req.body.porder,
 		dependency: req.body.dependency.split(','),
-		md : req.body.textbox
+		md : req.body.textbox,
+		solution_md: req.body.textbox2
 	};
 	if (req.body.dependency.trim().length == 0)
 		config.dependency = [];
@@ -207,8 +211,12 @@ router.post('/update/problem/:pid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.update_problem_content(config, function() {
-			res.redirect('/');
+			res.redirect('/problem/0/' + config.pid);
+			dblink.admin.update_problem_solution(config, function() {
+
+			});
 		});
+		
 	});
 });
 router.post('/update/contest/:cid', function(req, res, next) {
@@ -228,7 +236,7 @@ router.post('/update/contest/:cid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.update_contest_config(config, function() {
-			res.redirect('/');
+			res.redirect('/contest/' + config.cid);
 		});
 	});
 });
@@ -244,7 +252,7 @@ router.post('/update/account/:uid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.update_account(config, function() {
-			res.redirect('/');
+			res.redirect('/admin/accounts');
 		});
 	});
 });
