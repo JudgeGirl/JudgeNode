@@ -19,6 +19,7 @@
 		});
 		if (user["uid"] >= 0 && user["class"] == null)
 			return true;
+		return true; // temporarily setting
 		for( var row = 0 ; row < all_depend.length ; row++ ){
 			if( problem_list.filter(function(y){ return y.pid === all_depend[row].depend_pid;})[0].score !== 100 ){
 				return false;
@@ -41,6 +42,16 @@
 	<h2>You have to belive in yourself. That's the secret of success. </h2>
 </div>
 <div class="content">
+<div class="pure-g">
+	<div class="pure-u-1-1">
+		<form class="pure-form" style="position: relative">
+			<label for="search" style="position: absolute; left: 12px; top: -2px">
+				<i class="fa fa-search"></i> 
+			</label>
+			<input type="text" id="search" class="pure-input-rounded pure-input-1-2" placeholder='Search Problems, like :unsolved, :solved' style="padding-left: 36px; margin-top: 2px">
+		</form>
+	</div>
+</div>
 <% for (var level = 0 ; level < level_list.length ; level++ ) { %>
 	<% if( level_list[level].level < 0 ) { %>
 	 <h2 class="content-subhead"> Side Track. <%- level_list[level].ttl %> </h2>
@@ -66,9 +77,11 @@
 	            <% var score = problem_list[row].score; %>
 				<td>
 					<% if (score == 100) { %>
-						<i class="fa fa-check" style="color: green;"></i>
+						<i class="fa fa-check" style="color: green;"></i><span style='display: none'>:solved</span>
 					<% } else if (score >= 0) { %>
-						<i class="fa fa-times" style="color: red;"></i>
+						<i class="fa fa-times" style="color: red;"></i><span style='display: none'>:unsolved</span>
+					<% } else { %>
+						<span style='display: none'>:unsolved</span>
 					<% } %>
 				</td>
 				<td><%- problem_list[row].pid %></td>
@@ -87,3 +100,14 @@
 	</div>
 <% } %>
 </div>
+<script>
+var $rows = $('tbody tr');
+$('#search').keyup(function() {
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});
+</script>

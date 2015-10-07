@@ -1,0 +1,115 @@
+<%
+	var pid = problem_config.pid,
+		ttl = problem_config.ttl;
+%>
+<div class="header">
+	<h1 class='article-title'><%- __('Report') %></h1>
+	<h2><%- pid %>. <%- ttl %></h2>
+</div>
+<div class="content">
+	<h2>Upload Record</h2>
+		<table id='grade-table' class="pure-table pure-table-bordered" border="1">
+			<thead>
+				<tr>
+					<th data-type="string" data-sortable="true" data-name="User" style="width: 15%;"></th>
+					<th data-type="string" data-sortable="true" data-name="Result" style="text-align:"></th>
+					<th data-type="int" data-sortable="true" data-name="Score">Score</th>
+					<th data-type="int" data-sortable="true" data-name="Subs">Subs</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					var sl = statistic_config.grade;
+					var cid = 0;
+				%>
+				<% for (var row = 0; row < sl.length; row++) { %>
+				<tr class="normal">
+					<td><a href="/user/<%- sl[row].uid %>"><%- sl[row].lgn %></a></td>
+					<% 
+						var score = sl[row]['MAX(scr)'];
+						var times = sl[row]['COUNT(*)'];
+					%>
+					<%
+						var filter = 'cid=' + cid;
+						filter += '&uid=' + sl[row].uid;
+						filter += '&pid=' + pid;
+					%>
+					<% if (score != 100) { %>
+						<td><span class="result6">Wrong Answer </span></td>
+					<% } else { %>
+						<td><span class="result7">Accepted </span></td>
+					<% } %>
+
+					<td><%- score %></td>
+					<td><a href="/submissions?<%- filter %>"><%- times %></a></td>
+				</tr>
+				<% } %>
+		</table>
+		<script>
+function sortTable(tag_id, column, type, cmp) {
+    var tbl = document.getElementById(tag_id).tBodies[0];
+    var store = [];
+    for(var i=0, len=tbl.rows.length; i<len; i++){
+        var row = tbl.rows[i];
+        var sortnr;
+        if (type == 'int') {
+        	sortnr = parseFloat(row.cells[column].textContent || row.cells[column].innerText);
+        	if(!isNaN(sortnr)) store.push([sortnr, row]);
+        } else if (type == 'string') {
+        	sortnr = row.cells[column].textContent || row.cells[column].innerText;
+        	store.push([sortnr, row]);
+        }
+    }
+    if (type == 'int') {
+    	if (cmp == 0) {
+	    	store.sort(function(x,y) {
+	        	return y[0] - x[0];
+	    	});
+    	} else {
+    		store.sort(function(x,y) {
+	        	return x[0] - y[0];
+	    	});
+    	}
+    } else if (type == 'string') {
+    	if (cmp == 0) {
+    		store.sort(function(x,y) {
+	        	return y[0] < x[0] ? 1 : -1;
+    		});
+    	} else {
+    		store.sort(function(x,y) {
+	        	return y[0] < x[0] ? -1 : 1;
+    		});
+    	}
+    }
+    for(var i=0, len=store.length; i<len; i++){
+        tbl.appendChild(store[i][1]);
+    }
+    store = null;
+}
+sortTable('grade-table', 0, 'string', 0);
+$('#grade-table thead tr').find('th').each(function(index, value) {
+	var sortable = $(value).attr('data-sortable');
+	if (sortable != undefined && sortable == "true") {
+		var type = $(value).attr('data-type');
+		var name = $(value).attr('data-name');
+		$(value).html(name + ' <i class="fa fa-caret-up"></i>');
+		$(value).css('cursor', 'pointer');
+		$(value).attr('data-sort', '0');
+		$(value).click(function() {
+			var cmp = $(value).attr('data-sort');
+			if (cmp == "1") {
+				sortTable('grade-table', index, type, 1);
+				$(value).attr('data-sort', "0");
+				var name = $(value).attr('data-name');
+				$(value).html(name + ' <i class="fa fa-caret-up"></i>');
+			} else {
+				sortTable('grade-table', index, type, 0);
+				$(value).attr('data-sort', "1");
+				var name = $(value).attr('data-name');
+				$(value).html(name + ' <i class="fa fa-caret-down"></i>');
+			}
+		});
+	}
+});
+		</script>
+</div>

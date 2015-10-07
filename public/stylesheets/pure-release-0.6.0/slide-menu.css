@@ -83,15 +83,12 @@ body {
   overflow: hidden;
 }
 .content code {
-  padding: 2px 4px;
-  color: #c0c0c0;
-  background-color: #2d2d2d;
   border: 1px solid #696969;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   font-family: Monaco, Consolas;
   margin: 0 2px;
-  padding: 0.2em 0.3em;
+  padding: 0em 0em;
   font-weight: 400;
 }
 .content pre code {

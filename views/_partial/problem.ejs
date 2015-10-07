@@ -15,6 +15,7 @@
 	<li class="pure-menu-item"><a class="pure-menu-link" href='/statistic/problem/<%- cid %>/<%- pid %>'><%= __('Statistics') %></a></li>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='/solution/problem/<%- pid %>'><%= __('Solution') %></a></li>
 <% if (user["uid"] >= 0 && user["class"] == null) { %>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='/statistic/grade/problem/<%- cid %>/<%- pid %>'><%= __('Report') %></a></li>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='/admin/edit/problem/<%- pid %>'><%= __('Edit') %></a></li>
 <% } %>
 </ul>

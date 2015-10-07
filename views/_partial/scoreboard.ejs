@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="10" />
+<!-- <meta http-equiv="refresh" content="10" /> -->
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
@@ -91,19 +91,20 @@
 	</script>
 	<% if (user["uid"] >= 0 && user["class"] == null) { %>
 		<h2>Grade</h2>
-		<table class="pure-table pure-table-bordered" border="1">
+		<table id='grade-table' class="pure-table pure-table-bordered" border="1">
 			<thead>
 				<tr>
-					<tr><th style="width: 15%;">User</th>
+					<th data-type="string" data-sortable="true" data-name="User" style="width: 15%;"></th>
 					<% var width = 85 / Math.max(table_config.header.length, 1); %>
 					<% for (var row = 0; row < table_config.header.length; row++) { %>
-						<th style="width:<%- width %>%"><%- table_config.header[row].ttl %></th>
+						<th data-type="string" data-sortable="true" data-name="<%- table_config.header[row].ttl %>" style="text-align:"><%- table_config.header[row].ttl %></th>
+						<th data-type="int" data-sortable="true" data-name="Score">Score</th>
+						<th data-type="int" data-sortable="true" data-name="Subs">Subs</th>
 					<% } %>
 				</tr>
 			</thead>
 			<tbody>
 				<%
-					console.log(table_config);
 					var alluser = {};
 					for (var i = 0; i < table_config.user.length; i++)
 						alluser[table_config.user[i].uid] = {};
@@ -129,17 +130,87 @@
 									filter += '&uid=' + table_config.user[row].uid;
 								%>
 								<% if (score != 100) { %>
-									
-									<td><span class="result6">Wrong Answer </span>(<%- score %>) / <a href="/submissions?<%- filter %>"><%- times %></a></td>
+									<td><span class="result6">Wrong Answer </span></td>
 								<% } else { %>
-									<td><span class="result7">Accepted </span>(<%- score %>) / <a href="/submissions?<%- filter %>"><%- times %></a></td>
+									<td><span class="result7">Accepted </span></td>
 								<% } %>
+								<td><%- score %></td>
+								<td><a href="/submissions?<%- filter %>"><%- times %></a></td>
 						<% } else { %>
-							<td> -- / --</td>
+							<td> NO RESULT </td>
+							<td> 0 </td>
+							<td> 0 </td>
 						<% } %>
 					<% } %>
 				</tr>
 				<% } %>
 		</table>
+		<script>
+function sortTable(tag_id, column, type, cmp) {
+    var tbl = document.getElementById(tag_id).tBodies[0];
+    var store = [];
+    for(var i=0, len=tbl.rows.length; i<len; i++){
+        var row = tbl.rows[i];
+        var sortnr;
+        if (type == 'int') {
+        	sortnr = parseFloat(row.cells[column].textContent || row.cells[column].innerText);
+        	if(!isNaN(sortnr)) store.push([sortnr, row]);
+        } else if (type == 'string') {
+        	sortnr = row.cells[column].textContent || row.cells[column].innerText;
+        	store.push([sortnr, row]);
+        }
+    }
+    if (type == 'int') {
+    	if (cmp == 0) {
+	    	store.sort(function(x,y) {
+	        	return y[0] - x[0];
+	    	});
+    	} else {
+    		store.sort(function(x,y) {
+	        	return x[0] - y[0];
+	    	});
+    	}
+    } else if (type == 'string') {
+    	if (cmp == 0) {
+    		store.sort(function(x,y) {
+	        	return y[0] < x[0] ? 1 : -1;
+    		});
+    	} else {
+    		store.sort(function(x,y) {
+	        	return y[0] < x[0] ? -1 : 1;
+    		});
+    	}
+    }
+    for(var i=0, len=store.length; i<len; i++){
+        tbl.appendChild(store[i][1]);
+    }
+    store = null;
+}
+sortTable('grade-table', 0, 'string', 0);
+$('#grade-table thead tr').find('th').each(function(index, value) {
+	var sortable = $(value).attr('data-sortable');
+	if (sortable != undefined && sortable == "true") {
+		var type = $(value).attr('data-type');
+		var name = $(value).attr('data-name');
+		$(value).html(name + ' <i class="fa fa-caret-up"></i>');
+		$(value).css('cursor', 'pointer');
+		$(value).attr('data-sort', '0');
+		$(value).click(function() {
+			var cmp = $(value).attr('data-sort');
+			if (cmp == "1") {
+				sortTable('grade-table', index, type, 1);
+				$(value).attr('data-sort', "0");
+				var name = $(value).attr('data-name');
+				$(value).html(name + ' <i class="fa fa-caret-up"></i>');
+			} else {
+				sortTable('grade-table', index, type, 0);
+				$(value).attr('data-sort', "1");
+				var name = $(value).attr('data-name');
+				$(value).html(name + ' <i class="fa fa-caret-down"></i>');
+			}
+		});
+	}
+});
+		</script>
 	<% } %>
 </div>

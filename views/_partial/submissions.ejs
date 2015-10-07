@@ -44,19 +44,10 @@ table .problem-title a {
 					<td><%- sl[i].pid %></td>
 					<td class='problem-title'><a href='problem/<%- sl[i].cid %>/<%- sl[i].pid %>'><%- sl[i].ttl %></a></td>
 					<td><a href='user/<%- sl[i].uid %>'><%- sl[i].lgn %></td>
-					<% if (config.CONTEST_MODE == true) { %>
-						<td>
-							<% if (sl[i].ip.indexOf("::ffff:140.112.16.155") >= 0 || sl[i].ip.indexOf("::ffff:140.112.16.156") >= 0 || sl[i].ip.indexOf("::ffff:140.112.16.158") >= 0 ) { %>
-								<i class="fa fa-check" style="color: green;"></i>
-							<% } else { %>
-								<i class="fa fa-exclamation-triangle" style="color: orange;"></i>
-							<% } %>
-						</td>
-					<% } %>
 					<% 
 						var text = '';
 						text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
-						text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + config.res[sl[i].res] + "</span>";
+						text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + config.res[(sl[i].res+config.res.length)%config.res.length] + "</span>";
 						if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
 							text += " (";
 							if (sl[i].res != 7) {

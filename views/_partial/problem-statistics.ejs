@@ -65,10 +65,10 @@
 	</table>
 	<% 
 		var donut = [], donut_color = [];
-		var ddcolor = ['#000000', '#AAAA00', '#000000', '#000000', '#00AAAA', '#0000FF', '#FF0000', '#00AA00', '#000000'];
+		var ddcolor = ['#000000', '#AAAA00', '#000000', '#000000', '#00AAAA', '#0000FF', '#FF0000', '#00AA00', '#000000', '#000000'];
 		for (var key in donut_config.donut) {
-		  	donut.push({label: config.res[donut_config.donut[key].res], value: donut_config.donut[key].count});
-		  	donut_color.push(ddcolor[donut_config.donut[key].res]);
+		  	donut.push({label: config.res[(donut_config.donut[key].res+config.res.length)%config.res.length], value: donut_config.donut[key].count});
+		  	donut_color.push(ddcolor[(donut_config.donut[key].res+config.res.length)%config.res.length]);
 		}
 	%>
 	<script>

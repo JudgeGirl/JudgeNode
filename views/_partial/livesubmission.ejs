@@ -13,6 +13,9 @@ table .problem-title a {
 	<h1 class='article-title'>Live Submission</h1>
     <h2>Auto update</h2>
 </div>
+<% if (config.CONTEST_MODE == true) { %>
+	<div class="sysmsg">考試正在進行</div>
+<% } %>
 <script src="/javascripts/jquery.timeago.js"></script>
 			<table id='live-submission' class="pure-table pure-table-bordered" style="width: 100%">
 				<thead>
@@ -132,7 +135,7 @@ table .problem-title a {
 							}
 							text += "<a href='user/" + submit_list[i].uid + "'>" + submit_list[i].lgn + "</td>";
 							text += "<td class='status' data-res=" + submit_list[i].res + " data-sid=" + submit_list[i].sid + ">";
-							text += "<a href='detail/" + submit_list[i].sid + "'><span class='result" + submit_list[i].res + "'>" + options.restext[submit_list[i].res] + "</span>";
+							text += "<a href='detail/" + submit_list[i].sid + "'><span class='result" + submit_list[i].res + "'>" + options.restext[(submit_list[i].res+options.restext.length)%options.restext.length] + "</span>";
 							if (submit_list[i].res != 0 && submit_list[i].res != 1 && submit_list[i].res != 8) {
 								text += " (";
 								if (submit_list[i].res != 7) {
@@ -239,11 +242,11 @@ table .problem-title a {
 			    }
 			    $.jhunt.defaults = {
 			        ip: '140.112.31.208',
-			        reloadtime: 1500,		// 	how time to load 
-			        reloadsubmit: 2,
+			        reloadtime: 2000,		// 	how time to load 
+			        reloadsubmit: 5,
 			        loadsubmit: 20,		//	how #submission to load
 			        updatetime: 3000,	//	single waiting submission to update
-			        restext:  ['', 'CE', 'OLE', 'MLE', 'RE', 'TLE', 'WA', 'AC', 'Uploading...'],
+			        restext:  ['', 'CE', 'OLE', 'MLE', 'RE', 'TLE', 'WA', 'AC', 'Uploading...', 'PE'],
 			        modify_flag: false,
 			        langtext: ['*', 'C']
 			    };

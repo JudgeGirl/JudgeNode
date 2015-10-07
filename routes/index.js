@@ -205,6 +205,21 @@ router.get('/statistic/problem/:cid/:pid', function(req, res, next) {
 		});
 	});
 });
+router.get('/statistic/grade/problem/:cid/:pid', function(req, res, next) {
+	var cid = req.params.cid, 
+		pid = req.params.pid,
+		uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('/login');
+		dblink.problem.problem(cid, pid, function(content, pconfig) {
+			pconfig = pconfig[0];
+			dblink.statistic.grade_problem(cid, pid, function(sconfig) {
+				res.render('layout', { layout: 'grade_problem', user: req.session, config: config, statistic_config: sconfig, problem_config: pconfig});
+			});
+		});
+	});
+});
 
 router.get('/contests', function(req, res, next) {
 	dblink.contest.list(req.session.uid, function(clist) {

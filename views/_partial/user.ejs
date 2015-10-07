@@ -4,6 +4,8 @@
 </div>
 <div class="content">
 
+<h2><%- __('Profile') %></h2>
+
 <table class="pure-table pure-table-bordered" style='width: 100%;'>
 	<tbody>
 	<tr>
@@ -44,5 +46,62 @@
 	</tr>
 	</tbody>
 </table>
+
 </div>
+
+<h2><%- __('Recent Submission') %></h2>
+
+<table class="pure-table pure-table-bordered" sytle="width: 150%">
+	<thead>
+		<tr>
+			<th class='sid-header' style="width: 5%">#</th>
+			<th style="width: 5%"></th>
+			<th style="width: 30%">Problem Title</th>
+			<th style="width: 10%">Username</th>
+			<th style="width: 20%">Verdict</th>
+			<th style="width: 5%"></th>
+			<th style="width: 10%">Len</th>
+			<th class='date-header' style="width: 30%">Date</th>
+		</tr>
+	</thead>
+	<tbody>
+
+
+<% var sl = userinfo.recent; %>
+<% for (var i = 0; i < sl.length; i++) { %>
+	<tr class='normal'>
+		<td class='sid'><%- sl[i].sid %></td>
+		<td><%- sl[i].pid %></td>
+		<td class='problem-title'><a href='problem/<%- sl[i].cid %>/<%- sl[i].pid %>'><%- sl[i].ttl %></a></td>
+		<td><a href='user/<%- sl[i].uid %>'><%- sl[i].lgn %></td>
+		<% 
+			var text = '';
+			text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
+			text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + config.res[(sl[i].res+config.res.length)%config.res.length] + "</span>";
+			if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
+				text += " (";
+				if (sl[i].res != 7) {
+					text += "score: " + sl[i].scr;
+				} else {
+					text += config.unitConvert('cpu', sl[i].cpu);
+					text += ","
+					text += config.unitConvert('mem', sl[i].mem);
+				}
+				text += ")";
+			}
+			text += "</a>";
+			if (sl[i].res == 0 || sl[i].res == 8)
+				text += ' <i class="fa fa-spinner fa-pulse"></i>';
+			text += '</td>';
+		%>
+		<%- text %>
+		<td>
+				<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %></a>
+		</td>
+		<td><%- config.unitConvert('mem', sl[i].len) %></td>
+		<td class='date'><%- config.unitConvert('date', new Date(sl[i].ts)) %></td>
+	</tr>
+<% } %>
+	</tbody>
+</table>
 
