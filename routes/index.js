@@ -27,7 +27,7 @@ router.get('/restart', function(req, res, next){
 
 /* User Information control */
 router.get('/login', function(req, res, next) {
-	res.render('layout', { layout: 'login', user: req.session });
+	res.render('layout', { layout: 'login', user: req.session, sysmsg: '' });
 });
 router.post('/login', function(req, res, next) {
 	var user = {
@@ -48,11 +48,11 @@ router.post('/login', function(req, res, next) {
 				});
 			} else {
 				req.session.regenerate(function(err) {
-					res.redirect('/login');
+					res.render('layout', { layout: 'login', user: req.session, sysmsg: '考試正在進行' });
 				});
 			}
 		} else {
-			res.render('layout', { layout: 'login', user: req.session });
+			res.render('layout', { layout: 'login', user: req.session, sysmsg: '帳號或密碼錯誤' });
 		}
 	});
 });
@@ -162,10 +162,12 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
 		if (!can)
 			return res.redirect('/problems');
 		dblink.problem.problem(cid, pid, function(pcontent, pinfo, psubmit) {
-			dblink.helper.cansubmit(cid, pid, uid, function(cansubmit){
-				if (uid != undefined && req.session['class'] == null)
-					cansubmit = true;
-				res.render('layout', { layout: 'problem', user: req.session , problem_content: pcontent, ttl: pinfo && pinfo[0] && pinfo[0].ttl, cid: cid, pid: pid, uid: uid, psubmit: psubmit, canSubmit: cansubmit, config: config});
+			dblink.problem.testdata(pid, function(tconfig) {
+				dblink.helper.cansubmit(cid, pid, uid, function(cansubmit){
+					if (uid != undefined && req.session['class'] == null)
+						cansubmit = true;
+					res.render('layout', { layout: 'problem', user: req.session , problem_content: pcontent, ttl: pinfo && pinfo[0] && pinfo[0].ttl, cid: cid, pid: pid, uid: uid, psubmit: psubmit, testdata_config: tconfig, canSubmit: cansubmit, config: config});
+				});
 			});
 		});
 	});

@@ -43,14 +43,14 @@ table .problem-title a {
 						if (query_filter['cid'] != undefined)
 							arg_query += '&cid=' + query_filter['cid'];
 					%>
-					 <div class="pure-u-12-24">
+					 <div class="pure-u-6-24">
 					<% if (page != undefined && page != null && parseInt(page) > 1) { %>
 						<a class="pure-button pure-button-primary" style="width:100%" rel="prev" href="/live?page=<%- parseInt(page)-1 %>">« Prev</a>
 					<% } else { %>
 						<a class="" style="width:100%"></a>
 					<% } %>
-					</div>
-					<div class="pure-u-12-24">
+					</div><div class="pure-u-12-24"></div>
+					<div class="pure-u-6-24">
 					<% if (page == undefined || page == null) { %>
 						<a class="pure-button pure-button-primary" style="width:100%" rel="next" href="/live?page=2<%- arg_query %>">Next »</a>
 					<% } else { %>
@@ -166,7 +166,8 @@ table .problem-title a {
 									$.ajax({
 									 	method: 'GET',
 									 	url: "http://" + options.ip + "/api/result",
-										data: { sid: sid }
+										data: { sid: sid },
+										timeout: options.updatetime/2,
 									}).done(function(submit_list) {
 								  		if (parseInt(submit_list[0].res) != 0 && parseInt(submit_list[0].res) != 8) {
 								  			var tmp = $.jhunt.submit_list.filter(function(obj) {
@@ -205,7 +206,8 @@ table .problem-title a {
 								<% if (query_filter['page'] != undefined) { %>
 									, page: <%- query_filter['page'] %>
 								<% } %>
-							}
+							},
+							timeout: options.reloadtime/2
 						}).done(function(submit_list) {
 							var obj = $(elem);
 					  		var tbody = obj.find('tbody');

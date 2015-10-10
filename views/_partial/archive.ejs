@@ -4,14 +4,5 @@
 </div>
 <div class="content">
 <%- archive_content %>
-<h2 class='article-title'><%- __('Recent Comments') %></h2>
-	<div class="pure-g">
-		<div class="pure-u-5-5">
-			
-			<div id="recentcomments" class="dsq-widget">
-				<script type="text/javascript" src="http://ntucsiecprogramming.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=1024&hide_mods=0"></script>
-			</div>
-			<style>.dsq-widget-list {padding:0; text-decoration:none; } .dsq-widget-list a {text-decoration: none; color: #4183C4; } li.dsq-widget-item {border-bottom: 1px solid; #d9d9d9;margin: 0 0 10px;padding-bottom: 10px;font-size:14px;}li.dsq-widget-item:last-child{border-bottom:none;margin-bottom:0;}a.dsq-widget-user {} img.dsq-widget-avatar {margin-right:10px; }.dsq-widget-comment {display:block;padding-top:5px;}.dsq-widget-comment p {display:block;margin:0;padding:0!important;font-size:14px!important;}p.dsq-widget-meta {padding-top:5px!important;margin:0;font-size:14px!important;}#dsq-combo-widget.grey #dsq-combo-content .dsq-combo-box {background: transparent;}#dsq-combo-widget.grey #dsq-combo-tabs li {background: #DDDDDD;}</style>
-		</div>
-	</div>
+<%- include('widget/recent_comment') %>
 </div>

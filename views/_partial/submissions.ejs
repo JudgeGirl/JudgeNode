@@ -93,14 +93,15 @@ table .problem-title a {
 				if (query_filter['cid'] != undefined)
 					arg_query += '&cid=' + query_filter['cid'];
 			%>
-			<div class="pure-u-12-24">
+			<div class="pure-u-6-24">
 			<% if (page != undefined && page != null && parseInt(page) > 1) { %>
 				<a class="pure-button pure-button-primary" style="width:100%" rel="prev" href="/submissions?page=<%- parseInt(page)-1 %><%- arg_query %>">« Prev</a>
 			<% } else { %>
 				<a class="" style="width:100%"></a>
 			<% } %>
 			</div>
-			<div class="pure-u-12-24">
+			<div class="pure-u-12-24"></div>
+			<div class="pure-u-6-24">
 			<% if (page == undefined || page == null) { %>
 				<a class="pure-button pure-button-primary" style="width:100%" rel="next" href="/submissions?page=2<%- arg_query %>">Next »</a>
 			<% } else { %>
