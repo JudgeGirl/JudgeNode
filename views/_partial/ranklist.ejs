@@ -2,6 +2,15 @@
 	<h1 class='article-title'><%= __('Rank') %></h1>
 	<h2>I thought that solving problem would last forever. I was wrong.</h2>
 </div>
+<style>
+table .motto span {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 324px;
+}
+</style>
 <div class="content">
 	<div class="pure-menu pure-menu-horizontal">
 		<ul class="pure-menu-list">
@@ -9,8 +18,6 @@
 			<li class="pure-menu-item"><a class="pure-menu-link" href="#">Site Statistics</a></li>
 		</ul>
 	</div>
-</div>
-<div class="content-table">
 	<div class="pure-g">
 		<div class="pure-u-1-1">
 	<table class="pure-table pure-table-bordered" style="width: 100%">
@@ -20,7 +27,7 @@
 				<th style="width: 15%"><%= __('Account') %></th>
 				<th style="width: 20%"><%= __('Class') %></th>
 				<th style="width: 10%"><%= __('#Solved') %></th>
-				<th style="width: 45%"><%= __('Motto') %></th>
+				<th><%= __('Motto') %></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,11 +47,12 @@
 						<% } %>
 					<% } %>
 					<td><%- rl[i].slv %></td>
-					<td class='motto'><span><%= rl[i].motto.substr(0, 80) %></span></td>
+					<td class='motto'><span><%= rl[i].motto.substr(0, 128) %></span></td>
 				</tr>
 			<% } %>
 		</tbody>
 	</table>
 	</div>
 	</div>
+</div>
 </div>
