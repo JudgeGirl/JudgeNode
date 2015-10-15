@@ -117,6 +117,14 @@ table .problem-title a {
 			    	function render(elem, options) {
 			    		if  (options.modify_flag == false)
 			    			return true;
+			    		var unique = function uniqBy(a, key) {
+						    var seen = {};
+						    return a.filter(function(item) {
+						        var k = item[key];
+						        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+						    });
+						};
+						$.jhunt.submit_list = unique($.jhunt.submit_list, 'sid');
 			    		options.modify_flag = false;
 			    		var submit_list = $.jhunt.submit_list;
 			    		var obj = $(elem);

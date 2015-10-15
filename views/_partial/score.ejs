@@ -8,14 +8,36 @@
 	<thead>
 	<tr>
 		<th>Student</th>
-		<th>Week 2 Exam</td>
+		<%
+			var thead = score.thead;
+			var tbody = score.tbody;
+		%>
+		<% for (var i in thead) { %>
+			<th><%- thead[i].ttl %></th>
+		<% } %>
+		%>
 	</tr>
 	</thead>
 	<tbody>
-		<% for(var i = 0; score && i < score.length; i++) { %>
+		<% 
+			var record = {};
+			for (var i = 0; tbody && i < tbody.length; i++) {
+				record[tbody[i].lgn] = {};
+			}
+			for (var i in record) {
+				for (var j = 0; j < thead.length; j++)
+					record[i][thead[j].eid] = {};
+			}
+			for (var i = 0; tbody && i < tbody.length; i++) {
+				record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
+			}
+		%>
+		<% for (var i = 0; tbody && i < tbody.length; i++) { %>
 			<tr>
-				<td><strong><%- score[i].lgn %></strong></td>
-				<td><%- score[i].exam2 %></td>
+				<td><strong><%- tbody[i].lgn %></strong></td>
+				<% for (var j = 0; j < thead.length; j++) { %>
+					<td><%- record[tbody[i].lgn][thead[j].eid] %></td>
+				<% } %>
 			</tr>
 		<% } %>
 	</tbody>

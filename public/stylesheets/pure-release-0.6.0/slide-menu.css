@@ -194,8 +194,10 @@ table .comming {
 }
 
 .pure-img-responsive {
-    max-width: 100%;
-    height: auto;
+  max-width: 90%;
+  height: auto;
+  margin: auto;
+  display: block;
 }
 
 /*
