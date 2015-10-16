@@ -15,7 +15,8 @@
 		<% for (var i in thead) { %>
 			<th><%- thead[i].ttl %></th>
 		<% } %>
-		%>
+                
+                <th>Average</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -23,21 +24,35 @@
 			var record = {};
 			for (var i = 0; tbody && i < tbody.length; i++) {
 				record[tbody[i].lgn] = {};
-			}
+			}i
+                        /*
 			for (var i in record) {
 				for (var j = 0; j < thead.length; j++)
 					record[i][thead[j].eid] = {};
 			}
+                        */
 			for (var i = 0; tbody && i < tbody.length; i++) {
 				record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
 			}
+                        for( var i in record ){
+                          var sum = 0;
+                          for( var j in record[i] ){
+                            sum += record[i][j];
+                          }
+                          record[i].avg = sum / thead.length;
+                        }
+
+                        function roundToTwo(num) {    
+                            return +(Math.round(num + "e+2")  + "e-2");
+                        }
 		%>
-		<% for (var i = 0; tbody && i < tbody.length; i++) { %>
+		<% for (var i in record) { %>
 			<tr>
-				<td><strong><%- tbody[i].lgn %></strong></td>
+				<td><strong><%- i %></strong></td>
 				<% for (var j = 0; j < thead.length; j++) { %>
-					<td><%- record[tbody[i].lgn][thead[j].eid] %></td>
+					<td><%- (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? record[i][thead[j].eid] : "X" %></td>
 				<% } %>
+                                <td><%- roundToTwo( record[i].avg ) %></td>
 			</tr>
 		<% } %>
 	</tbody>
