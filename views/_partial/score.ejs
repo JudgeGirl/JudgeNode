@@ -15,8 +15,7 @@
 		<% for (var i in thead) { %>
 			<th><%- thead[i].ttl %></th>
 		<% } %>
-                
-                <th>Average</th>
+        <th>Avg.</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -50,9 +49,9 @@
 			<tr>
 				<td><strong><%- i %></strong></td>
 				<% for (var j = 0; j < thead.length; j++) { %>
-					<td><%- (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? record[i][thead[j].eid] : "X" %></td>
+					<td><%- (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 'X' %></td>
 				<% } %>
-                                <td><%- roundToTwo( record[i].avg ) %></td>
+				<td><%- Math.ceil(record[i].avg) %></td>
 			</tr>
 		<% } %>
 	</tbody>
