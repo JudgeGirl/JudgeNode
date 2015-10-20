@@ -1,10 +1,10 @@
 <%
-	for (var row = 0 ; row < problem_list.length ; row++) {
+	for (var row = 0 ; problem_list && row < problem_list.length ; row++) {
 		problem_list[row].score = -1;
 	}
 %>
 <%
-	for (var row = 0 ; row < score.length ; row++ ) {
+	for (var row = 0 ; score && row < score.length ; row++ ) {
 		var tmp = problem_list.filter(function(x){ return x.pid === score[row].pid});
 		if (tmp.length == 0)
 			continue;
@@ -13,6 +13,7 @@
 	}
 %>
 <%
+	if (problem_list)
 	problem_list = problem_list.filter(function(x){
 		var all_depend = depend.filter(function(d){
 			return d.pid === x.pid;
@@ -29,7 +30,7 @@
 		return true;
 	});
 
-	for( var row = 0 ; row < problem_list.length ; row++ ){
+	for( var row = 0 ; problem_list && row < problem_list.length ; row++ ){
 		var tmp = submissions.filter(function(x){ return x.pid == problem_list[row].pid; });
 		problem_list[row].count = 0;
 		for (var i in tmp)
@@ -52,7 +53,7 @@
 		</form>
 	</div>
 </div>
-<% for (var level = 0 ; level < level_list.length ; level++ ) { %>
+<% for (var level = 0 ; level_list && level < level_list.length ; level++ ) { %>
 	<% if( level_list[level].level < 0 ) { %>
 	 <h2 class="content-subhead"> Side Track. <%- level_list[level].ttl %> </h2>
 	<% } else { %>
@@ -72,7 +73,7 @@
 		<tbody>
 		<% var original_problem_list = problem_list; %>
 		<% problem_list = problem_list.filter(function(x){ return x.level == level_list[level].level; }); %>
-		<% for (var row = 0; row < problem_list.length; row++ ) { %>
+		<% for (var row = 0; problem_list && row < problem_list.length; row++ ) { %>
 			<tr class="<%- row%2 == 0 ? "" : "pure-table-odd" %>">
 	            <% var score = problem_list[row].score; %>
 				<td>
