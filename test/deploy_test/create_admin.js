@@ -1,17 +1,16 @@
-// INSERT INTO problems VALUES(1006, 1, 0, 'NPSC 2003 高中組初賽', '名偵探蚵男');
 
 var mysql = require('mysql'),
-	fs = require('fs'),
-	config = require('./const'),
-	crypto = require('crypto'),
-	randomstring = require("randomstring");
+    fs = require('fs'),
+    config = require('./const'),
+    crypto = require('crypto'),
+    randomstring = require("randomstring");
 
 var connection = mysql.createPool({  
     host     : '127.0.0.1', // config.DATABASE.host,  
     user     : config.DATABASE.user,  
     password : config.DATABASE.password,
     database : config.DATABASE.name,
-	port     : config.DATABASE.port
+    port     : config.DATABASE.port
 });
 
 var all_account = "judgegirl"; //fs.readFileSync('account.txt').toString().toUpperCase();
