@@ -14,6 +14,30 @@ h1, h2, h3, h4 {
 #menu .pure-menu-heading {
     font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.pure-menu-item input[type="checkbox"] {
+  display: none;
+}
+.pure-menu-item input[type="checkbox"]:checked + label + div {
+  display: block;
+}
+.pure-menu-item label {
+  display: block;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+.pure-menu-item label:hover {
+  background-color: black;
+}
+.pure-menu-item label:hover:after {
+  background-color: black;
+}
+.pure-menu-item div {
+  display: none;
+  border-top: none;
+  text-align: left;
+}
 /* Custom */
 .footer-content {
     font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
