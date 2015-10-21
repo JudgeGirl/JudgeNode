@@ -264,7 +264,7 @@ table .problem-title a {
 			        updatetime: 3000,	//	single waiting submission to update
 			        restext:  ['', 'CE', 'OLE', 'MLE', 'RE', 'TLE', 'WA', 'AC', 'Uploading...', 'PE'],
 			        modify_flag: false,
-			        langtext: ['*', 'C']
+			        langtext: <%- JSON.stringify(site.JUDGE_lng) %>
 			    };
 			    $.jhunt.submit_list = [];
 			})(jQuery);  

@@ -2,7 +2,11 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Judge Girl</title>
+		<title><%= site.HOST.TITLE %>
+			<% if (typeof subtitle !== 'undefined') { %>
+				<%= subtitle ? ' | ' + subtitle : '' %>
+			<% } %>
+		</title>
 		<!-- <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" /> -->
 		<link rel="stylesheet" href="/stylesheets/pure-release-0.6.0/pure-min.css">
 		<link rel="stylesheet" href="/stylesheets/pure-release-0.6.0/slide-menu.css">
@@ -25,7 +29,7 @@
 
 	    <div id="menu">
 	        <div class="pure-menu">
-	            <a class="pure-menu-heading" href="#">Judge Girl</a>
+	            <a class="pure-menu-heading" href="#"><%= __(site.HOST.TITLE) %></a>
 
 	            <ul class="pure-menu-list">
 	                <li class="pure-menu-item"><a href="/archive" class="pure-menu-link"><i class="fa fa-archive"></i> <%= __('Archive') %></a></li>
@@ -51,10 +55,10 @@
 	            </ul>
 	        </div>
 	        <div class="pure-menu">
-	            <a class="pure-menu-heading" href="#">Account</a>
+	            <a class="pure-menu-heading" href="#"><%= __('Account') %></a>
 
 	            <ul class="pure-menu-list">
-	        <% if (user == undefined || user == null || user.uid == undefined || user.uid == -1) { %>
+	        <% if (user == undefined || user == null || user.uid == undefined) { %>
 				<li class="pure-menu-item">
 					<a class="pure-menu-link" href="/login"><i class="fa fa-sign-in"></i> <%= __('Login') %></a>
 				</li>

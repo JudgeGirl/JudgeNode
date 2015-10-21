@@ -120,7 +120,7 @@ router.get('/archive', function(req, res, next) {
 });
 router.get('/ranklist', function(req, res, next) {
 	dblink.rank.list(function(rlist) {
-		res.render('layout', { layout: 'ranklist', user: req.session, rank_list : rlist });
+		res.render('layout', { layout: 'ranklist', subtitle: 'Rank', user: req.session, rank_list : rlist });
 	})
 });
 router.get('/progress', function(req, res, next) {
@@ -132,12 +132,12 @@ router.get('/submissions?', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.submission.list(req.query, function(slist) {
 		dblink.problem.score(uid, function(ac_list) {
-			res.render('layout', { layout: 'submissions', user: req.session, query_filter: req.query, submission_list: slist, ac_list: ac_list});
+			res.render('layout', { layout: 'submissions', subtitle: 'Submission', user: req.session, query_filter: req.query, submission_list: slist, ac_list: ac_list});
 		});
 	});
 });
 router.get('/live', function(req, res, next) {
-	res.render('layout', { layout: 'live', user: req.session, query_filter: req.query});
+	res.render('layout', { layout: 'live', subtitle: 'Live', user: req.session, query_filter: req.query});
 });
 router.get('/problems', function(req, res, next) {
 	dblink.problem.level(function(llist){
@@ -145,7 +145,7 @@ router.get('/problems', function(req, res, next) {
 			dblink.problem.dependency(function(depend){
 				dblink.problem.score(req.session && req.session.uid , function(score){
 					dblink.statistic.submissions_count( function(submissions){ 
-						res.render('layout', { layout: 'problems', user: req.session , problem_list: plist, level_list: llist, score: score, depend: depend, submissions: submissions });
+						res.render('layout', { layout: 'problems', subtitle: 'Problem Set', user: req.session , problem_list: plist, level_list: llist, score: score, depend: depend, submissions: submissions });
 					});
 				});
 			});
@@ -166,7 +166,10 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
 				dblink.helper.cansubmit(cid, pid, uid, function(cansubmit){
 					if (uid != undefined && req.session['class'] == null)
 						cansubmit = true;
-					res.render('layout', { layout: 'problem', user: req.session , problem_content: pcontent, ttl: pinfo && pinfo[0] && pinfo[0].ttl, cid: cid, pid: pid, uid: uid, psubmit: psubmit, testdata_config: tconfig, canSubmit: cansubmit});
+					var ttl = pinfo && pinfo[0] && pinfo[0].ttl;
+					res.render('layout', { layout: 'problem', subtitle: pid + '. ' + ttl, user: req.session , problem_content: pcontent, 
+						ttl: ttl, cid: cid, pid: pid, uid: uid, 
+						psubmit: psubmit, testdata_config: tconfig, canSubmit: cansubmit});
 				});
 			});
 		});
@@ -225,7 +228,7 @@ router.get('/statistic/grade/problem/:cid/:pid', function(req, res, next) {
 
 router.get('/contests', function(req, res, next) {
 	dblink.contest.list(req.session.uid, function(clist) {
-		res.render('layout', { layout: 'contests', user: req.session, contest_list: clist});
+		res.render('layout', { layout: 'contests', subtitle: 'Contest', user: req.session, contest_list: clist});
 	});
 });
 router.get('/contest/:cid', function(req, res, next) {
@@ -251,7 +254,7 @@ router.get('/scoreboard/contest/:cid', function(req, res, next) {
 			res.redirect('/contest/' + cid);
 		} else {
 			dblink.contest.scoreboard(cid, uid, function(table_config) {
-				res.render('layout', { layout: 'scoreboard', user: req.session, table_config: table_config});
+				res.render('layout', { layout: 'scoreboard', subtitle: 'Scoreboard', user: req.session, table_config: table_config});
 			});
 		}
 	})
@@ -358,7 +361,11 @@ router.get('/source/highlight/:sid', function(req, res, next) {
 			text += '## ' + source_code[i].title + ' ##\n';
 			text += '```cpp\n' + source_code[i].code + '```\n';
 		}
-		res.render('layout', {layout: 'highlight', user: req.session, sid: sid, html_code: markdown.post_marked(text) });
+		dblink.submission.list({sid: sid}, function(slist) {
+			res.render('layout', {layout: 'highlight', user: req.session, sid: sid, 
+				html_code: markdown.post_marked(text),
+				subs_info: slist && slist.length > 0 ? slist[0] : null });
+		});
 	});
 });
 
@@ -369,12 +376,12 @@ router.get('/score', function(req, res, next){
 	  dblink.user.info(req.session.uid, function(user) {
 		if( isAdmin ){
 			dblink.score.getAll( function(score){
-				res.render('layout', {layout: 'score', user: req.session, score: score, userinfo: user});
+				res.render('layout', {layout: 'score', subtitle: 'Score', user: req.session, score: score, userinfo: user});
 			});	
 		}
 		else {
 			dblink.score.getOne(uid, function(score){
-				res.render('layout', {layout: 'score', user: req.session, score: score, userinfo: user});
+				res.render('layout', {layout: 'score', subtitle: 'Score', user: req.session, score: score, userinfo: user});
 			});
 		}
 	  });

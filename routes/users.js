@@ -10,13 +10,13 @@ var fs = require('fs');
 router.get('/', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.user.info(uid, function(user) {
-		res.render('layout', { layout: 'user', user: req.session, userinfo: user});
+		res.render('layout', { layout: 'user', subtitle: 'User', user: req.session, userinfo: user});
 	});
 });
 router.get('/:uid', function(req, res, next) {
 	var uid = req.params.uid;
 	dblink.user.info(uid, function(user) {
-		res.render('layout', { layout: 'user', user: req.session, userinfo: user});
+		res.render('layout', { layout: 'user', subtitle: 'User', user: req.session, userinfo: user});
 	});
 });
 

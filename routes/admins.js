@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (isadmin) {
-			res.render('admin/layout', { layout: 'dashboard', user: req.session});
+			res.render('admin/layout', { layout: 'dashboard', subtitle: 'Dashboard', user: req.session});
 		} else {
 			res.redirect('../login');
 		}
