@@ -65,7 +65,7 @@ router.get('/edit', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.user.info(uid, function(user) {
 		var wrongmsg = '';
-		res.render('layout', { layout: 'edit', user: req.session, userinfo: user, sysmsg: wrongmsg});
+		res.render('layout', { layout: 'edit', subtitle: 'Profile', user: req.session, userinfo: user, sysmsg: wrongmsg});
 	});
 });
 router.post('/edit', function(req, res, next) {
@@ -201,7 +201,7 @@ router.get('/statistic/problem/:cid/:pid', function(req, res, next) {
 			dblink.statistic.statistic_donut(cid, pid, function(donut_config) {
 				dblink.statistic.submission_table(cid, pid, function(tried_config) {
 					dblink.statistic.best_submission(cid, pid, function(best_config) {
-						res.render('layout', { layout: 'problem_statistic', user: req.session, 
+						res.render('layout', { layout: 'problem_statistic', subtitle: 'Statistic', user: req.session, 
 								cid: cid, pid: pid, ttl: pinfo && pinfo[0] && pinfo[0].ttl, 
 								donut_config : donut_config, tried_config: tried_config, best_config: best_config});
 					});
