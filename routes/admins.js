@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var dblink = require('../lib/dblink');
-var config = require('../lib/const');
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');
@@ -11,7 +10,7 @@ router.get('/', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (isadmin) {
-			res.render('admin/layout', { layout: 'dashboard', user: req.session, config: config});
+			res.render('admin/layout', { layout: 'dashboard', user: req.session});
 		} else {
 			res.redirect('../login');
 		}
@@ -23,7 +22,7 @@ router.get('/announcement', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.load_announcement(function(md_content) {
-			res.render('admin/layout', { layout: 'announcement', user: req.session, config: config, md_content: md_content});
+			res.render('admin/layout', { layout: 'announcement', user: req.session, md_content: md_content});
 		});
 	});
 });
@@ -33,7 +32,7 @@ router.get('/problems', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.load_problemlist(function(prob_list) {
-			res.render('admin/layout', { layout: 'problems', user: req.session, config: config, prob_list: prob_list});
+			res.render('admin/layout', { layout: 'problems', user: req.session, prob_list: prob_list});
 		});
 	});
 });
@@ -43,7 +42,7 @@ router.get('/contests', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.load_contestlist(function(contest_list) {
-			res.render('admin/layout', { layout: 'contests', user: req.session, config: config, contest_list: contest_list});
+			res.render('admin/layout', { layout: 'contests', user: req.session, contest_list: contest_list});
 		});
 	});
 });
@@ -53,7 +52,7 @@ router.get('/accounts', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.load_accountlist(function(account_list) {
-			res.render('admin/layout', { layout: 'accounts', user: req.session, config: config, account_list: account_list});
+			res.render('admin/layout', { layout: 'accounts', user: req.session, account_list: account_list});
 		});
 	});
 });
@@ -62,7 +61,7 @@ router.get('/grade', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (isadmin) {
-			res.render('admin/layout', { layout: 'grade', user: req.session, config: config});
+			res.render('admin/layout', { layout: 'grade', user: req.session});
 		} else {
 			res.redirect('../login');
 		}
@@ -78,7 +77,7 @@ router.get('/edit/problem/:pid', function(req, res, next) {
 		dblink.admin.load_problem_content(pid, function(prob_config) {
 			dblink.admin.load_problem_solution(pid, function(sol_content) {
 				prob_config.solution_md = sol_content;
-				res.render('admin/layout', { layout: 'edit_problem', user: req.session, config: config, prob_config: prob_config, pid : pid});
+				res.render('admin/layout', { layout: 'edit_problem', user: req.session, prob_config: prob_config, pid : pid});
 			});
 		});
 	});
@@ -90,7 +89,7 @@ router.get('/edit/contest/:cid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.load_contest_config(cid, function(contest_config) {
-			res.render('admin/layout', { layout: 'edit_contest', user: req.session, config: config, contest_config: contest_config, cid: cid});
+			res.render('admin/layout', { layout: 'edit_contest', user: req.session, contest_config: contest_config, cid: cid});
 		});
 	});
 });
@@ -100,7 +99,7 @@ router.get('/new/problem', function(req, res, next) {
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (!isadmin)
 			return res.redirect('../login');
-		res.render('admin/layout', { layout: 'new_problem', user: req.session, config: config});
+		res.render('admin/layout', { layout: 'new_problem', user: req.session});
 	});
 });
 router.get('/new/contest', function(req, res, next) {
@@ -108,7 +107,7 @@ router.get('/new/contest', function(req, res, next) {
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (!isadmin)
 			return res.redirect('../login');
-		res.render('admin/layout', { layout: 'new_contest', user: req.session, config: config});
+		res.render('admin/layout', { layout: 'new_contest', user: req.session});
 	});
 });
 router.get('/new/account', function(req, res, next) {
@@ -116,7 +115,7 @@ router.get('/new/account', function(req, res, next) {
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (!isadmin)
 			return res.redirect('../login');
-		res.render('admin/layout', { layout: 'new_account', user: req.session, config: config});
+		res.render('admin/layout', { layout: 'new_account', user: req.session});
 	});
 });
 

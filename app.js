@@ -9,6 +9,7 @@ var session = require('express-session');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admins = require('./routes/admins');
+var _config = require('./lib/const');
 var i18n = require('i18n');
 var app = express();
 
@@ -30,6 +31,10 @@ app.use(function (req, res, next) {
     res.locals.__ = res.__ = function() {
         return i18n.__.apply(req, arguments);
     };
+    next();
+});
+app.use(function (req, res, next) {
+    res.locals.site = _config;
     next();
 });
 

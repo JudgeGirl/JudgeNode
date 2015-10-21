@@ -51,14 +51,19 @@
 			</tr>
 		</thead>
 		<tbody>
+			<% 
+				var judge_res = site.JUDGE_res,
+					judge_lng = site.JUDGE_lng;
+				var unitConvert = site.unitConvert;
+			%>
 			<% for (var row in best_config) { %>
 				<tr>
 					<td><%- (parseInt(row)+1) %></td>
 					<td><a href="/user/<%- best_config[row].uid %>"><%- best_config[row].lgn %></a></td>
-					<td><%- config.unitConvert('cpu', best_config[row].cpu) %>, <%- config.unitConvert('mem', best_config[row].mem) %></td>
-					<td><%- config.unitConvert('mem', best_config[row].len) %></td>
-					<td><a href='/source/highlight/<%- best_config[row].sid %>'><%- config.lng[best_config[row].lng] %></a></td>
-					<td class='date'><%- config.unitConvert('date', new Date(best_config[row].ts)) %></td>
+					<td><%- unitConvert('cpu', best_config[row].cpu) %>, <%- unitConvert('mem', best_config[row].mem) %></td>
+					<td><%- unitConvert('mem', best_config[row].len) %></td>
+					<td><a href='/source/highlight/<%- best_config[row].sid %>'><%- judge_lng[best_config[row].lng] %></a></td>
+					<td class='date'><%- unitConvert('date', new Date(best_config[row].ts)) %></td>
 				</tr>
 			<% } %>
 		</tbody>
@@ -67,8 +72,8 @@
 		var donut = [], donut_color = [];
 		var ddcolor = ['#000000', '#AAAA00', '#000000', '#000000', '#00AAAA', '#0000FF', '#FF0000', '#00AA00', '#000000', '#000000'];
 		for (var key in donut_config.donut) {
-		  	donut.push({label: config.res[(donut_config.donut[key].res+config.res.length)%config.res.length], value: donut_config.donut[key].count});
-		  	donut_color.push(ddcolor[(donut_config.donut[key].res+config.res.length)%config.res.length]);
+		  	donut.push({label: judge_res[(donut_config.donut[key].res+judge_res.length)%judge_res.length], value: donut_config.donut[key].count});
+		  	donut_color.push(ddcolor[(donut_config.donut[key].res+judge_res.length)%judge_res.length]);
 		}
 	%>
 	<script>

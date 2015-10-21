@@ -23,6 +23,13 @@
 </div>
 
 <%- problem_content %>
+
+<%
+var judge_res = site.JUDGE_res,
+    judge_lng = site.JUDGE_lng,
+    judge_compiler_arg = site.COMIPLER_ARGU;
+var unitConvert = site.unitConvert;
+%>
 <div class="pure-g">
 	<div class="pure-u-2-3">
 	<h2 class="content-subhead">Submit</h2>
@@ -35,8 +42,8 @@
 			<div class="pure-control-group">
 				<label for="lng"><%= __('Programming Language') %></label>
 				<select name="lng">
-				<% for( var i = 1 ; i < config.lng.length ; i++ ) { %>
-					<option value="<%- i %>" <%- (i == 1 )?"selected" : "" %>><%- config.lng[i] %> (<%- config.COMIPLER_ARGU[i] %>) </option>
+				<% for( var i = 1 ; i < judge_lng.length ; i++ ) { %>
+					<option value="<%- i %>" <%- (i == 1 )?"selected" : "" %>><%- judge_lng[i] %> (<%- judge_compiler_arg[i] %>) </option>
 				<% } %>
 				</select>
 			</div>

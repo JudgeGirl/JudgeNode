@@ -19,7 +19,7 @@ table .problem-title a {
     <h2>Update page each 10 seconds</h2>
 </div>
 <div class="content">
-	<% if (config.CONTEST_MODE == true) { %>
+	<% if (site.CONTEST_MODE == true) { %>
 	<div class="sysmsg">考試正在進行</div>
 	<% } %>
 	<div class="pure-g">
@@ -47,16 +47,19 @@ table .problem-title a {
 					<td><a href='user/<%- sl[i].uid %>'><%- sl[i].lgn %></td>
 					<% 
 						var text = '';
+						var judge_res = site.JUDGE_res,
+						    judge_lng = site.JUDGE_lng;
+						var unitConvert = site.unitConvert;
 						text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
-						text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + config.res[(sl[i].res+config.res.length)%config.res.length] + "</span>";
+						text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";
 						if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
 							text += " (";
 							if (sl[i].res != 7) {
 								text += "score: " + sl[i].scr;
 							} else {
-								text += config.unitConvert('cpu', sl[i].cpu);
+								text += unitConvert('cpu', sl[i].cpu);
 								text += ","
-								text += config.unitConvert('mem', sl[i].mem);
+								text += unitConvert('mem', sl[i].mem);
 							}
 							text += ")";
 						}
@@ -68,15 +71,15 @@ table .problem-title a {
 					<%- text %>
 					<td>
 						<% if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) { %>
-							<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
+							<a href='/source/highlight/<%- sl[i].sid %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
 						<% } else if (ac_map[sl[i].pid] != undefined) { %>
-							<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
+							<a href='/source/highlight/<%- sl[i].sid %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
 						<% } else { %>
-							<%- config.lng[sl[i].lng] %>
+							<%- judge_lng[sl[i].lng] %>
 						<% } %>
 					</td>
-					<td><%- config.unitConvert('mem', sl[i].len) %></td>
-					<td class='date'><%- config.unitConvert('date', new Date(sl[i].ts)) %></td>
+					<td><%- unitConvert('mem', sl[i].len) %></td>
+					<td class='date'><%- unitConvert('date', new Date(sl[i].ts)) %></td>
 				</tr>
 			<% } %>
 		</tbody>

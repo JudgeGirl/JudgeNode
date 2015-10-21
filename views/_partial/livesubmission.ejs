@@ -14,7 +14,7 @@ table .problem-title a {
     <h2>Auto update</h2>
 </div>
 <div class="content">
-<% if (config.CONTEST_MODE == true) { %>
+<% if (site.CONTEST_MODE == true) { %>
 	<div class="sysmsg">考試正在進行</div>
 <% } %>
 <script src="/javascripts/jquery.timeago.js"></script>
@@ -130,6 +130,7 @@ table .problem-title a {
 			    		var obj = $(elem);
 					  	var tbody = obj.find('tbody');
 					  	var text = '';
+					  	var iplist = <%- JSON.stringify(site.CONTEST_IP) %>;
 						for (var i in submit_list) {
 				  			text += "<tr class='normal'>"; 
 							text += "<td class='sid'>" + submit_list[i].sid + "</td>";
@@ -137,7 +138,10 @@ table .problem-title a {
 							text += "<td class='problem-title'>" + 
 										"<a href='problem/" + submit_list[i].cid + "/" + submit_list[i].pid + "'>" + submit_list[i].ttl + "</a></td>";
 							text += "<td>";
-							if (submit_list[i].ip.indexOf("::ffff:140.112.16.155") >= 0 || submit_list[i].ip.indexOf("::ffff:140.112.16.156") >= 0 || submit_list[i].ip.indexOf("::ffff:140.112.16.158") >= 0) {
+							var filter_ip = iplist.filter(function(valid_ip) {
+								return submit_list[i].ip == valid_ip;
+							});
+							if (filter_ip.length != 0) {
 								text += '<i class="fa fa-check" style="color: green;"></i> ';
 							} else {
 								text += '<i class="fa fa-exclamation-triangle" style="color: orange;"></i> ';
@@ -226,7 +230,8 @@ table .problem-title a {
 					  			if (parseInt(submit_list[i].sid) <= now)
 					  				break;
 					  			$.jhunt.submit_list.unshift(submit_list[i]);
-					  			$.jhunt.submit_list.pop();
+					  			if ($.jhunt.submit_list.length > 20)
+					  				$.jhunt.submit_list.pop();
 					  			options.modify_flag = true;
 					  		}
 						});			
@@ -252,7 +257,7 @@ table .problem-title a {
 					}
 			    }
 			    $.jhunt.defaults = {
-			        ip: '<%- config.HOST.IP %>',
+			        ip: '<%- site.HOST.IP %>',
 			        reloadtime: 2000,		// 	how time to load 
 			        reloadsubmit: 5,
 			        loadsubmit: 20,		//	how #submission to load

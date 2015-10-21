@@ -17,7 +17,10 @@
 				        </tr>
 				    </thead>
 				    <tbody>
-					<% var nowtime = new Date().getTime() %>
+					<% 
+						var nowtime = new Date().getTime();
+						var unitConvert = site.unitConvert;
+					%>
 					<% for (var i = 0; i < contest_list.length; i++) { %>
 						<% 
 							var contest_status = '';
@@ -37,8 +40,8 @@
 								</a>
 							</td>
 							<td>
-								<%- config.unitConvert('date', new Date(contest_list[i].ts1)) %> ~
-								<%- config.unitConvert('date', new Date(contest_list[i].ts2)) %>
+								<%- unitConvert('date', new Date(contest_list[i].ts1)) %> ~
+								<%- unitConvert('date', new Date(contest_list[i].ts2)) %>
 							</td>
 							<td>
 								<% if (nowtime >= contest_list[i].ts2) { %>
@@ -53,7 +56,7 @@
 								<% if (nowtime < contest_list[i].ts1) { %>
 								<div id="contest-clock<%- i%>" class='contest-clock'></div>
 								<script text='javascript'>
-									var d = new Date('<%- config.unitConvert('date', new Date(contest_list[i].ts1)) %>');
+									var d = new Date('<%- unitConvert('date', new Date(contest_list[i].ts1)) %>');
 									d.setTime(d.getTime() - get_clock_offset());
 									var ddstr = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate()  + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 									$('#contest-clock<%- i%>').countdown(ddstr, function(event) {

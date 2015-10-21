@@ -68,7 +68,7 @@
 				<td><%- problem_list[row].pid %></td>
 				<td><a href="<%- "/problem/" + contest_config.cid + "/" + problem_list[row].pid %>" ><%- problem_list[row].ttl %></a></td>
 				<td></td>
-				<td><%- config.CONTEST_SUBMIT_LIMIT - submits %></td>
+				<td><%- site.CONTEST_SUBMIT_LIMIT - submits %></td>
 			</tr>
 			
 		<% } %>

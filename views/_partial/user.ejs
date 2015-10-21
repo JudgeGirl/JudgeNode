@@ -64,7 +64,12 @@
 	<tbody>
 
 
-<% var sl = userinfo.recent; %>
+<% 
+	var sl = userinfo.recent; 
+	var judge_res = site.JUDGE_res,
+		judge_lng = site.JUDGE_lng;
+	var unitConvert = site.unitConvert;
+%>
 <% for (var i = 0; i < sl.length; i++) { %>
 	<tr class='normal'>
 		<td class='sid'><%- sl[i].sid %></td>
@@ -73,15 +78,15 @@
 		<% 
 			var text = '';
 			text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
-			text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + config.res[(sl[i].res+config.res.length)%config.res.length] + "</span>";
+			text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";
 			if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
 				text += " (";
 				if (sl[i].res != 7) {
 					text += "score: " + sl[i].scr;
 				} else {
-					text += config.unitConvert('cpu', sl[i].cpu);
+					text += unitConvert('cpu', sl[i].cpu);
 					text += ","
-					text += config.unitConvert('mem', sl[i].mem);
+					text += unitConvert('mem', sl[i].mem);
 				}
 				text += ")";
 			}
@@ -92,10 +97,10 @@
 		%>
 		<%- text %>
 		<td>
-				<a href='/source/highlight/<%- sl[i].sid %>'><%- config.lng[sl[i].lng] %></a>
+				<a href='/source/highlight/<%- sl[i].sid %>'><%- judge_lng[sl[i].lng] %></a>
 		</td>
-		<td><%- config.unitConvert('mem', sl[i].len) %></td>
-		<td class='date'><%- config.unitConvert('date', new Date(sl[i].ts)) %></td>
+		<td><%- unitConvert('mem', sl[i].len) %></td>
+		<td class='date'><%- unitConvert('date', new Date(sl[i].ts)) %></td>
 	</tr>
 <% } %>
 	</tbody>
