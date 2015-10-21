@@ -306,7 +306,7 @@ router.post('/submit',
 				lng: lng,
 				len: size,
 				scr: 0,
-				res: config.SAVING,
+				res: 8,	// JUDGE result : SAVING
 				cpu: 0,
 				mem: 0 
 			};
