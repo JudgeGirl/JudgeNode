@@ -1,10 +1,25 @@
+@font-face
+{
+  font-family: ChekiangShuKeSung;
+  src: url('../fonts/ChekiangShuKeSung.otf');
+}
 body {
     /*color: #777;*/
     color: black;
+    font-family: "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h1, h2, h3, h4 {
+  font-family: ChekiangShuKeSung;
+}
+#menu .pure-menu-heading {
+    font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Custom */
+.footer-content {
+    font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .content {
-    font-family: "Times New Roman", "Open Sans Light", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: GutiFangsong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.7em;
 }
 .content .caption {
