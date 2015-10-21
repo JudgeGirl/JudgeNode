@@ -21,7 +21,6 @@ JUDGE:
     compiler_arg: ['none', 'gcc -std=c99 -O2']
     result_message: ['Waiting', 'Compilation Error', 'Output Limit Exceeded', 'Memory Limit Exceeded', 'Runtime Error', 'Time Limit Exceeded', 'Wrong Answer', 'Accepted', 'Uploading...', 'Presentation Error']
 
-TITLE: 'Judge Girl'
 # JUDGE_PATH/submission /testdata /source
 # JUDGE_PATH: /home/c2014/judgesister/
 
@@ -34,19 +33,39 @@ CONTEST:
 # DATABASE Setting, MySQL
 DATABASE:
     host: '140.112.xxx.xxx'
-    user: 'xxxxxxxxxx'
-    password: 'xxxxxxxxx'
+    user: 'xxxxxxxxxxxxxxx'
+    password: 'xxxxxxxxxxx'
     port: '3306'
-    dbname: 'xxxxxxxxx'
+    dbname: 'xxxxxxxxxxxxx'
 
 # WEBSITE API HOST
 HOST:
+    TITLE: 'Judge Girl'
     IP: '140.112.31.208'
 
 # Disqus
 Disqus:
     shortname: 'ntucsiecprogramming'
 ```
+
+### Auto Restart ###
+
+If you want server not crash in seldom situation, run `./start` as infinite loop to call `npm start`. In this situation, your debug work will be harder.
+
+```
+$ ./start
+```
+
+#### How to stop auto restart ####
+
+```
+$ ps aux | grep start
+root      3232  0.0  0.0 106096  1148 pts/2    S+   Oct12   0:00 /bin/sh ./start
+root      5960  0.0  0.0 103256   856 pts/0    S+   13:33   0:00 grep start
+root     25866  0.0  0.0   3920   340 pts/4    S+   Sep22   0:00 ./start
+$ kill -9 25866
+```
+
 
 ### MySQL Scheme Setting ###
 
