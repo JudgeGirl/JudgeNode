@@ -4,18 +4,18 @@
 </div>
 <div class="content">
 
-<table class="pure-table pure-table-bordered" style='width: 100%;'>
+<table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
 	<thead>
 	<tr>
-		<th>Student</th>
+		<th data-type="string" data-sortable="true" data-name="Student">Student</th>
 		<%
 			var thead = score.thead;
 			var tbody = score.tbody;
 		%>
 		<% for (var i in thead) { %>
-			<th><%- thead[i].ttl %></th>
+			<th data-type="int" data-sortable="true" data-name="<%= thead[i].ttl %>"><%- thead[i].ttl %></th>
 		<% } %>
-        <th>Avg.</th>
+        <th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -58,3 +58,70 @@
 </table>
 </div>
 
+<script>
+function sortTable(tag_id, column, type, cmp) {
+    var tbl = document.getElementById(tag_id).tBodies[0];
+    var store = [];
+    for(var i=0, len=tbl.rows.length; i<len; i++){
+        var row = tbl.rows[i];
+        var sortnr;
+        if (type == 'int') {
+        	sortnr = parseFloat(row.cells[column].textContent || row.cells[column].innerText);
+        	if(!isNaN(sortnr)) store.push([sortnr, row]);
+        } else if (type == 'string') {
+        	sortnr = row.cells[column].textContent || row.cells[column].innerText;
+        	store.push([sortnr, row]);
+        }
+    }
+    if (type == 'int') {
+    	if (cmp == 0) {
+	    	store.sort(function(x,y) {
+	        	return y[0] - x[0];
+	    	});
+    	} else {
+    		store.sort(function(x,y) {
+	        	return x[0] - y[0];
+	    	});
+    	}
+    } else if (type == 'string') {
+    	if (cmp == 0) {
+    		store.sort(function(x,y) {
+	        	return y[0] < x[0] ? 1 : -1;
+    		});
+    	} else {
+    		store.sort(function(x,y) {
+	        	return y[0] < x[0] ? -1 : 1;
+    		});
+    	}
+    }
+    for(var i=0, len=store.length; i<len; i++){
+        tbl.appendChild(store[i][1]);
+    }
+    store = null;
+}
+sortTable('grade-table', 0, 'string', 0);
+$('#grade-table thead tr').find('th').each(function(index, value) {
+	var sortable = $(value).attr('data-sortable');
+	if (sortable != undefined && sortable == "true") {
+		var type = $(value).attr('data-type');
+		var name = $(value).attr('data-name');
+		$(value).html(name + ' <i class="fa fa-caret-up"></i>');
+		$(value).css('cursor', 'pointer');
+		$(value).attr('data-sort', '0');
+		$(value).click(function() {
+			var cmp = $(value).attr('data-sort');
+			if (cmp == "1") {
+				sortTable('grade-table', index, type, 1);
+				$(value).attr('data-sort', "0");
+				var name = $(value).attr('data-name');
+				$(value).html(name + ' <i class="fa fa-caret-up"></i>');
+			} else {
+				sortTable('grade-table', index, type, 0);
+				$(value).attr('data-sort', "1");
+				var name = $(value).attr('data-name');
+				$(value).html(name + ' <i class="fa fa-caret-down"></i>');
+			}
+		});
+	}
+});
+		</script>
