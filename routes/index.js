@@ -373,18 +373,21 @@ router.get('/source/highlight/:sid', function(req, res, next) {
 router.get('/score', function(req, res, next){
 	var uid = req.session.uid;
 	dblink.helper.isAdmin( uid, function(isAdmin){
-	  dblink.user.info(req.session.uid, function(user) {
-		if( isAdmin ){
-			dblink.score.getAll( function(score){
-				res.render('layout', {layout: 'score', subtitle: 'Score', user: req.session, score: score, userinfo: user});
-			});	
-		}
-		else {
-			dblink.score.getOne(uid, function(score){
-				res.render('layout', {layout: 'score', subtitle: 'Score', user: req.session, score: score, userinfo: user});
+		dblink.user.info(req.session.uid, function(user) {
+			dblink.score.statistic(function(score_statistic) {
+				if (isAdmin) {
+					dblink.score.getAll(function(score) {
+						res.render('layout', {layout: 'score', subtitle: 'Score', user: req.session, 
+												score: score, userinfo: user, score_statistic: score_statistic});
+					});	
+				} else {
+					dblink.score.getOne(uid, function(score) {
+						res.render('layout', {layout: 'score', subtitle: 'Score', user: req.session, 
+												score: score, userinfo: user, score_statistic: score_statistic});
+					});
+				}
 			});
-		}
-	  });
+		});
 	});	
 });
 

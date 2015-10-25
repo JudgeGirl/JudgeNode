@@ -4,6 +4,57 @@
 </div>
 <div class="content">
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<% 
+	for (var i in score_statistic.score) {
+		score_statistic.score[i].sum /= score_statistic.exams_cnt;
+		score_statistic.score[i].sum = Math.ceil(score_statistic.score[i].sum);
+	}
+%>
+
+<h2>Score Distribution</h2>
+
+<div id="line-progress"></div>
+
+<script>
+	Morris.Bar({
+		element: 'line-progress',
+		data:
+			<%- JSON.stringify(score_statistic.score) %>
+		,
+		xkey: 'sum',
+  		ykeys: ['count'],
+		labels: ['#users']
+	});
+</script>
+
+<h2>Score Cumulative Distribution</h2>
+
+<div id="line-progress2"></div>
+<% 
+	var sum = 0;
+	for (var i in score_statistic.score) {
+		sum += score_statistic.score[i].count;
+		score_statistic.score[i].count = sum; 
+	}
+%>
+<script>
+	Morris.Bar({
+		element: 'line-progress2',
+		data:
+			<%- JSON.stringify(score_statistic.score) %>
+		,
+		xkey: 'sum',
+  		ykeys: ['count'],
+		labels: ['#users']
+	});
+</script>
+
+<h2>Score Detail</h2>
+
 <table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
 	<thead>
 	<tr>
