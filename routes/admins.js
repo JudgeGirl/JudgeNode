@@ -60,11 +60,11 @@ router.get('/accounts', function(req, res, next) {
 router.get('/grade', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.helper.isAdmin(uid, function(isadmin) {
-		if (isadmin) {
-			res.render('admin/layout', { layout: 'grade', user: req.session});
-		} else {
-			res.redirect('../login');
-		}
+		if (!isadmin)
+			return res.redirect('../login');
+		dblink.admin.load_scores(function(score_list) {
+			res.render('admin/layout', { layout: 'grade', user: req.session, score_list: score_list});
+		});
 	});
 });
 /* edit page */
@@ -116,6 +116,14 @@ router.get('/new/account', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		res.render('admin/layout', { layout: 'new_account', user: req.session});
+	});
+});
+router.get('/new/grade', function(req, res, next) {
+	var uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		res.render('admin/layout', { layout: 'new_grade', user: req.session});
 	});
 });
 
@@ -176,6 +184,17 @@ router.post('/new/account', function(req, res, next) {
 			return res.redirect('../login');
 		dblink.admin.create_account(config, function() {
 			res.redirect('/admin/accounts');
+		});
+	});
+});
+router.post('/new/grade', function(req, res, next) {
+	var uid = req.session.uid;
+	var ttl = req.body.ttl;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		dblink.admin.create_exam_scores(ttl, function() {
+			res.redirect('/admin/grade');
 		});
 	});
 });
@@ -252,6 +271,16 @@ router.post('/update/account/:uid', function(req, res, next) {
 			return res.redirect('../login');
 		dblink.admin.update_account(config, function() {
 			res.redirect('/admin/accounts');
+		});
+	});
+});
+router.post('/update/grade/:uid', function(req, res, next) {
+	var uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		dblink.admin.update_scores(req.params.uid, req.body, function() {
+			res.redirect('/admin/grade');
 		});
 	});
 });

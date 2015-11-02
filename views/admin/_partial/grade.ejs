@@ -4,5 +4,86 @@
 </div>
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
-	<h2><%= __('Notice') %></h2>
+
+	<div class="pure-g">
+		<div class="pure-u-1-3">
+			<a class="pure-button pure-button-primary" class="pure-u-1-1" href="/admin/new/grade">+ <%= __('New Scores') %></a>
+		</div>
+	</div>
+
+
+<table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
+	<thead>
+	<tr>
+		<th data-type="string" data-sortable="true" data-name="Student">ID</th>
+		<%
+			var thead = score_list.thead;
+			var tbody = score_list.tbody;
+			var userlst = score_list.user;
+		%>
+		<th>
+		<div class="pure-g">
+			<div class="pure-u-1-1">
+		<% for (var i in thead) { %>
+			<div class="pure-u-1-12">
+				<%- thead[i].ttl %>
+			</div>
+		<% } %>
+			</div>
+		</div>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+		<% 
+			var record = {};
+			for (var i = 0; userlst && i < userlst.length; i++) {
+				record[userlst[i].lgn] = {};
+				record[userlst[i].lgn].uid = userlst[i].uid;
+			}
+            /*
+			for (var i in record) {
+				for (var j = 0; j < thead.length; j++)
+					record[i][thead[j].eid] = {};
+			}
+            */
+			for (var i = 0; tbody && i < tbody.length; i++) {
+				record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
+			}
+		%>
+		<% for (var i in record) { %>
+			<tr>
+				<td><a href="/user/<%- record[i].uid %>"><strong><%- i %></strong></a></td>
+				<td>
+					<form id="form-<%- record[i].uid %>" action="/admin/update/grade/<%- record[i].uid %>" method="post" class="pure-form pure-form-stacked">
+				    <fieldset>
+				    <div class="pure-g">
+				            <div class="pure-u-1-1">
+
+				               <div class="pure-g">
+
+				               <% for (var j = 0; j < thead.length; j++) { 
+				               		var s =  (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : '-1';
+				               %>
+								<div class="pure-u-1-12">
+									 <input type="text" name="<%- thead[j].eid %>" class="pure-u-23-24" value="<%- s %>">
+								</div>
+								<% } %>
+				                    
+				                    <div class="pure-controls pure-u-1-12">
+				                		<button onclick="document.getElementById('form-<%- record[i].uid %>').submit();" class="pure-button pure-button-primary button-warning pure-u-23-24"><i class="fa fa-pencil-square-o"></i>
+</button>
+				                	</div>
+				                </div>
+				            </div>
+				        </div>
+				    </fieldset>
+				</form>
+				</td>
+				
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+</div>
 </div>
