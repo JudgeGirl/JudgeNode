@@ -93,6 +93,17 @@ router.get('/edit/contest/:cid', function(req, res, next) {
 		});
 	});
 });
+router.get('/edit/gradettl/:eid', function(req, res, next) {
+	var eid = req.params.eid,
+		uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		dblink.admin.load_gradettl(eid, function(econfig) {
+			res.render('admin/layout', { layout: 'edit_gradettl', user: req.session, econfig: econfig});
+		});
+	});
+});
 /* new page */
 router.get('/new/problem', function(req, res, next) {
 	var uid = req.session.uid;
@@ -280,6 +291,17 @@ router.post('/update/grade/:uid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.admin.update_scores(req.params.uid, req.body, function() {
+			res.redirect('/admin/grade');
+		});
+	});
+});
+router.post('/update/gradettl/:eid', function(req, res, next) {
+	var uid = req.session.uid;
+	var eid = req.params.eid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		dblink.admin.update_gradettl(eid, req.body.ttl, function() {
 			res.redirect('/admin/grade');
 		});
 	});

@@ -1,0 +1,33 @@
+<div class="header">
+	<h1 class='article-title'><%= __('Change Exam Title') %></h1>
+    <h2>Administrator</h2>
+</div>
+<div class="content">
+	<%- include('../_partial/widget/nav')%>
+
+<form action="/admin/update/gradettl/<%= econfig.eid %>" method="post" class="pure-form pure-form-stacked">
+    <fieldset>
+    <div class="pure-g">
+
+            <div class="pure-u-1-1">
+               <div class="pure-g">
+                    <div class="pure-u-1-4">
+                        <label for="pid"><%= __('Grade ID') %></label>
+                        <input class="pure-u-23-24" type="text" name="pid" id="pid" style="opacity: 0.5;" value="<%= econfig.eid %>" disabled/>
+                    </div>
+               		<div class="pure-u-1-4">
+                        <label for="ttl"><%= __('Grade Title') %></label>
+                        <input type="text" name="ttl" class="pure-u-23-24" value="<%= econfig.ttl %>" placeholder="Week x. Exam">
+                    </div>
+                    <div class="pure-controls pure-u-1-1">
+                		<button type="submit" name="submit" id="submit" class="pure-button pure-button-primary button-warning"><%= __('Update') %></button>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+				
+</div>
+
+<% console.log(econfig) %>

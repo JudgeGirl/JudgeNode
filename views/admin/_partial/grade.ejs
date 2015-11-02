@@ -26,7 +26,9 @@
 			<div class="pure-u-1-1">
 		<% for (var i in thead) { %>
 			<div class="pure-u-1-12">
-				<%- thead[i].ttl %>
+				<a href="/admin/edit/gradettl/<%- thead[i].eid %>">
+					<%- thead[i].ttl %>
+				</a>
 			</div>
 		<% } %>
 			</div>
