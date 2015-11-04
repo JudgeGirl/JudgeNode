@@ -3,6 +3,12 @@
   font-family: ChekiangShuKeSung;
   src: url('../fonts/ChekiangShuKeSung.otf');
 }
+@font-face
+{
+  font-family: MonotypeTraditionalSong;
+  src: url('../fonts/MonotypeTraditionalSong.otf');
+  unicode-range: U+4E00-9FFF;
+}
 body {
     /*color: #777;*/
     color: black;
@@ -12,9 +18,11 @@ h1, h2, h3, h4 {
   font-family: ChekiangShuKeSung;
 }
 #menu .pure-menu-heading {
-    font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
+.content table thead {
+  font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .video-container {
   position: relative;
   padding-top: 56.25%;
@@ -58,11 +66,19 @@ h1, h2, h3, h4 {
 }
 /* Custom */
 .footer-content {
-    font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: MonotypeTraditionalSong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .content {
-    font-family: GutiFangsong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: MonotypeTraditionalSong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.7em;
+}
+.content blockquote {
+  margin: 1.6em 20px;
+  text-align: left;
+  border-left: 5px solid rgba(152,232,99,0.8);
+  margin: 0.65em 0 0.65em 4%;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 .content .caption {
   color: #A4A4A4;
@@ -295,9 +311,9 @@ The content `<div>` is where all your content goes.
     max-width: 75%;
     margin-bottom: 50px;
     line-height: 1.6em;
+    font-size: 1.3em;
 }
 .content p {
-  font-size: 1em;
 }
 
 .header {
@@ -321,7 +337,7 @@ The content `<div>` is where all your content goes.
 
 .content-subhead {
     margin: 20px 0 20px 0;
-    color: gray;
+    color: rgb(4, 23, 39);
 }
 
 
@@ -347,9 +363,11 @@ appears on the left side of the page.
     All anchors inside the menu should be styled like this.
     */
     #menu a {
+        font-family: MonotypeTraditionalSong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
         color: #999;
         border: none;
         padding: 0.6em 0 0.6em 0.6em;
+        line-height: 1.5em;
     }
 
     /*
