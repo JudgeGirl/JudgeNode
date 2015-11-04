@@ -9,12 +9,15 @@
 		</title>
 		<!-- <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" /> -->
 		<link rel="stylesheet" href="/stylesheets/pure-release-0.6.0/pure-min.css">
-		<link rel="stylesheet" href="/stylesheets/pure-release-0.6.0/slide-menu.css">
+		<link title="default" rel="stylesheet" href="/stylesheets/pure-release-0.6.0/slide-menu.css">
+		<link title="dark" rel="stylesheet" href="/stylesheets/pure-release-0.6.0/slide-menu-dark.css" disabled="disabled"/>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/stylesheets/font-awesome/css/font-awesome.min.css">
 		<script type="text/javascript" src="/javascripts/main.js"></script>
 		<script type="text/javascript" src="/javascripts/problem.js"></script>
 		<script src="/javascripts/jquery-2.1.0.min.js"></script>
+		<script src="/javascripts/jquery.cookie.js"></script> 
 		<script src="/javascripts/jquery.countdown.min.js"></script>
 		<script src="/javascripts/typed.js"></script>
 		<link rel="stylesheet" href="/stylesheets/terminal.css">
@@ -86,6 +89,21 @@
 							</li>
 							<li class="pure-menu-item">
 								<a class="pure-menu-link" href="/i18n/en"><i class="fa fa-globe"></i> en</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="pure-menu-item">
+					<input type="checkbox" id="box-2">
+					<label for="box-2" class="pure-menu-item">
+					<span class="pure-menu-link"><i class="fa fa-rocket"></i> Theme <i class="fa fa-caret-down"></i></span></label>
+					<div>
+						<ul class="pure-menu-list" id="styles">
+							<li class="pure-menu-item" id="default">
+								<a class="pure-menu-link" href="#"><i class="fa fa-sun-o"></i> Default</a>
+							</li>
+							<li class="pure-menu-item" id="dark">
+								<a class="pure-menu-link" href="#"><i class="fa fa-moon-o"></i> Dark</a>
 							</li>
 						</ul>
 					</div>

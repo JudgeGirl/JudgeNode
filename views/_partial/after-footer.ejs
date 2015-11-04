@@ -63,6 +63,25 @@
         toggleClass(menuLink, active);
     };
 
+    $("#styles li").click(function(){ 
+        var style = $(this).attr("id");
+        if (style + '' == 'dark') {
+            $("link[title='default']").attr("disabled","disabled"); 
+            $("link[title='dark']").removeAttr('disabled');
+        } else {
+            $("link[title='dark']").attr("disabled","disabled"); 
+            $("link[title='default']").removeAttr('disabled');
+        }
+        $.cookie("mystyle",style,{expires:30}); 
+    }); 
+    var cookie_style = $.cookie("mystyle"); 
+    if (cookie_style == null || cookie_style + '' == 'default') { 
+        $("link[title='dark']").attr("disabled","disabled"); 
+        $("link[title='default']").removeAttr('disabled');
+    } else { 
+        $("link[title='default']").attr("disabled","disabled"); 
+        $("link[title='dark']").removeAttr('disabled');
+    } 
 }(this, this.document));
 
 </script>
