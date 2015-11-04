@@ -1,4 +1,12 @@
+# server configuration
 *.yml
+
+# debug information
 *.log
 *.sql
+
+# generate by hand adjustment script
+*.csv
+
+# server upload temporary file dictionary
 /files
