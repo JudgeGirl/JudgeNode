@@ -42,6 +42,7 @@ DATABASE:
 HOST:
     TITLE: 'Judge Girl'
     IP: '140.112.31.208'
+    testdata: 'https://github.com/JudgeGirl/JG-testdata/blob/master/practice/'
 
 # Disqus
 Disqus:
