@@ -57,7 +57,7 @@
 				var unitConvert = site.unitConvert;
 			%>
 			<% for (var row in best_config) { %>
-				<tr>
+				<tr class='<%- row%2 == 0 ? "pure-table-odd" : "" %>'>
 					<td><%- (parseInt(row)+1) %></td>
 					<td><a href="/user/<%- best_config[row].uid %>"><%- best_config[row].lgn %></a></td>
 					<td><%- unitConvert('cpu', best_config[row].cpu) %>, <%- unitConvert('mem', best_config[row].mem) %></td>

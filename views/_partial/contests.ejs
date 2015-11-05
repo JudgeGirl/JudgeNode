@@ -31,6 +31,9 @@
 							} else {
 								contest_status = 'running';
 							}
+							if (i % 2) {
+								contest_status += ' pure-table-odd';
+							}
 						%>
 						<tr class="<%- contest_status %>">
 							<td><%- contest_list[i].cid %></td>
