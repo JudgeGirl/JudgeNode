@@ -1,13 +1,12 @@
 <style>
-/* 
-table .problem-title a {
-	display: block;
-	white-space: nowrap;
-	width: 150px; 
-	overflow: hidden;
-	text-overflow: ellipsis;
+@media screen and (max-width: 64em) {
+	.sid, .sid-header {
+		display: none;
+	}
+	.pid, .pid-header {
+		display: none;
+	}
 }
-*/
 </style>
 <div class="header">
 	<h1 class='article-title'>Live Submission</h1>
@@ -22,12 +21,12 @@ table .problem-title a {
 				<thead>
 					<tr>
 						<th class='sid-header' style="width: 5%">#</th>
-						<th style="width: 5%"></th>
-						<th style="width: 30%">Problem Title</th>
-						<th style="width: 15%">Username</th>
-						<th style="width: 20%">Verdict</th>
-						<th style="width: 0%"></th>
-						<th class='date-header' style="width: 30%">Submit Time</th>
+						<th class='pid-header' style=""></th>
+						<th style="">Problem Title</th>
+						<th style="">Username</th>
+						<th style="">Verdict</th>
+						<th style=""></th>
+						<th class='date-header' style="">Submit Time</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -134,7 +133,7 @@ table .problem-title a {
 						for (var i in submit_list) {
 				  			text += "<tr class='normal'>"; 
 							text += "<td class='sid'>" + submit_list[i].sid + "</td>";
-							text += "<td>" + submit_list[i].pid + "</td>";
+							text += "<td class='pid'>" + submit_list[i].pid + "</td>";
 							text += "<td class='problem-title'>" + 
 										"<a href='problem/" + submit_list[i].cid + "/" + submit_list[i].pid + "'>" + submit_list[i].ttl + "</a></td>";
 							text += "<td>";

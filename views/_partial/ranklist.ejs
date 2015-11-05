@@ -10,6 +10,11 @@ table .motto span {
 	text-overflow: ellipsis;
 	width: 324px;
 }
+@media screen and (max-width: 64em) {
+	.motto, .motto-header {
+		display: none;
+	}
+}
 </style>
 <div class="content">
 	<div class="pure-menu pure-menu-horizontal">
@@ -23,11 +28,11 @@ table .motto span {
 	<table class="pure-table pure-table-bordered" style="width: 100%">
 		<thead>
 			<tr>
-				<th style="width: 10%"><%= __('Rank') %></th>
-				<th style="width: 15%"><%= __('Account') %></th>
-				<th style="width: 20%"><%= __('Class') %></th>
-				<th style="width: 10%"><%= __('#Solved') %></th>
-				<th><%= __('Motto') %></th>
+				<th><%= __('Rank') %></th>
+				<th><%= __('Account') %></th>
+				<th><%= __('Class') %></th>
+				<th><%= __('#Solved') %></th>
+				<th class='motto-header'><%= __('Motto') %></th>
 			</tr>
 		</thead>
 		<tbody>
