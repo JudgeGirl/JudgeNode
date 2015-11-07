@@ -1,16 +1,3 @@
-## JudgeNode ##
-
-### Tutorial ###
-
-1. Install Nodejs & Express4.x & MySQL
-2. Download this repository
-3. create the file named `_config.yml`
-
-### About config ###
-
-In `_config.yml`, the default setting as below,
-
-```
 # order is important, don't change or alternate, otherwise please change all testdata/xxx/judge
 # lang: ['*', 'C', 'C++', 'C# 3.0', 'Python 3', 'Scala 2']
 # compiler: [, 'g++ -std=c++98 -O2', 'mcs -langversion:3', 'python3', 'scalac -optimise'],
@@ -32,11 +19,11 @@ CONTEST:
 
 # DATABASE Setting, MySQL
 DATABASE:
-    host: '140.112.xxx.xxx'
-    user: 'xxxxxxxxxxxxxxx'
-    password: 'xxxxxxxxxxx'
+    host: '140.112.31.208'
+    user: 'c2015'
+    password: 'xxxxxxxxxx'
     port: '3306'
-    dbname: 'xxxxxxxxxxxxx'
+    dbname: 'c2015'
 
 # WEBSITE API HOST
 HOST:
@@ -51,38 +38,6 @@ HOST:
     footer:
         text: 'What do you want to do ?'
         license: 'so ?'
-
 # Disqus
 Disqus:
     shortname: 'ntucsiecprogramming'
-```
-
-### Auto Restart ###
-
-If you want server not crash in seldom situation, run `./start` as infinite loop to call `npm start`. In this situation, your debug work will be harder.
-
-```
-$ ./start
-```
-
-#### How to stop auto restart ####
-
-```
-$ ps aux | grep start
-root      3232  0.0  0.0 106096  1148 pts/2    S+   Oct12   0:00 /bin/sh ./start
-root      5960  0.0  0.0 103256   856 pts/0    S+   13:33   0:00 grep start
-root     25866  0.0  0.0   3920   340 pts/4    S+   Sep22   0:00 ./start
-$ kill -9 25866
-```
-
-
-### MySQL Scheme Setting ###
-
-* [Judge-MySQL](https://github.com/JudgeGirl/Judge-MySQL)
-
-If there are encode & decode problem, maybe change the character set and command like these,
-
-```sql
-ALTER DATABASE databasename CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-ALTER TABLE tablename CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-```

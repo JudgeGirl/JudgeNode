@@ -1,5 +1,5 @@
 # server configuration
-*.yml
+_config.yml
 
 # debug information
 *.log
