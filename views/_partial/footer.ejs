@@ -2,24 +2,27 @@
 	<div class='pure-g'>
 		<div class='pure-u-2-3'>
 			<div class='footer-content'>
-				<p>TA 曹又霖、顏志軒、林蔚城、楊翔雲、陳威甯
-				<p>Instructor <a title="劉邦鋒" href="/">Pangfeng Liu</a>, Web designer 
-					<a title="許祐程" href="/">Akira</a>, 
-					<a title="王盛平" href="/">Peer4321</a>, 
-					<a title="曹又霖" href="https://github.com/sinmaplewing">Maplewing</a>, 
-					<a title="楊翔雲" href="https://github.com/morris821028">Morris</a>
-				</p>
+				<p><%- site.HOST.footer.text %></p>
+				<p></p>
 			</div>
 		</div>
 		<div class='pure-u-1-3'>
 			<div class='footer-content'>
 			<span class="relative-link">
-				<a title="Google" href="https://sites.google.com/site/ntucsiec2015/announcement"><i class="fa fa-google fa-2x"></i></a>
-				<a title="Facebook" href="https://www.facebook.com/%E6%89%B9%E6%94%B9%E5%A8%98%E7%B2%89%E7%B5%B2%E5%9C%98-257246016760/timeline/"><i class="fa fa-facebook-square fa-2x"></i></a>
-				<a title="Github" href="https://github.com/pangfengliu/programmingtasks/issues"><i class="fa fa-github-square fa-2x"></i></a>
-				<a title="Youtube" href="https://www.youtube.com/playlist?list=PLOvZ8aEg7xDkpKHk3hAwQxLAlpZ1Q3wKH"><i class="fa fa-youtube-square fa-2x"></i></a>
+				<% if (site.HOST.social.youtube) { %>
+					<a title="Youtube" href="<%- site.HOST.social.youtube %>"><i class="fa fa-youtube-square fa-2x"></i></a>
+				<% } %>
+				<% if (site.HOST.social.facebook) { %>
+					<a title="Facebook" href="<%- site.HOST.social.facebook %>"><i class="fa fa-facebook-square fa-2x"></i></a>
+				<% } %>
+				<% if (site.HOST.social.github) { %>
+					<a title="Github" href="<%- site.HOST.social.github %>"><i class="fa fa-github-square fa-2x"></i></a>
+				<% } %>
+				<% if (site.HOST.social.googlesite) { %>
+					<a title="Google" href="<%- site.HOST.social.googlesite %>"><i class="fa fa-google fa-2x"></i></a>
+				<% } %>
 			</span>
-			<p>Powered by <a target="_blank" href='https://nodejs.org/'>Nodejs</a> © 2015 <a target="_blank" href="https://sites.google.com/site/ntucsieparalleldistributedlab/home">NTU PDP Lab</a></p>
+			<p>Powered by <a target="_blank" href='https://nodejs.org/'>Nodejs</a> © 2015</p>
 			</div>
 		</div>
 	</div>
