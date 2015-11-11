@@ -1,12 +1,25 @@
-<meta http-equiv="refresh" content="10" />
+<meta http-equiv="refresh" content="60" />
+
 <style>
-table .problem-title a {
-	display: block;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+@media screen and (max-width : 648px) {
+	.date, .date-header {
+		display: none;
+	}
+}
+@media screen and (max-width : 960px) {
+	.sid, .sid-header {
+		color: white;
+		display: none;
+	}
+
+}
+@media screen and (max-width : 1920px) {
+	.codelen, .codelen-header {
+		display: none;
+	}
 }
 </style>
+
 <% 
 	var ac_map = [];
 	for (var i in ac_list) {
@@ -16,7 +29,7 @@ table .problem-title a {
 %>
 <div class="header">
 	<h1 class='article-title'>Submission</h1>
-    <h2>Update page each 10 seconds</h2>
+    <h2>Update page each 60 seconds</h2>
 </div>
 <div class="content">
 	<% if (site.CONTEST_MODE == true) { %>
@@ -24,17 +37,17 @@ table .problem-title a {
 	<% } %>
 	<div class="pure-g">
 		<div class="pure-u-1-1">
-	<table class="pure-table pure-table-bordered" sytle="width: 150%">
+	<table class="pure-table pure-table-bordered" sytle="width: 100%">
 		<thead>
 			<tr>
-				<th class='sid-header' style="width: 5%">#</th>
-				<th style="width: 5%"></th>
-				<th style="width: 30%">Problem Title</th>
-				<th style="width: 10%">Username</th>
-				<th style="width: 20%">Verdict</th>
-				<th style="width: 5%"></th>
-				<th style="width: 10%">Len</th>
-				<th class='date-header' style="width: 30%">Date</th>
+				<th class='sid-header'>#</th>
+				<th></th>
+				<th>Problem</th>
+				<th>User</th>
+				<th>Verdict</th>
+				<th></th>
+				<th class='codelen-header'>Len</th>
+				<th class='date-header'>Date</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -66,6 +79,9 @@ table .problem-title a {
 						text += "</a>";
 						if (sl[i].res == 0 || sl[i].res == 8)
 							text += ' <i class="fa fa-spinner fa-pulse"></i>';
+						if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) {
+							text += ' <a class="pid-rejudge" href="/admin/api/rejudge?pid=' + sl[i].pid + '&sid=' + sl[i].sid + '" style="color: #b6c17b;" title="rejudge"><i class="fa fa-refresh"></i></a>';
+						}
 						text += '</td>';
 					%>
 					<%- text %>
@@ -78,7 +94,7 @@ table .problem-title a {
 							<%- judge_lng[sl[i].lng] %>
 						<% } %>
 					</td>
-					<td><%- unitConvert('mem', sl[i].len) %></td>
+					<td class='codelen'><%- unitConvert('mem', sl[i].len) %></td>
 					<td class='date'><%- unitConvert('date', new Date(sl[i].ts)) %></td>
 				</tr>
 			<% } %>

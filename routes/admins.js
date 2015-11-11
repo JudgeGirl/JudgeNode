@@ -315,7 +315,8 @@ router.get('/api/rejudge?', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect('../login');
 		dblink.api.rejudge(req.query, function(result) {
-			res.redirect('/admin/problems');
+			if (req.headers.referer) res.redirect(req.headers.referer);
+    		else res.redirect("/");
 		});
 	});
 });
