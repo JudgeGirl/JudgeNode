@@ -307,4 +307,16 @@ router.post('/update/gradettl/:eid', function(req, res, next) {
 		});
 	});
 });
+
+/* api */
+router.get('/api/rejudge?', function(req, res, next) {
+	var uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		dblink.api.rejudge(req.query, function(result) {
+			res.redirect('/admin/problems');
+		});
+	});
+});
 module.exports = router;
