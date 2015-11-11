@@ -13,15 +13,15 @@
 	<table class="pure-table pure-table-bordered" style="width: 100%">
 		<thead>
 		    <tr>
-				<th style="width: 5%"></th>
-				<th style="width: 5%">#</th>
+				<th></th>
+				<th>#</th>
 				<th><%= __('Problem Title') %></th>
-				<th style="width: 5%"><%= __('Options') %></th>
+				<th><%= __('Options') %></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% for (var row in prob_list) { %>
-			<tr>
+			<tr class='<%- row%2 == 0 ? "pure-table-odd" : "" %>'>
 				<% var prob = prob_list[row]; %>
 				<td>
 					<% if (prob.pub == 1) { %>
@@ -32,9 +32,47 @@
 				</td>
 				<td><%- prob.pid %></td>
 				<td><a href="/problem/0/<%- prob.pid%>"><%- prob.ttl %></a></td>
-				<td><a class="pure-button pure-button-primary" href="/admin/edit/problem/<%- prob.pid%>"><i class="fa fa-cog"></i> <%= __('Edit') %></a></td>
+				<td>
+				<span>
+					<a class="" href="/admin/edit/problem/<%- prob.pid%>"><i class="fa fa-cog"></i></a>
+				</span> | 
+				<span>
+					<a class="pid-rejudge" href="#"><i class="fa fa-refresh"></i></a>
+				</span> |
+				<span>
+					<a class="pid-delete" href="#"><i class="fa fa-trash"></i></a>
+				</span>
+				</td>
 			</tr>
 			<% } %>
 		</tbody>
 	</table>
 </div>
+
+<script>
+var list = document.getElementsByClassName("pid-rejudge");
+
+for (var i = 0; i < list.length; i++) {
+	list[i].addEventListener("click", 
+        function (event) {
+            event.preventDefault();
+            if (confirm('Are you sure ? Rejuge maybe need a lot of time.')) {
+                window.location = this.href;
+            }
+        }, 
+        false);
+}
+
+list = document.getElementsByClassName("pid-delete");
+
+for (var i = 0; i < list.length; i++) {
+	list[i].addEventListener("click", 
+        function (event) {
+            event.preventDefault();
+            if (confirm('Are you sure ? Delete problem.')) {
+                window.location = this.href;
+            }
+        }, 
+        false);
+}
+</script>	
