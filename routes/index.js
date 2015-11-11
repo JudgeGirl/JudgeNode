@@ -239,7 +239,9 @@ router.get('/contest/:cid', function(req, res, next) {
 			status = 1;	// can
 		if (status == 1) {
 			dblink.contest.problemlist(cid, uid, function(status, problem_config) {
-				res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, problem_config: problem_config});
+				dblink.contest.rule(cid, function(contest_rule_desc) {
+					res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, contest_rule_desc: contest_rule_desc, problem_config: problem_config});
+				});
 			});
 		} else {
 			res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, problem_config: {} });

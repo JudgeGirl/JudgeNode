@@ -257,7 +257,8 @@ router.post('/update/contest/:cid', function(req, res, next) {
 		ts1 : new Date(req.body.ts1).getTime(),
 		ts2 : new Date(req.body.ts2).getTime(),
 		pid : req.body.pid.split(','),
-		participants: req.body.participants
+		participants: req.body.participants,
+		rule: req.body.rule
 	};
 	if (req.body.pid.trim().length == 0)
 		config.pid = [];

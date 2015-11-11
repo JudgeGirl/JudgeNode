@@ -83,6 +83,13 @@
 
         <div class="pure-g">
             <div class="pure-u-1-1">
+               <legend><%= __('Contest Rule') %></legend>
+               <textarea name="rule" id="textbox" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 400px;"><%= contest_config.rule %></textarea>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
                 <div class="pure-controls">
                     <button type="submit" name="submit" id="submit" class="pure-button pure-button-primary button-warning"><%= __('Update') %></button>
                 </div>
