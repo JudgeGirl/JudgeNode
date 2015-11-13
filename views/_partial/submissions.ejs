@@ -35,34 +35,22 @@
 	<% if (site.CONTEST_MODE == true) { %>
 	<div class="sysmsg">考試正在進行</div>
 	<% } %>
-	
-	<%- include('widget/submission_table', {submission_list: submission_list}) %>
-
-	<div class="pure-g">
-			<%
-				var page = query_filter['page'];
-				var arg_query = '';
-				if (query_filter['uid'] != undefined)
-					arg_query += '&uid=' + query_filter['uid'];
-				if (query_filter['pid'] != undefined)
-					arg_query += '&pid=' + query_filter['pid'];
-				if (query_filter['cid'] != undefined)
-					arg_query += '&cid=' + query_filter['cid'];
-			%>
-			<div class="pure-u-6-24">
-			<% if (page != undefined && page != null && parseInt(page) > 1) { %>
-				<a class="pure-button pure-button-primary" style="width:100%" rel="prev" href="/submissions?page=<%- parseInt(page)-1 %><%- arg_query %>">« Prev</a>
-			<% } else { %>
-				<a class="" style="width:100%"></a>
-			<% } %>
-			</div>
-			<div class="pure-u-12-24"></div>
-			<div class="pure-u-6-24">
-			<% if (page == undefined || page == null) { %>
-				<a class="pure-button pure-button-primary" style="width:100%" rel="next" href="/submissions?page=2<%- arg_query %>">Next »</a>
-			<% } else { %>
-				<a class="pure-button pure-button-primary" style="width:100%" rel="next" href="/submissions?page=<%- parseInt(page)+1 %><%- arg_query %>">Next »</a>
-			<% } %>
-			</div>
-	</div>
+	<% console.log(submission_status.count) %>
+	<%- include('widget/submission_table', {submission_list: submission_list, ac_map: ac_map}) %>
+	<%
+		var totpage = Math.ceil(submission_status.count / 25);
+		var page = query_filter['page'];
+		var arg_query = '';
+		if (query_filter['uid'] != undefined)
+			arg_query += '&uid=' + query_filter['uid'];
+		if (query_filter['pid'] != undefined)
+			arg_query += '&pid=' + query_filter['pid'];
+		if (query_filter['cid'] != undefined)
+			arg_query += '&cid=' + query_filter['cid'];
+		if (page == undefined || page == null)
+			page = 1;
+		else
+			page = parseInt(page);
+	%>
+	<%- include('pagination', {page: page, url: '/submissions?page=', query: arg_query, totpage: totpage})%>
 </div>

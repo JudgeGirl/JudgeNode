@@ -1,0 +1,51 @@
+<%
+	/*
+		@integer: totpage
+			totpage page
+		@integer: page
+			current page index
+		@string: url
+			prefix url
+		@string: query
+			suffix query
+	*/
+%>
+<div class="pure-g" id="page-nav">
+	<div class="pure-u-4-24">
+	<% if (page > 1) { %>
+		<a class="prev" style="width:100%" rel="prev" href="<%- url %><%- (page-1) %><%- query %>">« Prev</a>
+	<% } else { %>
+		<a class="" style="width:100%"></a>
+	<% } %>
+	</div>
+
+	<div class="pure-u-16-24">
+		<% if (page != 1) { %>
+			<a class="page-number" rel="prev" href="<%- url %><%- 1 %><%- query %>">1</a>
+		<% } %>
+		<% if (1 < page-2) { %>
+			<span class="space">…</span>
+		<% } %>
+		<% for (var i = Math.max(page-2, 2); i < page; i++) { %>
+			<a class="page-number" rel="prev" href="<%- url %><%- i %><%- query %>"><%- i %></a>
+		<% } %>
+		<a class="current page-number" rel="prev" href="<%- url %><%- page %><%- query %>"><%- page %></a>
+		<% for (var i = page+1; i <= page+2 && i < totpage; i++) { %>
+			<a class="page-number" rel="prev" href="<%- url %><%- i %><%- query %>"><%- i %></a>
+		<% } %>
+		<% if (page+2 < totpage) { %>
+			<span class="space">…</span>
+		<% } %>
+		<% if (page != totpage) { %>
+			<a class="page-number" rel="prev" href="<%- url %><%- totpage %><%- query %>"><%- totpage %></a>
+		<% } %>
+	</div>
+
+	<div class="pure-u-4-24">
+	<% if (page == totpage) { %>
+		<a class="" style="width:100%"></a>
+	<% } else { %>
+		<a class="next" style="width:100%" rel="next" href="<%- url %><%- (page+1) %><%- query %>">Next »</a>
+	<% } %>
+	</div>
+</div>

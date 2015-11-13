@@ -517,3 +517,62 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     }
 }
 
+.page-number {
+    display: inline-block;
+}
+#page-nav a {
+    text-decoration: none;
+}
+#page-nav {
+  border: 1px solid #CBCBCB;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#page-nav {
+  margin: 50px auto;
+  text-align: center;
+  color: #4183C4;
+  overflow: hidden;
+}
+#page-nav:before,
+#page-nav:after {
+  content: "";
+  display: table;
+}
+#page-nav:after {
+  clear: both;
+}
+#page-nav a,
+#page-nav span {
+  padding: 10px 20px;
+}
+#page-nav a {
+  color: #4183c4;
+  text-decoration: none;
+}
+#page-nav a:hover {
+  background: #2ca6cb;
+  color: #fff;
+}
+#page-nav .prev {
+  float: left;
+}
+#page-nav .next {
+  float: right;
+}
+#page-nav .page-number {
+  display: inline-block;
+}
+@media screen and (max-width: 479px) {
+  #page-nav .page-number {
+    display: none;
+  }
+}
+#page-nav .current {
+  color: black;
+  font-weight: bold;
+}
+#page-nav .space {
+  color: #696969;
+}
+
