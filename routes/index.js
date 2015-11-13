@@ -27,7 +27,7 @@ router.get('/restart', function(req, res, next){
 
 /* User Information control */
 router.get('/login', function(req, res, next) {
-	res.render('layout', { layout: 'login', user: req.session, sysmsg: '' });
+	res.render('layout', { layout: 'login', subtitle: 'Login', user: req.session, sysmsg: '' });
 });
 router.post('/login', function(req, res, next) {
 	var user = {
@@ -48,11 +48,11 @@ router.post('/login', function(req, res, next) {
 				});
 			} else {
 				req.session.regenerate(function(err) {
-					res.render('layout', { layout: 'login', user: req.session, sysmsg: '考試正在進行' });
+					res.render('layout', { layout: 'login', subtitle: 'Login', user: req.session, sysmsg: '考試正在進行' });
 				});
 			}
 		} else {
-			res.render('layout', { layout: 'login', user: req.session, sysmsg: '帳號或密碼錯誤' });
+			res.render('layout', { layout: 'login', subtitle: 'Login', user: req.session, sysmsg: '帳號或密碼錯誤' });
 		}
 	});
 });
@@ -72,7 +72,7 @@ router.post('/edit', function(req, res, next) {
 	if (req.body.pwd != req.body.repwd) {
 		var wrongmsg = 'The new password is not equal to the retype new password.';
 		dblink.user.info(req.session.uid, function(user) {
-			res.render('layout', { layout: 'edit', user: req.session, userinfo: user, sysmsg: wrongmsg});
+			res.render('layout', { layout: 'edit', subtitle: 'Profile', user: req.session, userinfo: user, sysmsg: wrongmsg});
 		});
 	} else {
 		var user = {
@@ -82,7 +82,7 @@ router.post('/edit', function(req, res, next) {
 		};
 		dblink.user.update_info(user, function(status) {
 			dblink.user.info(user.uid, function(user) {
-				res.render('layout', { layout: 'edit', user: req.session, userinfo: user, sysmsg: status});
+				res.render('layout', { layout: 'edit', subtitle: 'Profile', user: req.session, userinfo: user, sysmsg: status});
 			});
 		});
 	}
@@ -185,7 +185,7 @@ router.get('/solution/problem/:pid', function(req, res, next) {
 		if (!can)
 			return res.redirect('/problems');
 		dblink.problem.solution(cid, pid, function(solution_config) {
-			res.render('layout', { layout: 'solution', user: req.session, solution_config: solution_config});
+			res.render('layout', { layout: 'solution', subtitle: 'Solution', user: req.session, solution_config: solution_config});
 		});
 	});
 });

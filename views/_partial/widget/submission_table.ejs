@@ -1,0 +1,87 @@
+<style>
+@media screen and (max-width : 648px) {
+	.date, .date-header {
+		display: none;
+	}
+}
+@media screen and (max-width : 960px) {
+	.sid, .sid-header {
+		color: white;
+		display: none;
+	}
+
+}
+@media screen and (max-width : 1920px) {
+	.codelen, .codelen-header {
+		display: none;
+	}
+}
+</style>
+
+<div class="pure-g">
+	<div class="pure-u-1-1">
+	<table class="pure-table pure-table-bordered" sytle="width: 100%">
+		<thead>
+			<tr>
+				<th class='sid-header'>#</th>
+				<th></th>
+				<th>Problem</th>
+				<th>User</th>
+				<th>Verdict</th>
+				<th></th>
+				<th class='codelen-header'>Len</th>
+				<th class='date-header'>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% var sl = submission_list; %>
+			<% for (var i = 0; i < sl.length; i++) { %>
+				<tr class='normal'>
+					<td class='sid'><%- sl[i].sid %></td>
+					<td><%- sl[i].pid %></td>
+					<td class='problem-title'><a href='problem/<%- sl[i].cid %>/<%- sl[i].pid %>'><%- sl[i].ttl %></a></td>
+					<td><a href='user/<%- sl[i].uid %>'><%- sl[i].lgn %></td>
+					<% 
+						var text = '';
+						var judge_res = site.JUDGE_res,
+						    judge_lng = site.JUDGE_lng;
+						var unitConvert = site.unitConvert;
+						text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
+						text += "<a href='detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";
+						if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
+							text += " (";
+							if (sl[i].res != 7) {
+								text += "score: " + sl[i].scr;
+							} else {
+								text += unitConvert('cpu', sl[i].cpu);
+								text += ","
+								text += unitConvert('mem', sl[i].mem);
+							}
+							text += ")";
+						}
+						text += "</a>";
+						if (sl[i].res == 0 || sl[i].res == 8)
+							text += ' <i class="fa fa-spinner fa-pulse"></i>';
+						if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) {
+							text += ' <a class="pid-rejudge" href="/admin/api/rejudge?pid=' + sl[i].pid + '&sid=' + sl[i].sid + '" style="color: #b6c17b;" title="rejudge"><i class="fa fa-refresh"></i></a>';
+						}
+						text += '</td>';
+					%>
+					<%- text %>
+					<td>
+						<% if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) { %>
+							<a href='/source/highlight/<%- sl[i].sid %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
+						<% } else if (ac_map[sl[i].pid] != undefined) { %>
+							<a href='/source/highlight/<%- sl[i].sid %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
+						<% } else { %>
+							<%- judge_lng[sl[i].lng] %>
+						<% } %>
+					</td>
+					<td class='codelen'><%- unitConvert('mem', sl[i].len) %></td>
+					<td class='date'><%- unitConvert('date', new Date(sl[i].ts)) %></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+	</div>
+</div>
