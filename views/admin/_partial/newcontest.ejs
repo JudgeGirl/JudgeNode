@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/stylesheets/DateTimePicker.css">
+<script type="text/javascript" src="/javascripts/DateTimePicker.js"></script>
+
 <div class="header">
 	<h1 class='article-title'><%= __('Add Contest') %></h1>
     <h2>Be Careful to do.</h2>
@@ -33,14 +36,15 @@
 
                <div class="pure-g">
                     <div class="pure-u-1-2">
-                        <label for="ts1"><%= __('Start Date') %></label>
-                        <input class="pure-u-23-24" type="text" name="ts1" id="ts1" value="" placeholder="<%- new Date() %>">
+                        <label for="pid"><%= __('Start Date') %></label>
+                        <input class="pure-u-23-24" type="text" name="ts1" id="ts1" value="<%- site.unitConvert('date', new Date()) %>" data-field="datetime" data-format="yyyy/MM/dd HH:mm:ss">
+                        <div id="dts1Box"></div>
                     </div>
                     <div class="pure-u-1-2">
-                        <label for="ts2"><%= __('End Date') %></label>
-                        <input class="pure-u-23-24" type="text" name="ts2" id="ts2" value="" placeholder="<%- new Date(new Date().getTime()+60*60*1000) %>">
+                        <label for="pub"><%= __('End Date') %></label>
+                        <input class="pure-u-23-24" type="text" name="ts2" id="ts2" value="<%- site.unitConvert('date', new Date(new Date().getTime()+60*60*1000)) %>" data-field="datetime" data-format="yyyy/MM/dd HH:mm:ss">
+                        <div id="dts2Box"></div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -102,5 +106,18 @@ $(document).delegate('#textbox', 'keydown', function(e) {
     $(this).get(0).selectionStart =
     $(this).get(0).selectionEnd = start + 1;
   }
+});
+
+$(document).ready(function() {  
+     $("#dts1Box").DateTimePicker({
+        defaultDate: new Date('<%- new Date() %>'),
+        dateTimeFormat: "yyyy/MM/dd HH:mm:ss",
+        dateSeparator: '/'
+     });
+     $("#dts2Box").DateTimePicker({
+        defaultDate: new Date('<%- new Date(new Date().getTime()+60*60*1000) %>'),
+        dateTimeFormat: "yyyy/MM/dd HH:mm:ss",
+        dateSeparator: '/'
+     });
 });
 </script>
