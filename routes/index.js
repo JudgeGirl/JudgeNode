@@ -247,7 +247,9 @@ router.get('/contest/:cid', function(req, res, next) {
 				});
 			});
 		} else {
-			res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, problem_config: {} });
+			dblink.contest.rule(cid, function(contest_rule_desc) {
+				res.render('layout', { layout: 'contest', user: req.session, sysmsg: sysmsg, contest_config: contest_config, contest_rule_desc: contest_rule_desc, problem_config: {} });
+			});
 		}
 	});
 });
