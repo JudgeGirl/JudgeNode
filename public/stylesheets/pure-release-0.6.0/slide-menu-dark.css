@@ -603,3 +603,80 @@ abbr[title] {
 #page-nav .space {
   color: #696969;
 }
+
+/* table of content */
+#toc_wrapper {
+    position: fixed;
+    top: 10px;
+    width: 170px;
+    right: 10px;
+    z-index: 9999;
+}
+#toc_wrapper .toc-button {
+  float: right;
+  margin-top: -10px;
+  cursor: pointer;
+}
+#nav {
+    padding: 20px 20px 20px 30px;
+    background-color: #343434;
+}
+#nav a {
+    color:rgb(133, 133, 133);
+    text-decoration: none;
+    color: #cbcbcb;
+}
+#nav li {
+  line-height: 1em;
+}
+#toc_wrapper .toc-item-desc {
+  display: none;
+   -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  opacity: 0;
+  -webkit-transition: -webkit-transform .3s ease-in-out, opacity .3s ease-in-out;
+          transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+}
+#toc_wrapper li:hover .toc-item-desc {
+  display: inline-block;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  -webkit-animation: tocanim .3s ease-in-out;
+          animation: tocanim .3s ease-in-out;
+}
+@media screen and (max-width : 648px) {
+  #toc_wrapper {
+    position: relative;
+    width: 100%;
+  }
+  #toc_wrapper .toc-item-desc {
+  display: inline-block;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  -webkit-animation: tocanim .3s ease-in-out;
+          animation: tocanim .3s ease-in-out;
+  }
+  #toc_wrapper .toc-button {
+    display: none;
+  }
+}
+@keyframes tocanim {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

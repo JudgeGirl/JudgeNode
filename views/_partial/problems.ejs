@@ -43,6 +43,20 @@
 	<h2>You have to belive in yourself. That's the secret of success. </h2>
 </div>
 <div class="content">
+
+<div id="toc_wrapper" >
+	<span class="toc-button"><i class="fa fa-anchor"></i></span>
+	<ul id="nav" class="pure-table">
+<% for (var level = 0 ; level_list && level < level_list.length ; level++ ) { %>
+	<% if( level_list[level].level < 0 ) { %>
+	 <li><a href="#prob-lv-<%- level_list[level].level %>"> Side Track <span class="toc-item-desc">. <%- level_list[level].ttl %></span> </a></li>
+	<% } else { %>
+	 <li><a href="#prob-lv-<%- level_list[level].level %>"> Lv. <%- level_list[level].level %>. <span class="toc-item-desc"><%- level_list[level].ttl %></span></a> </li>
+	<% } %>
+<% } %>
+	</ul>
+</div>
+
 <div class="pure-g">
 	<div class="pure-u-1-1">
 		<form class="pure-form" style="position: relative">
@@ -55,9 +69,9 @@
 </div>
 <% for (var level = 0 ; level_list && level < level_list.length ; level++ ) { %>
 	<% if( level_list[level].level < 0 ) { %>
-	 <h2 class="content-subhead"> Side Track. <%- level_list[level].ttl %> </h2>
+	 <h2 id="prob-lv-<%- level_list[level].level %>" class="content-subhead"> Side Track. <%- level_list[level].ttl %> </h2>
 	<% } else { %>
-	 <h2 class="content-subhead"> Level <%- level_list[level].level %>. <%- level_list[level].ttl %> </h2> 
+	 <h2 id="prob-lv-<%- level_list[level].level %>" class="content-subhead"> Level <%- level_list[level].level %>. <%- level_list[level].ttl %> </h2> 
 	<% } %>
 	<div class="pure-g">
 		<div class="pure-u-1-1">
@@ -101,6 +115,7 @@
 	</div>
 <% } %>
 </div>
+
 <script>
 var $rows = $('tbody tr');
 $('#search').keyup(function() {

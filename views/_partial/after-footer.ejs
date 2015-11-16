@@ -63,6 +63,7 @@
         toggleClass(menuLink, active);
     };
 
+    /*  theme style css */
     $("#styles li").click(function(){ 
         var style = $(this).attr("id");
         if (style + '' == 'dark') {
@@ -82,6 +83,25 @@
         $("link[title='default']").attr("disabled","disabled"); 
         $("link[title='dark']").removeAttr('disabled');
     } 
+
+    /* table of contents */
+    var nav_list    = $("#nav"); // navigation list id
+    var nav_links   = $("#nav a");  //links inside navigation list
+    var toc_button  = $("#toc_wrapper .toc-button"); // expand/collapse animated button
+    toc_button.click(function() { // use click on navigation button
+         nav_list.fadeToggle('fast', function() { // toggle hide/show navigation list
+                if(nav_list.is(':visible')) { //navigtion list is visible
+                    toc_button.html('<i class="fa fa-anchor"></i>');
+                }else{
+                    toc_button.html('<i class="fa fa-anchor fa-rotate-90"></i>'); //restore css3 animation class
+                }
+        });
+     });
+     
+    $(nav_links).click(function() { //user click on toc links
+            event.returnValue = false; //stop browser from going to href link
+            $('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500); //scroll smoothly to #id  
+     });
 }(this, this.document));
 
 </script>
