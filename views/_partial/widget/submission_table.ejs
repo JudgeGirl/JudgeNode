@@ -71,7 +71,7 @@
 					<td>
 						<% if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) { %>
 							<a href='/source/highlight/<%- sl[i].sid %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
-						<% } else if (ac_map[sl[i].pid] != undefined) { %>
+						<% } else if (typeof(ac_map) != 'undefined' && ac_map[sl[i].pid] != undefined) { %>
 							<a href='/source/highlight/<%- sl[i].sid %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
 						<% } else { %>
 							<%- judge_lng[sl[i].lng] %>
