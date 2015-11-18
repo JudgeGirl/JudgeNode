@@ -1,0 +1,31 @@
+<h2>考試即時發問系統 (測試)</h2>
+
+<script src="/javascripts/jquery.timeago.js"></script>
+<div class="pure-g">
+    <div class="pure-u-1-1">
+        <div class="panel-body" id="chat">
+            <ul class="chat">
+                
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="pure-u-1-1">
+        <div class="panel-footer">
+            <div class="input-group custom-search-form">
+                <% if (!(user == undefined || user == null || user.uid == undefined)) { %>
+                    <input class="form-control usernameInput" type="text" placeholder="" value="<%= user.lgn %>" style="display: none"/>
+                <% } %>
+            </div>
+            <% if (!(user == undefined || user == null || user.uid == undefined)) { %>
+                <div class="pure-form">
+                    <input id="btn-input" type="text" class="pure-input-1" placeholder="Type your message here ..." />
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/socket.io.js"></script>
+<script src="/javascripts/chat.js"></script>

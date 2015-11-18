@@ -6,12 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admins = require('./routes/admins');
 var _config = require('./lib/const');
 var i18n = require('i18n');
 var app = express();
+
+// chat room
 
 i18n.configure({
   // setup some locales - other locales default to en silently
