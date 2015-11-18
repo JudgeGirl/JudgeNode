@@ -22,7 +22,7 @@ $(function() {
   var typing = false;
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
-  var socket = io.connect('ws://localhost:80');
+  var socket = io.connect('ws://140.112.31.208:80');
   var oldscrollHeight = 0;
   setUsername();
 
