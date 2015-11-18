@@ -69,6 +69,7 @@
 			</th>
 		<% } %>
         <th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
+        <th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -91,6 +92,7 @@
                           for( var j in record[i] ){
                             sum += record[i][j];
                           }
+                          record[i].sum = sum;
                           record[i].avg = sum / thead.length;
                         }
 
@@ -98,13 +100,17 @@
                             return +(Math.round(num + "e+2")  + "e-2");
                         }
 		%>
-		<% for (var i in record) { %>
+		<% 
+			for (var i in record) { 
+				var finalgrade = Math.ceil(record[i].sum / 17.0);
+		%>
 			<tr>
 				<td><strong><%- i %></strong></td>
 				<% for (var j = 0; j < thead.length; j++) { %>
 					<td><%- (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 'X' %></td>
 				<% } %>
 				<td><%- Math.ceil(record[i].avg) %></td>
+				<td style="color: <%- finalgrade < 60 ? "#F00" : "#0A0" %>; font-weight: bold;"><%- finalgrade %></td>
 			</tr>
 		<% } %>
 	</tbody>
