@@ -22,16 +22,38 @@ $(function() {
   var typing = false;
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
+  // var socket = io.connect('ws://140.112.31.208:80');
   var socket = io.connect('ws://140.112.31.208:80');
   var oldscrollHeight = 0;
+  var friends = [];
   setUsername();
 
   window.setInterval(function() {
     var elem = document.getElementById('chat');
     if (elem.scrollTop > elem.scrollHeight - 550)
       elem.scrollTop = elem.scrollHeight;
+    elem = $('#chat-list');
+    var html = '';
+    for (var f in friends) {
+        var icon = '';
+        if (friends[f].type == 0)
+            icon = '<i class="fa fa-user"></i> ';
+        else
+            icon = '<i class="fa fa-user-secret"></i> ';
+        html += '<li>' + icon + friends[f].username + '</li>';
+    }
+    elem.html(html);
   }, 1500);
 
+  function addParticipants(data) {
+      for (var f in friends)
+        if (friends[f].username == data.username)
+            return ;
+      friends.push(data);
+  }
+  function removeParticipants(data) {
+      delete friends[data];
+  }
   function addParticipantsMessage(data) {
     var message = '';
     if (data.numUsers === 1) {
@@ -76,16 +98,16 @@ $(function() {
 
   // Log a message
   function log(message, options) {
-    var el = '<li class="left clearfix">';
-    el += '<span class="chat-img pull-left">';
-    el += '<div>System</div>';
-    el += '</span>';
-    el += '<div class="chat-body clearfix">';
-    el += '<p>' + message + '</p>';
-    el += '</div>';
+    // var el = '<li class="left clearfix">';
+    // el += '<span class="chat-img pull-left">';
+    // el += '<div>System</div>';
+    // el += '</span>';
+    // el += '<div class="chat-body clearfix">';
+    // el += '<p>' + message + '</p>';
+    // el += '</div>';
 
-    el += '</li>';
-    addMessageElement(el, options);
+    // el += '</li>';
+    // addMessageElement(el, options);
   }
 
   // Adds the visual chat message to the message list
@@ -253,6 +275,7 @@ $(function() {
   socket.on('login', function(data) {
     connected = true;
     // Display the welcome message
+    addParticipants({type: 0, username: username});
     var message = "Testing Realtime Question systems";
     log(message, {
       prepend: true
@@ -269,6 +292,7 @@ $(function() {
   socket.on('user joined', function(data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
+    addParticipants({type: 1, username: data.username});
   });
 
   // Whenever the server emits 'user left', log it in the chat body
@@ -276,6 +300,7 @@ $(function() {
     log(data.username + ' left');
     addParticipantsMessage(data);
     removeChatTyping(data);
+    removeParticipants({type: 1, username: data.username});
   });
 
   // Whenever the server emits 'typing', show the typing message

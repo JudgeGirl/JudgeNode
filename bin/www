@@ -90,18 +90,42 @@ function onListening() {
 }
 
 var usernames = {};
+var recentmessage = [];
 var numUsers = 0;
 var io = require('socket.io').listen(server);
+var chatDB = require('../lib/chat');
+
 io.on('connection', function(socket) {
   var addedUser = false;
+
+  for (var username in usernames) {
+    socket.emit('user joined', {
+      username: username,
+      numUsers: numUsers
+    });
+  }
+
+  chatDB.loadrecent(function(msgs) {
+    for (var i in msgs) {
+      socket.emit('new message', {
+        username: msgs[i].lgn,
+        message: msgs[i].msg,
+        date: (new Date(msgs[i])).toString()
+      });
+    }
+  });
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function(data) {
     // we tell the client to execute 'new message'
+    data = data.substr(0, 80);
     socket.broadcast.emit('new message', {
       username: socket.username,
-      message: data.substr(0, 80),
+      message: data,
       date: (new Date()).toString()
+    });
+    chatDB.insert_message(socket.username, data, (new Date()).getTime(), 0, function() {
+
     });
   });
 
@@ -110,17 +134,21 @@ io.on('connection', function(socket) {
     // we store the username in the socket session for this client
     socket.username = username;
     // add the client's username to the global list
-    usernames[username] = username;
-    ++numUsers;
-    addedUser = true;
-    socket.emit('login', {
-      numUsers: numUsers
-    });
-    // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers
-    });
+    if (username in usernames) {
+    } else {
+      usernames[username] = username;
+      ++numUsers;
+      addedUser = true;
+      socket.emit('login', {
+        numUsers: numUsers
+      });
+      // echo globally (all clients) that a person has connected
+      socket.broadcast.emit('user joined', {
+        username: socket.username,
+        numUsers: numUsers
+      });
+    }
+    
   });
 
   // when the client emits 'typing', we broadcast it to others
