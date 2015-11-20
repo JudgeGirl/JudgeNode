@@ -106,6 +106,7 @@ io.on('connection', function(socket) {
   }
 
   chatDB.loadrecent(function(msgs) {
+    msgs.reverse();
     for (var i in msgs) {
       socket.emit('new message', {
         username: msgs[i].lgn,
