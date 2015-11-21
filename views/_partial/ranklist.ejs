@@ -8,7 +8,10 @@ table .motto span {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	width: 324px;
+	width: 300px;
+}
+table .motto span:hover {
+    width: 100%;
 }
 @media screen and (max-width: 64em) {
 	.motto, .motto-header {
@@ -52,7 +55,7 @@ table .motto span {
 						<% } %>
 					<% } %>
 					<td><%- rl[i].slv %></td>
-					<td class='motto'><span><%= rl[i].motto.substr(0, 128) %></span></td>
+					<td class='motto'><span><%= rl[i].motto %></span></td>
 				</tr>
 			<% } %>
 		</tbody>
