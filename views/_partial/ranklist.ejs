@@ -39,9 +39,25 @@ table .motto span:hover {
 			</tr>
 		</thead>
 		<tbody>
-			<% var rl = rank_list, rank = 1; %>
-			<% for (var i = 0; rl && i < rl.length; i++) { %>
-				<% if( i !== 0 && rl[i].slv < rl[i-1].slv ) rank++; %>
+			<% var rl = rank_list; %>
+			<%
+				var totpage = Math.ceil(rank_size / 50);
+				var page = query_filter['page'];
+				var arg_query = '';
+				if (query_filter['uid'] != undefined)
+					arg_query += '&uid=' + query_filter['uid'];
+				if (query_filter['pid'] != undefined)
+					arg_query += '&pid=' + query_filter['pid'];
+				if (query_filter['cid'] != undefined)
+					arg_query += '&cid=' + query_filter['cid'];
+				if (page == undefined || page == null)
+					page = 1;
+				else
+					page = parseInt(page);
+			%>
+			<% for (var i = 0, rank = (page-1) * 50; rl && i < rl.length; i++) { 
+				rank++;
+			%>
 				<tr class='<%- i%2 == 0 ? "pure-table-odd" : "" %>'>
 					<td><%- rank %></td>
 					<td><a href='user/<%- rl[i].uid %>' class='nav_a'><%- rl[i].lgn %></a></td>
@@ -61,6 +77,8 @@ table .motto span:hover {
 		</tbody>
 	</table>
 	</div>
+	
+	<%- include('pagination', {page: page, url: '/ranklist?page=', query: arg_query, totpage: totpage})%>
 	</div>
 </div>
 </div>

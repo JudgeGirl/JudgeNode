@@ -118,9 +118,11 @@ router.get('/archive', function(req, res, next) {
 		res.render('layout', { layout: 'archive', user: req.session, archive_content: acontent });
 	});
 });
-router.get('/ranklist', function(req, res, next) {
-	dblink.rank.list(function(rlist) {
-		res.render('layout', { layout: 'ranklist', subtitle: 'Rank', user: req.session, rank_list : rlist });
+router.get('/ranklist?', function(req, res, next) {
+	dblink.rank.list(req.query, function(rlist) {
+		dblink.rank.listsize(function(rsize) {
+			res.render('layout', { layout: 'ranklist', subtitle: 'Rank', user: req.session, rank_list : rlist, query_filter: req.query, rank_size: rsize});
+		});
 	})
 });
 router.get('/progress', function(req, res, next) {
@@ -229,9 +231,11 @@ router.get('/statistic/grade/problem/:cid/:pid', function(req, res, next) {
 	});
 });
 
-router.get('/contests', function(req, res, next) {
-	dblink.contest.list(req.session.uid, function(clist) {
-		res.render('layout', { layout: 'contests', subtitle: 'Contest', user: req.session, contest_list: clist});
+router.get('/contests?', function(req, res, next) {
+	dblink.contest.list(req.query, req.session.uid, function(clist) {
+		dblink.contest.listsize(req.query, req.session.uid, function(csize) {
+			res.render('layout', { layout: 'contests', subtitle: 'Contest', user: req.session, contest_list: clist, query_filter: req.query, contest_size: csize});
+		});
 	});
 });
 router.get('/contest/:cid', function(req, res, next) {

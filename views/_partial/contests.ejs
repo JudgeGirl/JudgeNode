@@ -75,4 +75,20 @@
 				</tbody>
 				</table>
 			<% } %>
+	<%
+		var totpage = Math.ceil(contest_size / 25);
+		var page = query_filter['page'];
+		var arg_query = '';
+		if (query_filter['uid'] != undefined)
+			arg_query += '&uid=' + query_filter['uid'];
+		if (query_filter['pid'] != undefined)
+			arg_query += '&pid=' + query_filter['pid'];
+		if (query_filter['cid'] != undefined)
+			arg_query += '&cid=' + query_filter['cid'];
+		if (page == undefined || page == null)
+			page = 1;
+		else
+			page = parseInt(page);
+	%>
+	<%- include('pagination', {page: page, url: '/contests?page=', query: arg_query, totpage: totpage})%>
 </div>
