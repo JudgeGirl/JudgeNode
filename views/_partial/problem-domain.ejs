@@ -1,0 +1,145 @@
+<div class="header">
+	<h1><%= __('Problems') %></h1>
+	<h2>You have to belive in yourself. That's the secret of success. </h2>
+</div>
+
+<div class="content">
+
+<div class="pure-menu pure-menu-horizontal">
+	<ul class="pure-menu-list">
+		<li class="pure-menu-item"><a class="pure-menu-link" href="/problems/domains">Domain</a></li>
+	</ul>
+</div>
+
+</div>
+
+<div class="pure-g" id="level-list">
+	<div class="pure-u-1-24">
+	</div>
+	<div class="pure-u-5-24">
+		<div class="pure-menu">
+		    <span class="pure-menu-heading">Subdomains</span>
+		    <ul class="pure-menu-list">
+		    <% for (var level = 0 ; level_list && level < level_list.length ; level++ ) { %>
+		    	<li class="pure-menu-item" data="<%- level_list[level].level %>"><span class="pure-menu-link"><%- level_list[level].ttl %></span></li>
+		  	<% } %>
+		    </ul>
+		</div>
+	</div>
+	<div class="pure-u-17-24" id="level-content">
+
+	</div>
+	<div class="pure-u-1-24">
+	</div>
+</div>
+
+<script>
+(function($) {
+    "use strict";
+    $.fn.extend({
+        jhunt: function(options, arg) {
+            if (options && typeof(options) == 'object') {
+                options = $.extend({}, $.jhunt.defaults, options);
+            } else {
+                options = $.extend($.jhunt.defaults, options);
+            }
+
+            this.each(function() {
+                new $.jhunt(this, options, arg);
+            });
+            return;
+        }
+    });
+    $.jhunt = function(elem, options, arg) {
+    	init(elem, options);
+    	var obj = $(elem).find('li');
+    	obj.on("click", function() {
+    		console.log($(this).attr('data'));
+    		var lid = $(this).attr('data');
+    		$.ajax({
+			 	method: 'GET',
+			 	url: "http://" + options.ip + "/api/problems",
+				data: { did: <%- domain_id %>
+					<% if (user['uid'] != undefined) { %>
+						, uid: <%- user['uid'] %>
+					<% } %>
+						, lid: lid
+				}
+			}).done(function(probs_list) {
+		  		var obj = $(elem);
+		  		$.jhunt.probs_list = probs_list;
+		  		render(elem, options);
+		  	}); 
+    	});
+    	function init(elem, options) {
+			$.ajax({
+			 	method: 'GET',
+			 	url: "http://" + options.ip + "/api/problems",
+				data: { did: <%- domain_id %>
+					<% if (user['uid'] != undefined) { %>
+						, uid: <%- user['uid'] %>
+					<% } %>
+					<% if (level_list) { %>
+						, lid: <%- level_list[0].level %>
+					<% } %>
+				}
+			}).done(function(probs_list) {
+		  		var obj = $(elem);
+		  		$.jhunt.probs_list = probs_list;
+		  		render(elem, options);
+		  	}); 
+    	}
+    	function render(elem, options) {
+    		var probs_list = $.jhunt.probs_list;
+    		var obj = $(elem);
+		  	var tbody = obj.find('#level-content');
+		  	var text = '';
+		  	var iplist = <%- JSON.stringify(site.CONTEST_IP) %>;
+		  	var score = {}, subs = {};
+		  	console.log(probs_list);
+		  	for (var i in probs_list.score)
+		  		score[probs_list.score[i].pid] = probs_list.score[i].score;
+		  	for (var i in probs_list.subs)
+		  		subs[probs_list.subs[i].pid] = probs_list.subs[i].count;
+			for (var i in probs_list.plist) {
+				var item = probs_list.plist[i];
+				text += '<div class="problem-item">';
+
+				if (item.pid in score) {
+					if (score[item.pid] == 100)
+						text += '<div class="pure-u-1-12"><h2><i class="fa fa-check" style="color: green;"></i></h2></div>';
+					else
+						text += '<div class="pure-u-1-12"><h2><i class="fa fa-times" style="color: red;"></i></h2></div>';
+				} else {
+					text += '<div class="pure-u-1-12">' + '</div>';
+				}
+				text += '<div class="pure-u-11-12">';
+				text += '<h2><a href="/problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h2>';
+
+				if (item.pid in subs) {
+					text += '<p><span class="content-subhead">Subs: </span> ' + subs[item.pid] + '</p>';
+				} else {
+					text += '<p><span class="content-subhead">Subs: </span> ' + 0 + '</p>';
+				}
+				text += '</div>';
+				text += '</div>';
+	  		}
+	  		tbody.html(text);
+    	}
+    }
+    $.jhunt.defaults = {
+        ip: '<%- site.HOST.IP %>',
+        reloadtime: 2000,		// 	how time to load 
+        reloadsubmit: 5,
+        loadsubmit: 20,		//	how #submission to load
+        updatetime: 3000,	//	single waiting submission to update
+        restext:  ['', 'CE', 'OLE', 'MLE', 'RE', 'TLE', 'WA', 'AC', 'Uploading...', 'PE'],
+        modify_flag: false,
+        langtext: <%- JSON.stringify(site.JUDGE_lng) %>
+    };
+    $.jhunt.probs_list = [];
+})(jQuery);  
+$(document).ready(function() {
+	$('#level-list').jhunt();
+});
+</script>

@@ -157,6 +157,20 @@ router.get('/problems', function(req, res, next) {
 		});
 	});
 });
+router.get('/problems/domains', function(req, res, next) {
+	var did = req.params.did;
+	dblink.problem.domains(function(dlist){
+		res.render('layout', { layout: 'domains', subtitle: 'Domain Set', user: req.session, domain_list: dlist});
+	});
+});
+router.get('/problems/domain/:did', function(req, res, next) {
+	var did = req.params.did;
+	dblink.problem.level_domain(did, function(llist){
+		dblink.problem.score(req.session && req.session.uid , function(score){
+			res.render('layout', { layout: 'problem_domain', subtitle: 'Problem Set', user: req.session, level_list: llist, score: score, domain_id: did});
+		});
+	});
+});
 router.get('/problem/:cid/:pid', function(req, res, next) {
 	var cid = req.params.cid, 
 		pid = req.params.pid,
@@ -411,6 +425,14 @@ router.get('/api/result?', function(req, res, next) {
 	var sid = req.query.sid;
 	if (sid == undefined || sid == null)	sid = 0;
 	dblink.api.result(sid, function(result) {
+		res.json(result);
+	});
+});
+router.get('/api/problems?', function(req, res, next) {
+	var did = req.query.did, 
+	    lid = req.query.lid, 
+	    uid = req.query.uid;
+	dblink.api.problems(did, lid, uid, function(result) {
 		res.json(result);
 	});
 });
