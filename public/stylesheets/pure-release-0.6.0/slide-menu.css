@@ -663,9 +663,3 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     margin: 0.2em 0 0;
     font-weight: 100;
 }
-.content-subhead {
-    margin: 2em 0 1em 0;
-    font-weight: 300;
-    color: #888;
-    position: relative;
-}
