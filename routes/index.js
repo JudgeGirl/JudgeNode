@@ -10,7 +10,10 @@ var upload = multer({
     	if(req.files.file.length > 64 * 1024) {	// 64 KB
       		return false;
     	}
-  	}
+  	},
+  	limits: {
+       fileSize: 64 * 1024
+    }
 });
 
 /* GET home page, default /archive */
