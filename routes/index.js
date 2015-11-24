@@ -2,9 +2,16 @@ var express = require('express');
 var router = express.Router();
 var dblink = require('../lib/dblink');
 var multer = require('multer');
-var upload = multer({dest: 'files/'});
 var _config = require('../lib/const');
 var fs = require('fs');
+var upload = multer({
+	dest: 'files/',
+	onFileUploadStart: function(file, req, res) {
+    	if(req.files.file.length > 64 * 1024) {	// 64 KB
+      		return false;
+    	}
+  	}
+});
 
 /* GET home page, default /archive */
 router.get('/', function(req, res, next) {
