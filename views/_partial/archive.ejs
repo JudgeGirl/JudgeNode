@@ -3,6 +3,16 @@
     <h2>Take your passion and make it come true.</h2>
 </div>
 <div class="content">
-<%- archive_content %>
-<%- include('widget/recent_comment') %>
+
+<div class="pure-g">
+	<div class="pure-u-14-24">
+		<%- archive_content %>
+	</div>
+	<div class="pure-u-1-24">
+	</div>
+	<div class="pure-u-6-24">
+		<%- include('widget/recent_problem', {recent_problems: recent_problems}) %>
+		<%- include('widget/recent_comment') %>
+	</div>
+</div>
 </div>

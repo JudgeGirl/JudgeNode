@@ -19,7 +19,9 @@ var upload = multer({
 /* GET home page, default /archive */
 router.get('/', function(req, res, next) {
 	dblink.archive.list(function(acontent) {
-		res.render('layout', { layout: 'archive', user: req.session, archive_content: acontent });
+		dblink.problem.recent(function(rlist) {
+			res.render('layout', { layout: 'archive', user: req.session, archive_content: acontent, recent_problems: rlist});
+		});
 	});
 });
 
@@ -124,9 +126,7 @@ router.post('/register', function(req, res, next) {
 */
 /* Navigation Bar */
 router.get('/archive', function(req, res, next) {
-	dblink.archive.list(function(acontent) {
-		res.render('layout', { layout: 'archive', user: req.session, archive_content: acontent });
-	});
+	res.redirect('/');
 });
 router.get('/ranklist?', function(req, res, next) {
 	dblink.rank.list(req.query, function(rlist) {
