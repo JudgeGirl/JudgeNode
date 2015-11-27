@@ -38,7 +38,6 @@ app.use(function (req, res, next) {
     next();
 });
 app.use (function (req, res, next) {
-  console.log(req.headers.host);
   if (req.secure) {
     next();
   } else {
