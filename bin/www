@@ -93,18 +93,19 @@ function onListening() {
   https 
 */
 
-var https = require('https')
-    ,fs = require("fs");
-
+var https = require('https'),
+    fs = require("fs");
 var options = {
-
+    port: 443,
+    path: '/',
+    method: 'GET',
     key: fs.readFileSync('./privatekey.pem'),
     cert: fs.readFileSync('./certificate.pem')
 };
-
-https.createServer(options, app).listen(8000, function () {
-    console.log('Https server listening on port ' + 8000);
+https.createServer(options, app).listen(443, function () {
+    console.log('Https server listening on port ' + 443);
 });
+
 
 var usernames = {};
 var recentmessage = [];
