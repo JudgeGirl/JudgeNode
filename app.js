@@ -37,6 +37,14 @@ app.use(function (req, res, next) {
     };
     next();
 });
+app.use (function (req, res, next) {
+  console.log(req.headers.host);
+  if (req.secure) {
+    next();
+  } else {
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
 app.use(function (req, res, next) {
     res.locals.site = _config;
     next();
