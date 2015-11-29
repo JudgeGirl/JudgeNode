@@ -663,3 +663,6 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     margin: 0.2em 0 0;
     font-weight: 100;
 }
+.pure-table-submitowner {
+    background-color: rgba(0, 0, 0, 0.2);
+}
