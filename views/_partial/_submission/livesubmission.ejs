@@ -74,7 +74,7 @@
     	function init(elem, options) {
 			$.ajax({
 			 	method: 'GET',
-			 	url: "http://" + options.ip + "/api/submission",
+			 	url: "//" + options.ip + "/api/submission",
 				data: { limit: options.loadsubmit 
 					<% if (query_filter['uid'] != undefined) { %>
 						, uid: <%- query_filter['uid'] %>
@@ -174,7 +174,7 @@
 					if (result == 0 || result == 8) {
 						$.ajax({
 						 	method: 'GET',
-						 	url: "https://" + options.ip + "/api/result",
+						 	url: "//" + options.ip + "/api/result",
 							data: { sid: sid },
 							timeout: options.updatetime/2,
 						}).done(function(submit_list) {
@@ -201,7 +201,7 @@
     		<% if (page == undefined || page == null || page == 1) { %>
     		$.ajax({
 			 	method: 'GET',
-			 	url: "https://" + options.ip + "/api/submission",
+			 	url: "//" + options.ip + "/api/submission",
 				data: { limit: options.reloadsubmit 
 					<% if (query_filter['uid'] != undefined) { %>
 						, uid: <%- query_filter['uid'] %>

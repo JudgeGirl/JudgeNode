@@ -58,7 +58,7 @@
     		var lid = $(this).attr('data');
     		$.ajax({
 			 	method: 'GET',
-			 	url: "http://" + options.ip + "/api/problems",
+			 	url: "//" + options.ip + "/api/problems",
 				data: { did: <%- domain_id %>
 					<% if (user['uid'] != undefined) { %>
 						, uid: <%- user['uid'] %>
@@ -74,7 +74,7 @@
     	function init(elem, options) {
 			$.ajax({
 			 	method: 'GET',
-			 	url: "http://" + options.ip + "/api/problems",
+			 	url: "//" + options.ip + "/api/problems",
 				data: { did: <%- domain_id %>
 					<% if (user['uid'] != undefined) { %>
 						, uid: <%- user['uid'] %>
@@ -94,7 +94,7 @@
     		var obj = $(elem);
 		  	var tbody = obj.find('#level-content');
 		  	var text = '';
-		  	var iplist = <%- JSON.stringify(site.CONTEST_IP) %>;
+		  	var iplist = <%- JSON.stringify(site.CONTEST.VALID_IP) %>;
 		  	var score = {}, subs = {};
 		  	console.log(probs_list);
 		  	for (var i in probs_list.score)
@@ -134,8 +134,7 @@
         loadsubmit: 20,		//	how #submission to load
         updatetime: 3000,	//	single waiting submission to update
         restext:  ['', 'CE', 'OLE', 'MLE', 'RE', 'TLE', 'WA', 'AC', 'Uploading...', 'PE'],
-        modify_flag: false,
-        langtext: <%- JSON.stringify(site.JUDGE_lng) %>
+        modify_flag: false
     };
     $.jhunt.probs_list = [];
 })(jQuery);  
