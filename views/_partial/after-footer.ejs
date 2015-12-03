@@ -75,14 +75,6 @@
         }
         $.cookie("mystyle",style,{expires:30}); 
     }); 
-    var cookie_style = $.cookie("mystyle"); 
-    if (cookie_style == null || cookie_style + '' == 'default') { 
-        $("link[title='dark']").attr("disabled","disabled"); 
-        $("link[title='default']").removeAttr('disabled');
-    } else { 
-        $("link[title='default']").attr("disabled","disabled"); 
-        $("link[title='dark']").removeAttr('disabled');
-    } 
 
     /* table of contents */
     var nav_list    = $("#nav"); // navigation list id

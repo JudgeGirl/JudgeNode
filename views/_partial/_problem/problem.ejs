@@ -25,9 +25,9 @@
 <%- problem_content %>
 
 <%
-var judge_res = site.JUDGE_res,
-    judge_lng = site.JUDGE_lng,
-    judge_compiler_arg = site.COMIPLER_ARGU;
+var judge_res = site.JUDGE.result_message,
+    judge_lng = site.JUDGE.lang,
+    judge_compiler_arg = site.JUDGE.compiler_arg;
 var unitConvert = site.unitConvert;
 %>
 <div class="pure-g">
@@ -94,7 +94,7 @@ var unitConvert = site.unitConvert;
 	</div>
 </div>
 
-<%- include('widget/disqus')  %>
+<%- include('../widget/disqus')  %>
 
 
 </div>

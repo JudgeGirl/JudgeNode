@@ -1,0 +1,85 @@
+<div class="header">
+	<h1 class='article-title'><%= __('Rank') %></h1>
+	<h2>I thought that solving problem would last forever. I was wrong.</h2>
+</div>
+<style>
+table .motto span {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 300px;
+}
+table .motto span:hover {
+    width: 100%;
+}
+@media screen and (max-width: 64em) {
+	.motto, .motto-header {
+		display: none;
+	}
+}
+</style>
+<div class="content">
+	<div class="pure-menu pure-menu-horizontal">
+		<ul class="pure-menu-list">
+			<li class="pure-menu-item"><a class="pure-menu-link" href="/progress">Progress Report</a></li>
+			<li class="pure-menu-item"><a class="pure-menu-link" href="#">Site Statistics</a></li>
+		</ul>
+	</div>
+	<div class="pure-g">
+		<div class="pure-u-1-1">
+		<table class="pure-table pure-table-bordered" style="width: 100%">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th><%= __('Account') %></th>
+					<th><%= __('Class') %></th>
+					<th><%= __('#AC') %></th>
+					<th class='motto-header'><%= __('Motto') %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% var rl = rank_list; %>
+				<%
+					var totpage = Math.ceil(rank_size / 50);
+					var page = query_filter['page'];
+					var arg_query = '';
+					if (query_filter['uid'] != undefined)
+						arg_query += '&uid=' + query_filter['uid'];
+					if (query_filter['pid'] != undefined)
+						arg_query += '&pid=' + query_filter['pid'];
+					if (query_filter['cid'] != undefined)
+						arg_query += '&cid=' + query_filter['cid'];
+					if (page == undefined || page == null)
+						page = 1;
+					else
+						page = parseInt(page);
+				%>
+				<% for (var i = 0, rank = (page-1) * 50; rl && i < rl.length; i++) { 
+					rank++;
+				%>
+					<tr class='<%- i%2 == 0 ? "pure-table-odd" : "" %>'>
+						<td><%- rank %></td>
+						<td><a href='user/<%- rl[i].uid %>' class='nav_a'><%- rl[i].lgn %></a></td>
+						<% if (rl[i].class === null || rl[i].class == 0) { %>
+							<td><%= __('Administrator') %></td>
+						<% } else { %>
+							<% if (rl[i].class <= 2) { %>
+								<td><%= __('Class {{number}}', {number: __(rl[i].class == 1 ? "Tue." : "Mon.") }) %></td>
+							<% } else { %>
+								<td><%= __('Visitor Class {{number}}', {number: __(rl[i].class-2 == 1 ? "Tue." : "Mon.") }) %></td>
+							<% } %>
+						<% } %>
+						<td><%- rl[i].slv %></td>
+						<td class='motto'><span><%= rl[i].motto %></span></td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+	<div class="pure-u-1-1">
+		<%- include('../pagination', {page: page, url: '/ranklist?page=', query: arg_query, totpage: totpage})%>
+	</div>
+	</div>
+</div>
+</div>

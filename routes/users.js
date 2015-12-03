@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var dblink = require('../lib/dblink');
-var config = require('../lib/const');
+var dblink = require('../lib/components/dblink');
+var config = require('../lib/config').config;
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');

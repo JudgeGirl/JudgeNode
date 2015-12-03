@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var dblink = require('../lib/dblink');
+var dblink = require('../lib/components/dblink');
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');
@@ -102,39 +102,6 @@ router.get('/edit/gradettl/:eid', function(req, res, next) {
 		dblink.admin.load_gradettl(eid, function(econfig) {
 			res.render('admin/layout', { layout: 'edit_gradettl', subtitle: 'Edit Grade Title', user: req.session, econfig: econfig});
 		});
-	});
-});
-/* new page */
-router.get('/new/problem', function(req, res, next) {
-	var uid = req.session.uid;
-	dblink.helper.isAdmin(uid, function(isadmin) {
-		if (!isadmin)
-			return res.redirect('../login');
-		res.render('admin/layout', { layout: 'new_problem', subtitle: 'Add New Problem', user: req.session});
-	});
-});
-router.get('/new/contest', function(req, res, next) {
-	var uid = req.session.uid;
-	dblink.helper.isAdmin(uid, function(isadmin) {
-		if (!isadmin)
-			return res.redirect('../login');
-		res.render('admin/layout', { layout: 'new_contest', subtitle: 'Add New Contest', user: req.session});
-	});
-});
-router.get('/new/account', function(req, res, next) {
-	var uid = req.session.uid;
-	dblink.helper.isAdmin(uid, function(isadmin) {
-		if (!isadmin)
-			return res.redirect('../login');
-		res.render('admin/layout', { layout: 'new_account', subtitle: 'Add New Account', user: req.session});
-	});
-});
-router.get('/new/grade', function(req, res, next) {
-	var uid = req.session.uid;
-	dblink.helper.isAdmin(uid, function(isadmin) {
-		if (!isadmin)
-			return res.redirect('../login');
-		res.render('admin/layout', { layout: 'new_grade', subtitle: 'Add Grade', user: req.session});
 	});
 });
 

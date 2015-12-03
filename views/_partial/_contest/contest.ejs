@@ -34,6 +34,8 @@
 <% if (sysmsg.length != 0) { %>
 	<h2><div class="sysmsg"><%- sysmsg %></div></h2>
 <% } else { %>
+<div class="pure-g">
+	<div class="pure-u-1-1">
 	<table class="pure-table pure-table-bordered" style="width: 100%;">
 		<thead>
 			<tr>
@@ -45,28 +47,30 @@
 			</tr>
 		</thead>
 		<tbody>
-		</tbody>
-		<% for (var row = 0; row < problem_list.length; row++ ) { %>
-			<% 
-				var score = problem_list[row].score; 
-				var submits = problem_list[row].submits == undefined ? 0 : problem_list[row].submits;
-			%>
-			<tr>
-				<td>
-					<% if (score == 100) { %>
-						<i class="fa fa-check" style="color: green;"></i>
-					<% } else if (score >= 0) { %>
-						<i class="fa fa-times" style="color: red;"></i>
-					<% } %>
-				</td>
-				<td><%- problem_list[row].pid %></td>
-				<td><a href="<%- "/problem/" + contest_config.cid + "/" + problem_list[row].pid %>" ><%- problem_list[row].ttl %></a></td>
-				<td></td>
-				<td><%- site.CONTEST_SUBMIT_LIMIT - submits %></td>
-			</tr>
-			
-		<% } %>
+
+<% for(var row = 0; row < problem_list.length; row++) { %>
+	<% 
+		var score = problem_list[row].score; 
+		var submits = problem_list[row].submits == undefined ? 0 : problem_list[row].submits;
+	%>
+	<tr>
+		<td>
+			<% if (score == 100) { %>
+				<i class="fa fa-check" style="color: green;"></i>
+			<% } else if (score >= 0) { %>
+				<i class="fa fa-times" style="color: red;"></i>
+			<% } %>
+		</td>
+		<td><%- problem_list[row].pid %></td>
+		<td><a href="<%- "/problem/" + contest_config.cid + "/" + problem_list[row].pid %>" ><%- problem_list[row].ttl %></a></td>
+		<td></td>
+		<td><%- site.CONTEST.SUBMIT_LIMIT - submits %></td>
+	</tr>
+<% } %>
+
 		</tbody>
 	</table>
+	</div>
+</div>
 <% } %>
 </div>

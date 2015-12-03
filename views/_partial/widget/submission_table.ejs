@@ -47,8 +47,13 @@
 				<td><a href='/user/<%- sl[i].uid %>'><%- sl[i].lgn %></td>
 				<% 
 					var text = '';
+<<<<<<< HEAD
+					var judge_res = site.JUDGE.result_message,
+					    judge_lng = site.JUDGE.lang;
+=======
 					var judge_res = site.JUDGE_res,
 					    judge_lng = site.JUDGE_lng;
+>>>>>>> da5d543f41476b1ebd4c40dbf977d378aa6bd76f
 					var unitConvert = site.unitConvert;
 					text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
 					text += "<a href='/detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";

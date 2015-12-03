@@ -1,0 +1,272 @@
+<style>
+@media screen and (max-width: 64em) {
+	.sid, .sid-header {
+		display: none;
+	}
+	.pid, .pid-header {
+		display: none;
+	}
+}
+</style>
+<div class="header">
+	<h1 class='article-title'>Live Submission</h1>
+    <h2>Auto update</h2>
+</div>
+<div class="content">
+<% if (site.CONTEST_MODE == true) { %>
+	<div class="sysmsg">考試正在進行</div>
+<% } %>
+
+<p></p>
+
+<script src="/javascripts/jquery.timeago.js"></script>
+	<table id='live-submission' class="pure-table pure-table-bordered" style="width: 100%">
+		<thead>
+			<tr>
+				<th class='sid-header' style="width: 5%">#</th>
+				<th class='pid-header' style=""></th>
+				<th style="">Problem Title</th>
+				<th style="">Username</th>
+				<th style="">Verdict</th>
+				<th style=""></th>
+				<th class='date-header' style="">Submit Time</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+<%
+	var page = query_filter['page'],
+		totpage = 9999;
+	var arg_query = '';
+	if (query_filter['uid'] != undefined)
+		arg_query += '&uid=' + query_filter['uid'];
+	if (query_filter['pid'] != undefined)
+		arg_query += '&pid=' + query_filter['pid'];
+	if (query_filter['cid'] != undefined)
+		arg_query += '&cid=' + query_filter['cid'];
+	if (page == undefined || page == null)
+		page = 1;
+	else
+		page = parseInt(page);
+%>
+<%- include('../pagination', {page: page, url: '/live?page=', query: arg_query, totpage: totpage})%>
+<script>
+(function($) {
+    "use strict";
+    $.fn.extend({
+        jhunt: function(options, arg) {
+            if (options && typeof(options) == 'object') {
+                options = $.extend({}, $.jhunt.defaults, options);
+            } else {
+                options = $.extend($.jhunt.defaults, options);
+            }
+
+            this.each(function() {
+                new $.jhunt(this, options, arg);
+            });
+            return;
+        }
+    });
+    $.jhunt = function(elem, options, arg) {
+    	init(elem, options);
+    	var submit_uid = <%= user.uid ? user.uid : "null" %>;
+    	function init(elem, options) {
+			$.ajax({
+			 	method: 'GET',
+			 	url: "http://" + options.ip + "/api/submission",
+				data: { limit: options.loadsubmit 
+					<% if (query_filter['uid'] != undefined) { %>
+						, uid: <%- query_filter['uid'] %>
+					<% } %>
+					<% if (query_filter['pid'] != undefined) { %>
+						, pid: <%- query_filter['pid'] %>
+					<% } %>
+					<% if (query_filter['cid'] != undefined) { %>
+						, cid: <%- query_filter['cid'] %>
+					<% } %>
+					<% if (query_filter['page'] != undefined) { %>
+						, page: <%- query_filter['page'] %>
+					<% } %>
+				}
+			}).done(function(submit_list) {
+		  		var obj = $(elem);
+		  		$.jhunt.submit_list = submit_list;
+		  		options.modify_flag = true;
+		  		render(elem, options);
+		  		$("abbr.timeago").timeago();
+		  		setInterval(function() {
+		  			update_result(elem, options);
+		  		}, options.updatetime);
+		  		setInterval(function() {
+		  			update_submit(elem, options);
+		  		}, options.reloadtime);
+		  		setInterval(function() {
+		  			render(elem, options);
+		  			$("abbr.timeago").timeago();
+		  		}, Math.min(options.reloadtime, options. updatetime));
+		  	}); 
+    	}
+    	function render(elem, options) {
+    		if  (options.modify_flag == false)
+    			return true;
+    		var unique = function uniqBy(a, key) {
+			    var seen = {};
+			    return a.filter(function(item) {
+			        var k = item[key];
+			        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+			    });
+			};
+			$.jhunt.submit_list = unique($.jhunt.submit_list, 'sid');
+    		options.modify_flag = false;
+    		var submit_list = $.jhunt.submit_list;
+    		var obj = $(elem);
+		  	var tbody = obj.find('tbody');
+		  	var text = '';
+		  	var iplist = <%- JSON.stringify(site.CONTEST.VALID_IP) %>;
+			for (var i in submit_list) {
+				if (submit_list[i].uid == submit_uid)
+	  				text += '<tr class="pure-table-submitowner">'; 
+				else
+	  				text += "<tr>"; 
+				text += "<td class='sid'>" + submit_list[i].sid + "</td>";
+				text += "<td class='pid'>" + submit_list[i].pid + "</td>";
+				text += "<td class='problem-title'>" + 
+							"<a href='problem/" + submit_list[i].cid + "/" + submit_list[i].pid + "'>" + submit_list[i].ttl + "</a></td>";
+				text += "<td>";
+				var filter_ip = iplist.filter(function(valid_ip) {
+					return submit_list[i].ip == valid_ip;
+				});
+				if (filter_ip.length != 0) {
+					text += '<i class="fa fa-check" style="color: green;"></i> ';
+				} else {
+					text += '<i class="fa fa-exclamation-triangle" style="color: orange;"></i> ';
+				}
+				text += "<a href='user/" + submit_list[i].uid + "'>" + submit_list[i].lgn + "</td>";
+				text += "<td class='status' data-res=" + submit_list[i].res + " data-sid=" + submit_list[i].sid + ">";
+				text += "<a href='detail/" + submit_list[i].sid + "'><span class='result" + submit_list[i].res + "'>" + options.restext[(submit_list[i].res+options.restext.length)%options.restext.length] + "</span>";
+				if (submit_list[i].res != 0 && submit_list[i].res != 1 && submit_list[i].res != 8) {
+					text += " (";
+					if (submit_list[i].res != 7) {
+						text += "score: " + submit_list[i].scr;
+					} else {
+						text += unitConvert('cpu', submit_list[i].cpu);
+						text += ","
+						text += unitConvert('mem', submit_list[i].mem);
+					}
+					text += ")";
+				}
+				text += "</a>";
+				if (submit_list[i].res == 0 || submit_list[i].res == 8)
+					text += ' <i class="fa fa-spinner fa-pulse"></i>';
+				text += '</td>';
+				text += "<td><a href='source/highlight/" + submit_list[i].sid + "'>" + options.langtext[submit_list[i].lng] + '</a></td>';
+				text += '<td><abbr class="timeago" title="' + new Date(submit_list[i].ts).toISOString() + '"></abbr></td>';
+	  		}
+	  		tbody.html(text);
+    	}
+    	function update_result(elem, options) {
+			for (var i in $.jhunt.submit_list) {
+				var ss = $.jhunt.submit_list[i];
+				var update = function(selem) {
+					var result = parseInt(selem.res);
+					var sid = selem.sid;
+					if (result == 0 || result == 8) {
+						$.ajax({
+						 	method: 'GET',
+						 	url: "https://" + options.ip + "/api/result",
+							data: { sid: sid },
+							timeout: options.updatetime/2,
+						}).done(function(submit_list) {
+					  		if (parseInt(submit_list[0].res) != 0 && parseInt(submit_list[0].res) != 8) {
+					  			var tmp = $.jhunt.submit_list.filter(function(obj) {
+					  				return obj.sid == submit_list[0].sid;
+					  			});
+					  			for (var i in tmp) {
+					  				tmp[i].res = submit_list[i].res;
+					  				tmp[i].scr = submit_list[i].scr;
+					  				tmp[i].cpu = submit_list[i].cpu;
+					  				tmp[i].mem = submit_list[i].mem;
+					  				options.modify_flag = true;
+					  			}
+					  		}
+					  	}); 
+					}
+				};
+				update(ss);
+			}				
+    	}
+    	function update_submit(elem, options) {
+    		<% var page = query_filter['page'] %>
+    		<% if (page == undefined || page == null || page == 1) { %>
+    		$.ajax({
+			 	method: 'GET',
+			 	url: "https://" + options.ip + "/api/submission",
+				data: { limit: options.reloadsubmit 
+					<% if (query_filter['uid'] != undefined) { %>
+						, uid: <%- query_filter['uid'] %>
+					<% } %>
+					<% if (query_filter['pid'] != undefined) { %>
+						, pid: <%- query_filter['pid'] %>
+					<% } %>
+					<% if (query_filter['cid'] != undefined) { %>
+						, cid: <%- query_filter['cid'] %>
+					<% } %>
+					<% if (query_filter['page'] != undefined) { %>
+						, page: <%- query_filter['page'] %>
+					<% } %>
+				},
+				timeout: options.reloadtime/2
+			}).done(function(submit_list) {
+				var obj = $(elem);
+		  		var tbody = obj.find('tbody');
+		  		var now = parseInt(tbody.find('.sid').first().text());
+				var text = '';
+		  		for (var i in submit_list) {
+		  			if (parseInt(submit_list[i].sid) <= now)
+		  				break;
+		  			$.jhunt.submit_list.unshift(submit_list[i]);
+		  			if ($.jhunt.submit_list.length > 20)
+		  				$.jhunt.submit_list.pop();
+		  			options.modify_flag = true;
+		  		}
+			});			
+			<% } %>		
+    	}
+    	var unitConvert = function(kind, bytes) {
+			if (kind == 'mem') {
+				var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+	   			if (bytes == 0) return '0 B';
+	   			var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	   			return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+			} else if (kind == 'cpu') {
+				var sizes = ['ms', 's', 'ks', 'ms', 'ts'];
+	   			if (bytes == 0) return '0 ms';
+	   			var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	   			return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+			} else if (kind == 'date') {
+				var utc = bytes.getTime() + bytes.getTimezoneOffset() * 60000;
+				var utc8 = bytes;
+				return utc8.toLocaleString().replace(/T/, ' ').replace(/\..+/, '');
+			}
+			return 'unit undefined'
+		}
+    }
+    $.jhunt.defaults = {
+        ip: '<%- site.HOST.IP %>',
+        reloadtime: 2000,		// 	how time to load 
+        reloadsubmit: 5,
+        loadsubmit: 20,		//	how #submission to load
+        updatetime: 3000,	//	single waiting submission to update
+        restext:  ['', 'CE', 'OLE', 'MLE', 'RE', 'TLE', 'WA', 'AC', 'Uploading...', 'PE'],
+        modify_flag: false,
+        langtext: <%- JSON.stringify(site.JUDGE.lang) %>
+    };
+    $.jhunt.submit_list = [];
+})(jQuery);  
+$(document).ready(function() {
+	$('#live-submission').jhunt();
+});
+</script>
+
+</div>

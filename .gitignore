@@ -10,3 +10,7 @@ _config.yml
 
 # server upload temporary file dictionary
 /files
+
+# https SSL
+*.pem
+*.csr

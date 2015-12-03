@@ -5,14 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-
-
+var i18n = require('i18n');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admins = require('./routes/admins');
-var _config = require('./lib/const');
-var i18n = require('i18n');
+var _config = require('./lib/config').config;
+var utils = require('./lib/components/utils');
+
 var app = express();
 
 // chat room
@@ -37,15 +37,16 @@ app.use(function (req, res, next) {
     };
     next();
 });
-app.use (function (req, res, next) {
-  if (req.secure) {
-    next();
-  } else {
-    res.redirect('https://' + req.headers.host + req.url);
-  }
-});
+// app.use (function (req, res, next) {
+//   if (req.secure) {
+//     next();
+//   } else {
+//     res.redirect('https://' + req.headers.host + req.url);
+//   }
+// });
 app.use(function (req, res, next) {
     res.locals.site = _config;
+    res.locals.site.unitConvert = utils.unitConvert
     next();
 });
 
@@ -66,7 +67,7 @@ app.use(session({
     httpOnly: false,
     maxAge : 24*60*60*1000
   },
-  secret: '1234567890judgenode'
+  secret: 'alskdjasjoimk'
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var dblink = require('../lib/dblink');
+var dblink = require('../lib/components/dblink');
 var multer = require('multer');
-var _config = require('../lib/const');
+var _config = require('../lib/config').config;
+var markdown = require('../lib/components/plugin/markdown');
 var fs = require('fs');
 var upload = multer({
 	dest: 'files/',
@@ -46,7 +47,7 @@ router.post('/login', function(req, res, next) {
 		lgn : req.body.lgn,
 		pwd : req.body.pwd
 	};
-	var iplist = _config.CONTEST_IP;
+	var iplist = _config.CONTEST.VALID_IP;
 	var ip = req.ip;
 	dblink.user.login(user, req.session, function(status) {
 		if (status == 1) {
@@ -387,7 +388,6 @@ router.get('/source/:sid', function(req, res, next) {
 		res.send(text);
 	});
 });
-var markdown = require('../lib/plugin/markdown');
 router.get('/source/highlight/:sid', function(req, res, next) {
 	var sid = req.params.sid;
 	dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {

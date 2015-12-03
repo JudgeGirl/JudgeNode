@@ -52,8 +52,8 @@
 		</thead>
 		<tbody>
 			<% 
-				var judge_res = site.JUDGE_res,
-					judge_lng = site.JUDGE_lng;
+				var judge_res = site.JUDGE.result_message,
+					judge_lng = site.JUDGE.lang;
 				var unitConvert = site.unitConvert;
 			%>
 			<% for (var row in best_config) { %>
