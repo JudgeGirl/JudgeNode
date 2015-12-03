@@ -55,7 +55,7 @@ router.post('/login', function(req, res, next) {
 			var filter_ip = iplist.filter(function(valid_ip) {
 				return ip == valid_ip;
 			});
-			if (config.CONTEST_MODE == false || filter_ip.length != 0 || req.session['class'] == null) {
+			if (config.CONTEST.MODE == false || filter_ip.length != 0 || req.session['class'] == null) {
 				dblink.user.update_login(uid, ip, function() {
 					res.redirect('/');
 				});

@@ -32,7 +32,7 @@
     <h2>Update page each 60 seconds</h2>
 </div>
 <div class="content">
-	<% if (site.CONTEST_MODE == true) { %>
+	<% if (site.CONTEST.MODE == true) { %>
 	<div class="sysmsg">考試正在進行</div>
 	<% } %>
 	<%- include('../_widget/submission_table', {submission_list: submission_list, ac_map: ac_map}) %>
