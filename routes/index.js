@@ -349,7 +349,7 @@ router.post('/submit',
 
 			dblink.judge.insert_submission(subinfo, function(sid) {
 				for (var i = 0 ; i < source_list.length ; i++) {
-					fs.writeFileSync(config.JUDGE_PATH + "submission/" + sid + "-" + i,  fs.readFileSync(req.files['code' + i][0].path) );
+					fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i,  fs.readFileSync(req.files['code' + i][0].path) );
 					fs.unlinkSync(req.files['code' + i][0].path);
 				}
 				
