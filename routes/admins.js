@@ -105,6 +105,40 @@ router.get('/edit/gradettl/:eid', function(req, res, next) {
 	});
 });
 
+/* new page */
+router.get('/new/problem', function(req, res, next) {
+	var uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		res.render('admin/layout', { layout: 'new_problem', subtitle: 'Add New Problem', user: req.session});
+	});
+});
+router.get('/new/contest', function(req, res, next) {
+	var uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		res.render('admin/layout', { layout: 'new_contest', subtitle: 'Add New Contest', user: req.session});
+	});
+});
+router.get('/new/account', function(req, res, next) {
+	var uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		res.render('admin/layout', { layout: 'new_account', subtitle: 'Add New Account', user: req.session});
+	});
+});
+router.get('/new/grade', function(req, res, next) {
+	var uid = req.session.uid;
+	dblink.helper.isAdmin(uid, function(isadmin) {
+		if (!isadmin)
+			return res.redirect('../login');
+		res.render('admin/layout', { layout: 'new_grade', subtitle: 'Add Grade', user: req.session});
+	});
+});
+
 /* create */
 router.post('/new/problem', function(req, res, next) {
 	var uid = req.session.uid;
