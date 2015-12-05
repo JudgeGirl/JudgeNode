@@ -153,7 +153,8 @@ router.get('/submissions?', function(req, res, next) {
 	});
 });
 router.get('/live', function(req, res, next) {
-	res.render('layout', { layout: 'live', subtitle: 'Live', user: req.session, query_filter: req.query});
+	res.render('layout', { layout: 'live', subtitle: 'Live', user: req.session, query_filter: req.query,
+						request_hostname: req.hostname});
 });
 router.get('/problems', function(req, res, next) {
 	dblink.problem.level(function(llist){
