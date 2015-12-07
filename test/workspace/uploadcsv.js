@@ -3,18 +3,11 @@
 */
 var mysql = require('mysql'),
     fs = require('fs'),
-    config = require('./const'),
     crypto = require('crypto'),
     randomstring = require("randomstring");
 var parse = require('csv-parse');
 
-var connection = mysql.createPool({  
-    host     : config.DATABASE.host, // config.DATABASE.host,  
-    user     : config.DATABASE.user,  
-    password : config.DATABASE.password,
-    database : config.DATABASE.name,
-    port     : config.DATABASE.port
-});
+var connection = require('../../lib/mysql').connection;
 
 var upload = function(gid, uid, score, callback) {
 	var cmd = 'DELETE FROM exam_scores WHERE eid = ? AND uid = ?';

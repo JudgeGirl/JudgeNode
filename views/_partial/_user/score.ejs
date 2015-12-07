@@ -102,7 +102,7 @@
 		%>
 		<% 
 			for (var i in record) { 
-				var finalgrade = Math.ceil(record[i].sum / 17.0);
+				var finalgrade = Math.ceil(record[i].sum / 100*6);
 		%>
 			<tr>
 				<td><strong><%- i %></strong></td>

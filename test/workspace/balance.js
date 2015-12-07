@@ -5,19 +5,11 @@
 */
 var mysql = require('mysql'),
     fs = require('fs'),
-    config = require('./const'),
     crypto = require('crypto'),
     randomstring = require("randomstring");
 var parse = require('csv-parse');
 
-var connection = mysql.createPool({  
-    host     : config.DATABASE.host, // config.DATABASE.host,  
-    user     : config.DATABASE.user,  
-    password : config.DATABASE.password,
-    database : config.DATABASE.name,
-    port     : config.DATABASE.port
-});
-
+var connection = require('../../lib/mysql').connection;
 
 var args = process.argv.slice(2);
 var class1file = args[0], class2file = args[1], outfilename = args[2];
