@@ -10,7 +10,11 @@
             <% } else if (layout == 'edit') { %>
               <%- include('_partial/_user/edit') %>
             <% } else if (layout == 'register') { %>
-              <%- include('_partial/_user/register') %>
+              <%- include('_partial/_user/register') %> 
+            <% } else if (layout == 'user') { %>
+              <%- include('_partial/_user/user') %>
+            <% } else if (layout == 'score') { %>
+              <%- include('_partial/_user/score') %>
             <% } else if (layout == 'ranklist') { %>
               <%- include('_partial/_rank/ranklist') %>
             <% } else if (layout == 'progress') { %>
@@ -21,39 +25,36 @@
               <%- include('_partial/_problem/domain') %>
             <% } else if (layout == 'problem_domain') { %>
               <%- include('_partial/_problem/problem-domain') %>
-            <% } else if (layout == 'submissions') { %>
-              <%- include('_partial/_submission/submissions') %>
             <% } else if (layout == 'problem') { %>
               <%- include('_partial/_problem/problem') %>
-            <% } else if (layout == 'user') { %>
-              <%- include('_partial/_user/user') %>
+            <% } else if (layout == 'solution') { %>
+              <%- include('_partial/_problem/solution') %>
+            <% } else if (layout == 'grade_problem') { %>
+              <%- include('_partial/_problem/problem-grade') %>
+            <% } else if (layout == 'problem_statistic') { %>
+              <%- include('_partial/_problem/problem-statistics') %>
             <% } else if (layout == 'contests') { %>
               <%- include('_partial/_contest/contests') %>
             <% } else if (layout == 'contest') { %>
               <%- include('_partial/_contest/contest') %>
             <% } else if (layout == 'scoreboard') { %>
               <%- include('_partial/_contest/scoreboard') %>
+            <% } else if (layout == 'submissions') { %>
+              <%- include('_partial/_submission/submissions') %>
             <% } else if (layout == 'live') { %>
               <%- include('_partial/_submission/livesubmission') %>
             <% } else if (layout == 'highlight') { %>
               <%- include('_partial/_submission/highlight') %>
             <% } else if (layout == 'detail') { %>
               <%- include('_partial/_submission/judgeresult') %>
-            <% } else if (layout == 'problem_statistic') { %>
-              <%- include('_partial/_problem/problem-statistics') %>
-            <% } else if (layout == 'score') { %>
-              <%- include('_partial/_user/score') %>
-            <% } else if (layout == 'solution') { %>
-              <%- include('_partial/_problem/solution') %>
-            <% } else if (layout == 'grade_problem') { %>
-              <%- include('_partial/_problem/problem-grade') %>
+            
             <% } %>
           </section>
       </div>
       <%- include('_partial/mobile-nav') %>
     </div>
     <%- include('_partial/footer') %>
-    <%- include('_partial/after-footer') %>
+    <%- include('_partial/after-footer', {layout: layout}) %>
   </div>
 </body>
 </html>
