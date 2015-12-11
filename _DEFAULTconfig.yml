@@ -23,7 +23,7 @@ DATABASE:
     user: 'c2015'
     password: 'xxxxxxxxxx'
     port: '3306'
-    databname: 'c2015'
+    database: 'c2015'
 
 # WEBSITE API HOST
 HOST:

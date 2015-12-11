@@ -36,7 +36,7 @@ DATABASE:
     user: 'xxxxxxxxxxxxxxx'
     password: 'xxxxxxxxxxx'
     port: '3306'
-    databname: 'xxxxxxxxxxxxx'
+    database: 'xxxxxxxxxxxxx'
 
 # WEBSITE API HOST
 HOST:
