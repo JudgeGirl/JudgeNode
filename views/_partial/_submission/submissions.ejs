@@ -35,6 +35,8 @@
 	<% if (site.CONTEST.MODE == true) { %>
 	<div class="sysmsg">考試正在進行</div>
 	<% } %>
+<div class="pure-g">
+	<div class="pure-u-1-1">
 	<%- include('../_widget/submission_table', {submission_list: submission_list, ac_map: ac_map}) %>
 	<%
 		var totpage = Math.ceil(submission_status.count / 25);
@@ -52,4 +54,6 @@
 			page = parseInt(page);
 	%>
 	<%- include('../pagination', {page: page, url: '/submissions?page=', query: arg_query, totpage: totpage})%>
+	</div>
+</div>
 </div>
