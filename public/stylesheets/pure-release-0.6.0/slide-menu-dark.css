@@ -680,3 +680,45 @@ abbr[title] {
     transform: scale(1);
   }
 }
+
+.problem-item {
+  border-bottom: 1px solid #ddd;
+  border-left: 6px solid transparent;
+}
+.problem-item a {
+    text-decoration: none;
+}
+.problem-item .problem-score {
+    font-size: 4em;
+    margin: 0.2em 0 0;
+    font-weight: 100;
+}
+.pure-table-submitowner {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.tooltip { 
+  font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  outline:none; 
+}
+.tooltip strong { line-height:30px; }
+.tooltip:hover {text-decoration:none;} 
+.tooltip .popup {
+    z-index: 10;
+    display: none; 
+    padding: 14px 20px;
+    margin-top:-30px; 
+    margin-left:28px;
+    width:300px; 
+    line-height: 1.5em;
+}
+.tooltip:hover .popup {
+    display:inline; 
+    position:absolute; 
+    color:#111;
+    border:1px 
+    solid #DCA; 
+    background:#fffAF0;
+}
+.tooltip .popup {
+    border-radius:4px;
+}

@@ -3,15 +3,12 @@
 	<h2>I thought that solving problem would last forever. I was wrong.</h2>
 </div>
 <style>
-table .motto span {
+table .motto .abbr {
 	display: block;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	width: 300px;
-}
-table .motto span:hover {
-    width: 100%;
 }
 @media screen and (max-width: 64em) {
 	.motto, .motto-header {
@@ -71,7 +68,16 @@ table .motto span:hover {
 							<% } %>
 						<% } %>
 						<td><%- rl[i].slv %></td>
-						<td class='motto'><span><%= rl[i].motto %></span></td>
+						<td class='motto'>
+							<span class='tooltip'>
+								<span class='abbr'>
+									<%= rl[i].motto %>
+								</span>
+								<span class='popup'>
+									<%= rl[i].motto %>
+								</span>
+							</span>
+						</td>
 					</tr>
 				<% } %>
 			</tbody>
