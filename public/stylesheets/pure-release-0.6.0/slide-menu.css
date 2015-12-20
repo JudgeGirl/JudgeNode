@@ -172,13 +172,12 @@ h1, h2, h3, h4 {
   overflow: hidden;
 }
 .content code {
-  border: 1px solid #696969;
-  -webkit-border-radius: 3px;
+  margin: 0px 2px;
+  padding: 0px 5px;
+  white-space: nowrap;
+  border: 1px solid #EAEAEA;
+  background-color: #F8F8F8;
   border-radius: 3px;
-  font-family: Monaco, Consolas;
-  margin: 0 2px;
-  padding: 0em 0em;
-  font-weight: 400;
 }
 .content pre code {
   background: none;
