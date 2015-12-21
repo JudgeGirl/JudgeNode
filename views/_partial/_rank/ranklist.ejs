@@ -52,8 +52,9 @@ table .motto .abbr {
 					else
 						page = parseInt(page);
 				%>
-				<% for (var i = 0, rank = (page-1) * 50; rl && i < rl.length; i++) { 
-					rank++;
+				<% 
+					for (var i = 0, rank = (page-1) * 50; rl && i < rl.length; i++) { 
+						rank++;
 				%>
 					<tr class='<%- i%2 == 0 ? "pure-table-odd" : "" %>'>
 						<td><%- rank %></td>

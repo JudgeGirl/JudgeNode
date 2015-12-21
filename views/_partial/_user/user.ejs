@@ -61,7 +61,8 @@
 			<img class="pure-u-1-1" src="/images/avatar/thumb--<%= userinfo.info.uid %>" onerror="this.src='http://i.imgur.com/mV053DI.png'"/>
 		</div>
 		<div class="pure-u-1-1">
-			<div class="header">				<h3><%- userinfo.info.lgn  %></h2>
+			<div class="header">				
+				<h3><%- userinfo.info.lgn  %></h2>
 				<h3><% if (userinfo.info.class == null || userinfo.info.class == '') { %>
 				<%= __('Administrator') %>
 			<% } else { %>
@@ -140,6 +141,37 @@
 			</tr>
 			</tbody>
 			</table>
+		</div>
+
+		<div class="pure-u-1-1">
+	<!-- Live2D Library -->
+    <script src="/javascripts/live2d/live2d.min.js"></script>
+    
+    <!-- Live2D Framework -->
+    <script src="/javascripts/live2d/Live2DFramework.js"></script>
+    
+    <!-- User's Script -->
+    <script src="/javascripts/live2d/src/utils/MatrixStack.js"></script>
+    <script src="/javascripts/live2d/src/utils/ModelSettingJson.js"></script>
+    <script src="/javascripts/live2d/src/PlatformManager.js"></script>
+    <script src="/javascripts/live2d/src/LAppDefine.js"></script>
+    <script src="/javascripts/live2d/src/LAppModel.js"></script>
+    <script src="/javascripts/live2d/src/LAppLive2DManager.js"></script>
+    <script src="/javascripts/live2d/src/SampleApp1.js"></script>
+    <!--
+    <p>
+        <button id="btnChange" class="active">Change Model</button>
+    </p>
+    -->
+    
+    <div style="width: 100%:">
+        <canvas id="glcanvas" width="360" height="480" style="">
+        </canvas>
+    </div>
+    
+    <div id="myconsole" style="color:#000; display: none;">---- Log ----</div>
+
+<script>sampleApp1();</script>
 		</div>
 	</div>
 </div>
