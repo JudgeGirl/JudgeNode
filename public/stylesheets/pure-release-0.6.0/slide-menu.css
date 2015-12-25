@@ -666,6 +666,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+/* tooltip */
 .tooltip { 
   font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   outline:none; 
@@ -691,4 +692,32 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 }
 .tooltip .popup {
     border-radius:4px;
+}
+/* tabs */
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4,
+#tab5:checked ~ #content5 {
+  display: block;
+}
+.tab_container section {
+   display: none;
+}
+.tab_container [id^="tab"]:checked + label {
+  background: #fff;
+  box-shadow: inset 0 3px #0CE;
+}
+.tab_container input {
+  display: none;
+}
+.tab_container label {
+  display: block;
+  float: left;
+  width: 20%;
+  color: #757575;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  background: #f0f0f0;
 }

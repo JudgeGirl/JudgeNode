@@ -1,3 +1,11 @@
+<script type="text/javascript" src="/javascripts/marked.js"></script>
+<script type="text/javascript" src="/javascripts/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/javascripts/sh/scripts/shCore.js" type="text/javascript"></script>
+<script src="/javascripts/sh/scripts/shAutoloader.js" type="text/javascript"></script>
+<script src="/javascripts/sh/scripts/shBrushPlain.js" type="text/javascript"></script>
+<script src="/javascripts/sh/scripts/shBrushCpp.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css">
+
 <div class="header">
 	<h1 class='article-title'><%= __('Edit Problem') %></h1>
     <h2><%= prob_config.config.pid %>. <%= prob_config.config.ttl %></h2>
@@ -55,15 +63,38 @@
                 </div>
             </div>
         </div>
+    <div class="tab_container">
 
+        <input id="tab1" type="radio" name="tabs" checked>
+        <label for="tab1"><i class="fa fa-code"></i><span> Problem Markdown</span></label>
+
+        <input id="tab2" type="radio" name="tabs">
+        <label for="tab2"><i class="fa fa-pencil-square-o"></i><span> Problem Preview</span></label>
+
+        <input id="tab3" type="radio" name="tabs">
+        <label for="tab3"><i class="fa fa-code"></i><span> Solution Markdown</span></label>
+
+        <input id="tab4" type="radio" name="tabs">
+        <label for="tab4"><i class="fa fa-pencil-square-o"></i><span> Solution Preview</span></label>
+
+        <section id="content1" class="tab-content">
+            <textarea name="textbox" id="textbox" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= prob_config.md %></textarea>
+        </section>
+        <section id="content2" class="tab-content">
+            <div class="pure-u-1-1" id="preview-textbox">
+            </div>
+        </section>
+
+        <section id="content3" class="tab-content">
+            <textarea name="textbox2" id="textbox2" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 600px;"><%= prob_config.solution_md %></textarea>
+        </section>
+        <section id="content4" class="tab-content">
+            <div class="pure-u-1-1" id="preview-textbox2">
+            </div>
+        </section>
+    </div>
         <div class="pure-g">
             <div class="pure-u-1-1">
-                <legend><%= __('Description') %> (Markdown)</legend>
-                <textarea name="textbox" id="textbox" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= prob_config.md %></textarea>
-
-                <legend><%= __('Solution Description') %> (Markdown)</legend>
-                <textarea name="textbox2" id="textbox2" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 600px;"><%= prob_config.solution_md %></textarea>
-
         		<div class="pure-controls">
                 	<button type="submit" name="submit" id="submit" class="pure-button pure-button-primary button-warning"><%= __('Update') %></button>
                 </div>
@@ -116,5 +147,55 @@ $(document).delegate('#textbox2', 'keydown', function(e) {
     $(this).get(0).selectionStart =
     $(this).get(0).selectionEnd = start + 1;
   }
+});
+
+//
+function latex_filter(text) {
+    var out = text.replace(/(\${1,2})((?:\\.|[^$])*)\1/g, function(m) {
+        m = m.replace(/_/g, '\\_')
+             .replace(/</g, '\\lt ')
+             .replace(/\|/g, '\\vert ')
+             .replace(/\[/g, '\\lbrack ')
+             .replace(/\\{/g, '\\lbrace ')
+             .replace(/\\}/g, '\\rbrace ')
+             .replace(/\\\\/g, '\\\\\\\\');
+        return m;
+    });
+    return out;
+};
+function after_footer() {
+    var math = document.getElementById("preview-textbox");
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+    SyntaxHighlighter.highlight(math);
+    math = document.getElementById("preview-textbox2");
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+    SyntaxHighlighter.highlight(math);
+};
+function render() {
+    var renderer = new marked.Renderer();
+
+    renderer.code = function (code, language) {
+        if (!language)  language = 'plain';
+        return '<pre class="brush: ' + language + ';">' + code + '</pre>';
+    };
+    var html = $("#textbox").val();
+    html = latex_filter(html);
+    $("#preview-textbox").html(marked(html, { renderer: renderer })).promise().done(function() {
+        after_footer();
+    });
+    html = $("#textbox2").val();
+    html = latex_filter(html);
+    $("#preview-textbox2").html(marked(html, { renderer: renderer })).promise().done(function() {
+        after_footer();
+    });
+};
+$(document).delegate('#textbox', 'keyup', function(e) {
+    render();
+});
+$(document).delegate('#textbox2', 'keyup', function(e) {
+    render();
+});
+$(document).ready(function() {
+    render();
 });
 </script>

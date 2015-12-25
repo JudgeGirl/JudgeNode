@@ -1,27 +1,66 @@
+<script type="text/javascript" src="/javascripts/marked.js"></script>
+<script type="text/javascript" src="/javascripts/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 <div class="header">
 	<h1 class='article-title'><%= __('Edit Announcement') %></h1>
     <h2>Administrator</h2>
 </div>
+
+
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
+<div class="tab_container">
+    <input id="tab1" type="radio" name="tabs" checked>
+    <label for="tab1"><i class="fa fa-code"></i><span> Markdown</span></label>
 
-<form action="update/announcement" method="post" class="pure-form  pure-form-stacked">
-    <fieldset>
-       
-    	<legend>Announcement</legend>
+    <input id="tab2" type="radio" name="tabs">
+    <label for="tab2"><i class="fa fa-pencil-square-o"></i><span> Preview</span></label>
 
-			<label for"motto><%= __('Markdown') %></label>
-			<textarea name="textbox" id="textbox" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= md_content %></textarea>
+    <section id="content1" class="tab-content">
+        <div class="pure-u-1-1">
+            <form action="update/announcement" method="post" class="pure-form  pure-form-stacked">
+                <fieldset>
 
-		<div class="pure-controls">
-        	<button type="submit" name="submit" id="submit" class="pure-button pure-button-primary"><%= __('Update') %></button>
+                        <textarea name="textbox" id="textbox" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= md_content %></textarea>
+
+                    <div class="pure-controls">
+                        <button type="submit" name="submit" id="submit" class="pure-button pure-button-primary"><%= __('Update') %></button>
+                    </div>
+                </fieldset>
+            </form>
         </div>
-    </fieldset>
-</form>
-
+    </section>
+    <section id="content2" class="tab-content">
+        <div class="pure-u-1-1 content" id="preview-textbox" style="border-color: #f0f0f0; border-style: solid;">
+        </div>
+    </section>
+    <!--content goes here-->
+</div> 
 </div>
-
 <script>
+function latex_filter(text) {
+    var out = text.replace(/(\${1,2})((?:\\.|[^$])*)\1/g, function(m) {
+        m = m.replace(/_/g, '\\_')
+             .replace(/</g, '\\lt ')
+             .replace(/\|/g, '\\vert ')
+             .replace(/\[/g, '\\lbrack ')
+             .replace(/\\{/g, '\\lbrace ')
+             .replace(/\\}/g, '\\rbrace ')
+             .replace(/\\\\/g, '\\\\\\\\');
+        return m;
+    });
+    return out;
+};
+function after_footer() {
+    var math = document.getElementById("preview-textbox");
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+};
+function render() {
+    var html = $("#textbox").val();
+    html = latex_filter(html);
+    $("#preview-textbox").html(marked(html));
+    after_footer();
+};
 $(document).delegate('#textbox', 'keydown', function(e) {
   var keyCode = e.keyCode || e.which;
 
@@ -39,5 +78,11 @@ $(document).delegate('#textbox', 'keydown', function(e) {
     $(this).get(0).selectionStart =
     $(this).get(0).selectionEnd = start + 1;
   }
+});
+$(document).delegate('#textbox', 'keyup', function(e) {
+    render();
+});
+$(document).ready(function() {
+    render();
 });
 </script>
