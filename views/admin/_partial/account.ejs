@@ -58,3 +58,13 @@
 		</tbody>
 	</table>
 </div>
+
+<script>
+var list = document.getElementsByTagName("form");
+for (var i = 0; i < list.length; i++) {
+	list[i].addEventListener("submit", function(event){
+		var answer = confirm("Are you sure you want to update this accout information ?");
+		if(!answer){ event.preventDefault(); }
+	});
+}
+</script>

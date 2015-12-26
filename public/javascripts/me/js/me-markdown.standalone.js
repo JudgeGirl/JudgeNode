@@ -784,7 +784,6 @@ module.exports = {
         this.element = this.base.elements[0];
 
         var handler = function () {
-            console.log(toMarkdown(this.element.innerHTML));
             callback(toMarkdown(this.element.innerHTML).split("\n").map(function (c) {
                 return c.trim();
             }).join("\n").trim());

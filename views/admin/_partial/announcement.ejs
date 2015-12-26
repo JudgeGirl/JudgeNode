@@ -98,8 +98,9 @@ $(document).delegate('#textbox', 'keydown', function(e) {
     $(this).get(0).selectionEnd = start + 1;
   }
 });
-$(document).delegate('#textbox', 'keyup', function(e) {
-    render();
+$("#tab2").click(function() {
+    if ($(this).is(':checked'))
+        render();
 });
 $(document).ready(function() {
     render();
@@ -113,4 +114,26 @@ $(document).ready(function() {
         }
     });
 });
+
+var list = document.getElementsByTagName("form");
+for (var i = 0; i < list.length; i++) {
+    list[i].addEventListener("submit", function(event){
+        var answer = confirm("Are you sure ?");
+        if (!answer){ event.preventDefault(); }
+    });
+}
+
+var aElems = document.getElementsByTagName('a');
+
+for (var i = 0; i < aElems.length; i++) {
+    aElems[i].onclick = function() {
+        var check = confirm("Are you sure you want to leave?");
+        if (check == true) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+}
 </script>
