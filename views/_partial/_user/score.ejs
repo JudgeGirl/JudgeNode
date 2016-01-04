@@ -13,6 +13,21 @@
 		score_statistic.score[i].sum /= score_statistic.exams_cnt;
 		score_statistic.score[i].sum = Math.ceil(score_statistic.score[i].sum);
 	}
+	for (var i = 0; i <= 100; i++) {
+		var arr = score_statistic.score.filter(function(e) {
+			return e["sum"] == i;
+		});
+		if (arr.length == 0) {
+			score_statistic.score.push({sum: i, count: 0});
+		}
+	}
+	score_statistic.score.sort(function(a, b) {
+    	var keyA = a["sum"],
+        	keyB = b["sum"];
+	    if(keyA < keyB) return -1;
+	    if(keyA > keyB) return 1;
+	    return 0;
+	});
 %>
 
 <h2>Score Distribution</h2>
@@ -27,7 +42,8 @@
 		,
 		xkey: 'sum',
   		ykeys: ['count'],
-		labels: ['#users']
+		labels: ['#users'],
+		parseTime: false
 	});
 </script>
 
@@ -42,14 +58,16 @@
 	}
 %>
 <script>
-	Morris.Bar({
+	Morris.Line({
 		element: 'line-progress2',
 		data:
 			<%- JSON.stringify(score_statistic.score) %>
 		,
 		xkey: 'sum',
   		ykeys: ['count'],
-		labels: ['#users']
+		labels: ['#users'],
+		parseTime: false,
+		pointSize: 1
 	});
 </script>
 
