@@ -67,6 +67,10 @@
 	columnsum['Fin.'] = 0;
 %>
 
+<div class="pure-g">
+	<div class="pure-u-1-1">
+
+<div  style="overflow: auto; max-height: 768px;">
 <table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
 	<thead>
 	<tr>
@@ -125,43 +129,48 @@
 		<% } %>
 	</tbody>
 </table>
+</div>
 
 <% if (user["uid"] >= 0 && user["class"] == null) { %>
 
 <h2>Report</h2>
 
-<table class="pure-table pure-table-bordered" style='width: 100%;' id="summary-table">
-	<thead>
-	<tr>
-		<th data-type="string" data-sortable="true" data-name="Student">\</th>
-		<%
-			var thead = score.thead;
-			var tbody = score.tbody;
-		%>
-		<% for (var i in thead) { %>
-			<th data-type="int" data-sortable="true" data-name="<%= thead[i].ttl %>">
-				<%- thead[i].ttl %>
-			</th>
-		<% } %>
-		<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
-		<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
-	</tr>
-	</thead>
-	<tbody>
+	<div  style="overflow: auto; max-height: 768px;">
+	<table class="pure-table pure-table-bordered" style='width: 100%;' id="summary-table">
+		<thead>
 		<tr>
-			<td><strong>Average</strong></td>
-			<% for (var i = 0; i < thead.length; i++) { 
-				var rows = Object.keys(record).length;
+			<th data-type="string" data-sortable="true" data-name="Student">\</th>
+			<%
+				var thead = score.thead;
+				var tbody = score.tbody;
 			%>
-			<td><%= rows ? Math.ceil(columnsum[thead[i].eid]/rows) : 0 %></td>
+			<% for (var i in thead) { %>
+				<th data-type="int" data-sortable="true" data-name="<%= thead[i].ttl %>">
+					<%- thead[i].ttl %>
+				</th>
 			<% } %>
-			<td><%= rows ? Math.ceil(columnsum['Avg.']/rows) : 0 %></td>
-			<td><%= rows ? Math.ceil(columnsum['Fin.']/rows) : 0 %></td>
+			<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
+			<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
 		</tr>
-	</tbody>
-</table>
-
+		</thead>
+		<tbody>
+			<tr>
+				<td><strong>Average</strong></td>
+				<% for (var i = 0; i < thead.length; i++) { 
+					var rows = Object.keys(record).length;
+				%>
+				<td><%= rows ? Math.ceil(columnsum[thead[i].eid]/rows) : 0 %></td>
+				<% } %>
+				<td><%= rows ? Math.ceil(columnsum['Avg.']/rows) : 0 %></td>
+				<td><%= rows ? Math.ceil(columnsum['Fin.']/rows) : 0 %></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
 <% } %>
+
+</div>
+</div>
 
 </div>
 
