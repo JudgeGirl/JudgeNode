@@ -54,11 +54,86 @@
 </script>
 
 <h2>Score Detail</h2>
+<%
+	var thead = score.thead;
+	var tbody = score.tbody;
+%>
+<%
+	var columnsum = {};
+	for (var i in thead) {
+		columnsum[thead[i].eid] = 0;
+	}
+	columnsum['Avg.'] = 0;
+	columnsum['Fin.'] = 0;
+%>
 
 <table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
 	<thead>
 	<tr>
 		<th data-type="string" data-sortable="true" data-name="Student">Student</th>
+		<% for (var i in thead) { %>
+			<th data-type="int" data-sortable="true" data-name="<%= thead[i].ttl %>">
+				<%- thead[i].ttl %>
+			</th>
+		<% } %>
+		<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
+		<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
+	</tr>
+	</thead>
+	<tbody>
+		<% 
+			var record = {};
+			for (var i = 0; tbody && i < tbody.length; i++) {
+				record[tbody[i].lgn] = {};
+			}
+			for (var i = 0; tbody && i < tbody.length; i++) {
+				record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
+			}
+			for (var i in record) {
+				var sum = 0;
+				for (var j in record[i])
+					sum += record[i][j];
+				record[i].sum = sum;
+				record[i].avg = sum / thead.length;
+			}
+
+            function roundToTwo(num) {    
+                return +(Math.round(num + "e+2")  + "e-2");
+            }
+		%>
+		<% 
+			for (var i in record) { 
+				var finalgrade = Math.ceil(record[i].sum / 100*6);
+		%>
+			<tr>
+				<td><strong><%- i %></strong></td>
+				<% 
+				for (var j = 0; j < thead.length; j++) { 
+					columnsum[thead[j].eid] += (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 0;
+				%>
+					<td>
+					<%- (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 'X' %>
+					</td>
+				<% } %>
+				<% 
+					columnsum['Avg.'] += record[i].avg;
+					columnsum['Fin.'] += finalgrade;
+				%>
+				<td><%- Math.ceil(record[i].avg) %></td>
+				<td style="color: <%- finalgrade < 60 ? "#F00" : "#0A0" %>; font-weight: bold;"><%- finalgrade %></td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+
+<% if (user["uid"] >= 0 && user["class"] == null) { %>
+
+<h2>Report</h2>
+
+<table class="pure-table pure-table-bordered" style='width: 100%;' id="summary-table">
+	<thead>
+	<tr>
+		<th data-type="string" data-sortable="true" data-name="Student">\</th>
 		<%
 			var thead = score.thead;
 			var tbody = score.tbody;
@@ -68,53 +143,26 @@
 				<%- thead[i].ttl %>
 			</th>
 		<% } %>
-        <th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
-        <th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
+		<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
+		<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
 	</tr>
 	</thead>
 	<tbody>
-		<% 
-			var record = {};
-			for (var i = 0; tbody && i < tbody.length; i++) {
-				record[tbody[i].lgn] = {};
-			}i
-                        /*
-			for (var i in record) {
-				for (var j = 0; j < thead.length; j++)
-					record[i][thead[j].eid] = {};
-			}
-                        */
-			for (var i = 0; tbody && i < tbody.length; i++) {
-				record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
-			}
-                        for( var i in record ){
-                          var sum = 0;
-                          for( var j in record[i] ){
-                            sum += record[i][j];
-                          }
-                          record[i].sum = sum;
-                          record[i].avg = sum / thead.length;
-                        }
-
-                        function roundToTwo(num) {    
-                            return +(Math.round(num + "e+2")  + "e-2");
-                        }
-		%>
-		<% 
-			for (var i in record) { 
-				var finalgrade = Math.ceil(record[i].sum / 100*6);
-		%>
-			<tr>
-				<td><strong><%- i %></strong></td>
-				<% for (var j = 0; j < thead.length; j++) { %>
-					<td><%- (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 'X' %></td>
-				<% } %>
-				<td><%- Math.ceil(record[i].avg) %></td>
-				<td style="color: <%- finalgrade < 60 ? "#F00" : "#0A0" %>; font-weight: bold;"><%- finalgrade %></td>
-			</tr>
-		<% } %>
+		<tr>
+			<td><strong>Average</strong></td>
+			<% for (var i = 0; i < thead.length; i++) { 
+				var rows = Object.keys(record).length;
+			%>
+			<td><%= rows ? Math.ceil(columnsum[thead[i].eid]/rows) : 0 %></td>
+			<% } %>
+			<td><%= rows ? Math.ceil(columnsum['Avg.']/rows) : 0 %></td>
+			<td><%= rows ? Math.ceil(columnsum['Fin.']/rows) : 0 %></td>
+		</tr>
 	</tbody>
 </table>
+
+<% } %>
+
 </div>
 
 <script>
