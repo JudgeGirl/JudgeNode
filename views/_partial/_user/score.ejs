@@ -122,7 +122,7 @@
 		%>
 		<% 
 			for (var i in record) { 
-				var finalgrade = Math.ceil(record[i].sum / 100*6);
+				var valid_record = 0;				
 		%>
 			<tr>
 				<td class="headcol"><strong><%- i %></strong></td>
@@ -131,10 +131,29 @@
 					columnsum[thead[j].eid] += (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 0;
 				%>
 					<td>
-					<%- (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 'X' %>
+					<% if (record[i][thead[j].eid] !== undefined && record[i][thead[j].eid] >= 0) { %>
+						<% valid_record++; %>
+						<%= Math.ceil(record[i][thead[j].eid]) %>
+					<% } else { %>
+						<% if (record[i][thead[j].eid] == undefined || record[i][thead[j].eid] == -1) { %>
+							<% valid_record++; %>
+							<i class="fa fa-times"></i>
+						<% } else if (record[i][thead[j].eid] == -2) { %>
+							<i class="fa fa-calendar-check-o"></i>
+						<% } %>
+					<% } %>
 					</td>
 				<% } %>
 				<% 
+
+					var expect_fill_count = 18;
+					var expect_fill_score = 108;
+
+					expect_fill_count = expect_fill_count - (thead.length - valid_record);
+
+					var contribute_each = expect_fill_score / expect_fill_count;
+					var finalgrade = Math.ceil(record[i].sum / 100*contribute_each);
+
 					columnsum['Avg.'] += record[i].avg;
 					columnsum['Fin.'] += finalgrade;
 				%>
@@ -218,13 +237,14 @@
 <script>
 function sortTable(tag_id, column, type, cmp) {
     var tbl = document.getElementById(tag_id).tBodies[0];
-    var store = [];
+    var store = [], exp_store = [];
     for(var i=0, len=tbl.rows.length; i<len; i++){
         var row = tbl.rows[i];
         var sortnr;
         if (type == 'int') {
         	sortnr = parseFloat(row.cells[column].textContent || row.cells[column].innerText);
-        	if(!isNaN(sortnr)) store.push([sortnr, row]);
+        	if(!isNaN(sortnr)) 	store.push([sortnr, row]);
+        	else				exp_store.push([sortnr, row]);
         } else if (type == 'string') {
         	sortnr = row.cells[column].textContent || row.cells[column].innerText;
         	store.push([sortnr, row]);
@@ -251,10 +271,12 @@ function sortTable(tag_id, column, type, cmp) {
     		});
     	}
     }
-    for(var i=0, len=store.length; i<len; i++){
+    for (var i = 0, len = store.length; i < len; i++)
         tbl.appendChild(store[i][1]);
-    }
+	for (var i = 0, len = exp_store.length; i < len; i++)
+        tbl.appendChild(exp_store[i][1]);
     store = null;
+    exp_store = null;
 }
 sortTable('grade-table', 0, 'string', 0);
 
