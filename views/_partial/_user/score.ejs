@@ -85,9 +85,6 @@
 	columnsum['Fin.'] = 0;
 %>
 
-<div class="pure-g">
-	<div class="pure-u-1-1">
-
 <div style="overflow: auto; max-height: 750px;">
 <table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
 	<thead>
@@ -153,6 +150,8 @@
 
 <h2>Compare</h2>
 
+<p>使用滑鼠右鍵選擇上表的列，結果會在下表呈現。</p>
+
 <div  style="overflow: auto; max-height: 768px;">
 	<table class="pure-table pure-table-bordered" style='width: 100%;' id="compare-table">
 		<thead>
@@ -213,9 +212,6 @@
 	</table>
 	</div>
 <% } %>
-
-</div>
-</div>
 
 </div>
 
@@ -287,18 +283,23 @@ $('#grade-table thead tr').find('th').each(function(index, value) {
 	}
 });
 
+<% if (user["uid"] >= 0 && user["class"] == null) { %>
 $(document).ready(function () {
-    $('tr').click(function () {
-        if (!$(this).hasClass("pure-table-submitowner")) {
-            $(this).addClass("pure-table-submitowner");
-            var table = document.getElementById("compare-table").tBodies[0];
-            table.appendChild(this);
-        }
-        else {
-         	$(this).removeClass("pure-table-submitowner");
-         	var table = document.getElementById("grade-table").tBodies[0];
-         	table.appendChild(this);
-        }
+    $('tr').mousedown(function(event) {
+    	switch (event.which) {
+    		case 3:
+	        if (!$(this).hasClass("pure-table-submitowner")) {
+	            $(this).addClass("pure-table-submitowner");
+	            var table = document.getElementById("compare-table").tBodies[0];
+	            table.appendChild(this);
+	        }
+	        else {
+	         	$(this).removeClass("pure-table-submitowner");
+	         	var table = document.getElementById("grade-table").tBodies[0];
+	         	table.appendChild(this);
+	        }
+	    }
     });
 });
+<% } %>
 </script>
