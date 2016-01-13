@@ -88,18 +88,18 @@
 <div class="pure-g">
 	<div class="pure-u-1-1">
 
-<div  style="overflow: auto; max-height: 768px;">
+<div style="overflow: auto; max-height: 750px;">
 <table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
 	<thead>
 	<tr>
-		<th data-type="string" data-sortable="true" data-name="Student">Student</th>
+		<th class="headcol" data-type="string" data-sortable="true" data-name="Student"><div>Student</div></th>
 		<% for (var i in thead) { %>
 			<th data-type="int" data-sortable="true" data-name="<%= thead[i].ttl %>">
-				<%- thead[i].ttl %>
+				<div><%- thead[i].ttl %></div>
 			</th>
 		<% } %>
-		<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
-		<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
+		<th data-type="int" data-sortable="true" data-name="Avg."><div>Avg.</div></th>
+		<th data-type="int" data-sortable="true" data-name="Final Grade"><div>Final Grade</div></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -128,7 +128,7 @@
 				var finalgrade = Math.ceil(record[i].sum / 100*6);
 		%>
 			<tr>
-				<td><strong><%- i %></strong></td>
+				<td class="headcol"><strong><%- i %></strong></td>
 				<% 
 				for (var j = 0; j < thead.length; j++) { 
 					columnsum[thead[j].eid] += (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 0;
@@ -151,9 +151,36 @@
 
 <% if (user["uid"] >= 0 && user["class"] == null) { %>
 
+<h2>Compare</h2>
+
+<div  style="overflow: auto; max-height: 768px;">
+	<table class="pure-table pure-table-bordered" style='width: 100%;' id="compare-table">
+		<thead>
+		<tr>
+			<th data-type="string" data-sortable="true" data-name="Student">\</th>
+			<%
+				var thead = score.thead;
+				var tbody = score.tbody;
+			%>
+			<% for (var i in thead) { %>
+				<th data-type="int" data-sortable="true" data-name="<%= thead[i].ttl %>">
+					<%- thead[i].ttl %>
+				</th>
+			<% } %>
+			<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
+			<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
+		</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	</div>
+
+
 <h2>Report</h2>
 
-	<div  style="overflow: auto; max-height: 768px;">
+<div style="overflow: auto; max-height: 768px;">
 	<table class="pure-table pure-table-bordered" style='width: 100%;' id="summary-table">
 		<thead>
 		<tr>
@@ -234,6 +261,7 @@ function sortTable(tag_id, column, type, cmp) {
     store = null;
 }
 sortTable('grade-table', 0, 'string', 0);
+
 $('#grade-table thead tr').find('th').each(function(index, value) {
 	var sortable = $(value).attr('data-sortable');
 	if (sortable != undefined && sortable == "true") {
@@ -258,4 +286,19 @@ $('#grade-table thead tr').find('th').each(function(index, value) {
 		});
 	}
 });
-		</script>
+
+$(document).ready(function () {
+    $('tr').click(function () {
+        if (!$(this).hasClass("pure-table-submitowner")) {
+            $(this).addClass("pure-table-submitowner");
+            var table = document.getElementById("compare-table").tBodies[0];
+            table.appendChild(this);
+        }
+        else {
+         	$(this).removeClass("pure-table-submitowner");
+         	var table = document.getElementById("grade-table").tBodies[0];
+         	table.appendChild(this);
+        }
+    });
+});
+</script>
