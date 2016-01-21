@@ -54,6 +54,8 @@ var multibalance = function(table1, table2, totalscore) {
 	var factor1 = 1, factor2 = 1;
 	avg1 = sum1 / size1;
 	avg2 = sum2 / size2;
+	console.log("-W " + avg1);
+	console.log("-B " + avg2);
 	if (avg1 > avg2) {
 		factor1 = 1;
 		factor2 = avg1 / avg2;

@@ -1,17 +1,16 @@
 ## README ##
 
-```
-node downloadcsv 28 week7mon
-```
+### 小考 ###
 
 ```
-node downloadcsv 29 week7tue
+$ node downloadcsv [eid] week7mon
+$ node downloadcsv [eid] week7tue
+$ node balance week7mon_0.csv week7tue_0.csv result.csv
+$ node uploadcsv.js [eid] result.csv
 ```
 
-```
-node balance week7mon_0.csv week7tue_0.csv result.csv
-```
+### 期中期末考 ###
 
 ```
-node uploadcsv.js 4 result.csv
+$ node balance -W [_csvfile_]+ -B [_csvfile_]+ -o _outputfile
 ```
