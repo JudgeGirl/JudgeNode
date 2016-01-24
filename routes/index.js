@@ -177,9 +177,10 @@ router.get('/problems/domains', function(req, res, next) {
 });
 router.get('/problems/domain/:did', function(req, res, next) {
 	var did = req.params.did;
-	dblink.problem.level_domain(did, function(llist){
-		dblink.problem.score(req.session && req.session.uid , function(score){
-			res.render('layout', { layout: 'problem_domain', subtitle: 'Problem Set', user: req.session, level_list: llist, score: score, domain_id: did});
+	dblink.problem.level_domain(did, function(llist) {
+		dblink.problem.level_progress(req.session && req.session.uid, did, function(level_progress) {
+			res.render('layout', { layout: 'problem_domain', subtitle: 'Problem Set', user: req.session, 
+					level_list: llist, domain_id: did, level_progress: level_progress});
 		});
 	});
 });

@@ -10,27 +10,71 @@
 		<li class="pure-menu-item"><a class="pure-menu-link" href="/problems/domains">Domain</a></li>
 	</ul>
 </div>
+<style>
+.custom-restricted {
+    height: 680px;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+#level-list li {
+	cursor: pointer; 
+}
+</style>
 
-</div>
+<%
+	var solve_status = {};
+	if (level_progress && level_progress['db']) {
+		for (var i = 0; i < level_progress['db'].length; i++) {
+			solve_status[level_progress['db'][i].level] = {};
+			solve_status[level_progress['db'][i].level]['total'] = level_progress['db'][i].count;
+			solve_status[level_progress['db'][i].level]['status'] = 'undefined';
+		}
+	}
+	
+	if (level_progress && level_progress['ac']) {
+		for (var i = 0; i < level_progress['ac'].length; i++) {
+			if (level_progress['ac'][i].count >= 
+				solve_status[level_progress['ac'][i].level]['total'])
+				solve_status[level_progress['ac'][i].level]['status'] = 'complete';
+			else
+				solve_status[level_progress['ac'][i].level]['status'] = 'working';
+		}
+	}
+%>
 
 <div class="pure-g" id="level-list">
-	<div class="pure-u-1-24">
-	</div>
-	<div class="pure-u-5-24">
-		<div class="pure-menu">
-		    <span class="pure-menu-heading">Subdomains</span>
+	<div class="pure-u-1 pure-u-lg-6-24">
+		<h3>Subdomains</h3>
+		<div class="pure-menu pure-menu-scrollable custom-restricted">
+		    <span class="pure-menu-heading"></span>
 		    <ul class="pure-menu-list">
 		    <% for (var level = 0 ; level_list && level < level_list.length ; level++ ) { %>
-		    	<li class="pure-menu-item" data="<%- level_list[level].level %>"><span class="pure-menu-link"><%- level_list[level].ttl %></span></li>
+		    	<li class="pure-menu-item" data="<%- level_list[level].level %>"><span class="pure-menu-link" style="text-overflow: ellipsis;">
+		    	<% if (solve_status && solve_status[level_list[level].level]) { %>
+		    		<% if (solve_status[level_list[level].level]['status'] == 'complete') { %>
+		    			<i class="fa fa-star"></i>	
+		    		<% } else if (solve_status[level_list[level].level]['status'] == 'working') { %>
+		    			<i class="fa fa-star-half-o"></i>
+		    		<% } else { %>
+		    			<i class="fa fa-star-o"></i>
+		    		<% } %>
+		    	<% } else { %>
+		    		<i class="fa fa-star-o"></i>
+		    	<% } %>
+		    	<%- level_list[level].ttl %></span></li>
 		  	<% } %>
 		    </ul>
 		</div>
 	</div>
-	<div class="pure-u-17-24" id="level-content">
+	<div class="pure-u-1 pure-u-lg-1-24">
+	</div>
+	<div class="pure-u-1 pure-u-lg-17-24">
+		<h3>Problem List</h3>
+		<div class="pure-u-1-1" id="level-content">
+		</div>
+	</div>
+</div>
 
-	</div>
-	<div class="pure-u-1-24">
-	</div>
 </div>
 
 <script>
@@ -96,15 +140,16 @@
 		  	var text = '';
 		  	var iplist = <%- JSON.stringify(site.CONTEST.VALID_IP) %>;
 		  	var score = {}, subs = {};
-		  	console.log(probs_list);
 		  	for (var i in probs_list.score)
 		  		score[probs_list.score[i].pid] = probs_list.score[i].score;
 		  	for (var i in probs_list.subs)
 		  		subs[probs_list.subs[i].pid] = probs_list.subs[i].count;
 			for (var i in probs_list.plist) {
 				var item = probs_list.plist[i];
-				text += '<div class="problem-item">';
-
+				if (i%2 == 0)
+					text += '<div class="problem-item">';
+				else
+					text += '<div class="problem-item problem-item-odd">';
 				if (item.pid in score) {
 					if (score[item.pid] == 100)
 						text += '<div class="pure-u-1-12"><h2><i class="fa fa-check" style="color: green;"></i></h2></div>';
@@ -114,7 +159,7 @@
 					text += '<div class="pure-u-1-12">' + '</div>';
 				}
 				text += '<div class="pure-u-11-12">';
-				text += '<h2><a href="/problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h2>';
+				text += '<h3><a href="/problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
 
 				if (item.pid in subs) {
 					text += '<p><span class="content-subhead">Subs: </span> ' + subs[item.pid] + '</p>';

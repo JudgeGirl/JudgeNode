@@ -651,8 +651,13 @@ Hides the menu at `48em`, but modify this based on your app's needs.
   }
 }
 .problem-item {
+  border: 1px solid #CBCBCB;
   border-bottom: 1px solid #ddd;
-  border-left: 6px solid transparent;
+  margin: 0.5em;
+  padding: 0.4em;
+}
+.problem-item-odd {
+  background-color: #f2f2f2;
 }
 .problem-item a {
     text-decoration: none;
