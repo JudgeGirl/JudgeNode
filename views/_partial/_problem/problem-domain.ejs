@@ -12,9 +12,10 @@
 </div>
 <style>
 .custom-restricted {
-    height: 680px;
+    width: 100%;
     border: 1px solid gray;
     border-radius: 4px;
+    overflow-x: scroll;
 }
 #level-list li {
 	cursor: pointer; 
@@ -45,16 +46,16 @@
 <div class="pure-g" id="level-list">
 	<div class="pure-u-1 pure-u-lg-6-24">
 		<h3>Subdomains</h3>
-		<div class="pure-menu pure-menu-scrollable custom-restricted">
+		<div class="pure-menu custom-restricted">
 		    <span class="pure-menu-heading"></span>
 		    <ul class="pure-menu-list">
 		    <% for (var level = 0 ; level_list && level < level_list.length ; level++ ) { %>
 		    	<li class="pure-menu-item" data="<%- level_list[level].level %>"><span class="pure-menu-link" style="text-overflow: ellipsis;">
 		    	<% if (solve_status && solve_status[level_list[level].level]) { %>
 		    		<% if (solve_status[level_list[level].level]['status'] == 'complete') { %>
-		    			<i class="fa fa-star"></i>	
+		    			<i class="fa fa-star" style='color: green;'></i>	
 		    		<% } else if (solve_status[level_list[level].level]['status'] == 'working') { %>
-		    			<i class="fa fa-star-half-o"></i>
+		    			<i class="fa fa-star-half-o" style='color: red;'></i>
 		    		<% } else { %>
 		    			<i class="fa fa-star-o"></i>
 		    		<% } %>
