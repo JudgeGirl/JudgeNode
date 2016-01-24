@@ -682,7 +682,9 @@ abbr[title] {
 
 .problem-item {
   border-bottom: 1px solid #ddd;
-  border-left: 6px solid transparent;
+}
+.problem-item-odd {
+  background-color: #343434;
 }
 .problem-item a {
     text-decoration: none;
@@ -750,4 +752,52 @@ abbr[title] {
   cursor: pointer;
   text-decoration: none;
   text-align: center;
+}
+/*
+ * -- PRICING TABLE HEADER --
+ * By default, a header is black/white, and has some styles for its <h2> name.
+ */
+
+.pricing-tables {
+  text-align: center;
+}
+.pricing-table-header {
+}
+
+.pricing-table-header h2 {
+    margin: 0;
+    padding-top: 1em;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+/*
+ * -- PRICING TABLE PRICE --
+ * Styles for the price and the corresponding <span>per month</span>
+ */
+
+.pricing-table-price {
+    font-size: 2em;
+    margin: 0.2em 0 0;
+    font-weight: 100;
+}
+
+.pricing-table-price span {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.2em;
+    padding-bottom: 2em;
+    font-weight: 400;
+}
+
+.pricing-table-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.pricing-table-list li {
+    padding: 0.8em 0;
+    background: #252423;
+    border-bottom: 1px solid #e7e7e7;
 }
