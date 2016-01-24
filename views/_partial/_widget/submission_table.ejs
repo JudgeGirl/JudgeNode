@@ -51,7 +51,7 @@
 					    judge_lng = site.JUDGE.lang;
 					var unitConvert = site.unitConvert;
 					text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
-					text += "<a href='/detail/" + sl[i].sid + "'><span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";
+					text += "<span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";
 					if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
 						text += " (";
 						if (sl[i].res != 7) {
@@ -63,7 +63,6 @@
 						}
 						text += ")";
 					}
-					text += "</a>";
 					if (sl[i].res == 0 || sl[i].res == 8)
 						text += ' <i class="fa fa-spinner fa-pulse"></i>';
 					if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) {

@@ -371,14 +371,6 @@ router.post('/submit',
 router.get('/time', function(req, res, next) {
 	res.send(new Date());
 });
-router.get('/detail/:sid', function(req, res, next) {
-	var sid = req.params.sid;
-	dblink.submission.source_result_html(sid, req.session.uid, req.session["class"], function(source_result) {
-		// res.type('text/plain');
-		res.render('layout', {layout: 'detail', user: req.session, sid: sid, html_code: source_result });
-	});
-});
-
 router.get('/source/:sid', function(req, res, next) {
 	var sid = req.params.sid;
 	dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
@@ -391,16 +383,19 @@ router.get('/source/:sid', function(req, res, next) {
 });
 router.get('/source/highlight/:sid', function(req, res, next) {
 	var sid = req.params.sid;
-	dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
-		var text = '';
-		for (var i in source_code) {
-			text += '## ' + source_code[i].title + ' ##\n';
-			text += '```cpp\n' + source_code[i].code + '```\n';
-		}
-		dblink.submission.list({sid: sid}, function(slist) {
-			res.render('layout', {layout: 'highlight', user: req.session, sid: sid, 
-				html_code: markdown.post_marked(text),
-				subs_info: slist && slist.length > 0 ? slist[0] : null });
+	dblink.submission.source_result(sid, req.session.uid, req.session["class"], function(source_result_json) {
+		dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
+			var text = '';
+			for (var i in source_code) {
+				text += '## ' + source_code[i].title + ' ##\n';
+				text += '```cpp\n' + source_code[i].code + '```\n';
+			}
+			dblink.submission.list({sid: sid}, function(slist) {
+				res.render('layout', {layout: 'highlight', user: req.session, sid: sid, 
+					source_result: source_result_json,
+					html_code: markdown.post_marked(text),
+					subs_info: slist && slist.length > 0 ? slist[0] : null});
+			});
 		});
 	});
 });

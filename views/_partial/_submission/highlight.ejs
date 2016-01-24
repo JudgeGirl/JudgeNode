@@ -5,21 +5,44 @@
   <h2>Share your idea. You will get more.</h2>
 </div>
 <div class="content">
-<div class="pure-menu pure-menu-horizontal">
 
+<div class="pure-menu pure-menu-horizontal">
 <ul class="pure-menu-list">
   <li class="pure-menu-item"><a class="pure-menu-link" href="/source/<%- subs_info.sid %>" target="_blank"><i class="fa fa-file"></i> plain</a></li>
   <li class="pure-menu-item"><a class="pure-menu-link" href="/problem/<%= subs_info.cid %>/<%- subs_info.pid %>" target="_blank"><i class="fa fa-file"></i> <%= __('Problem') %></a></li>
 </ul>
-
 </div>
 
-  <div class="pure-g">
+<% if (source_result['state'] == 'OTHER') { %>
+<h3>Error Message</h3>
+<pre><%= source_result['message'][0] %></pre>
+<% } else { %>
+<h3>Result</h3>
+<table class="pure-table" style="width: 100%">
+<thead>
+  <tr>
+    <th>Testdata</th>
+    <th>Result</th>
+  </tr>
+</thead>
+<tbody>
+  <% for (var i = 0; i < source_result['message'].length; i++) {
+      var subtask = source_result['message'][i];
+   %>
+      <tr>
+        <td><%= subtask.name %> <%= subtask.input %></td>
+        <td><%= subtask.status %> (<%= subtask.cpu %> ms, <%= subtask.mem %> bytes)</td>
+      </tr>
+  <% } %>
+</tbody>
+</table>
+<% } %>
 
-      <div class="pure-u-5-5">
-          <%- html_code %>
-      </div>
-  </div>
+<div class="pure-g">
+    <div class="pure-u-5-5">
+        <%- html_code %>
+    </div>
+</div>
 
   <%- include('../_widget/disqus') %>
 </div>
