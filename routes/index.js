@@ -5,6 +5,7 @@ var multer = require('multer');
 var _config = require('../lib/config').config;
 var markdown = require('../lib/components/plugin/markdown');
 var fs = require('fs');
+
 var upload = multer({
 	dest: 'files/',
 	onFileUploadStart: function(file, req, res) {
@@ -19,9 +20,9 @@ var upload = multer({
 
 /* GET home page, default /archive */
 router.get('/', function(req, res, next) {
-	dblink.archive.list(function(acontent) {
-		dblink.problem.recent(function(rlist) {
-			res.render('layout', { layout: 'archive', user: req.session, archive_content: acontent, recent_problems: rlist});
+	dblink.archive.list(function(content) {
+		dblink.problemManager.recentUpdate(function(list) {
+			res.render('layout', { layout: 'archive', user: req.session, archive_content: content, recent_problems: list});
 		});
 	});
 });
@@ -145,7 +146,7 @@ router.get('/submissions?', function(req, res, next) {
 	var uid = req.session.uid;
 	dblink.submission.list(req.query, function(slist) {
 		dblink.submission.listinfo(req.query, function(slist_status) {
-			dblink.problem.score(uid, function(ac_list) {
+			dblink.problemManager.scoreboard(uid, function(ac_list) {
 				res.render('layout', { layout: 'submissions', subtitle: 'Submission', user: req.session, 
 					query_filter: req.query, submission_list: slist, submission_status: slist_status, ac_list: ac_list});
 			});
@@ -156,31 +157,15 @@ router.get('/live', function(req, res, next) {
 	res.render('layout', { layout: 'live', subtitle: 'Live', user: req.session, query_filter: req.query,
 						request_hostname: req.hostname});
 });
-router.get('/problems', function(req, res, next) {
-	dblink.problem.level(function(llist){
-		dblink.problem.list(function(plist) {
-			dblink.problem.dependency(function(depend){
-				dblink.problem.score(req.session && req.session.uid , function(score){
-					dblink.statistic.submissions_count( function(submissions){ 
-						res.render('layout', { layout: 'problems', subtitle: 'Problem Set', user: req.session , problem_list: plist, level_list: llist, score: score, depend: depend, submissions: submissions });
-					});
-				});
-			});
-		});
-	});
-});
 router.get('/problems/domains', function(req, res, next) {
-	var did = req.params.did;
-	dblink.problem.domains(function(dlist){
-		res.render('layout', { layout: 'domains', subtitle: 'Domain Set', user: req.session, domain_list: dlist});
-	});
+	res.render('layout', { layout: 'domains', subtitle: 'Domain Set', user: req.session});
 });
 router.get('/problems/domain/:did', function(req, res, next) {
 	var did = req.params.did;
-	dblink.problem.level_domain(did, function(llist) {
-		dblink.problem.level_progress(req.session && req.session.uid, did, function(level_progress) {
+	dblink.problemManager.domainLevelList(did, function(lvList) {
+		dblink.problemManager.levelProgress(req.session && req.session.uid, did, function(lvProgress) {
 			res.render('layout', { layout: 'problem_domain', subtitle: 'Problem Set', user: req.session, 
-					level_list: llist, domain_id: did, level_progress: level_progress});
+					level_list: lvList, domain_id: did, level_progress: lvProgress});
 		});
 	});
 });
@@ -188,23 +173,26 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
 	var cid = req.params.cid, 
 		pid = req.params.pid,
 		uid = req.session.uid;
+	var loadPage = function() {
+		dblink.problemManager.problemContent(pid, function(pcontent, pinfo, psubmit) {
+			dblink.problemManager.testdataList(pid, function(tconfig) {
+				dblink.helper.cansubmit(cid, pid, uid, function(cansubmit) {
+					if (uid != undefined && req.session['class'] == null)
+						cansubmit = true;
+					var ttl = pinfo && pinfo[0] && pinfo[0].ttl;
+					res.render('layout', { layout: 'problem', subtitle: pid + '. ' + ttl, user: req.session , 
+						problem_content: pcontent, pinfo: pinfo[0], cid: cid, 
+						psubmit: psubmit, testdata_config: tconfig, canSubmit: cansubmit});
+				});
+			});
+		});
+	};
 	dblink.helper.canread(cid, pid, uid, function(can) {
 		if (uid != undefined && req.session['class'] == null)
 			can = true;
 		if (!can)
 			return res.redirect('/problems');
-		dblink.problem.problem(cid, pid, function(pcontent, pinfo, psubmit) {
-			dblink.problem.testdata(pid, function(tconfig) {
-				dblink.helper.cansubmit(cid, pid, uid, function(cansubmit){
-					if (uid != undefined && req.session['class'] == null)
-						cansubmit = true;
-					var ttl = pinfo && pinfo[0] && pinfo[0].ttl;
-					res.render('layout', { layout: 'problem', subtitle: pid + '. ' + ttl, user: req.session , problem_content: pcontent, 
-						ttl: ttl, cid: cid, pid: pid, uid: uid, 
-						psubmit: psubmit, testdata_config: tconfig, canSubmit: cansubmit});
-				});
-			});
-		});
+		loadPage();
 	});
 });
 router.get('/solution/problem/:pid', function(req, res, next) {
@@ -216,7 +204,7 @@ router.get('/solution/problem/:pid', function(req, res, next) {
 			can = true;
 		if (!can)
 			return res.redirect('/problems');
-		dblink.problem.solution(cid, pid, function(solution_config) {
+		dblink.problemManager.problemSolution(pid, function(solution_config) {
 			res.render('layout', { layout: 'solution', subtitle: 'Solution', user: req.session, solution_config: solution_config});
 		});
 	});
@@ -225,36 +213,40 @@ router.get('/statistic/problem/:cid/:pid', function(req, res, next) {
 	var cid = req.params.cid, 
 		pid = req.params.pid,
 		uid = req.session.uid;
-
-	dblink.helper.canread(cid, pid, uid, function(can) {
-		if (!can)
-			return res.redirect('/problems');
-		dblink.problem.problem(cid, pid, function(pcontent, pinfo, psubmit) {
+	var loadPage = function() {
+		dblink.problemManager.problemContent(pid, function(pcontent, pinfo, psubmit) {
 			dblink.statistic.statistic_donut(cid, pid, function(donut_config) {
 				dblink.statistic.submission_table(cid, pid, function(tried_config) {
 					dblink.statistic.best_submission(cid, pid, function(best_config) {
 						res.render('layout', { layout: 'problem_statistic', subtitle: 'Statistic', user: req.session, 
-								cid: cid, pid: pid, ttl: pinfo && pinfo[0] && pinfo[0].ttl, 
-								donut_config : donut_config, tried_config: tried_config, best_config: best_config});
+								pinfo: pinfo[0], donut_config : donut_config, tried_config: tried_config, best_config: best_config});
 					});
 				});				
 			});
 		});
+	};
+	dblink.helper.canread(cid, pid, uid, function(can) {
+		if (!can)
+			return res.redirect('/problems');
+		loadPage();
 	});
 });
 router.get('/statistic/grade/problem/:cid/:pid', function(req, res, next) {
 	var cid = req.params.cid, 
 		pid = req.params.pid,
 		uid = req.session.uid;
+	var loadPage = function() {
+		dblink.problemManager.problemContent(pid, function(content, pconfig) {
+			dblink.statistic.grade_problem(cid, pid, function(sconfig) {
+				res.render('layout', { layout: 'grade_problem', user: req.session, 
+					statistic_config: sconfig, problem_config: pconfig[0]});
+			});
+		});
+	};
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (!isadmin)
 			return res.redirect('/login');
-		dblink.problem.problem(cid, pid, function(content, pconfig) {
-			pconfig = pconfig[0];
-			dblink.statistic.grade_problem(cid, pid, function(sconfig) {
-				res.render('layout', { layout: 'grade_problem', user: req.session, statistic_config: sconfig, problem_config: pconfig});
-			});
-		});
+		loadPage();
 	});
 });
 
@@ -303,29 +295,21 @@ router.post('/submit',
 				   {name: 'code2', maxCount: 1}, {name: 'code3', maxCount: 1},
 				   {name: 'code4', maxCount: 1}, {name: 'code5', maxCount: 1},
 				   {name: 'code6', maxCount: 1}, {name: 'code7', maxCount: 1}]), 
-	function(req, res, next){
-	if (req.session.uid < 0 || req.session.uid === undefined) {
+	function(req, res, next) {
+	if (req.session.uid === undefined || req.session.uid < 0)
 		return res.redirect("/login");
-	}
 	
-	var cid = req.body.cid;
-	var pid = req.body.pid;
-	var lng = req.body.lng;
+	var cid = req.body.cid,
+		pid = req.body.pid,
+		lng = req.body.lng;
 	var uid = req.session.uid;	
 	if (lng == undefined) // multi file
 		lng = 0;
-	dblink.helper.cansubmit( cid, pid, uid, function(canSubmit) {
-		if (req.session['class'] == null)
-			canSubmit = true;
-		if (!canSubmit)
-			return res.redirect("/");
 
-		dblink.problem.problem_config( pid, function(source_list) {
-			if (source_list.length === 0) {
+	var submitStep = function() {
+		dblink.problemManager.sourceList(pid, function(source_list) {
+			if (source_list.length === 0)
 				source_list.push("source");
-			}
-			
-			console.log(source_list);
 			var size = 0;
 			for (var i = 0 ; i < source_list.length; i++) {
 				if (req.files['code' + i] == null || req.files['code' + i] == undefined || 
@@ -335,22 +319,18 @@ router.post('/submit',
 				}
 				size += req.files['code' + i][0].size;
 			}	
-			
+			/**
+			 * JUDGE result8 : SAVING
+			 */
 			var subinfo = {
-				uid: uid,
-				cid: cid,
-				pid: pid,
+				uid: uid, cid: cid, pid: pid,
 				ts: Date.now(),
-				lng: lng,
-				len: size,
-				scr: 0,
-				res: 8,	// JUDGE result : SAVING
-				cpu: 0,
-				mem: 0 
+				lng: lng, len: size, scr: 0,
+				res: 8, cpu: 0, mem: 0 
 			};
 
 			dblink.judge.insert_submission(subinfo, function(sid) {
-				for (var i = 0 ; i < source_list.length ; i++) {
+				for (var i = 0; i < source_list.length; i++) {
 					fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i,  fs.readFileSync(req.files['code' + i][0].path) );
 					fs.unlinkSync(req.files['code' + i][0].path);
 				}
@@ -365,8 +345,14 @@ router.post('/submit',
 			});
 			
 		});
+	};
+	dblink.helper.cansubmit(cid, pid, uid, function(canSubmit) {
+		if (req.session['class'] == null)
+			canSubmit = true;
+		if (!canSubmit)
+			return res.redirect("/");
+		submitStep();
 	});
-
 });
 /* Helper */
 router.get('/time', function(req, res, next) {

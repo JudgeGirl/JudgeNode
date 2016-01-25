@@ -2,6 +2,14 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
+<%
+	var pid = pinfo.pid,
+		ttl = pinfo.ttl;
+	var judge_res = site.JUDGE.result_message,
+		judge_lng = site.JUDGE.lang;
+	var unitConvert = site.unitConvert;
+%>
+
 <div class="header">
 	<h1 class='article-title'><%= __('Statistics') %></h1>
     <h2><%- pid %>. <%- ttl %></h2>
@@ -51,11 +59,6 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% 
-				var judge_res = site.JUDGE.result_message,
-					judge_lng = site.JUDGE.lang;
-				var unitConvert = site.unitConvert;
-			%>
 			<% for (var row in best_config) { %>
 				<tr class='<%- row%2 == 0 ? "pure-table-odd" : "" %>'>
 					<td><%- (parseInt(row)+1) %></td>
