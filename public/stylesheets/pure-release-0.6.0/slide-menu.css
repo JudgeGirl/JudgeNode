@@ -503,6 +503,10 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     }
 }
 
+a {
+  text-decoration: none;
+}
+
 @media (max-width: 48em) {
     /* Only apply this when the window is small. Otherwise, the following
     case results in extra padding on the left:
@@ -778,4 +782,12 @@ Hides the menu at `48em`, but modify this based on your app's needs.
  */
 .custom-mf-title {
     font-family: verdana;
+}
+.fw-code-copy-button {
+  position: relative;
+  z-index: 9999;
+  top: 20px;
+  float: right;
+  cursor: pointer;
+  font-size: 70%;
 }

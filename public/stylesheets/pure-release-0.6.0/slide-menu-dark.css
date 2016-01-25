@@ -522,6 +522,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 }
 a {
   color: #4183C4;
+  text-decoration: none;
 }
 
 .pure-form legend, .pure-form label {
@@ -805,4 +806,12 @@ abbr[title] {
  */
 .custom-mf-title {
     font-family: verdana;
+}
+.fw-code-copy-button {
+  position: relative;
+  z-index: 9999;
+  top: 20px;
+  float: right;
+  cursor: pointer;
+  font-size: 70%;
 }
