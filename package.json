@@ -16,6 +16,7 @@
     "express": "~4.13.1",
     "gm": "^1.21.1",
     "marked": "^0.3.5",
+    "mkdirp": "^0.5.1",
     "morgan": "~1.6.1",
     "multer": "^1.0.3",
     "serve-favicon": "~2.3.0",
