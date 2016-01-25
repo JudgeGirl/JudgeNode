@@ -61,4 +61,19 @@
   <%- include('../_widget/disqus') %>
 </div>
 
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+    var $rows = $(trigger).next().find('.code').find('.line');
+    var rowDelim = '\n';
+    return '' + $rows.map(function(i, row) {
+      var $row = $(row);
+      return $row.text().replace(/\s/g, " ");
+    }).get().join(rowDelim);
+  }
+});
+</script>
+
 
