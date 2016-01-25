@@ -774,3 +774,8 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     background: #f7f7f7;
     border-bottom: 1px solid #e7e7e7;
 }
+/*
+ */
+.custom-mf-title {
+    font-family: verdana;
+}

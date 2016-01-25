@@ -31,7 +31,21 @@
    %>
       <tr>
         <td><%= subtask.name %> <%= subtask.input %></td>
-        <td><%= subtask.status %> (<%= subtask.cpu %> ms, <%= subtask.mem %> bytes)</td>
+        <td>
+          <%
+            var map_class = {
+              'Accepted': 'result7',
+              'Wrong Answer': 'result6',
+              'Runtime Error': 'result4',
+              'Time Limit Exceeded': 'result5',
+            };
+            var status_class = '';
+
+            if (map_class[subtask.status])
+              status_class = map_class[subtask.status];
+          %>
+          <span class="<%= status_class %>"><%= subtask.status %></span> 
+         (<%= subtask.cpu %> ms, <%= Math.ceil(subtask.mem/1024) %> KB)</td>
       </tr>
   <% } %>
 </tbody>

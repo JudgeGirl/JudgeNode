@@ -160,12 +160,12 @@
 					text += '<div class="pure-u-1-12">' + '</div>';
 				}
 				text += '<div class="pure-u-11-12">';
-				text += '<h3><a href="/problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
+				text += '<h3 class="custom-mf-title"><a href="/problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
 
 				if (item.pid in subs) {
-					text += '<p><span class="content-subhead">Subs: </span> ' + subs[item.pid] + '</p>';
+					text += '<p><span class="content-subhead">Submissions: </span> ' + subs[item.pid] + '</p>';
 				} else {
-					text += '<p><span class="content-subhead">Subs: </span> ' + 0 + '</p>';
+					text += '<p><span class="content-subhead">Submissions: </span> ' + 0 + '</p>';
 				}
 				text += '</div>';
 				text += '</div>';
