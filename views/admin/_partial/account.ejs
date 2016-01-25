@@ -2,6 +2,18 @@
 	<h1 class='article-title'><%= __('Manage Account') %></h1>
     <h2>Administrator</h2>
 </div>
+
+<style>
+.account-table th:nth-child(n+3), .account-table td:nth-child(n+3) {
+	padding: 0em;
+	width: 15%;
+}
+.account-from-table tr td {
+	padding: 0em;
+	width: 15%;
+}
+</style>
+
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
 	<div class="pure-g">
@@ -10,11 +22,14 @@
 		</div>
 	</div>
 
-	<table class="pure-table pure-table-bordered" style="width: 100%">
+	<table class="pure-table pure-table-bordered account-table" style="width: 100%">
 		<thead>
 		    <tr>
 		    	<th>#</th>
 				<th><%= __('Username') %></th>
+				<th><%= __('Pwd') %></th>
+				<th><%= __('Class') %></th>
+				<th>Email</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -24,32 +39,19 @@
 			<tr>
 				<td><%- acc.uid %></td>
 				<td><%- acc.lgn %></td>
-				<td>
+				<td colspan="4">
 <form id="form-<%- acc.uid %>" action="/admin/update/account/<%- acc.uid %>" method="post" class="pure-form pure-form-stacked">
     <fieldset>
-    <div class="pure-g">
-            <div class="pure-u-1-1">
-
-               <div class="pure-g">
-                    <div class="pure-u-1-4">
-                        <label for="pwd"><%= __('Password') %></label>
-                        <input type="text" name="pwd" class="pure-u-23-24" value="">
-                    </div>
-                    <div class="pure-u-1-4">
-                        <label for="class"><%= __('Class') %></label>
-                        <input type="text" name="class" class="pure-u-23-24" value="<%- acc.class %>">
-                    </div>
-                    <div class="pure-u-1-4">
-                        <label for="emial">Email</label>
-                        <input type="text" name="email" class="pure-u-23-24" value="<%- acc.email %>">
-                    </div>
-                    <div class="pure-controls pure-u-1-4">
-                    	<label for=""><%= __('Options') %></label>
-                		<button onclick="document.getElementById('form-<%- acc.uid %>').submit();" class="pure-button pure-button-primary button-warning pure-u-23-24"><%= __('Update') %></button>
-                	</div>
-                </div>
-            </div>
-        </div>
+    <table class="pure-table account-from-table" style='width: 100%;'>
+    	<tbody>
+    		<tr>
+    			<td><input type="text" name="pwd" class="pure-u-23-24" value=""></td>
+    			<td><input type="text" name="class" class="pure-u-23-24" value="<%- acc.class %>"></td>
+    			<td><input type="text" name="email" class="pure-u-23-24" value="<%- acc.email %>"></td>
+    			<td><button onclick="document.getElementById('form-<%- acc.uid %>').submit();" class="pure-button pure-button-primary button-warning pure-u-23-24"><i class="fa fa-pencil-square-o"></i></button></td>
+    		</tr>
+    	</tbody>
+    </table>
     </fieldset>
 </form>
 				</td>

@@ -11,8 +11,19 @@
 		</div>
 	</div>
 
+<style>
+.grade-table th, .grade-table td {
+	padding: 0em;
+	min-width: 70px;
+}
+</style>
 
-<table class="pure-table pure-table-bordered" style='width: 100%;' id="grade-table">
+<ul>
+	<li><i class="fa fa-calendar-check-o"></i> = 特殊事由請假，不列入學期成績。輸入 $-2$</li>
+	<li><i class="fa fa-times"></i> = 沒有成績，該場考試為有效，成績以零分計算。輸入 $-1$</li>
+</ul>
+
+<table class="pure-table pure-table-bordered grade-table" style='width: 100%;' id="grade-table">
 	<thead>
 	<tr>
 		<th data-type="string" data-sortable="true" data-name="Student">ID</th>
@@ -21,71 +32,73 @@
 			var tbody = score_list.tbody;
 			var userlst = score_list.user;
 		%>
-		<th>
-		<div class="pure-g">
-			<div class="pure-u-1-1">
 		<% for (var i in thead) { %>
-			<div class="pure-u-1-12">
-				<a href="/admin/edit/gradettl/<%- thead[i].eid %>">
+			<th>
+				<a href="/admin/edit/gradettl/<%- thead[i].eid %>" class="custom-mf-title">
 					<%- thead[i].ttl %>
 				</a>
-			</div>
+			</th>
 		<% } %>
-			</div>
-		</div>
+		<th>
 		</th>
 	</tr>
 	</thead>
 	<tbody>
-		<% 
-			var record = {};
-			for (var i = 0; userlst && i < userlst.length; i++) {
-				record[userlst[i].lgn] = {};
-				record[userlst[i].lgn].uid = userlst[i].uid;
-			}
-            /*
-			for (var i in record) {
-				for (var j = 0; j < thead.length; j++)
-					record[i][thead[j].eid] = {};
-			}
-            */
-			for (var i = 0; tbody && i < tbody.length; i++) {
-				record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
-			}
-		%>
-		<% for (var i in record) { %>
-			<tr>
-				<td><a href="/user/<%- record[i].uid %>"><strong><%- i %></strong></a></td>
-				<td>
-					<form id="form-<%- record[i].uid %>" action="/admin/update/grade/<%- record[i].uid %>" method="post" class="pure-form pure-form-stacked">
-				    <fieldset>
-				    <div class="pure-g">
-				            <div class="pure-u-1-1">
-
-				               <div class="pure-g">
-
-				               <% for (var j = 0; j < thead.length; j++) { 
-				               		var s =  (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : '-1';
-				               %>
-								<div class="pure-u-1-12">
-									 <input type="text" name="<%- thead[j].eid %>" class="pure-u-23-24" value="<%- s %>">
-								</div>
-								<% } %>
-				                    
-				                    <div class="pure-controls pure-u-1-12">
-				                		<button onclick="document.getElementById('form-<%- record[i].uid %>').submit();" class="pure-button pure-button-primary button-warning pure-u-23-24"><i class="fa fa-pencil-square-o"></i>
-</button>
-				                	</div>
-				                </div>
-				            </div>
-				        </div>
-				    </fieldset>
-				</form>
-				</td>
-				
-			</tr>
-		<% } %>
+<% 
+	var record = {};
+	for (var i = 0; userlst && i < userlst.length; i++) {
+		record[userlst[i].lgn] = {};
+		record[userlst[i].lgn].uid = userlst[i].uid;
+	}
+    /*
+	for (var i in record) {
+		for (var j = 0; j < thead.length; j++)
+			record[i][thead[j].eid] = {};
+	}
+    */
+	for (var i = 0; tbody && i < tbody.length; i++) {
+		record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
+	}
+%>
+<% for (var i in record) { %>
+	<tr>
+		<td><a href="/user/<%- record[i].uid %>"><strong><%- i %></strong></a></td>
+		<td colspan="<%= thead.length+1 %>">
+			<form id="form-<%- record[i].uid %>" action="/admin/update/grade/<%- record[i].uid %>" method="post" class="pure-form pure-form-stacked" style="padding: 0em;">
+			<fieldset style="padding: 0em;">
+				<table class="pure-table" style='width: 100%;'>
+				<tbody>
+				<tr>
+				<% 
+					for (var j = 0; j < thead.length; j++) { 
+						var s = (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : '-1';
+				%>
+						<td>
+							 <input type="text" name="<%- thead[j].eid %>" class="pure-u-23-24" value="<%- s %>">
+						</td>
+				<% } %>
+					<td>
+					<button onclick="document.getElementById('form-<%- record[i].uid %>').submit();" class="pure-button pure-button-primary button-warning pure-u-23-24"><i class="fa fa-pencil-square-o"></i></button>
+					</td>
+				</tr>
+				</tbody>
+				</table>
+		    </fieldset>
+			</form>
+		</td>		
+	</tr>
+<% } %>
 	</tbody>
 </table>
 </div>
 </div>
+
+<script>
+var list = document.getElementsByTagName("form");
+for (var i = 0; i < list.length; i++) {
+    list[i].addEventListener("submit", function(event){
+        var answer = confirm("Make sure");
+        if (!answer){ event.preventDefault(); }
+    });
+}
+</script>
