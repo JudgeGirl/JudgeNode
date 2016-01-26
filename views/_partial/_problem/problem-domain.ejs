@@ -49,8 +49,8 @@
 		<div class="pure-menu custom-restricted">
 		    <span class="pure-menu-heading"></span>
 		    <ul class="pure-menu-list">
-		    <% for (var level = 0 ; level_list && level < level_list.length ; level++ ) { %>
-		    	<li class="pure-menu-item" data="<%- level_list[level].level %>"><span class="pure-menu-link" style="text-overflow: ellipsis;">
+		    <% for (var level = 0; level_list && level < level_list.length; level++) { %>
+		    	<li class="pure-menu-item" data="<%- level_list[level].level %>"><a class="pure-menu-link" style="text-overflow: ellipsis;" href="#<%= level_list[level].level %>">
 		    	<% if (solve_status && solve_status[level_list[level].level]) { %>
 		    		<% if (solve_status[level_list[level].level]['status'] == 'complete') { %>
 		    			<i class="fa fa-star" style='color: green;'></i>	
@@ -62,7 +62,7 @@
 		    	<% } else { %>
 		    		<i class="fa fa-star-o"></i>
 		    	<% } %>
-		    	<%- level_list[level].ttl %></span></li>
+		    	<%- level_list[level].ttl %></a></li>
 		  	<% } %>
 		    </ul>
 		</div>
@@ -117,6 +117,10 @@
 		  	}); 
     	});
     	function init(elem, options) {
+    	    var defaultLevel = parseInt(window.location.hash.substring(1));
+    		if (!defaultLevel) {
+    			defaultLevel = <%- level_list ? level_list[0].level : 0 %>;
+    		}
 			$.ajax({
 			 	method: 'GET',
 			 	url: "//" + options.ip + "/api/problems",
@@ -124,9 +128,7 @@
 					<% if (user['uid'] != undefined) { %>
 						, uid: <%- user['uid'] %>
 					<% } %>
-					<% if (level_list) { %>
-						, lid: <%- level_list[0].level %>
-					<% } %>
+						, lid: defaultLevel
 				}
 			}).done(function(probs_list) {
 		  		var obj = $(elem);
