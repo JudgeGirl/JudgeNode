@@ -165,7 +165,7 @@ router.get('/problems/domain/:did', function(req, res, next) {
 	dblink.problemManager.domainLevelList(did, function(lvList) {
 		dblink.problemManager.levelProgress(req.session && req.session.uid, did, function(lvProgress) {
 			res.render('layout', { layout: 'problem_domain', subtitle: 'Problem Set', user: req.session, 
-					level_list: lvList, domain_id: did, level_progress: lvProgress});
+					level_list: lvList, domain_id: did, level_progress: lvProgress, request_hostname: req.hostname});
 		});
 	});
 });
