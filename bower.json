@@ -1,0 +1,6 @@
+{
+  "name": "newedenfaces",
+  "dependencies": {
+    "MathJax": "^2.6.1"
+  }
+}
