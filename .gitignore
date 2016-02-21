@@ -18,3 +18,6 @@ _config.yml
 # https SSL
 *.pem
 *.csr
+
+# gulp produce
+public/javascripts/MathJax/
