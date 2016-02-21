@@ -37,7 +37,7 @@ HOST:
         googlesite: 'https://sites.google.com/site/ntucsiec2015/announcement'
     footer:
         text: 'What do you want to do ?'
-        license: 'so ?'
+        license: 'Instructor <a title="劉邦鋒" href="/">Pangfeng Liu</a>, Web designer <a title="許祐程" href="/">Akira</a>, <a title="王盛平" href="/">Peer4321</a>, <a title="曹又霖" href="https://github.com/sinmaplewing">Maplewing</a>, <a title="楊翔雲" href="https://github.com/morris821028">Morris</a>'
 # Disqus
 Disqus:
     shortname: 'ntucsiecprogramming'
