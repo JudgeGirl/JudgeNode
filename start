@@ -7,7 +7,7 @@ import time
 def main():
   while True:
     time.sleep(10)
-    os.system('npm start');
+    os.system('npm start')
 
 def signal_handler(signal, frame):
   print ('INFO Good Bye')
