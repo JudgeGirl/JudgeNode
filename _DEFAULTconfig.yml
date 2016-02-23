@@ -29,6 +29,7 @@ DATABASE:
 HOST:
     TITLE: 'Judge Girl'
     IP: '140.112.31.208'
+    root: '/'
     testdata: 'https://github.com/JudgeGirl/JG-testdata/blob/master/practice/'
     social:
         youtube: 'https://www.youtube.com/playlist?list=PLOvZ8aEg7xDkpKHk3hAwQxLAlpZ1Q3wKH'
