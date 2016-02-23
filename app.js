@@ -46,7 +46,8 @@ app.use(function (req, res, next) {
 // });
 app.use(function (req, res, next) {
     res.locals.site = _config;
-    res.locals.site.unitConvert = utils.unitConvert
+    res.locals.site.unitConvert = utils.unitConvert,
+    res.locals.site.url_for = utils.url_for,
     next();
 });
 
@@ -71,14 +72,14 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', admins);
-app.use('/user', users);
-app.use('/', routes);
-app.get('/i18n/:locale', function (req, res) {
+app.use(utils.url_for('admin'), admins);
+app.use(utils.url_for('user'), users);
+app.use(utils.url_for('/'), routes);
+app.get(utils.url_for('/i18n/:locale'), function (req, res) {
     res.cookie('locale', req.params.locale);
     i18n.setLocale(req.params.locale);
     if (req.headers.referer) res.redirect(req.headers.referer);
-    else res.redirect("/");
+    else res.redirect(utils.url_for('/'));
 });
 
 // catch 404 and forward to error handler

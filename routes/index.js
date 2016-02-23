@@ -41,6 +41,7 @@ router.get('/restart', function(req, res, next){
 
 /* User Information control */
 router.get('/login', function(req, res, next) {
+	req.session.redirect_to = req.header('Referer') || '/';
 	res.render('layout', { layout: 'login', subtitle: 'Login', user: req.session, sysmsg: '' });
 });
 router.post('/login', function(req, res, next) {
@@ -50,6 +51,8 @@ router.post('/login', function(req, res, next) {
 	};
 	var iplist = _config.CONTEST.VALID_IP;
 	var ip = req.ip;
+	console.log(req.session.redirect_to);
+	var backURL = req.session.redirect_to || '/';
 	dblink.user.login(user, req.session, function(status) {
 		if (status == 1) {
 			var uid = req.session.uid;
@@ -58,7 +61,7 @@ router.post('/login', function(req, res, next) {
 			});
 			if (config.CONTEST.MODE == false || filter_ip.length != 0 || req.session['class'] == null) {
 				dblink.user.update_login(uid, ip, function() {
-					res.redirect('/');
+					res.redirect(backURL);
 				});
 			} else {
 				req.session.regenerate(function(err) {
@@ -358,35 +361,6 @@ router.post('/submit',
 router.get('/time', function(req, res, next) {
 	res.send(new Date());
 });
-router.get('/source/:sid', function(req, res, next) {
-	var sid = req.params.sid;
-	dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
-		res.type('text/plain');
-		var text = '';
-		for (var i in source_code)
-			text += source_code[i].code + '\n';
-		res.send(text);
-	});
-});
-router.get('/source/highlight/:sid', function(req, res, next) {
-	var sid = req.params.sid;
-	dblink.submission.source_result(sid, req.session.uid, req.session["class"], function(source_result_json) {
-		dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
-			var text = '';
-			for (var i in source_code) {
-				text += '## ' + source_code[i].title + ' ##\n';
-				text += '```cpp\n' + source_code[i].code + '```\n';
-			}
-			dblink.submission.list({sid: sid}, function(slist) {
-				res.render('layout', {layout: 'highlight', user: req.session, sid: sid, 
-					source_result: source_result_json,
-					html_code: markdown.post_marked(text),
-					subs_info: slist && slist.length > 0 ? slist[0] : null});
-			});
-		});
-	});
-});
-
 
 router.get('/score', function(req, res, next){
 	var uid = req.session.uid;
@@ -409,24 +383,10 @@ router.get('/score', function(req, res, next){
 	});	
 });
 
-router.get('/api/submissions?', function(req, res, next) {
-	dblink.api.list(req.query, function(result) {
-		res.json(result);
-	});
-});
-router.get('/api/result?', function(req, res, next) {
-	var sid = req.query.sid;
-	if (sid == undefined || sid == null)	sid = 0;
-	dblink.api.result(sid, function(result) {
-		res.json(result);
-	});
-});
-router.get('/api/problems?', function(req, res, next) {
-	var did = req.query.did, 
-	    lid = req.query.lid, 
-	    uid = req.query.uid;
-	dblink.api.problems(did, lid, uid, function(result) {
-		res.json(result);
-	});
-});
+var sourceRouter = require('./source'),
+	apiRouter = require('./api');
+
+router.use('/source', sourceRouter);
+router.use('/api', apiRouter);
+
 module.exports = router;
