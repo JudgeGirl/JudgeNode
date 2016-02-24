@@ -7,51 +7,11 @@ function zeroFill( number, width )
 	}
 	return number + ""; // always return a string
 }
-
-window.onunload = function(){}; 
-
-window.addEventListener("load", function(){
-	return 0;
-	document.getElementsByClassName("blackscreen")[0].style.opacity = 0;
-	setTimeout(function(){ document.getElementsByClassName("blackscreen")[0].style.display = "none"; }, 249);
-	
-	
-	var allNav = document.getElementsByTagName("a");
-	for( var i = 0 ; i < allNav.length ; ++i ){
-		(function(realTarget){
-			realTarget.addEventListener("click", function(event){
-				if( event.which === 1 && realTarget.getAttribute('target') == undefined){
-					event.preventDefault();
-				
-					document.getElementsByClassName("blackscreen")[0].style.display = "";
-					setTimeout(function(){ document.getElementsByClassName("blackscreen")[0].style.opacity = 1; 
-						setTimeout(function(){ window.location = realTarget.getAttribute("href"); }, 249); }, 50);
-				}
-			});
-		})(allNav[i]);
-	}
-	
-
-});
-
-function get_clock_offset() {
-	var offset;
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open("GET", "/time", false);
-	xmlhttp.send();
-
-	var dateStr = xmlhttp.getResponseHeader('Date');
-	var serverTimeMillisGMT = Date.parse(new Date(Date.parse(dateStr)).toUTCString());
-	var localMillisUTC = Date.parse(new Date().toUTCString());
-
-	offset = serverTimeMillisGMT -  localMillisUTC;
-	return offset;
-}
-function start_clock() {
+function start_clock(timeURL) {
 	var offset = 0;
 	function calcOffset() {
 		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("GET", "/time", false);
+		xmlhttp.open("GET", timeURL, false);
 		xmlhttp.send();
 
 		var dateStr = xmlhttp.getResponseHeader('Date');

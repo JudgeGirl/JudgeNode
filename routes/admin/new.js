@@ -5,7 +5,8 @@ var dblink = require('../../lib/components/dblink');
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');
-var loginURL = '/login';
+var utils = require('../../lib/components/utils');
+var loginURL = utils.url_for('login');
 
 /* new page */
 router.get('/problem', function(req, res, next) {
@@ -59,7 +60,7 @@ router.post('/problem', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.create_problem_content(config, function() {
-			res.redirect('/admin/problems');
+			res.redirect(utils.url_for('admin/problems'));
 		});
 	});
 });
@@ -80,7 +81,7 @@ router.post('/contest', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.create_contest_config(config, function() {
-			res.redirect('/admin/contests');
+			res.redirect(utils.url_for('admin/contests'));
 		});
 	});
 });
@@ -97,7 +98,7 @@ router.post('/account', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.create_account(config, function() {
-			res.redirect('/admin/accounts');
+			res.redirect(utils.url_for('admin/accounts'));
 		});
 	});
 });
@@ -108,7 +109,7 @@ router.post('/grade', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.create_exam_scores(ttl, function() {
-			res.redirect('/admin/grade');
+			res.redirect(utils.url_for('admin/grade'));
 		});
 	});
 });

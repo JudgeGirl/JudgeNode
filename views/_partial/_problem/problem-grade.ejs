@@ -24,7 +24,7 @@
 				%>
 				<% for (var row = 0; row < sl.length; row++) { %>
 				<tr class="normal">
-					<td><a href="/user/<%- sl[row].uid %>"><%- sl[row].lgn %></a></td>
+					<td><a href="<%= site.url_for('user/' + sl[row].uid) %>"><%- sl[row].lgn %></a></td>
 					<% 
 						var score = sl[row]['MAX(scr)'];
 						var times = sl[row]['COUNT(*)'];
@@ -41,7 +41,7 @@
 					<% } %>
 
 					<td><%- score %></td>
-					<td><a href="/submissions?<%- filter %>"><%- times %></a></td>
+					<td><a href="<%= site.url_for('submissions?' + filter) %>"><%- times %></a></td>
 				</tr>
 				<% } %>
 		</table>

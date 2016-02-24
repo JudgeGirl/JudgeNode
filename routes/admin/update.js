@@ -5,8 +5,8 @@ var dblink = require('../../lib/components/dblink');
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');
-var loginURL = '/login';
-
+var utils = require('../../lib/components/utils');
+var loginURL = utils.url_for('login');
 
 /* update */
 router.post('/announcement', function(req, res, next) {
@@ -16,7 +16,7 @@ router.post('/announcement', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.update_announcement(md, function() {
-			res.redirect('/');
+			res.redirect(utils.url_for('/'));
 		});
 	});
 });
@@ -38,7 +38,7 @@ router.post('/problem/:pid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.update_problem_content(config, function() {
-			res.redirect('/problem/0/' + config.pid);
+			res.redirect(utils.url_for('problem/0/' + config.pid));
 			dblink.admin.update_problem_solution(config, function() {
 
 			});
@@ -68,7 +68,7 @@ router.post('/contest/:cid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.update_contest_config(config, function() {
-			res.redirect('/contest/' + config.cid);
+			res.redirect(utils.url_for('contest/' + config.cid));
 		});
 	});
 });
@@ -84,7 +84,7 @@ router.post('/account/:uid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.update_account(config, function() {
-			res.redirect('/admin/accounts');
+			res.redirect(utils.url_for('admin/accounts'));
 		});
 	});
 });
@@ -94,7 +94,7 @@ router.post('/grade/:uid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.update_scores(req.params.uid, req.body, function() {
-			res.redirect('/admin/grade');
+			res.redirect(utils.url_for('admin/grade'));
 		});
 	});
 });
@@ -105,7 +105,7 @@ router.post('/gradettl/:eid', function(req, res, next) {
 		if (!isadmin)
 			return res.redirect(loginURL);
 		dblink.admin.update_gradettl(eid, req.body.ttl, function() {
-			res.redirect('/admin/grade');
+			res.redirect(utils.url_for('admin/grade'));
 		});
 	});
 });

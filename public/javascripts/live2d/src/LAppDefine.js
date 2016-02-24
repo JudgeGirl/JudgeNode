@@ -30,10 +30,10 @@ var LAppDefine = {
     BACK_IMAGE_NAME : "assets/image/back_class_normal.png",
 
     //  モデル定義
-    MODEL_HARU : "/javascripts/live2d/assets/live2d/haru/haru.model.json",
-    MODEL_HARU_B : "/javascripts/live2d/assets/live2d/haru/haru_02.model.json",
-    MODEL_SHIZUKU : "/javascripts/live2d/assets/live2d/shizuku/shizuku.model.json",
-    MODEL_WANKO : "/javascripts/live2d/assets/live2d/wanko/wanko.model.json",
+    MODEL_HARU : "./../javascripts/live2d/assets/live2d/haru/haru.model.json",
+    MODEL_HARU_B : "./../javascripts/live2d/assets/live2d/haru/haru_02.model.json",
+    MODEL_SHIZUKU : "./..javascripts/live2d/assets/live2d/shizuku/shizuku.model.json",
+    MODEL_WANKO : "./../javascripts/live2d/assets/live2d/wanko/wanko.model.json",
     
     // 外部定義ファイル(json)と合わせる
     MOTION_GROUP_IDLE : "idle", // アイドリング

@@ -6,7 +6,7 @@
 	<%- include('../_partial/widget/nav')%>
 	<div class="pure-g">
 		<div class="pure-u-1-3">
-			<a class="pure-button pure-button-primary" class="pure-u-1-1" href="/admin/new/contest">+ <%= __('New Contest') %></a>
+			<a class="pure-button pure-button-primary" class="pure-u-1-1" href="<%= site.url_for('admin/new/contest') %>">+ <%= __('New Contest') %></a>
 		</div>
 	</div>
 
@@ -33,11 +33,11 @@
 					<% } %>
 				</td>
 				<td><%- contest.cid %></td>
-				<td><a href="/contest/<%- contest.cid %>"><%- contest.ttl %></a></td>
+				<td><a href="<%= site.url_for('contest/' + contest.cid) %>"><%- contest.ttl %></a></td>
 				<td><%- config.unitConvert('date', new Date(contest.ts1)) %></td>
 				<td><%- config.unitConvert('date', new Date(contest.ts2)) %></td>
 				<td>
-				<a class="pure-button pure-button-primary" href="/admin/edit/contest/<%- contest.cid %>"><i class="fa fa-cog"></i> <%= __('Edit') %></a>
+				<a class="pure-button pure-button-primary" href="<%= site.url_for('admin/edit/contest/' + contest.cid) %>"><i class="fa fa-cog"></i> <%= __('Edit') %></a>
 				</td>
 			</tr>
 			<% } %>

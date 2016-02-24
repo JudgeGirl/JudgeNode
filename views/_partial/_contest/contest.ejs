@@ -22,9 +22,9 @@
 
 <div class="pure-menu pure-menu-horizontal">
 	<ul class="pure-menu-list">
-		<li class="pure-menu-item"><a class="pure-menu-link" href='/scoreboard/contest/<%- contest_config.cid %>'><%= __('Scoreboard') %></a></li>
-		<% if (user["uid"] >= 0 && user["class"] == null) { %>
-		<li class="pure-menu-item"><a class="pure-menu-link" href='/admin/edit/contest/<%- contest_config.cid %>'><%= __('Edit') %></a></li>
+		<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('scoreboard/contest/' + contest_config.cid) %>'><%= __('Scoreboard') %></a></li>
+		<% if (user["class"] == null) { %>
+		<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('admin/edit/contest/' + contest_config.cid) %>'><%= __('Edit') %></a></li>
 		<% } %>
 	</ul>
 </div>
@@ -62,7 +62,7 @@
 			<% } %>
 		</td>
 		<td><%- problem_list[row].pid %></td>
-		<td><a href="<%- "/problem/" + contest_config.cid + "/" + problem_list[row].pid %>" ><%- problem_list[row].ttl %></a></td>
+		<td><a href="<%= site.url_for('problem/' + contest_config.cid + '/' + problem_list[row].pid) %>" ><%- problem_list[row].ttl %></a></td>
 		<td></td>
 		<td><%- site.CONTEST.SUBMIT_LIMIT - submits %></td>
 	</tr>

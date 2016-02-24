@@ -9,24 +9,23 @@
 			<%= site.HOST.TITLE %>
 		</title>
 		<!-- <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" /> -->
-		<link rel="stylesheet" href="/stylesheets/pure-release-0.6.0/pure-min.css">
-		<link rel="stylesheet" href="/stylesheets/pure-release-0.6.0/grids-responsive-min.css">
-		<link title="default" rel="stylesheet" href="/stylesheets/pure-release-0.6.0/slide-menu.css">
-		<link title="dark" rel="stylesheet" href="/stylesheets/pure-release-0.6.0/slide-menu-dark.css" disabled="disabled"/>
+		<link rel="stylesheet" href="<%= site.url_for('stylesheets/pure-release-0.6.0/pure-min.css') %>">
+		<link rel="stylesheet" href="<%= site.url_for('stylesheets/pure-release-0.6.0/grids-responsive-min.css') %>">
+		<link title="default" rel="stylesheet" href="<%= site.url_for('stylesheets/pure-release-0.6.0/slide-menu.css') %>">
+		<link title="dark" rel="stylesheet" href="<%= site.url_for('stylesheets/pure-release-0.6.0/slide-menu-dark.css') %>" disabled="disabled"/>
 
-		<link title="default" rel="stylesheet" href="/stylesheets/chat.css">
+		<link title="default" rel="stylesheet" href="<%= site.url_for('stylesheets/chat.css') %>">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<link rel="stylesheet" href="/stylesheets/font-awesome/css/font-awesome.min.css">
-		<script type="text/javascript" src="/javascripts/main.js"></script>
-		<script type="text/javascript" src="/javascripts/problem.js"></script>
-		<script src="/javascripts/jquery-2.1.0.min.js"></script>
-		<script src="/javascripts/jquery.cookie.js"></script> 
-		<script src="/javascripts/jquery.countdown.min.js"></script>
-		<script src="/javascripts/typed.js"></script>
-		<script src="/javascripts/diagram/raphael-min.js"></script>
-		<script src="/javascripts/diagram/flowchart.js"></script>
-		<link rel="stylesheet" href="/stylesheets/terminal.css">		
+		<link rel="stylesheet" href="<%= site.url_for('stylesheets/font-awesome/css/font-awesome.min.css') %>">
+		<script type="text/javascript" src="<%= site.url_for('javascripts/main.js') %>"></script>
+		<script src="<%= site.url_for('javascripts/jquery-2.1.0.min.js') %>"></script>
+		<script src="<%= site.url_for('javascripts/jquery.cookie.js') %>"></script> 
+		<script src="<%= site.url_for('javascripts/jquery.countdown.min.js') %>"></script>
+		<script src="<%= site.url_for('javascripts/typed.js') %>"></script>
+		<script src="<%= site.url_for('javascripts/diagram/raphael-min.js') %>"></script>
+		<script src="<%= site.url_for('javascripts/diagram/flowchart.js') %>"></script>
+		<link rel="stylesheet" href="<%= site.url_for('stylesheets/terminal.css') %>">
 
 		<script>
 		var cookie_style = $.cookie("mystyle"); 
@@ -52,11 +51,11 @@
 	            <a class="pure-menu-heading" href="#"><%= __(site.HOST.TITLE) %></a>
 
 	            <ul class="pure-menu-list">
-	                <li class="pure-menu-item"><a href="/archive" class="pure-menu-link"><i class="fa fa-archive"></i> <%= __('Archive') %></a></li>
-	                <li class="pure-menu-item"><a href="/problems/domains" class="pure-menu-link"><i class="fa fa-list-alt"></i> <%= __('Problems') %></a></li>
-	                <li class="pure-menu-item"><a href="/live" class="pure-menu-link"><i class="fa fa-circle"></i> <%= __('Live') %></a></li>
-	                <li class="pure-menu-item"><a href="/ranklist" class="pure-menu-link"><i class="fa fa-trophy"></i> <%= __('Rank') %></a></li>
-	                <li class="pure-menu-item"><a href="/contests" class="pure-menu-link"><i class="fa fa-flag"></i> <%= __('Contest') %></a></li>
+	                <li class="pure-menu-item"><a href="<%= site.url_for('archive') %>" class="pure-menu-link"><i class="fa fa-archive"></i> <%= __('Archive') %></a></li>
+	                <li class="pure-menu-item"><a href="<%= site.url_for('problems/domains') %>" class="pure-menu-link"><i class="fa fa-list-alt"></i> <%= __('Problems') %></a></li>
+	                <li class="pure-menu-item"><a href="<%= site.url_for('live') %>" class="pure-menu-link"><i class="fa fa-circle"></i> <%= __('Live') %></a></li>
+	                <li class="pure-menu-item"><a href="<%= site.url_for('ranklist') %>" class="pure-menu-link"><i class="fa fa-trophy"></i> <%= __('Rank') %></a></li>
+	                <li class="pure-menu-item"><a href="<%= site.url_for('contests') %>" class="pure-menu-link"><i class="fa fa-flag"></i> <%= __('Contest') %></a></li>
 	                <li class="pure-menu-item">
 						<a id="timer" class="pure-menu-link"> 00:00:00</a>
 					</li>
@@ -64,32 +63,31 @@
 	        </div>
 	        <div class="pure-menu">
 	            <a class="pure-menu-heading" href="#"><%= __('Account') %></a>
-
 	            <ul class="pure-menu-list">
 	        <% if (user == undefined || user == null || user.uid == undefined) { %>
 				<li class="pure-menu-item">
-					<a class="pure-menu-link" href="/login"><i class="fa fa-sign-in"></i> <%= __('Login') %></a>
+					<a class="pure-menu-link" href="<%= site.url_for('login') %>"><i class="fa fa-sign-in"></i> <%= __('Login') %></a>
 				</li>
 			<% } else { %>
 				<li class="pure-menu-item">
 					<a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> <%- user.lgn %> <i class="fa fa-caret-down"></i></a>
 					<ul class="pure-menu-list">
 						<li class="pure-menu-item">
-							<a class="pure-menu-link" href="/user/<%- user.uid %>"><i class="fa fa-tasks"></i> <%= __('Status') %></a>
+							<a class="pure-menu-link" href="<%= site.url_for('user/' + user.uid) %>"><i class="fa fa-tasks"></i> <%= __('Status') %></a>
 						</li>
 						<li class="pure-menu-item">
-							<a class="pure-menu-link" href="/score"><i class="fa fa-database"></i> <%= __('Score') %></a>
+							<a class="pure-menu-link" href="<%= site.url_for('score') %>"><i class="fa fa-database"></i> <%= __('Score') %></a>
 						</li>
 						<li>
-							<a class="pure-menu-link" href="/edit"><i class="fa fa-cogs"></i> <%= __('Profile') %></a>
+							<a class="pure-menu-link" href="<%= site.url_for('edit') %>"><i class="fa fa-cogs"></i> <%= __('Profile') %></a>
 						</li class="pure-menu-item">			
 						<% if (user["class"] == null) { %>
 							<li class="pure-menu-item">
-								<a class="pure-menu-link" href="/admin"><i class="fa fa-hand-paper-o"></i> <%= __('Manage') %></a>
+								<a class="pure-menu-link" href="<%= site.url_for('admin') %>"><i class="fa fa-hand-paper-o"></i> <%= __('Manage') %></a>
 							</li>
 						<% } %>
 						<li class="pure-menu-item">
-							<a class="pure-menu-link" href="/logout"><i class="fa fa-sign-out"></i> <%= __('Logout') %></a>
+							<a class="pure-menu-link" href="<%= site.url_for('logout') %>"><i class="fa fa-sign-out"></i> <%= __('Logout') %></a>
 						</li>
 
 					</ul>
@@ -102,10 +100,10 @@
 					<div>
 						<ul class="pure-menu-list">
 							<li class="pure-menu-item">
-								<a class="pure-menu-link" href="/i18n/zhtw"><i class="fa fa-globe"></i> zhtw</a>
+								<a class="pure-menu-link" href="<%= site.url_for('i18n/zhtw') %>"><i class="fa fa-globe"></i> zhtw</a>
 							</li>
 							<li class="pure-menu-item">
-								<a class="pure-menu-link" href="/i18n/en"><i class="fa fa-globe"></i> en</a>
+								<a class="pure-menu-link" href="<%= site.url_for('i18n/en') %>"><i class="fa fa-globe"></i> en</a>
 							</li>
 						</ul>
 					</div>
@@ -128,8 +126,4 @@
 	            </ul>
 	        </div>
 	    </div>
-
-			
-		<script>start_clock()</script>
-
-		<div></div>
+		<script>start_clock('<%= site.url_for('time') %>')</script>

@@ -19,7 +19,7 @@ table .motto .abbr {
 <div class="content">
 	<div class="pure-menu pure-menu-horizontal">
 		<ul class="pure-menu-list">
-			<li class="pure-menu-item"><a class="pure-menu-link" href="/progress">Progress Report</a></li>
+			<li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('progress') %>">Progress Report</a></li>
 			<li class="pure-menu-item"><a class="pure-menu-link" href="#">Site Statistics</a></li>
 		</ul>
 	</div>
@@ -85,7 +85,7 @@ table .motto .abbr {
 		</table>
 	</div>
 	<div class="pure-u-1-1">
-		<%- include('../pagination', {page: page, url: '/ranklist?page=', query: arg_query, totpage: totpage})%>
+		<%- include('../pagination', {page: page, url: site.url_for('ranklist?page='), query: arg_query, totpage: totpage})%>
 	</div>
 	</div>
 </div>

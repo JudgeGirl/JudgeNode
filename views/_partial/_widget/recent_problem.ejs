@@ -9,7 +9,7 @@
 <% for (var i in recent_problems) { %>
 	<tr class="<%- i%2 == 0 ? "" : "pure-table-odd" %>">
 		<td>
-		<a href="problem/0/<%- recent_problems[i].pid %>" class="name">
+		<a href="<%= site.url_for('problem/0/' + recent_problems[i].pid) %>" class="name">
 		<%- recent_problems[i].pid %>. <%- recent_problems[i].ttl %></a></td>
 	</tr>
 <% } %>

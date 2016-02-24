@@ -70,7 +70,7 @@ app.use(session({
   },
   secret: 'alskdjasjoimk'
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(utils.url_for('/'), express.static(path.join(__dirname, 'public')));
 
 app.use(utils.url_for('admin'), admins);
 app.use(utils.url_for('user'), users);

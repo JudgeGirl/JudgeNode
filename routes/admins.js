@@ -5,7 +5,8 @@ var dblink = require('../lib/components/dblink');
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');
-var loginURL = '/login';
+var utils = require('../lib/components/utils');
+var loginURL = utils.url_for('login');
 
 /* GET admin page dashboard */
 router.get('/', function(req, res, next) {
@@ -79,7 +80,7 @@ router.get('/api/rejudge?', function(req, res, next) {
 			return res.redirect(loginURL);
 		dblink.api.rejudge(req.query, function(result) {
 			if (req.headers.referer) res.redirect(req.headers.referer);
-    		else res.redirect("/");
+    		else res.redirect(utils.url_for('/'));
 		});
 	});
 });

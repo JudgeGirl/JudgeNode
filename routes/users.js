@@ -5,6 +5,8 @@ var config = require('../lib/config').config;
 var MAU = require('../lib/components/modify-and-upload');
 var multer = require('multer');
 var fs = require('fs');
+var utils = require('../lib/components/utils');
+
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
     	cb(null, './files/')
@@ -40,10 +42,10 @@ router.post('/upload/avatar',
 	upload.fields([{name: 'avatar', maxCount: 1}]), function(req, res, next) {
 	var uid = req.session.uid;
 	if (uid == undefined || uid == null) {
-		res.redirect('../login');
+		res.redirect(utils.url_for('login'));
 	} else {
 		var mau = new MAU(req.files['avatar'][0], uid, function(err, newImagePath){
-	    	res.redirect('/');
+	    	res.redirect(utils.url_for('/'));
 		});
 	}
 });

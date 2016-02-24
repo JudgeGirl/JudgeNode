@@ -53,7 +53,7 @@
 		else
 			page = parseInt(page);
 	%>
-	<%- include('../pagination', {page: page, url: '/submissions?page=', query: arg_query, totpage: totpage})%>
+	<%- include('../pagination', {page: page, url: site.url_for('submissions?page='), query: arg_query, totpage: totpage})%>
 	</div>
 </div>
 </div>

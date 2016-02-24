@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css" />
+<link rel="stylesheet" type="text/css" href="<%= site.url_for('stylesheets/shThemeDefault.css') %>" />
 <%
 	var uid = user.uid,
 		pid = solution_config.config.pid,
@@ -14,13 +14,13 @@
 
 <ul class="pure-menu-list">
 <% if (uid != undefined) { %>
-	<li class="pure-menu-item"><a class="pure-menu-link" href='/submissions?pid=<%- pid %>&uid=<%- uid %>'><%= __('My Status') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('submissions?pid=' + pid + '&uid=' + uid) %>'><%= __('My Status') %></a></li>
 <% } %>
-	<li class="pure-menu-item"><a class="pure-menu-link" href='/submissions?pid=<%- pid %>'><%= __('Status') %></a></li>
-	<li class="pure-menu-item"><a class="pure-menu-link" href='/statistic/problem/0/<%- pid %>'><%= __('Statistics') %></a></li>
-	<li class="pure-menu-item"><a class="pure-menu-link" href='/problem/0/<%- pid %>'><%= __('Problem') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('submissions?pid=' + pid) %>'><%= __('Status') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('statistic/problem/0/' + pid) %>'><%= __('Statistics') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('problem/0/' + pid) %>'><%= __('Problem') %></a></li>
 <% if (user["uid"] >= 0 && user["class"] == null) { %>
-	<li class="pure-menu-item"><a class="pure-menu-link" href='/admin/edit/problem/<%- pid %>'><%= __('Edit') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('admin/edit/problem/' + pid) %>'><%= __('Edit') %></a></li>
 <% } %>
 </ul>
 </div>

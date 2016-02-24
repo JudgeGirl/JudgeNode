@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/stylesheets/DateTimePicker.css">
-<script type="text/javascript" src="/javascripts/DateTimePicker.js"></script>
+<link rel="stylesheet" href="<%= site.url_for('stylesheets/DateTimePicker.css') %>">
+<script type="text/javascript" src="<%= site.url_for('javascripts/DateTimePicker.js') %>"></script>
 
 <div class="header">
 	<h1 class='article-title'><%= __('Add Contest') %></h1>
@@ -8,7 +8,7 @@
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
 
-    <form action="/admin/new/contest" method="post" class="pure-form pure-form-stacked">
+    <form action="<%= site.url_for('admin/new/contest') %>" method="post" class="pure-form pure-form-stacked">
     <fieldset>
         <div class="pure-g">
             <div class="pure-u-1-1">

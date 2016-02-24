@@ -4,6 +4,7 @@ var dblink = require('../lib/components/dblink');
 var multer = require('multer');
 var _config = require('../lib/config').config;
 var markdown = require('../lib/components/plugin/markdown');
+var utils = require('../lib/components/utils');
 var fs = require('fs');
 
 var upload = multer({
@@ -34,14 +35,14 @@ router.get('/restart', function(req, res, next){
 			throw new Exception();
 		}
 		else {
-			res.redirect('/');
+			res.redirect(utils.url_for('/'));
 		}
 	});	
 });
 
 /* User Information control */
 router.get('/login', function(req, res, next) {
-	req.session.redirect_to = req.header('Referer') || '/';
+	req.session.redirect_to = req.header('Referer') || utils.url_for('/');
 	res.render('layout', { layout: 'login', subtitle: 'Login', user: req.session, sysmsg: '' });
 });
 router.post('/login', function(req, res, next) {
@@ -51,8 +52,7 @@ router.post('/login', function(req, res, next) {
 	};
 	var iplist = _config.CONTEST.VALID_IP;
 	var ip = req.ip;
-	console.log(req.session.redirect_to);
-	var backURL = req.session.redirect_to || '/';
+	var backURL = req.session.redirect_to || utils.url_for('/');
 	dblink.user.login(user, req.session, function(status) {
 		if (status == 1) {
 			var uid = req.session.uid;
@@ -75,7 +75,7 @@ router.post('/login', function(req, res, next) {
 });
 router.get('/logout', function(req, res, next) {
 	req.session.regenerate(function(err) {
-		res.redirect('/');
+		res.redirect(utils.url_for('/'));
 	});
 });
 router.get('/edit', function(req, res, next) {
@@ -131,7 +131,7 @@ router.post('/register', function(req, res, next) {
 */
 /* Navigation Bar */
 router.get('/archive', function(req, res, next) {
-	res.redirect('/');
+	res.redirect(utils.url_for('/'));
 });
 router.get('/ranklist?', function(req, res, next) {
 	dblink.rank.list(req.query, function(rlist) {
@@ -176,6 +176,7 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
 	var cid = req.params.cid, 
 		pid = req.params.pid,
 		uid = req.session.uid;
+	console.log(pid);
 	var loadPage = function() {
 		dblink.problemManager.problemContent(pid, function(pcontent, pinfo, psubmit) {
 			dblink.problemManager.testdataList(pid, function(tconfig) {
@@ -194,7 +195,7 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
 		if (uid != undefined && req.session['class'] == null)
 			can = true;
 		if (!can)
-			return res.redirect('/problems');
+			return res.redirect(utils.url_for('problems/domains'));
 		loadPage();
 	});
 });
@@ -206,7 +207,7 @@ router.get('/solution/problem/:pid', function(req, res, next) {
 		if (uid != undefined && req.session['class'] == null)
 			can = true;
 		if (!can)
-			return res.redirect('/problems');
+			return res.redirect(utils.url_for('problems/domains'));
 		dblink.problemManager.problemSolution(pid, function(solution_config) {
 			res.render('layout', { layout: 'solution', subtitle: 'Solution', user: req.session, solution_config: solution_config});
 		});
@@ -248,7 +249,7 @@ router.get('/statistic/grade/problem/:cid/:pid', function(req, res, next) {
 	};
 	dblink.helper.isAdmin(uid, function(isadmin) {
 		if (!isadmin)
-			return res.redirect('/login');
+			return res.redirect(utils.url_for('login'));
 		loadPage();
 	});
 });
@@ -284,7 +285,7 @@ router.get('/scoreboard/contest/:cid', function(req, res, next) {
 		uid = req.session.uid;
 	dblink.contest.enable(cid, uid, function(status, contest_config, sysmsg) {
 		if (status == 0) {
-			res.redirect('/contest/' + cid);
+			res.redirect(utils.url_for('/contest/' + cid));
 		} else {
 			dblink.contest.scoreboard(cid, uid, function(table_config) {
 				res.render('layout', { layout: 'scoreboard', subtitle: 'Scoreboard', user: req.session, table_config: table_config});
@@ -300,7 +301,7 @@ router.post('/submit',
 				   {name: 'code6', maxCount: 1}, {name: 'code7', maxCount: 1}]), 
 	function(req, res, next) {
 	if (req.session.uid === undefined || req.session.uid < 0)
-		return res.redirect("/login");
+		return res.redirect(utils.url_for('/login'));
 	
 	var cid = req.body.cid,
 		pid = req.body.pid,
@@ -318,7 +319,7 @@ router.post('/submit',
 				if (req.files['code' + i] == null || req.files['code' + i] == undefined || 
 					req.files['code' + i][0] == null || req.files['code' + i][0] == undefined) {
 					console.log('NOT FOUND FILE ' + i);
-					return res.redirect("/");
+					return res.redirect(utils.url_for('/'));
 				}
 				size += req.files['code' + i][0].size;
 			}	
@@ -340,9 +341,9 @@ router.post('/submit',
 				
 				dblink.judge.update_waiting_submission(sid, function(err) {
 					if (cid === "0")
-						return res.redirect("/submissions");
+						return res.redirect(utils.url_for('submissions'));
 					else
-						return res.redirect("/submissions?cid=" + cid);
+						return res.redirect(utils.url_for('submissions?cid=' + cid));
 				});	
 				
 			});
@@ -353,7 +354,7 @@ router.post('/submit',
 		if (req.session['class'] == null)
 			canSubmit = true;
 		if (!canSubmit)
-			return res.redirect("/");
+			return res.redirect(utils.url_for('/'));
 		submitStep();
 	});
 });

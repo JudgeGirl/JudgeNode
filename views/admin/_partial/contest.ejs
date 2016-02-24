@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/stylesheets/DateTimePicker.css">
-<script type="text/javascript" src="/javascripts/DateTimePicker.js"></script>
+<link rel="stylesheet" href="<%= site.url_for('stylesheets/DateTimePicker.css') %>">
+<script type="text/javascript" src="<%= site.url_for('javascripts/DateTimePicker.js') %>"></script>
 
 <div class="header">
 	<h1 class='article-title'><%= __('Edit Contest') %></h1>
@@ -8,7 +8,7 @@
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
 
-    <form action="/admin/update/contest/<%- cid %>" method="post" class="pure-form pure-form-stacked">
+    <form action="<%= site.url_for('/admin/update/contest/' + cid) %>" method="post" class="pure-form pure-form-stacked">
     <fieldset>
         <div class="pure-g">
             <div class="pure-u-1-1">
@@ -129,7 +129,7 @@
             <tr>
                 <% var prob = contest_config.problem[row]; %>
                 <td><%- prob.pid %></td>
-                <td><a href="/problem/<%- cid %>/<%- prob.pid %>"><%- prob.ttl %></a></td>
+                <td><a href="<%= site.url_for('problem/' + cid + '/' + prob.pid) %>"><%- prob.ttl %></a></td>
             </tr>
             <% } %>
         </tbody>
@@ -146,7 +146,7 @@
             <% for (row in contest_config.user) { %>
             <tr>
                 <% var user = contest_config.user[row]; %>
-                <td><a href="/user/<%- user.uid %>"><%- user.lgn %></a></td>
+                <td><a href="<%= site.url_for('user/' + user.uid) %>"><%- user.lgn %></a></td>
                 <td>
                 <% if (user.class == null) { %>
                     <%= __('Administrator') %>

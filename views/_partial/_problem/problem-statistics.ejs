@@ -62,10 +62,10 @@
 			<% for (var row in best_config) { %>
 				<tr class='<%- row%2 == 0 ? "pure-table-odd" : "" %>'>
 					<td><%- (parseInt(row)+1) %></td>
-					<td><a href="/user/<%- best_config[row].uid %>"><%- best_config[row].lgn %></a></td>
+					<td><a href="<%= site.url_for('user/' + best_config[row].uid) %>"><%- best_config[row].lgn %></a></td>
 					<td><%- unitConvert('cpu', best_config[row].cpu) %>, <%- unitConvert('mem', best_config[row].mem) %></td>
 					<td><%- unitConvert('mem', best_config[row].len) %></td>
-					<td><a href='/source/highlight/<%- best_config[row].sid %>'><%- judge_lng[best_config[row].lng] %></a></td>
+					<td><a href='<%= site.url_for('source/highlight/' + best_config[row].sid) %>'><%- judge_lng[best_config[row].lng] %></a></td>
 					<td class='date'><%- unitConvert('date', new Date(best_config[row].ts)) %></td>
 				</tr>
 			<% } %>

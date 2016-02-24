@@ -1,9 +1,9 @@
-<script type="text/javascript" src="/javascripts/marked.js"></script>
-<script type="text/javascript" src="/javascripts/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script src="/javascripts/sh/scripts/shCore.js" type="text/javascript"></script>
-<script src="/javascripts/sh/scripts/shBrushPlain.js" type="text/javascript"></script>
-<script src="/javascripts/sh/scripts/shBrushCpp.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css">
+<script type="text/javascript" src="<%= site.url_for('javascripts/marked.js') %>"></script>
+<script type="text/javascript" src="<%= site.url_for('javascripts/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML') %>"></script>
+<script src="<%= site.url_for('javascripts/sh/scripts/shCore.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/sh/scripts/shBrushPlain.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/sh/scripts/shBrushCpp.js') %>" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<%= site.url_for('stylesheets/shThemeDefault.css') %>">
 
 <div class="header">
 	<h1 class='article-title'><%= __('Edit Problem') %></h1>
@@ -12,7 +12,7 @@
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
 
-<form action="/admin/update/problem/<%- pid %>" method="post" class="pure-form pure-form-stacked">
+<form action="<%= site.url_for('admin/update/problem/' + pid) %>" method="post" class="pure-form pure-form-stacked">
     <fieldset>
     <div class="pure-g">
             <div class="pure-u-1-1">

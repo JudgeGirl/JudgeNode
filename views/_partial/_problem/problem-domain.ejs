@@ -7,7 +7,7 @@
 
 <div class="pure-menu pure-menu-horizontal">
 	<ul class="pure-menu-list">
-		<li class="pure-menu-item"><a class="pure-menu-link" href="/problems/domains">Domain</a></li>
+		<li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('problems/domains') %>">Domain</a></li>
 	</ul>
 </div>
 <style>
@@ -99,11 +99,10 @@
     	init(elem, options);
     	var obj = $(elem).find('li');
     	obj.on("click", function() {
-    		console.log($(this).attr('data'));
     		var lid = $(this).attr('data');
     		$.ajax({
 			 	method: 'GET',
-			 	url: "//" + options.ip + "/api/problems",
+			 	url: "//" + options.ip + "api/problems",
 				data: { did: <%- domain_id %>
 					<% if (user['uid'] != undefined) { %>
 						, uid: <%- user['uid'] %>
@@ -123,7 +122,7 @@
     		}
 			$.ajax({
 			 	method: 'GET',
-			 	url: "//" + options.ip + "/api/problems",
+			 	url: "//" + options.ip + "api/problems",
 				data: { did: <%- domain_id %>
 					<% if (user['uid'] != undefined) { %>
 						, uid: <%- user['uid'] %>
@@ -162,7 +161,7 @@
 					text += '<div class="pure-u-1-12">' + '</div>';
 				}
 				text += '<div class="pure-u-11-12">';
-				text += '<h3 class="custom-mf-title"><a href="/problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
+				text += '<h3 class="custom-mf-title"><a href="<%= site.url_for('/') %>problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
 
 				if (item.pid in subs) {
 					text += '<p><span class="content-subhead">Submissions: </span> ' + subs[item.pid] + '</p>';
@@ -176,7 +175,7 @@
     	}
     }
     $.jhunt.defaults = {
-        ip: '<%- request_hostname %>',
+        ip: '<%- request_hostname %><%= site.url_for('/') %>',
         reloadtime: 2000,		// 	how time to load 
         reloadsubmit: 5,
         loadsubmit: 20,		//	how #submission to load

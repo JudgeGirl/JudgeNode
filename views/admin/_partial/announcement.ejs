@@ -1,15 +1,10 @@
-<script type="text/javascript" src="/javascripts/marked.js"></script>
-<script type="text/javascript" src="/javascripts/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script src="/javascripts/sh/scripts/shCore.js" type="text/javascript"></script>
-<script src="/javascripts/sh/scripts/shAutoloader.js" type="text/javascript"></script>
-<script src="/javascripts/sh/scripts/shBrushPlain.js" type="text/javascript"></script>
-<script src="/javascripts/sh/scripts/shBrushCpp.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css">
-
-<script src="/javascripts/me/js/medium-editor.js" type="text/javascript"></script>
-<script src="/javascripts/me/js/me-markdown.standalone.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/javascripts/me/css/medium-editor.css">
-<link rel="stylesheet" type="text/css" href="/javascripts/me/css/default.css">
+<script type="text/javascript" src="<%= site.url_for('javascripts/marked.js') %>"></script>
+<script type="text/javascript" src="<%= site.url_for('javascripts/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML') %>"></script>
+<script src="<%= site.url_for('javascripts/sh/scripts/shCore.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/sh/scripts/shAutoloader.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/sh/scripts/shBrushPlain.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/sh/scripts/shBrushCpp.js') %>" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<%= site.url_for('stylesheets/shThemeDefault.css') %>">
 
 <div class="header">
 	<h1 class='article-title'><%= __('Edit Announcement') %></h1>
@@ -28,7 +23,7 @@
 
     <section id="content1" class="tab-content">
         <div class="pure-u-1-1">
-            <form action="update/announcement" method="post" class="pure-form  pure-form-stacked">
+            <form action="<%= site.url_for('admin/update/announcement') %>" method="post" class="pure-form  pure-form-stacked">
                 <fieldset>
 
                     <textarea name="textbox" id="textbox" class="pure-input-1 markdown" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= md_content %></textarea>

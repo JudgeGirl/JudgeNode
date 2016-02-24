@@ -5,7 +5,8 @@ var dblink = require('../../lib/components/dblink');
 var multer = require('multer');
 var upload = multer({dest: 'files/'});
 var fs = require('fs');
-var loginURL = '/login';
+var utils = require('../../lib/components/utils');
+var loginURL = utils.url_for('login');
 
 /* edit page */
 router.get('/problem/:pid', function(req, res, next) {

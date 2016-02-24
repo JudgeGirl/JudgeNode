@@ -5,7 +5,7 @@
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
 
-<form action="/admin/update/gradettl/<%= econfig.eid %>" method="post" class="pure-form pure-form-stacked">
+<form action="<%= site.url_for('admin/update/gradettl/' + econfig.eid) %>" method="post" class="pure-form pure-form-stacked">
     <fieldset>
     <div class="pure-g">
 
@@ -29,5 +29,3 @@
 </form>
 				
 </div>
-
-<% console.log(econfig) %>

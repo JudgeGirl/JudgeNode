@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/stylesheets/shThemeDefault.css" />
+<link rel="stylesheet" type="text/css" href="<%= site.url_for('stylesheets/shThemeDefault.css') %>" />
 
 <div class="header">
   <h1 class='article-title'>Source Code</h1>
@@ -8,8 +8,8 @@
 
 <div class="pure-menu pure-menu-horizontal">
 <ul class="pure-menu-list">
-  <li class="pure-menu-item"><a class="pure-menu-link" href="/source/<%- subs_info.sid %>" target="_blank"><i class="fa fa-file"></i> plain</a></li>
-  <li class="pure-menu-item"><a class="pure-menu-link" href="/problem/<%= subs_info.cid %>/<%- subs_info.pid %>" target="_blank"><i class="fa fa-file"></i> <%= __('Problem') %></a></li>
+  <li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('source/' + subs_info.sid) %>" target="_blank"><i class="fa fa-file"></i> plain</a></li>
+  <li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('problem/' + subs_info.cid + '/' + subs_info.pid) %>" target="_blank"><i class="fa fa-file"></i> <%= __('Problem') %></a></li>
 </ul>
 </div>
 
@@ -61,7 +61,7 @@
   <%- include('../_widget/disqus') %>
 </div>
 
-<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script src="<%= site.url_for('javascripts/clipboard/clipboard.min.js') %>"></script>
 
 <script>
 new Clipboard(".fw-code-copy-button", {

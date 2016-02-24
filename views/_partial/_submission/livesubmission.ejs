@@ -21,7 +21,8 @@
 
 <p></p>
 
-<script src="/javascripts/jquery.timeago.js"></script>
+<script src="<%= site.url_for('javascripts/jquery.timeago.js') %>"></script>
+	
 	<table id='live-submission' class="pure-table pure-table-bordered" style="width: 100%">
 		<thead>
 			<tr>
@@ -52,7 +53,7 @@
 	else
 		page = parseInt(page);
 %>
-<%- include('../pagination', {page: page, url: '/live?page=', query: arg_query, totpage: totpage})%>
+<%- include('../pagination', {page: page, url: site.url_for('live?page='), query: arg_query, totpage: totpage})%>
 <script>
 (function($) {
     "use strict";
@@ -76,7 +77,7 @@
     	function init(elem, options) {
 			$.ajax({
 			 	method: 'GET',
-			 	url: "//" + options.ip + "/api/submission",
+			 	url: "//" + options.ip + "api/submission",
 				data: { limit: options.loadsubmit 
 					<% if (query_filter['uid'] != undefined) { %>
 						, uid: <%- query_filter['uid'] %>
@@ -134,7 +135,7 @@
 				text += "<td class='sid'>" + submit_list[i].sid + "</td>";
 				text += "<td class='pid'>" + submit_list[i].pid + "</td>";
 				text += "<td class='problem-title'>" + 
-							"<a href='problem/" + submit_list[i].cid + "/" + submit_list[i].pid + "'>" + submit_list[i].ttl + "</a></td>";
+							"<a href='<%= site.url_for('problem/') %>" + submit_list[i].cid + "/" + submit_list[i].pid + "'>" + submit_list[i].ttl + "</a></td>";
 				text += "<td>";
 				var filter_ip = iplist.filter(function(valid_ip) {
 					return submit_list[i].ip == valid_ip;
@@ -144,7 +145,7 @@
 				} else {
 					text += '<i class="fa fa-exclamation-triangle" style="color: orange;"></i> ';
 				}
-				text += "<a href='user/" + submit_list[i].uid + "'>" + submit_list[i].lgn + "</td>";
+				text += "<a href='<%= site.url_for('user/') %>" + submit_list[i].uid + "'>" + submit_list[i].lgn + "</td>";
 				text += "<td class='status' data-res=" + submit_list[i].res + " data-sid=" + submit_list[i].sid + ">";
 				text += "<span class='result" + submit_list[i].res + "'>" + options.restext[(submit_list[i].res+options.restext.length)%options.restext.length] + "</span>";
 				if (submit_list[i].res != 0 && submit_list[i].res != 1 && submit_list[i].res != 8) {
@@ -161,7 +162,7 @@
 				if (submit_list[i].res == 0 || submit_list[i].res == 8)
 					text += ' <i class="fa fa-spinner fa-pulse"></i>';
 				text += '</td>';
-				text += "<td><a href='source/highlight/" + submit_list[i].sid + "'>" + options.langtext[submit_list[i].lng] + '</a></td>';
+				text += "<td><a href='<%= site.url_for('source/highlight/') %>" + submit_list[i].sid + "'>" + options.langtext[submit_list[i].lng] + '</a></td>';
 				text += '<td><abbr class="timeago" title="' + new Date(submit_list[i].ts).toISOString() + '"></abbr></td>';
 	  		}
 	  		tbody.html(text);
@@ -175,7 +176,7 @@
 					if (result == 0 || result == 8) {
 						$.ajax({
 						 	method: 'GET',
-						 	url: "//" + options.ip + "/api/result",
+						 	url: "//" + options.ip + "api/result",
 							data: { sid: sid },
 							timeout: options.updatetime/2,
 						}).done(function(submit_list) {
@@ -202,7 +203,7 @@
     		<% if (page == undefined || page == null || page == 1) { %>
     		$.ajax({
 			 	method: 'GET',
-			 	url: "//" + options.ip + "/api/submission",
+			 	url: "//" + options.ip + "api/submission",
 				data: { limit: options.reloadsubmit 
 					<% if (query_filter['uid'] != undefined) { %>
 						, uid: <%- query_filter['uid'] %>
@@ -254,7 +255,7 @@
 		}
     }
     $.jhunt.defaults = {
-        ip: '<%- request_hostname %>',
+        ip: '<%- request_hostname %><%= site.url_for('/') %>',
         reloadtime: 2000,		// 	how time to load 
         reloadsubmit: 5,
         loadsubmit: 20,		//	how #submission to load

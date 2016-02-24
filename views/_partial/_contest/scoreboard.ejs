@@ -16,7 +16,7 @@
 				<th style="width: 15%;">Score</th>
 				<% var width = 85 / Math.max(table_config.header.length, 1); %>
 				<% for (var row = 0; row < table_config.header.length; row++) { %>
-					<th style="width:<%- width %>%"><a href="/problem/<%- table_config.cid %>/<%- table_config.header[row].pid %>"><%- table_config.header[row].ttl %></a></th>
+					<th style="width:<%- width %>%"><a href="<%= site.url_for('problem/' + table_config.cid + '/' + table_config.header[row].pid) %>"><%- table_config.header[row].ttl %></a></th>
 				<% } %>
 			</tr>
 		</thead>
@@ -119,7 +119,7 @@
 				 %>
 				<% for (var row = 0; row < table_config.user.length; row++) { %>
 				<tr class="normal">
-					<td><a href="/user/<%- table_config.user[row].uid %>"><%- table_config.user[row].lgn %></a></td>
+					<td><a href="<%= site.url_for('user/' + table_config.user[row].uid) %>"><%- table_config.user[row].lgn %></a></td>
 					<% for (var col = 0; col < table_config.header.length; col++) { %>
 						<% 
 							if (alluser[table_config.user[row].uid][table_config.header[col].pid] != undefined) { 
@@ -136,7 +136,7 @@
 									<td><span class="result7">AC </span></td>
 								<% } %>
 								<td><%- score %></td>
-								<td><a href="/submissions?<%- filter %>"><%- times %></a></td>
+								<td><a href="<%= site.url_for('submissions?' + filter) %>"><%- times %></a></td>
 						<% } else { %>
 							<td> NO </td>
 							<td> 0 </td>
