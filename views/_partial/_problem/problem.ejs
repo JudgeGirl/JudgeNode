@@ -83,12 +83,13 @@
 	</div>
 	<div class="pure-u-1 pure-u-lg-1-3">
 		<h2 class="content-subhead">Testdata Set</h2>
+		<a href="<%= site.url_for('testdata/download/' + pid) %>"><i class="fa fa-download"></i> Download Testdata</a>
     	<div class="pure-menu">
 		    <ul class="pure-menu-list">
 	    	<% for (var i in testdata_config) { %>
 	    		<% var testset = testdata_config[i]; %>
 	    		<li class="pure-menu-item">
-	    			<a href="<%- site.HOST.testdata %><%- pid %>/<%- testset[1][0] %>" class="pure-menu-link" style="padding: 0em 0.1em;">
+	    			<a href="<%- site.url_for(site.HOST.testdata) %><%- pid %>/<%- testset[1][0] %>" class="pure-menu-link" style="padding: 0em 0.1em;">
 	    			<%- __('Subtask') %> <%- (parseInt(i)) %> (<%- testset[0] %>%): <%- config.unitConvert('cpu', testset[1][2]*1024) %>, <%- config.unitConvert('mem', testset[1][3]) %>
 	    			</a>
 	    		</li>

@@ -47,7 +47,8 @@
               <%- include('_partial/_submission/highlight') %>
             <% } else if (layout == 'detail') { %>
               <%- include('_partial/_submission/judgeresult') %>
-            
+            <% } else if (layout == 'testdata_download') { %>
+              <%- include('_partial/_testdata/download') %>
             <% } %>
           </section>
       </div>

@@ -385,9 +385,11 @@ router.get('/score', function(req, res, next){
 });
 
 var sourceRouter = require('./source'),
-	apiRouter = require('./api');
+	apiRouter = require('./api'),
+	testdataRouter = require('./testdata');
 
 router.use('/source', sourceRouter);
 router.use('/api', apiRouter);
+router.use('/testdata', testdataRouter);
 
 module.exports = router;
