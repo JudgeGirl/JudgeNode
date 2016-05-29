@@ -31,7 +31,6 @@
 			solve_status[level_progress['db'][i].level]['status'] = 'undefined';
 		}
 	}
-	
 	if (level_progress && level_progress['ac']) {
 		for (var i = 0; i < level_progress['ac'].length; i++) {
 			if (level_progress['ac'][i].count >= 
@@ -143,7 +142,7 @@
 		  	var iplist = <%- JSON.stringify(site.CONTEST.VALID_IP) %>;
 		  	var score = {}, subs = {};
 		  	for (var i in probs_list.score)
-		  		score[probs_list.score[i].pid] = probs_list.score[i].score;
+		  		score[probs_list.score[i].pid] = probs_list.score[i].res;
 		  	for (var i in probs_list.subs)
 		  		subs[probs_list.subs[i].pid] = probs_list.subs[i].count;
 			for (var i in probs_list.plist) {
@@ -153,7 +152,7 @@
 				else
 					text += '<div class="problem-item problem-item-odd">';
 				if (item.pid in score) {
-					if (score[item.pid] == 100)
+					if (score[item.pid] == 7)
 						text += '<div class="pure-u-1-12"><h2><i class="fa fa-check" style="color: green;"></i></h2></div>';
 					else
 						text += '<div class="pure-u-1-12"><h2><i class="fa fa-times" style="color: red;"></i></h2></div>';
