@@ -1,19 +1,21 @@
 <h2><%= __('Recent Update') %></h2>
 <div class="pure-g">
 	<div class="pure-u-1-1">
-<table class="pure-table" style="width: 100%">
-	<thead>
-		<th></th>
-	</thead>
-	<tbody>
-<% for (var i in recent_problems) { %>
-	<tr class="<%- i%2 == 0 ? "" : "pure-table-odd" %>">
-		<td>
-		<a href="<%= site.url_for('problem/0/' + recent_problems[i].pid) %>" class="name">
-		<%- recent_problems[i].pid %>. <%- recent_problems[i].ttl %></a></td>
-	</tr>
-<% } %>
-	</tbody>
-</table>
+		<table class="pure-table">
+			<tbody>
+				<% for (var i in recent_problems) { %>
+					<tr <%- i%2 == 0 ? "" : 'class="pure-table-odd"' %> >
+						<td>
+							<%- recent_problems[i].pid %>
+						</td>
+						<td>
+							<a href="<%= site.url_for('problem/0/' + recent_problems[i].pid) %>">
+								<%- recent_problems[i].ttl %>
+							</a>
+						</td>
+					</tr>
+					<% } %>
+			</tbody>
+		</table>
 	</div>
 </div>

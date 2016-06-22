@@ -1,13 +1,11 @@
-@font-face
-{
-  font-family: ChekiangShuKeSung;
-  src: url('../fonts/ChekiangShuKeSung.otf');
+@font-face {
+    font-family: ChekiangShuKeSung;
+    src: url('../fonts/ChekiangShuKeSung.otf');
 }
-@font-face
-{
-  font-family: MonotypeTraditionalSong;
-  src: url('../fonts/MonotypeTraditionalSong.otf');
-  unicode-range: U+4E00-9FFF;
+@font-face {
+    font-family: MonotypeTraditionalSong;
+    src: url('../fonts/MonotypeTraditionalSong.otf');
+    unicode-range: U+4E00-9FFF;
 }
 body {
     /*color: #777;*/
@@ -15,56 +13,55 @@ body {
     font-family: "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1, h2, h3, h4 {
-  font-family: ChekiangShuKeSung;
+    font-family: ChekiangShuKeSung;
 }
 #menu .pure-menu-heading {
-  font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .content table thead {
-  font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .video-container {
-  position: relative;
-  padding-top: 56.25%;
-  height: 0;
-  overflow: hidden;
-  max-width: 80%;
-  margin: auto;
+    position: relative;
+    padding-top: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 80%;
+    margin: auto;
 }
-.video-container iframe,
-.video-container object,
-.video-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.video-container iframe, .video-container object, .video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
-
 .pure-menu-item input[type="checkbox"] {
-  display: none;
+    display: none;
 }
-.pure-menu-item input[type="checkbox"]:checked + label + div {
-  display: block;
+.pure-menu-item input[type="checkbox"]:checked+ label+ div {
+    display: block;
 }
 .pure-menu-item label {
-  display: block;
-  width: 100%;
-  position: relative;
-  cursor: pointer;
+    display: block;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
 }
 .pure-menu-item label:hover {
-  background-color: black;
+    background-color: black;
 }
 .pure-menu-item label:hover:after {
-  background-color: black;
+    background-color: black;
 }
 .pure-menu-item div {
-  display: none;
-  border-top: none;
-  text-align: left;
+    display: none;
+    border-top: none;
+    text-align: left;
 }
+
 /* Custom */
+
 .footer-content {
     font-family: MonotypeTraditionalSong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -73,20 +70,20 @@ h1, h2, h3, h4 {
     line-height: 1.7em;
 }
 .content blockquote {
-  margin: 1.6em 20px;
-  text-align: left;
-  border-left: 5px solid rgba(152,232,99,0.8);
-  margin: 0.65em 0 0.65em 4%;
-  padding-left: 1%;
-  padding-right: 1%;
+    margin: 1.6em 20px;
+    text-align: left;
+    border-left: 5px solid rgba(152, 232, 99, 0.8);
+    margin: 0.65em 0 0.65em 4%;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 .content .caption {
-  color: #A4A4A4;
-  display: block;
-  font-size: 0.9em;
-  margin-top: 0.5em;
-  position: relative;
-  text-align: center;
+    color: #A4A4A4;
+    display: block;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+    position: relative;
+    text-align: center;
 }
 .footer {
     background: #111;
@@ -101,90 +98,88 @@ h1, h2, h3, h4 {
     font-weight: bold;
 }
 .footer a:hover {
-    color:  #333;
+    color: #333;
 }
 .dsq-widget {
-  background: none repeat scroll 0% 0% #333534;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
-  border: 1px solid color-border;
-  border-radius: 3px;
-  color: white;
-  padding: 10px;
+    background: none repeat scroll 0% 0% #333534;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+    border: 1px solid color-border;
+    border-radius: 3px;
+    color: white;
+    padding: 10px;
 }
 .sysmsg {
-  color: #0055BB;
-  background-position: 4px top;
-  background-repeat: no-repeat;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-top: 3px solid #84A7DB;
-  border-bottom: 3px solid #84A7DB;
+    color: #0055BB;
+    background-position: 4px top;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-top: 3px solid #84A7DB;
+    border-bottom: 3px solid #84A7DB;
 }
+
 /* button */
-.button-success,
-.button-error,
-.button-warning,
-.button-secondary {
+
+.button-success, .button-error, .button-warning, .button-secondary {
     color: white;
     border-radius: 4px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-
 .button-success {
-    background: rgb(28, 184, 65); /* this is a green */
+    background: rgb(28, 184, 65);
+    /* this is a green */
 }
-
 .button-error {
-    background: rgb(202, 60, 60); /* this is a maroon */
+    background: rgb(202, 60, 60);
+    /* this is a maroon */
 }
-
 .button-warning {
-    background: rgb(223, 117, 20); /* this is an orange */
+    background: rgb(223, 117, 20);
+    /* this is an orange */
 }
-
 .button-secondary {
-    background: rgb(66, 184, 221); /* this is a light blue */
-}
-/* code block */
-.content .syntaxhighlighter {
-  background: #2d2d2d;
-  padding: 5px;
-  margin: 0px;
-  border-style: solid;
-  border-color: #696969;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  border-width: 1px 1px;
-  overflow: hidden;
-  color: #ccc;
-  line-height: 25.6px;
+    background: rgb(66, 184, 221);
+    /* this is a light blue */
 }
 
-.content .syntaxhighlighter .gutter pre,
-.content .gist .gist-file .gist-data .line-numbers {
-  color: #666;
-  font-size: 0.85em;
+/* code block */
+
+.content .syntaxhighlighter {
+    background: #2d2d2d;
+    padding: 5px;
+    margin: 0px;
+    border-style: solid;
+    border-color: #696969;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border-width: 1px 1px;
+    overflow: hidden;
+    color: #ccc;
+    line-height: 25.6px;
 }
-.content pre,
-.content code {
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace, "Microsoft YaHei";
-  margin: 0px 0px 0px 0px;
-  overflow: hidden;
+.content .syntaxhighlighter .gutter pre, .content .gist .gist-file .gist-data .line-numbers {
+    color: #666;
+    font-size: 0.85em;
+}
+.content pre, .content code {
+    font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace, "Microsoft YaHei";
+    margin: 0px 0px 0px 0px;
+    overflow: hidden;
 }
 .content code {
-  margin: 0px 2px;
-  padding: 0px 5px;
-  white-space: nowrap;
-  border: 1px solid #EAEAEA;
-  background-color: #F8F8F8;
-  border-radius: 3px;
+    margin: 0px 2px;
+    padding: 0px 5px;
+    white-space: nowrap;
+    border: 1px solid #EAEAEA;
+    background-color: #F8F8F8;
+    border-radius: 3px;
 }
 .content pre code {
-  background: none;
-  text-shadow: none;
-  padding: 0;
-  border: none;
-  margin: 0px;
+    background: none;
+    text-shadow: none;
+    padding: 0;
+    border: none;
+    margin: 0px;
 }
 
 /* table */
@@ -197,88 +192,84 @@ table a {
     font-weight: bold;
 }
 table .result0 {
-  color: #000000;
-  font-weight: bold;
+    color: #000000;
+    font-weight: bold;
 }
 table .result0 a {
-  color: #000000;
-  text-decoration: underline;
+    color: #000000;
+    text-decoration: underline;
 }
 table .result1 {
-  color: #AAAA00;
-  font-weight: bold;
+    color: #AAAA00;
+    font-weight: bold;
 }
 table .result1 a {
-  color: #AAAA00;
-  text-decoration: underline;
+    color: #AAAA00;
+    text-decoration: underline;
 }
 table .result4 {
-  color: #00AAAA;
-  font-weight: bold;
+    color: #00AAAA;
+    font-weight: bold;
 }
 table .result4 a {
-  color: #00AAAA;
-  text-decoration: underline;
+    color: #00AAAA;
+    text-decoration: underline;
 }
-
 table .result5 {
-  color: #0000FF;
-  font-weight: bold;
+    color: #0000FF;
+    font-weight: bold;
 }
 table .result5 a {
-  color: #0000FF;
-  text-decoration: underline;
+    color: #0000FF;
+    text-decoration: underline;
 }
 table .result6 {
-  color: #FF0000;
-  font-weight: bold;
+    color: #FF0000;
+    font-weight: bold;
 }
 table .result6 a {
-  color: #FF0000;
-  text-decoration: underline;
+    color: #FF0000;
+    text-decoration: underline;
 }
 table .result7 {
-  color: #00AA00;
-  font-weight: bold;
+    color: #00AA00;
+    font-weight: bold;
 }
 table .result7 a {
-  color: #00AA00;
-  text-decoration: underline;
+    color: #00AA00;
+    text-decoration: underline;
 }
 table .result8 {
-  color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
 table .result8 a {
-  color: rgb(0, 0, 0);
-  text-decoration: underline;
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
 }
 
 /* status table row  */
 
 table .running {
-  background: rgba(128,0,0,0.30);
+    background: rgba(128, 0, 0, 0.30);
 }
-
 table .closed {
-  background: rgba(128,128,128,0.30);
+    background: rgba(128, 128, 128, 0.30);
 }
 table .comming {
-  background: rgba(255, 0, 0, 0.30);
+    background: rgba(255, 0, 0, 0.30);
 }
-
 .pure-img-responsive {
-  max-width: 90%;
-  height: auto;
-  margin: auto;
-  display: block;
+    max-width: 90%;
+    height: auto;
+    margin: auto;
+    display: block;
 }
 
 /*
 Add transition to containers so they can push in and out.
 */
-#layout,
-#menu,
-.menu-link {
+
+#layout, #menu, .menu-link {
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -ms-transition: all 0.2s ease-out;
@@ -289,21 +280,23 @@ Add transition to containers so they can push in and out.
 /*
 This is the parent `<div>` that contains the menu and the content area.
 */
+
 #layout {
     position: relative;
     padding-left: 0;
 }
-    #layout.active #menu {
-        left: 150px;
-        width: 150px;
-    }
+#layout.active #menu {
+    left: 150px;
+    width: 150px;
+}
+#layout.active .menu-link {
+    left: 150px;
+}
 
-    #layout.active .menu-link {
-        left: 150px;
-    }
 /*
 The content `<div>` is where all your content goes.
 */
+
 .content {
     margin: 0 auto;
     padding: 0 2em;
@@ -312,34 +305,29 @@ The content `<div>` is where all your content goes.
     line-height: 1.6em;
     font-size: 1.3em;
 }
-.content p {
-}
-
+.content p {}
 .header {
-     margin: 0;
-     color: #333;
-     text-align: center;
-     padding: 2.5em 2em 0;
-     border-bottom: 1px solid #eee;
- }
+    margin: 0;
+    color: #333;
+    text-align: center;
+    padding: 2.5em 2em 0;
+    border-bottom: 1px solid #eee;
+}
 .header h1 {
     margin: 0.2em 0;
     font-size: 3em;
     font-weight: 300;
 }
- .header h2 {
+.header h2 {
     font-weight: 300;
     color: #ccc;
     padding: 0;
     margin-top: 0;
 }
-
 .content-subhead {
     margin: 20px 0 20px 0;
     color: rgb(4, 23, 39);
 }
-
-
 
 /*
 The `#menu` `<div>` is the parent `<div>` that contains the `.pure-menu` that
@@ -347,166 +335,166 @@ appears on the left side of the page.
 */
 
 #menu {
-    margin-left: -150px; /* "#menu" width */
+    margin-left: -150px;
+    /* "#menu" width */
     width: 150px;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
-    z-index: 1000; /* so the menu or its navicon stays above all content */
+    z-index: 1000;
+    /* so the menu or its navicon stays above all content */
     background: #191818;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
-    /*
+
+/*
     All anchors inside the menu should be styled like this.
     */
-    #menu a {
-        font-family: MonotypeTraditionalSong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        color: #999;
-        border: none;
-        padding: 0.6em 0 0.6em 0.6em;
-        line-height: 1.5em;
-    }
 
-    /*
+#menu a {
+    font-family: MonotypeTraditionalSong, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #999;
+    border: none;
+    padding: 0.6em 0 0.6em 0.6em;
+    line-height: 1.5em;
+}
+
+/*
     Remove all background/borders, since we are applying them to #menu.
     */
-     #menu .pure-menu,
-     #menu .pure-menu ul {
-        border: none;
-        background: transparent;
-    }
 
-    /*
+#menu .pure-menu, #menu .pure-menu ul {
+    border: none;
+    background: transparent;
+}
+
+/*
     Add that light border to separate items into groups.
     */
-    #menu .pure-menu ul,
-    #menu .pure-menu .menu-item-divided {
-        border-top: 1px solid #333;
-    }
-        /*
+
+#menu .pure-menu ul, #menu .pure-menu .menu-item-divided {
+    border-top: 1px solid #333;
+}
+
+/*
         Change color of the anchor links on hover/focus.
         */
-        #menu .pure-menu li a:hover,
-        #menu .pure-menu li a:focus {
-            background: #333;
-        }
 
-    /*
+#menu .pure-menu li a:hover, #menu .pure-menu li a:focus {
+    background: #333;
+}
+
+/*
     This styles the selected menu item `<li>`.
     */
-    #menu .pure-menu-selected,
-    #menu .pure-menu-heading {
-        background: #1f8dd6;
-    }
-        /*
+
+#menu .pure-menu-selected, #menu .pure-menu-heading {
+    background: #1f8dd6;
+}
+
+/*
         This styles a link within a selected menu item `<li>`.
         */
-        #menu .pure-menu-selected a {
-            color: #fff;
-        }
 
-    /*
+#menu .pure-menu-selected a {
+    color: #fff;
+}
+
+/*
     This styles the menu heading.
     */
-    #menu .pure-menu-heading {
-        font-size: 110%;
-        color: #fff;
-        margin: 0;
-    }
+
+#menu .pure-menu-heading {
+    font-size: 110%;
+    color: #fff;
+    margin: 0;
+}
 
 /* -- Dynamic Button For Responsive Menu -------------------------------------*/
+
 
 /*
 The button to open/close the Menu is custom-made and not part of Pure. Here's
 how it works:
 */
 
+
 /*
 `.menu-link` represents the responsive menu toggle that shows/hides on
 small screens.
 */
+
 .menu-link {
     position: fixed;
-    display: block; /* show this only on small screens */
+    display: block;
+    /* show this only on small screens */
     top: 0;
-    left: 0; /* "#menu width" */
+    left: 0;
+    /* "#menu width" */
     background: #000;
-    background: rgba(0,0,0,0.7);
-    font-size: 10px; /* change this value to increase/decrease button size */
+    background: rgba(0, 0, 0, 0.7);
+    font-size: 10px;
+    /* change this value to increase/decrease button size */
     z-index: 10;
     width: 2em;
     height: auto;
     padding: 2.1em 1.6em;
 }
-
-    .menu-link:hover,
-    .menu-link:focus {
-        background: #000;
-    }
-
-    .menu-link span {
-        position: relative;
-        display: block;
-    }
-
-    .menu-link span,
-    .menu-link span:before,
-    .menu-link span:after {
-        background-color: #fff;
-        width: 100%;
-        height: 0.2em;
-    }
-
-        .menu-link span:before,
-        .menu-link span:after {
-            position: absolute;
-            margin-top: -0.6em;
-            content: " ";
-        }
-
-        .menu-link span:after {
-            margin-top: 0.6em;
-        }
-
+.menu-link:hover, .menu-link:focus {
+    background: #000;
+}
+.menu-link span {
+    position: relative;
+    display: block;
+}
+.menu-link span, .menu-link span:before, .menu-link span:after {
+    background-color: #fff;
+    width: 100%;
+    height: 0.2em;
+}
+.menu-link span:before, .menu-link span:after {
+    position: absolute;
+    margin-top: -0.6em;
+    content: " ";
+}
+.menu-link span:after {
+    margin-top: 0.6em;
+}
 
 /* -- Responsive Styles (Media Queries) ------------------------------------- */
+
 
 /*
 Hides the menu at `48em`, but modify this based on your app's needs.
 */
-@media (min-width: 48em) {
 
-    .header,
-    .content {
+@media (min-width: 48em) {
+    .header, .content {
         padding-left: 2em;
         padding-right: 2em;
     }
-
     #layout {
-        padding-left: 150px; /* left col width "#menu" */
+        padding-left: 150px;
+        /* left col width "#menu" */
         left: 0;
     }
     #menu {
         left: 150px;
     }
-
     .menu-link {
         position: fixed;
         left: 150px;
         display: none;
     }
-
     #layout.active .menu-link {
         left: 150px;
     }
 }
-
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
-
 @media (max-width: 48em) {
     /* Only apply this when the window is small. Otherwise, the following
     case results in extra padding on the left:
@@ -519,7 +507,6 @@ a {
         left: 150px;
     }
 }
-
 .page-number {
     display: inline-block;
 }
@@ -527,59 +514,58 @@ a {
     text-decoration: none;
 }
 #page-nav {
-  border: 1px solid #CBCBCB;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+    border: 1px solid #CBCBCB;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 #page-nav {
-  margin: 50px auto;
-  text-align: center;
-  color: #4183C4;
-  overflow: hidden;
+    margin: 50px auto;
+    text-align: center;
+    color: #4183C4;
+    overflow: hidden;
 }
-#page-nav:before,
+#page-nav:before, #page-nav:after {
+    content: "";
+    display: table;
+}
 #page-nav:after {
-  content: "";
-  display: table;
+    clear: both;
 }
-#page-nav:after {
-  clear: both;
-}
-#page-nav a,
-#page-nav span {
-  padding: 10px 20px;
+#page-nav a, #page-nav span {
+    padding: 10px 20px;
 }
 #page-nav a {
-  color: #4183c4;
-  text-decoration: none;
+    color: #4183c4;
+    text-decoration: none;
 }
 #page-nav a:hover {
-  background: #2ca6cb;
-  color: #fff;
+    background: #2ca6cb;
+    color: #fff;
 }
 #page-nav .prev {
-  float: left;
+    float: left;
 }
 #page-nav .next {
-  float: right;
+    float: right;
 }
 #page-nav .page-number {
-  display: inline-block;
+    display: inline-block;
 }
 @media screen and (max-width: 479px) {
-  #page-nav .page-number {
-    display: none;
-  }
+    #page-nav .page-number {
+        display: none;
+    }
 }
 #page-nav .current {
-  color: black;
-  font-weight: bold;
+    color: black;
+    font-weight: bold;
 }
 #page-nav .space {
-  color: #696969;
+    color: #696969;
 }
 
 /* table of content */
+
 #toc_wrapper {
     position: fixed;
     top: 10px;
@@ -588,80 +574,80 @@ a {
     z-index: 9999;
 }
 #toc_wrapper .toc-button {
-  float: right;
-  margin-top: -10px;
-  cursor: pointer;
+    float: right;
+    margin-top: -10px;
+    cursor: pointer;
 }
 #nav {
     padding: 20px 20px 20px 30px;
     background-color: white;
 }
 #nav a {
-    color:rgb(133, 133, 133);
+    color: rgb(133, 133, 133);
     text-decoration: none;
 }
 #nav li {
-  line-height: 1em;
+    line-height: 1em;
 }
 #toc_wrapper .toc-item-desc {
-  display: none;
-   -webkit-transform: scale(0);
-      -ms-transform: scale(0);
-          transform: scale(0);
-  opacity: 0;
-  -webkit-transition: -webkit-transform .3s ease-in-out, opacity .3s ease-in-out;
-          transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+    display: none;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+    -webkit-transition: -webkit-transform .3s ease-in-out, opacity .3s ease-in-out;
+    transition: transform .3s ease-in-out, opacity .3s ease-in-out;
 }
 #toc_wrapper li:hover .toc-item-desc {
-  display: inline-block;
-  -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-          transform: scale(1);
-  opacity: 1;
-  -webkit-animation: tocanim .3s ease-in-out;
-          animation: tocanim .3s ease-in-out;
+    display: inline-block;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    -webkit-animation: tocanim .3s ease-in-out;
+    animation: tocanim .3s ease-in-out;
 }
-@media screen and (max-width : 648px) {
-  #toc_wrapper {
-    position: relative;
-    width: 100%;
-  }
-  #toc_wrapper .toc-item-desc {
-  display: inline-block;
-  -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-          transform: scale(1);
-  opacity: 1;
-  -webkit-animation: tocanim .3s ease-in-out;
-          animation: tocanim .3s ease-in-out;
-  }
-  #toc_wrapper .toc-button {
-    display: none;
-  }
+@media screen and (max-width: 648px) {
+    #toc_wrapper {
+        position: relative;
+        width: 100%;
+    }
+    #toc_wrapper .toc-item-desc {
+        display: inline-block;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+        -webkit-animation: tocanim .3s ease-in-out;
+        animation: tocanim .3s ease-in-out;
+    }
+    #toc_wrapper .toc-button {
+        display: none;
+    }
 }
 @keyframes tocanim {
-  0% {
-    display: none;
-    opacity: 0;
-  }
-  1% {
-    display: block;
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    1% {
+        display: block;
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 .problem-item {
-  border: 1px solid #CBCBCB;
-  border-bottom: 1px solid #ddd;
-  margin: 0.5em;
-  padding: 0.4em;
+    border: 1px solid #CBCBCB;
+    border-bottom: 1px solid #ddd;
+    margin: 0.5em;
+    padding: 0.4em;
 }
 .problem-item-odd {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 .problem-item a {
     text-decoration: none;
@@ -676,71 +662,72 @@ a {
 }
 
 /* tooltip */
-.tooltip { 
-  font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  outline:none; 
+
+.tooltip {
+    font-family: ChekiangShuKeSung, "Times New Roman", "Georgia", "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    outline: none;
 }
-.tooltip strong { line-height:30px; }
-.tooltip:hover {text-decoration:none;} 
+.tooltip strong {
+    line-height: 30px;
+}
+.tooltip:hover {
+    text-decoration: none;
+}
 .tooltip .popup {
     z-index: 10;
-    display: none; 
+    display: none;
     padding: 14px 20px;
-    margin-top:-30px; 
-    margin-left:28px;
-    width:300px; 
+    margin-top: -30px;
+    margin-left: 28px;
+    width: 300px;
     line-height: 1.5em;
 }
 .tooltip:hover .popup {
-    display:inline; 
-    position:absolute; 
-    color:#111;
-    border:1px 
-    solid #DCA; 
-    background:#fffAF0;
+    display: inline;
+    position: absolute;
+    color: #111;
+    border: 1px solid #DCA;
+    background: #fffAF0;
 }
 .tooltip .popup {
-    border-radius:4px;
+    border-radius: 4px;
 }
+
 /* tabs */
-#tab1:checked ~ #content1,
-#tab2:checked ~ #content2,
-#tab3:checked ~ #content3,
-#tab4:checked ~ #content4,
-#tab5:checked ~ #content5 {
-  display: block;
+
+#tab1:checked~ #content1, #tab2:checked~ #content2, #tab3:checked~ #content3, #tab4:checked~ #content4, #tab5:checked~ #content5 {
+    display: block;
 }
 .tab_container section {
-   display: none;
+    display: none;
 }
-.tab_container [id^="tab"]:checked + label {
-  background: #fff;
-  box-shadow: inset 0 3px #0CE;
+.tab_container [id^="tab"]:checked+ label {
+    background: #fff;
+    box-shadow: inset 0 3px #0CE;
 }
 .tab_container input {
-  display: none;
+    display: none;
 }
 .tab_container label {
-  display: block;
-  float: left;
-  width: 20%;
-  color: #757575;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  background: #f0f0f0;
+    display: block;
+    float: left;
+    width: 20%;
+    color: #757575;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    background: #f0f0f0;
 }
+
 /*
  * -- PRICING TABLE HEADER --
  * By default, a header is black/white, and has some styles for its <h2> name.
  */
 
 .pricing-tables {
-  text-align: center;
+    text-align: center;
 }
-.pricing-table-header {
-}
-
+.pricing-table-header {}
 .pricing-table-header h2 {
     margin: 0;
     padding-top: 1em;
@@ -758,7 +745,6 @@ a {
     margin: 0.2em 0 0;
     font-weight: 100;
 }
-
 .pricing-table-price span {
     display: block;
     text-transform: uppercase;
@@ -766,7 +752,6 @@ a {
     padding-bottom: 2em;
     font-weight: 400;
 }
-
 .pricing-table-list {
     list-style-type: none;
     margin: 0;
@@ -778,16 +763,18 @@ a {
     background: #f7f7f7;
     border-bottom: 1px solid #e7e7e7;
 }
+
 /*
  */
+
 .custom-mf-title {
     font-family: verdana;
 }
 .fw-code-copy-button {
-  position: relative;
-  z-index: 9999;
-  top: 20px;
-  float: right;
-  cursor: pointer;
-  font-size: 70%;
+    position: relative;
+    z-index: 9999;
+    top: 20px;
+    float: right;
+    cursor: pointer;
+    font-size: 70%;
 }

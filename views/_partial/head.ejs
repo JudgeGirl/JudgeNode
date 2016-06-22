@@ -16,11 +16,11 @@
 
 		<link title="default" rel="stylesheet" href="<%= site.url_for('stylesheets/chat.css') %>">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="<%= site.url_for('stylesheets/font-awesome/css/font-awesome.min.css') %>">
 		<script type="text/javascript" src="<%= site.url_for('javascripts/main.js') %>"></script>
 		<script src="<%= site.url_for('javascripts/jquery-2.1.0.min.js') %>"></script>
-		<script src="<%= site.url_for('javascripts/jquery.cookie.js') %>"></script> 
+		<script src="<%= site.url_for('javascripts/jquery.cookie.js') %>"></script>
 		<script src="<%= site.url_for('javascripts/jquery.countdown.min.js') %>"></script>
 		<script src="<%= site.url_for('javascripts/typed.js') %>"></script>
 		<script src="<%= site.url_for('javascripts/diagram/raphael-min.js') %>"></script>
@@ -28,14 +28,14 @@
 		<link rel="stylesheet" href="<%= site.url_for('stylesheets/terminal.css') %>">
 
 		<script>
-		var cookie_style = $.cookie("mystyle"); 
-		    if (cookie_style == null || cookie_style + '' == 'default') { 
-		        $("link[title='dark']").attr("disabled","disabled"); 
+		var cookie_style = $.cookie("mystyle");
+		    if (cookie_style == null || cookie_style + '' == 'default') {
+		        $("link[title='dark']").attr("disabled","disabled");
 		        $("link[title='default']").removeAttr('disabled');
-		    } else { 
-		        $("link[title='default']").attr("disabled","disabled"); 
+		    } else {
+		        $("link[title='default']").attr("disabled","disabled");
 		        $("link[title='dark']").removeAttr('disabled');
-		    } 
+		    }
 		</script>
 	</head>
 	<body>
@@ -64,9 +64,12 @@
 	        <div class="pure-menu">
 	            <a class="pure-menu-heading" href="#"><%= __('Account') %></a>
 	            <ul class="pure-menu-list">
-	        <% if (user == undefined || user == null || user.uid == undefined) { %>
+	    <% if (user == undefined || user == null || user.uid == undefined) { %>
 				<li class="pure-menu-item">
 					<a class="pure-menu-link" href="<%= site.url_for('login') %>"><i class="fa fa-sign-in"></i> <%= __('Login') %></a>
+				</li>
+				<li class="pure-menu-item">
+					<a class="pure-menu-link" href="<%= site.url_for('register') %>"><i class="fa fa-sign-in"></i> <%= __('Sign up') %></a>
 				</li>
 			<% } else { %>
 				<li class="pure-menu-item">
@@ -80,7 +83,7 @@
 						</li>
 						<li>
 							<a class="pure-menu-link" href="<%= site.url_for('edit') %>"><i class="fa fa-cogs"></i> <%= __('Profile') %></a>
-						</li class="pure-menu-item">			
+						</li class="pure-menu-item">
 						<% if (user["class"] == null) { %>
 							<li class="pure-menu-item">
 								<a class="pure-menu-link" href="<%= site.url_for('admin') %>"><i class="fa fa-hand-paper-o"></i> <%= __('Manage') %></a>
