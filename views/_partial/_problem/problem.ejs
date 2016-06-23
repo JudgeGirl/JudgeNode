@@ -48,9 +48,10 @@
 						<label for="lng"><%= __('Programming Language') %></label>
 					</div>
 					<div class="pure-u-3-4">
-					<% for (var i = 1 ; i < judge_lng.length; i++) { %>
+					<% for (var i = 1; i < judge_lng.length; i++) { %>
 						<label for="option-two" class="pure-radio pure-input-1">
-								<input type="radio" name="lng" value="<%- i %>" checked> <%- judge_lng[i] %> (<code><%- judge_compiler_arg[i] %></code>)
+								<input type="radio" name="lng" value="<%- i %>" <%- ((user.submit_lng == undefined && i == 1) || user.submit_lng == i) ? "checked" : "" %>>
+									<%- judge_lng[i] %> (<code><%- judge_compiler_arg[i] %></code>)
 						</label>
 					<% } %>
 					</div>

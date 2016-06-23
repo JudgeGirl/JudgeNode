@@ -63,8 +63,7 @@ router.post('/login', function(req, res, next) {
     };
     var iplist = _config.CONTEST.VALID_IP;
     var ip = req.ip;
-    var backURL = req.session.redirect_to || utils.url_for('/');
-    dblink.user.login(user, req.session, function(status) {
+    var backURL = req.session.redirect_to || utils.url_for('/'); dblink.user.login(user, req.session, function(status) {
         /* login fail */
         if (status == 0) {
             return res.render('layout', {
@@ -456,25 +455,26 @@ router.post('/submit',
         var uid = req.session.uid;
         if (lng == undefined) // multi file
             lng = 0;
-
+        if (lng != 0)
+            req.session.submit_lng = lng;
         var submitStep = function() {
             dblink.problemManager.sourceList(pid, function(source_list) {
                 if (source_list.length === 0)
                     source_list.push("source");
                 var size = 0;
                 for (var i = 0; i < source_list.length; i++) {
-					var file_size = 0;
+                    var file_size = 0;
                     if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
                         req.files['code' + i][0] == null || req.files['code' + i][0] == undefined) {
-						if (req.body['paste_code' + i].length > 65536 || req.body['paste_code' + i].trim().length == 0) {	
-	                        console.log('NOT FOUND FILE ' + i);
-                        	return res.redirect(utils.url_for('/'));
-						} else {
-							file_size = req.body['paste_code' + i].length;
-						}
+                        if (req.body['paste_code' + i].length > 65536 || req.body['paste_code' + i].trim().length == 0) {
+                            console.log('NOT FOUND FILE ' + i);
+                            return res.redirect(utils.url_for('/'));
+                        } else {
+                            file_size = req.body['paste_code' + i].length;
+                        }
                     } else {
-                    	file_size = req.files['code' + i][0].size;
-					}
+                        file_size = req.files['code' + i][0].size;
+                    }
                     size += file_size;
                 }
                 /**
@@ -493,74 +493,74 @@ router.post('/submit',
                     mem: 0
                 };
                 dblink.judge.insert_submission(subinfo, function(sid) {
-					for (var i = 0; i < source_list.length; i++) {
-						if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
-							req.files['code' + i][0] == null || req.files['code' + i][0] == undefined) {
-								fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i, req.body['paste_code' + i]);
-							} else {
-								fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i, fs.readFileSync(req.files['code' + i][0].path));
-								fs.unlinkSync(req.files['code' + i][0].path);
-							}
-					}
+                    for (var i = 0; i < source_list.length; i++) {
+                        if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
+                            req.files['code' + i][0] == null || req.files['code' + i][0] == undefined) {
+                            fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i, req.body['paste_code' + i]);
+                        } else {
+                            fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i, fs.readFileSync(req.files['code' + i][0].path));
+                            fs.unlinkSync(req.files['code' + i][0].path);
+                        }
+                    }
 
-					dblink.judge.update_waiting_submission(sid, function(err) {
-						if (cid === "0")
-						return res.redirect(utils.url_for('live'));
-						else
-						return res.redirect(utils.url_for('live?cid=' + cid));
-					});
+                    dblink.judge.update_waiting_submission(sid, function(err) {
+                        if (cid === "0")
+                            return res.redirect(utils.url_for('live'));
+                        else
+                            return res.redirect(utils.url_for('live?cid=' + cid));
+                    });
 
-				});
+                });
 
-			});
-		};
-		dblink.helper.cansubmit(cid, pid, uid, function(canSubmit) {
-			if (req.session['class'] == null)
-			canSubmit = true;
-		if (!canSubmit)
-			return res.redirect(utils.url_for('/'));
-		submitStep();
-		});
-	});
+            });
+        };
+        dblink.helper.cansubmit(cid, pid, uid, function(canSubmit) {
+            if (req.session['class'] == null)
+                canSubmit = true;
+            if (!canSubmit)
+                return res.redirect(utils.url_for('/'));
+            submitStep();
+        });
+    });
 /* Helper */
 router.get('/time', function(req, res, next) {
-	res.send(new Date());
+    res.send(new Date());
 });
 
 router.get('/score', function(req, res, next) {
-	var uid = req.session.uid;
-	dblink.helper.isAdmin(uid, function(isAdmin) {
-		dblink.user.info(req.session.uid, function(user) {
-			dblink.score.statistic(function(score_statistic) {
-				if (isAdmin) {
-					dblink.score.getAll(function(score) {
-						res.render('layout', {
-							layout: 'score',
-							subtitle: 'Score',
-							score: score,
-							userinfo: user,
-							score_statistic: score_statistic
-						});
-					});
-				} else {
-					dblink.score.getOne(uid, function(score) {
-						res.render('layout', {
-							layout: 'score',
-							subtitle: 'Score',
-							score: score,
-							userinfo: user,
-							score_statistic: score_statistic
-						});
-					});
-				}
-			});
-		});
-	});
+    var uid = req.session.uid;
+    dblink.helper.isAdmin(uid, function(isAdmin) {
+        dblink.user.info(req.session.uid, function(user) {
+            dblink.score.statistic(function(score_statistic) {
+                if (isAdmin) {
+                    dblink.score.getAll(function(score) {
+                        res.render('layout', {
+                            layout: 'score',
+                            subtitle: 'Score',
+                            score: score,
+                            userinfo: user,
+                            score_statistic: score_statistic
+                        });
+                    });
+                } else {
+                    dblink.score.getOne(uid, function(score) {
+                        res.render('layout', {
+                            layout: 'score',
+                            subtitle: 'Score',
+                            score: score,
+                            userinfo: user,
+                            score_statistic: score_statistic
+                        });
+                    });
+                }
+            });
+        });
+    });
 });
 
 var sourceRouter = require('./source'),
-	apiRouter = require('./api'),
-	testdataRouter = require('./testdata');
+    apiRouter = require('./api'),
+    testdataRouter = require('./testdata');
 
 router.use('/source', sourceRouter);
 router.use('/api', apiRouter);
