@@ -68,25 +68,41 @@
 			-->
 			<div class="pure-g">
 				<div class="pure-u-1-4">
-					<label for="lng"><%= __('Paste your code ...') %></label>
+					<label for="lng"><%= __('Source') %></label>
+				</div>
+				<div class="pure-u-3-4">
+					<input class="pure-input-1-2" id="code0" name="code0" type="file">
+					<span class="pure-button upload-switch-button" style="background: none;" data-id="paste_code_block0" data-file-id="code0" data-show="false">
+						<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ...</i>
+					</span>
+				</div>
+			</div>
+			<div class="pure-g" id="paste_code_block0" style="display: none;">
+				<div class="pure-u-1-4">
 				</div>
 				<div class="pure-u-3-4">
 					<textarea class="pure-input-1" maxlength="65536" name="paste_code0" style="font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas"></textarea>
 				</div>
 			</div>
-			<div class="pure-g">
-				<div class="pure-u-1-4">
-					<label for="lng"><%= __('... or upload it') %></label>
-				</div>
-				<div class="pure-u-3-4">
-					<input class="pure-input-1" name="code0" type="file">
-				</div>
-			</div>
 		<% } else { %>
-			<% for( var i = 0 ; i < psubmit.length ; i++ ){ %>
-				<div class="pure-control-group">
-					<label for="code<%- i %>"><%- psubmit[i] %></label>
-					<input class="pure-input-1" name="code<%- i %>" type="file">
+			<% for (var i = 0; i < psubmit.length; i++){ %>
+				<div class="pure-g">
+					<div class="pure-u-1-4">
+						<label for="code<%- i %>"><%- psubmit[i] %></label>
+					</div>
+					<div class="pure-u-3-4">
+							<input class="pure-input-1-2" name="code<%- i %>" id="code<%- i %>" type="file">
+							<span class="pure-button upload-switch-button" style="background: none;" data-id="paste_code_block<%- i %>" data-file-id="code<%- i %>" data-show="false">
+								<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ...</i>
+							</span>
+					</div>
+				</div>
+				<div class="pure-g" id="paste_code_block<%- i %>" style="display: none;">
+					<div class="pure-u-1-4">
+					</div>
+					<div class="pure-u-3-4">
+						<textarea class="pure-input-1" maxlength="65536" name="paste_code<%- i %>" style="font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas"></textarea>
+					</div>
 				</div>
 			<% } %>
 		<% } %>
@@ -118,7 +134,7 @@
 	    	<% for (var i in testdata_config) { %>
 	    		<% var testset = testdata_config[i]; %>
 	    		<li class="pure-menu-item">
-	    			<a href="<%- site.url_for(site.HOST.testdata) %><%- pid %>/<%- testset[1][0] %>" class="pure-menu-link" style="padding: 0em 0.1em;">
+	    			<a target="_blank" href="<%- site.url_for(site.HOST.testdata) %><%- pid %>/<%- testset[1][0] %>" class="pure-menu-link" style="padding: 0em 0.1em;">
 	    			<%- __('Subtask') %> <%- (parseInt(i)) %> (<%- testset[0] %>%): <%- config.unitConvert('cpu', testset[1][2]*1024) %>, <%- config.unitConvert('mem', testset[1][3]) %>
 	    			</a>
 	    		</li>
@@ -145,5 +161,21 @@ new Clipboard(".fw-code-copy-button", {
   		return $row.text().replace(/\s/g, " ");
   	}).get().join(rowDelim);
   }
+});
+$('.upload-switch-button').click(function(elem) {
+		console.log(this);
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
 });
 </script>
