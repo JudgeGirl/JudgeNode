@@ -20,6 +20,11 @@
 #level-list li {
 	cursor: pointer; 
 }
+.problem-tag {
+	width: 30%;
+	display: inline-block;
+	float: right;
+}
 </style>
 
 <%
@@ -162,11 +167,14 @@
 				text += '<div class="pure-u-11-12">';
 				text += '<h3 class="custom-mf-title"><a href="<%= site.url_for('/') %>problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
 
-				if (item.pid in subs) {
-					text += '<p><span class="content-subhead">Submissions: </span> ' + subs[item.pid] + '</p>';
-				} else {
-					text += '<p><span class="content-subhead">Submissions: </span> ' + 0 + '</p>';
-				}
+				text += '<p>';
+				var date = new Date(item.ts);
+				text += ' <span class="problem-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + '</span> ';
+				if (item.pid in subs)
+					text += '<span class="problem-tag"><i class="fa fa-envelope-o" aria-hidden="true"></i> ' + subs[item.pid] + '</span> ';
+				else
+					text += '<span class="problem-tag"><i class="fa fa-envelope-o" aria-hidden="true"></i> 0</span>';
+				text += '</p>';
 				text += '</div>';
 				text += '</div>';
 	  		}
