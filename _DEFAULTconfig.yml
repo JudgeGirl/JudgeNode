@@ -42,3 +42,7 @@ HOST:
 # Disqus
 Disqus:
     shortname: 'ntucsiecprogramming'
+
+# Privilege
+Privilege:
+    register_key: 'test'
