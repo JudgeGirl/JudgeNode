@@ -4,19 +4,21 @@ import os
 import sys
 import signal
 import time
+from colorama import Fore, Back, Style
+
 def main():
   while True:
-    time.sleep(10)
     os.system('npm start')
+    time.sleep(10)
 
 def signal_handler(signal, frame):
-  print ('INFO Good Bye')
+  print ('\n['+ Fore.GREEN + 'INFO' + Fore.RESET + ']' + ' Good Bye')
   sys.exit(0)
 
 assert __name__ == '__main__'
 
 signal.signal(signal.SIGINT, signal_handler)
 
-print ('INFO Judge Node is running. Press Ctrl + C to stop')
+print ('['+ Fore.GREEN + 'INFO' + Fore.RESET + '] Judge Node is running. Press Ctrl + C to stop')
 
 main()
