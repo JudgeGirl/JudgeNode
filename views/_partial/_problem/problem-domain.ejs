@@ -136,6 +136,7 @@
 			}).done(function(probs_list) {
 		  		var obj = $(elem);
 		  		$.jhunt.probs_list = probs_list;
+		  		console.log(probs_list);
 		  		render(elem, options);
 		  	}); 
     	}
@@ -145,25 +146,38 @@
 		  	var tbody = obj.find('#level-content');
 		  	var text = '';
 		  	var iplist = <%- JSON.stringify(site.CONTEST.VALID_IP) %>;
-		  	var score = {}, subs = {};
+		  	var score = {}, subs = {}, solve_dep = {}, prob_dep = {};
 		  	for (var i in probs_list.score)
 		  		score[probs_list.score[i].pid] = probs_list.score[i].res;
 		  	for (var i in probs_list.subs)
 		  		subs[probs_list.subs[i].pid] = probs_list.subs[i].count;
+		  	for (var i in probs_list.prob_dep)
+		  		prob_dep[probs_list.prob_dep[i].pid] = probs_list.prob_dep[i].depend_count;
+		  	for (var i in probs_list.solve_dep)
+		  		solve_dep[probs_list.solve_dep[i].pid] = probs_list.solve_dep[i].depend_count;
 			for (var i in probs_list.plist) {
 				var item = probs_list.plist[i];
-				if (i%2 == 0)
 					text += '<div class="problem-item">';
-				else
-					text += '<div class="problem-item problem-item-odd">';
+				text += '<div class="pure-u-1-12"><h2>';
+				if (item.pid in solve_dep && (item.pid in score && score[item.pid] != 7)) {
+					if (solve_dep[item.pid] == prob_dep[item.pid]) {
+						text += '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>';
+					}
+				}
+				if (item.pid in score && score[item.pid] == 7) {
+					if (!(item.pid in score) || solve_dep[item.pid] != prob_dep[item.pid]) {
+						text += '<i class="fa fa-user-secret" aria-hidden="true"></i>';
+					}
+				}
 				if (item.pid in score) {
 					if (score[item.pid] == 7)
-						text += '<div class="pure-u-1-12"><h2><i class="fa fa-check" style="color: green;"></i></h2></div>';
+						text += '<i class="fa fa-check" style="color: green;"></i>';
 					else
-						text += '<div class="pure-u-1-12"><h2><i class="fa fa-times" style="color: red;"></i></h2></div>';
+						text += '<i class="fa fa-bug" style="color: red;"></i>';
 				} else {
-					text += '<div class="pure-u-1-12">' + '</div>';
+					text += '<i class="fa fa-lock" aria-hidden="true"></i>';
 				}
+				text += '</h2></div>';
 				text += '<div class="pure-u-11-12">';
 				text += '<h3 class="custom-mf-title"><a href="<%= site.url_for('/') %>problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
 
@@ -171,7 +185,7 @@
 				var date = new Date(item.ts);
 				text += ' <span class="problem-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + '</span> ';
 				if (item.pid in subs)
-					text += '<span class="problem-tag"><i class="fa fa-envelope-o" aria-hidden="true"></i> ' + subs[item.pid] + '</span> ';
+					text += '<span class="problem-tag"><i class="fa fa-line-chart" aria-hidden="true"></i> ' + subs[item.pid] + '</span> ';
 				else
 					text += '<span class="problem-tag"><i class="fa fa-envelope-o" aria-hidden="true"></i> 0</span>';
 				text += '</p>';
