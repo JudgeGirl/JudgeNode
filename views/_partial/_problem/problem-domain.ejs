@@ -159,10 +159,9 @@
 				var item = probs_list.plist[i];
 					text += '<div class="problem-item">';
 				text += '<div class="pure-u-1-12"><h2>';
-				if (item.pid in solve_dep && (item.pid in score && score[item.pid] != 7)) {
-					if (solve_dep[item.pid] == prob_dep[item.pid]) {
-						text += '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>';
-					}
+				if ((item.pid in solve_dep && item.pid in score && score[item.pid] != 7 && solve_dep[item.pid] == prob_dep[item.pid]) 
+					|| (!(item.pid in prob_dep) && (!(item.pid in score) || item.pid in score && score[item.pid] != 7))) {
+					text += '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>';
 				}
 				if (item.pid in score && score[item.pid] == 7) {
 					if (!(item.pid in score) || solve_dep[item.pid] != prob_dep[item.pid]) {
@@ -175,7 +174,9 @@
 					else
 						text += '<i class="fa fa-bug" style="color: red;"></i>';
 				} else {
-					text += '<i class="fa fa-lock" aria-hidden="true"></i>';
+					if (item.pid in prob_dep && prob_dep[item.pid] != solve_dep[item.pid]) {
+						text += '<i class="fa fa-lock" aria-hidden="true"></i>';
+					}
 				}
 				text += '</h2></div>';
 				text += '<div class="pure-u-11-12">';
