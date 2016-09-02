@@ -81,7 +81,19 @@
 </div>
 
 </div>
-
+<style>
+.meter { 
+	height: 12px;
+	background: #EE0000;
+}
+.meter > span {
+  display: block;
+  height: 100%;
+  background-color: #00EE00;
+  position: relative;
+  overflow: hidden;
+}
+</style>
 <script>
 (function($) {
     "use strict";
@@ -149,8 +161,12 @@
 		  	var score = {}, subs = {}, solve_dep = {}, prob_dep = {};
 		  	for (var i in probs_list.score)
 		  		score[probs_list.score[i].pid] = probs_list.score[i].res;
-		  	for (var i in probs_list.subs)
-		  		subs[probs_list.subs[i].pid] = probs_list.subs[i].count;
+		  	for (var i in probs_list.subs) {
+		  		subs[probs_list.subs[i].pid] = {
+		  			total: probs_list.subs[i].total,
+		  			ac: probs_list.subs[i].ac
+		  		};
+		  	}
 		  	for (var i in probs_list.prob_dep)
 		  		prob_dep[probs_list.prob_dep[i].pid] = probs_list.prob_dep[i].depend_count;
 		  	for (var i in probs_list.solve_dep)
@@ -180,16 +196,12 @@
 				}
 				text += '</h2></div>';
 				text += '<div class="pure-u-11-12">';
-				text += '<h3 class="custom-mf-title"><a href="<%= site.url_for('/') %>problem/0/' + item.pid + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
-
-				text += '<p>';
 				var date = new Date(item.ts);
-				text += ' <span class="problem-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + '</span> ';
+				text += '<h3 class="custom-mf-title"><a href="<%= site.url_for('/') %>problem/0/' + item.pid + '" title="Last Update ' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + '">' + item.pid + '. ' + item.ttl + '</a></h3>';
 				if (item.pid in subs)
-					text += '<span class="problem-tag"><i class="fa fa-line-chart" aria-hidden="true"></i> ' + subs[item.pid] + '</span> ';
+					text += '<span class="problem-tag"><div class="meter" title="' + (subs[item.pid].total-subs[item.pid].ac) + ' WA"><span title="' + subs[item.pid].ac + ' AC" style="width: ' + subs[item.pid].ac*100/subs[item.pid].total + '%"></span></div></span>';
 				else
-					text += '<span class="problem-tag"><i class="fa fa-envelope-o" aria-hidden="true"></i> 0</span>';
-				text += '</p>';
+					text += '<span class="problem-tag"><i class="fa fa-line-chart" aria-hidden="true"></i> 0%</span>';
 				text += '</div>';
 				text += '</div>';
 	  		}
