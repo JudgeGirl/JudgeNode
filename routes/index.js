@@ -150,9 +150,9 @@ router.get('/user', function(req, res, next) {
     });
 });
 
-router.get('/register', function(req, res, next) {
+router.get('/signup', function(req, res, next) {
     res.render('layout', {
-        layout: 'register',
+        layout: 'signup',
         user: req.session,
         sysmsg: ''
     });

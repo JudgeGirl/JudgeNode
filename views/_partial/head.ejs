@@ -69,7 +69,7 @@
 					<a class="pure-menu-link" href="<%= site.url_for('login') %>"><i class="fa fa-sign-in"></i> <%= __('Login') %></a>
 				</li>
 				<li class="pure-menu-item">
-					<a class="pure-menu-link" href="<%= site.url_for('register') %>"><i class="fa fa-sign-in"></i> <%= __('Sign up') %></a>
+					<a class="pure-menu-link" href="<%= site.url_for('signup') %>"><i class="fa fa-sign-in"></i> <%= __('Sign up') %></a>
 				</li>
 			<% } else { %>
 				<li class="pure-menu-item">
@@ -99,11 +99,11 @@
 				<li class="pure-menu-item">
 					<input type="checkbox" id="box-1">
 					<label for="box-1" class="pure-menu-item">
-					<span class="pure-menu-link"><i class="fa fa-globe"></i> Lang <i class="fa fa-caret-down"></i></span></label>
+					<span class="pure-menu-link"><i class="fa fa-globe"></i> <%= __('Lang') %><i class="fa fa-caret-down"></i></span></label>
 					<div>
 						<ul class="pure-menu-list">
 							<li class="pure-menu-item">
-								<a class="pure-menu-link" href="<%= site.url_for('i18n/zhtw') %>"><i class="fa fa-globe"></i> zhtw</a>
+								<a class="pure-menu-link" href="<%= site.url_for('i18n/zhtw') %>"><i class="fa fa-globe"></i> 中文</a>
 							</li>
 							<li class="pure-menu-item">
 								<a class="pure-menu-link" href="<%= site.url_for('i18n/en') %>"><i class="fa fa-globe"></i> en</a>
@@ -114,14 +114,14 @@
 				<li class="pure-menu-item">
 					<input type="checkbox" id="box-2">
 					<label for="box-2" class="pure-menu-item">
-					<span class="pure-menu-link"><i class="fa fa-rocket"></i> Theme <i class="fa fa-caret-down"></i></span></label>
+					<span class="pure-menu-link"><i class="fa fa-rocket"></i> <%= __('Theme') %> <i class="fa fa-caret-down"></i></span></label>
 					<div>
 						<ul class="pure-menu-list" id="styles">
 							<li class="pure-menu-item" id="default">
-								<a class="pure-menu-link" href="#"><i class="fa fa-sun-o"></i> Default</a>
+								<a class="pure-menu-link" href="#"><i class="fa fa-sun-o"></i> <%= __('Default') %></a>
 							</li>
 							<li class="pure-menu-item" id="dark">
-								<a class="pure-menu-link" href="#"><i class="fa fa-moon-o"></i> Dark</a>
+								<a class="pure-menu-link" href="#"><i class="fa fa-moon-o"></i> <%= __('Dark') %></a>
 							</li>
 						</ul>
 					</div>
