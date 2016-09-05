@@ -9,7 +9,26 @@
 	<h2> Contest. <%- table_config.cid %></h2>
 </div>
 <div class="content">
-	<div id="bar-progress"></div>
+	<div class="pure-g">
+		<% for (var ri = 0; ri < (table_config.header.length+1)/2; ri++) { %>
+			<% 
+				var l = ri*2, r = ri*2 +2;
+				var i;
+			%>
+			<% for (i = l; i < table_config.header.length && i < r; i++) { %>
+				<div class="pure-u-1-2"><div id="bar-progress<%= i %>"></div></div>
+			<% } %>
+			<% for (; i < r; i++) { %>
+				<div class="pure-u-1-2"></div>
+			<% } %>
+			<% for (i = l; i < table_config.header.length && i < r; i++) { %>
+				<div class="pure-u-1-2"><h4 style='text-align: center;'><%- table_config.header[i].ttl %></h4></div>
+			<% } %>
+			<% for (; i < r; i++) { %>
+				<div class="pure-u-1-2"></div>
+			<% } %>
+		<% } %>
+	</div>
 	<table class="pure-table pure-table-bordered" >
 		<thead>
 			<tr>
@@ -31,29 +50,32 @@
 			<% } %>
 			<% 
 				var alluser = {};
-				var chart_json = '';
+				var chart_json = [];
 				var probuser = {};
 				var score_sum = 0;
 				for (var i = 0; i < table_config.user.length; i++)
 					alluser[table_config.user[i].uid] = 0;
-				for (var i = 0; i < table_config.header.length; i++)
+				for (var i = 0; i < table_config.header.length; i++) {
 					probuser[i] = 0;
+					chart_json.push('');
+				}
 			 %>
 			<% for (var row = 0; row < table_config.scorekind.length; row++) { %>
 			<tr class="normal">
 				<td><%- table_config.scorekind[row].max_res %></td>
 				<% for (var col = 0; col < table_config.header.length; col++) { %>
-				<%
-					var counter = 0;
-					for (var i = 0; i < table_config.stats.length; i++) {
-						counter += table_config.stats[i].pid == table_config.header[col].pid 
-								&& table_config.stats[i]['MAX(scr)'] == table_config.scorekind[row].max_res;
-						alluser[table_config.stats[i].uid] = 0;
-					}
-					probuser[col] = probuser[col] + counter;
-					score_sum += counter * table_config.scorekind[row].max_res;
-					chart_json += '{ score: ' + table_config.scorekind[row].max_res + ', user: ' + counter + '},'
-				%>
+					<%
+						var counter = 0;
+						var chart = '';
+						for (var i = 0; i < table_config.stats.length; i++) {
+							counter += table_config.stats[i].pid == table_config.header[col].pid 
+									&& table_config.stats[i]['MAX(scr)'] == table_config.scorekind[row].max_res;
+							alluser[table_config.stats[i].uid] = 0;
+						}
+						probuser[col] = probuser[col] + counter;
+						score_sum += counter * table_config.scorekind[row].max_res;
+						chart_json[col] += '{ score: ' + table_config.scorekind[row].max_res + ', user: ' + counter + '},'
+					%>
 					<td><%- counter %></td>
 				<% } %>
 			</tr>
@@ -80,15 +102,16 @@
 		</tbody>
 	</table>
 	<script>
-		Morris.Bar({
-		  element: 'bar-progress',
-		  data: [
-		  	<%- chart_json %>
-		  ].reverse(),
-		  xkey: 'score',
-		  ykeys: ['user'],
-		  labels: ['#users']
-		});
+		<% for (var i = 0; i < table_config.header.length; i++) { %>
+			Morris.Bar({
+			  element: 'bar-progress<%- i %>',
+			  data: [<%- chart_json[i] %>].reverse(),
+			  xkey: 'score',
+			  ykeys: ['user'],
+			  labels: ['#users'],
+			  yLabelFormat: function(y){return y != Math.round(y)?'':y;}
+			});
+		<% } %>
 	</script>
 	<% if (user["uid"] >= 0 && user["class"] == null) { %>
 		<h2>Grade</h2>
