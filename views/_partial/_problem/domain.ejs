@@ -1,12 +1,11 @@
 <div class="header">
 	<h1><%= __('Domain') %></h1>
-	<h2>You have to belive in yourself. That's the secret of success. </h2>
+	<h2><%= __("If you only do what you can do, you'll never be more than you are now.") %></h2>
 </div>
 <div class="content">
 
 <style>
 .custom-border {
-    height: 200px;
     border: 1px solid gray;
     border-radius: 4px;
     margin: 0.5em;
@@ -15,28 +14,52 @@
 .custom-domain h1 a {
     text-decoration: none;
 }
+.text-box-head {
+    text-align: center;
+}
+.domain-icon {
+    padding: 0% 33%;
+}
 </style>
 
 <div class="pure-g">
-	<div class="pure-u-1-1 custom-domain">
-		<div class="custom-border">
-            <div>
-                <h1 class="text-box-head"><a href="<%= site.url_for('problems/domain/0') %>">The C Programming</a></h1>
+        <div class="pure-u-1-2">
+    		<div class="custom-border pure-g">
+                <div class="pure-u-1-1">
+                    <div class="domain-icon"><svg viewBox="0 0 128 128"><path fill="#03599C" d="M117.5 33.5l.3-.2c-.6-1.1-1.5-2.1-2.4-2.6l-48.3-27.8c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.3.9 3.4l-.2.1c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4v-55.8c.1-.8 0-1.7-.4-2.6zm-53.5 55c9.1 0 17.1-5 21.3-12.4l12.9 7.6c-6.8 11.8-19.6 19.8-34.2 19.8-21.8 0-39.5-17.7-39.5-39.5s17.7-39.5 39.5-39.5c14.7 0 27.5 8.1 34.3 20l-13 7.5c-4.2-7.5-12.2-12.5-21.3-12.5-13.5 0-24.5 11-24.5 24.5s11 24.5 24.5 24.5z"></path></svg></div>
+                </div>
+                <div class="pure-u-1-1">
+                    <h2 class="text-box-head"><a href="<%= site.url_for('problems/domain/0') %>"><%= __('The C Programming') %></a></h2>
+                </div>
             </div>
         </div>
-
-        <div class="custom-border">
-            <div>
-                <h1 class="text-box-head"><a href="<%= site.url_for('problems/domain/1') %>">Parallel Programming</a></h1>
+        <div class="pure-u-1-2">
+            <div class="custom-border">
+                    <div class="pure-u-1-1">
+                    <div class="domain-icon">
+                        <svg viewBox="0 0 128 128">
+                        </svg> 
+                    </div>
+                    </div>
+                <div class="pure-u-1-1">
+                    <h2 class="text-box-head"><a href="<%= site.url_for('problems/domain/1') %>"><%= __('Parallel Programming') %></a></h2>
+                </div>
             </div>
         </div>
-        <div class="custom-border">
-            <div>
-                <h1 class="text-box-head"><a href="<%= site.url_for('problems/domain/2') %>">Data Structures and Algorithms</a></h1>
+        <div class="pure-u-1-2">
+            <div class="custom-border">
+                    <div class="pure-u-1-1">
+                    <div class="domain-icon">
+                        <svg viewBox="0 0 128 128">
+                            <path fill="#9C033A" d="M117.5 33.5l.3-.2c-.6-1.1-1.5-2.1-2.4-2.6l-48.3-27.8c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.3.9 3.4l-.2.1c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4v-55.8c.1-.8 0-1.7-.4-2.6zm-35.5 32.5v-4h5v-5h5v5h5v4h-5v5h-5v-5h-5zm3.3-14c-4.2-7.5-12.2-12.5-21.3-12.5-13.5 0-24.5 11-24.5 24.5s11 24.5 24.5 24.5c9.1 0 17.1-5 21.3-12.4l12.9 7.6c-6.8 11.8-19.6 19.8-34.2 19.8-21.8 0-39.5-17.7-39.5-39.5s17.7-39.5 39.5-39.5c14.7 0 27.5 8.1 34.3 20l-13 7.5zm29.7 14h-5v5h-4v-5h-6v-4h6v-5h4v5h5v4z"></path>
+                        </svg> 
+                    </div>
+                    </div>
+                <div class="pure-u-1-1">
+                    <h2 class="text-box-head"><a href="<%= site.url_for('problems/domain/2') %>"><%= __('Data Structures and Algorithms') %></a></h2>
+                </div>
             </div>
         </div>
-
-	</div>
 </div>
 
 </div>

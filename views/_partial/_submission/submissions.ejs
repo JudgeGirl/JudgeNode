@@ -28,12 +28,12 @@
 	}
 %>
 <div class="header">
-	<h1 class='article-title'>Submission</h1>
-    <h2>Update page each 60 seconds</h2>
+	<h1 class='article-title'><%- __('Submission') %></h1>
+    <h2><%- __('Update page each 60 seconds') %></h2>
 </div>
 <div class="content">
 	<% if (site.CONTEST.MODE == true) { %>
-	<div class="sysmsg">考試正在進行</div>
+	<div class="sysmsg"><%- __('Examination in progress') %></div>
 	<% } %>
 <div class="pure-g">
 	<div class="pure-u-1-1">

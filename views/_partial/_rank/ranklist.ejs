@@ -1,6 +1,6 @@
 <div class="header">
 	<h1 class='article-title'><%= __('Rank') %></h1>
-	<h2>I thought that solving problem would last forever. I was wrong.</h2>
+	<h2><%= __("I'm not the best but I'm trying my best.") %></h2>
 </div>
 <style>
 table .motto .abbr {
@@ -19,8 +19,8 @@ table .motto .abbr {
 <div class="content">
 	<div class="pure-menu pure-menu-horizontal">
 		<ul class="pure-menu-list">
-			<li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('progress') %>">Progress Report</a></li>
-			<li class="pure-menu-item"><a class="pure-menu-link" href="#">Site Statistics</a></li>
+			<li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('progress') %>"><%= __('Progress Report') %></a></li>
+			<li class="pure-menu-item"><a class="pure-menu-link" href="#"><%= __('Site Statistics') %></a></li>
 		</ul>
 	</div>
 	<div class="pure-g">

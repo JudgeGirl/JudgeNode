@@ -11,12 +11,12 @@
 }
 </style>
 <div class="header">
-    <h1 class='article-title'>Live Submission</h1>
-    <h2>Auto update</h2>
+    <h1 class='article-title'><%= __('Live Submission') %></h1>
+    <h2><%= __('Auto update') %></h2>
 </div>
 <div class="content">
 <% if (site.CONTEST.MODE == true) { %>
-    <div class="sysmsg">考試正在進行</div>
+    <div class="sysmsg"><%- __('Examination in progress') %></div>
 <% } %>
 
 <p></p>

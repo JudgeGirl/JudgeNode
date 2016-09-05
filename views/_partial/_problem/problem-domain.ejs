@@ -1,13 +1,13 @@
 <div class="header">
 	<h1><%= __('Problems') %></h1>
-	<h2>You have to belive in yourself. That's the secret of success. </h2>
+	<h2><%= __("You have to believe in yourself. That's the secret of success.") %></h2>
 </div>
 
 <div class="content">
 
 <div class="pure-menu pure-menu-horizontal">
 	<ul class="pure-menu-list">
-		<li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('problems/domains') %>">Domain</a></li>
+		<li class="pure-menu-item"><a class="pure-menu-link" href="<%= site.url_for('problems/domains') %>"><%= __('Domain') %></a></li>
 	</ul>
 </div>
 <style>
@@ -49,7 +49,7 @@
 
 <div class="pure-g" id="level-list">
 	<div class="pure-u-1 pure-u-lg-6-24">
-		<h3>Subdomains</h3>
+		<h3><%= __('Subdomains') %></h3>
 		<div class="pure-menu custom-restricted">
 		    <span class="pure-menu-heading"></span>
 		    <ul class="pure-menu-list">
@@ -74,7 +74,7 @@
 	<div class="pure-u-1 pure-u-lg-1-24">
 	</div>
 	<div class="pure-u-1 pure-u-lg-17-24">
-		<h3>Problem List</h3>
+		<h3><%= __('Problem List') %></h3>
 		<div class="pure-u-1-1" id="level-content">
 		</div>
 	</div>

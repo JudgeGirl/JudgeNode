@@ -1,6 +1,6 @@
 <div class="header">
 	<h1 class='article-title'><%= __('Contest') %></h1>
-    <h2>Contest comming soon.</h2>
+    <h2><%= __('Contest comming soon.') %></h2>
 </div>
 <div class="content">
 <% if (contest_list == null || contest_list.length == 0) { %>
@@ -45,8 +45,8 @@
 						</a>
 					</td>
 					<td>
-						<%- unitConvert('date', new Date(contest_list[i].ts1)) %> ~
-						<%- unitConvert('date', new Date(contest_list[i].ts2)) %>
+						<%- unitConvert('simple_date', new Date(contest_list[i].ts1)) %> ~
+						<%- unitConvert('simple_date', new Date(contest_list[i].ts2)) %>
 					</td>
 					<td>
 						<% if (nowtime >= contest_list[i].ts2) { %>
