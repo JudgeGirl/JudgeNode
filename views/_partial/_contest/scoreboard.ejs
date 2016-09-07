@@ -6,7 +6,7 @@
 
 <div class="header">
 	<h1 class='article-title'>Scoreboard</h1>
-	<h2> Contest. <%- table_config.cid %></h2>
+	<h2> Contest. <%- table_config.cid %> <%- table_config.icpc.contest[0].ttl %></h2>
 </div>
 <div class="content">
 	<div class="pure-g">
@@ -123,13 +123,12 @@
 					<% for (var row = 0; row < table_config.header.length; row++) { %>
 						<th data-type="string" data-sortable="true" data-name="P<%- String.fromCharCode(65 + row)  %>"></th>
 						<th data-type="int" data-sortable="true" data-name="Score">Score</th>
-						<th data-type="int" data-sortable="true" data-name="Subs">Subs</th>
 					<% } %>
 				</tr>
 			</thead>
 			<tbody>
 				<%
-					var alluser = {};
+					var alluser = {}, firstkill_ts = {};
 					for (var i = 0; i < table_config.user.length; i++)
 						alluser[table_config.user[i].uid] = {};
 					for (var i = 0; i < table_config.stats.length; i++)
@@ -139,30 +138,46 @@
 							continue;
 						alluser[table_config.grade[i].uid][table_config.grade[i].pid] = table_config.grade[i];
 					}
+					for (var i in table_config.icpc.ac) {
+						if (alluser[table_config.icpc.ac[i].uid] == undefined)
+							continue;
+						alluser[table_config.icpc.ac[i].uid][table_config.icpc.ac[i].pid].ac = table_config.icpc.ac[i].ts;
+						if (firstkill_ts[table_config.icpc.ac[i].pid] == undefined ||
+							table_config.icpc.ac[i].ts < firstkill_ts[table_config.icpc.ac[i].pid])
+							firstkill_ts[table_config.icpc.ac[i].pid] = table_config.icpc.ac[i].ts;
+					}
+					for (var i in table_config.icpc.wa) {
+						if (alluser[table_config.icpc.wa[i].uid] == undefined)
+							continue;
+						alluser[table_config.icpc.wa[i].uid][table_config.icpc.wa[i].pid].wa = table_config.icpc.wa[i].wa;
+					}
+					
 				 %>
 				<% for (var row = 0; row < table_config.user.length; row++) { %>
-				<tr class="normal">
+				<tr style="height: 4.4em;">
 					<td><a href="<%= site.url_for('user/' + table_config.user[row].uid) %>"><%- table_config.user[row].lgn %></a></td>
 					<% for (var col = 0; col < table_config.header.length; col++) { %>
 						<% 
 							if (alluser[table_config.user[row].uid][table_config.header[col].pid] != undefined) { 
 								var score = alluser[table_config.user[row].uid][table_config.header[col].pid]['MAX(scr)'];
 								var times = alluser[table_config.user[row].uid][table_config.header[col].pid]['COUNT(*)'];
+								var ac = alluser[table_config.user[row].uid][table_config.header[col].pid]['ac'];
+								var wa = alluser[table_config.user[row].uid][table_config.header[col].pid]['wa'];
 						%>
 								<%
 									var filter = 'cid=' + table_config.cid;
 									filter += '&uid=' + table_config.user[row].uid;
 								%>
+								<td style="text-align: center; <%- ac == firstkill_ts[table_config.header[col].pid] ? "background: pink;" : "" %>"><a href="<%= site.url_for('submissions?' + filter) %>" style="color: <%- score == 100 ? "green" : "red" %>">
 								<% if (score != 100) { %>
-									<td><span class="result6">WA </span></td>
+									-<%- times %>
 								<% } else { %>
-									<td><span class="result7">AC </span></td>
+									+<%- wa == undefined ? "" : wa %><br/><%- Math.floor((ac-table_config.icpc.contest[0].ts1)/1000/60) %>
 								<% } %>
+								</a></td>
 								<td><%- score %></td>
-								<td><a href="<%= site.url_for('submissions?' + filter) %>"><%- times %></a></td>
 						<% } else { %>
-							<td> NO </td>
-							<td> 0 </td>
+							<td> -- </td>
 							<td> 0 </td>
 						<% } %>
 					<% } %>
