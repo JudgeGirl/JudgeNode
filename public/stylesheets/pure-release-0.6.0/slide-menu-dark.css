@@ -695,6 +695,9 @@ abbr[title] {
     margin: 0.2em 0 0;
     font-weight: 100;
 }
+.pure-table thead th a {
+    color: white;
+}
 .pure-table-submitowner {
     background-color: rgba(0, 0, 0, 0.2);
 }

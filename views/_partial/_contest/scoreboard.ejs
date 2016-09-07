@@ -35,7 +35,7 @@
 				<th style="width: 15%;">Score</th>
 				<% var width = 85 / Math.max(table_config.header.length, 1); %>
 				<% for (var row = 0; row < table_config.header.length; row++) { %>
-					<th style="width:<%- width %>%"><a href="<%= site.url_for('problem/' + table_config.cid + '/' + table_config.header[row].pid) %>"><%- table_config.header[row].ttl %></a></th>
+					<th style="width:<%- width %>%"><a href="<%= site.url_for('problem/' + table_config.cid + '/' + table_config.header[row].pid) %>"><%- table_config.header[row].pid %>. <%- table_config.header[row].ttl %></a></th>
 				<% } %>
 			</tr>
 		</thead>
