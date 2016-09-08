@@ -5,12 +5,33 @@
 <script src="<%= site.url_for('javascripts/sh/scripts/shBrushPlain.js') %>" type="text/javascript"></script>
 <script src="<%= site.url_for('javascripts/sh/scripts/shBrushCpp.js') %>" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<%= site.url_for('stylesheets/shThemeDefault.css') %>">
+<script src="<%= site.url_for('javascripts/sh/scripts/shBrushCpp.js') %>" type="text/javascript"></script>
 
+
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/lib/codemirror.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldcode.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldgutter.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/brace-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/xml-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/comment-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/display/fullscreen.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/mode/markdown/markdown.js') %>"></script>
+
+<link rel="stylesheet" type="text/css" href="<%= site.url_for('javascripts/codemirror-5.18.2/lib/codemirror.css') %>"></style>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldgutter.css') %>">
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/theme/monokai.css') %>">
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/addon/display/fullscreen.css') %>">
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+</style>
 <div class="header">
 	<h1 class='article-title'><%= __('Edit Announcement') %></h1>
     <h2>Administrator</h2>
 </div>
-
 
 <div class="content">
 	<%- include('../_partial/widget/nav')%>
@@ -25,9 +46,7 @@
         <div class="pure-u-1-1">
             <form action="<%= site.url_for('admin/update/announcement') %>" method="post" class="pure-form  pure-form-stacked">
                 <fieldset>
-
                     <textarea name="textbox" id="textbox" class="pure-input-1 markdown" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= md_content %></textarea>
-
                     <div class="pure-controls">
                         <button type="submit" name="submit" id="submit" class="pure-button pure-button-primary"><%= __('Update') %></button>
                     </div>
@@ -40,7 +59,7 @@
         </div>
     </section>
     <!--content goes here-->
-</div> 
+</div>
 </div>
 <script>
 function latex_filter(text) {
@@ -97,18 +116,6 @@ $("#tab2").click(function() {
     if ($(this).is(':checked'))
         render();
 });
-$(document).ready(function() {
-    render();
-    new MediumEditor(document.querySelector(".editor"), {
-        buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
-        extensions: {
-            markdown: new MeMarkdown(function (md) {
-                var markDownEl = document.querySelector(".markdown");
-                markDownEl.value = md;
-            })
-        }
-    });
-});
 
 var list = document.getElementsByTagName("form");
 for (var i = 0; i < list.length; i++) {
@@ -131,4 +138,34 @@ for (var i = 0; i < aElems.length; i++) {
         }
     };
 }
+
+window.onload = function() {
+  var te_markdown = document.getElementById("textbox");
+
+  window.editor_markdown = CodeMirror.fromTextArea(te_markdown, {
+    mode: "markdown",
+    lineNumbers: true,
+    lineWrapping: true,
+    extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    theme: "monokai",
+    extraKeys: {
+        "F11": function(cm) {
+          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          if (cm.getOption("fullScreen"))
+            $('#menu').hide();
+          else
+            $('#menu').show();
+        },
+        "Esc": function(cm) {
+          if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          $('#menu').show();
+        }
+      }
+  });
+  window.editor_markdown.on("change", function() {
+        te_markdown.value = window.editor_markdown.getValue();
+  });
+};
 </script>

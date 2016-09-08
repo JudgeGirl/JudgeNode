@@ -5,6 +5,28 @@
 <script src="<%= site.url_for('javascripts/sh/scripts/shBrushCpp.js') %>" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<%= site.url_for('stylesheets/shThemeDefault.css') %>">
 
+
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/lib/codemirror.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldcode.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldgutter.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/brace-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/xml-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/comment-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/display/fullscreen.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/mode/markdown/markdown.js') %>"></script>
+
+<link rel="stylesheet" type="text/css" href="<%= site.url_for('javascripts/codemirror-5.18.2/lib/codemirror.css') %>"></style>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldgutter.css') %>">
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/theme/monokai.css') %>">
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/addon/display/fullscreen.css') %>">
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 800px;
+}
+</style>
+
 <div class="header">
 	<h1 class='article-title'><%= __('Edit Problem') %></h1>
     <h2><%= prob_config.config.pid %>. <%= prob_config.config.ttl %></h2>
@@ -83,9 +105,8 @@
             <div class="pure-u-1-1" id="preview-textbox" style="border-color: #f0f0f0; border-style: solid; min-height: 512px;">
             </div>
         </section>
-
         <section id="content3" class="tab-content">
-            <textarea name="textbox2" id="textbox2" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 600px;"><%= prob_config.solution_md %></textarea>
+            <textarea name="textbox2" id="textbox2" class="pure-input-1" style="font-family: Courier, Courier New, Microsoft JhengHei, MingLiU; min-height: 800px;"><%= prob_config.solution_md %></textarea>
         </section>
         <section id="content4" class="tab-content">
             <div class="pure-u-1-1" id="preview-textbox2" style="border-color: #f0f0f0; border-style: solid; min-height: 512px;">
@@ -218,4 +239,38 @@ for (var i = 0; i < aElems.length; i++) {
         }
     };
 }
+
+window.onload = function() {
+    function editor(id)
+    {
+      var te_markdown = document.getElementById(id);
+
+      var editor_markdown = CodeMirror.fromTextArea(te_markdown, {
+        mode: "markdown",
+        lineNumbers: true,
+        lineWrapping: true,
+        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        theme: "monokai",
+        extraKeys: {
+            "F11": function(cm) {
+              cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+              if (cm.getOption("fullScreen"))
+                $('#menu').hide();
+              else
+                $('#menu').show();
+            },
+            "Esc": function(cm) {
+              if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+              $('#menu').show();
+            }
+          }
+      });
+      editor_markdown.on("change", function() {
+            te_markdown.value = editor_markdown.getValue();
+      });
+    }
+    editor('textbox');
+};
 </script>

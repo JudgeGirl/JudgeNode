@@ -9,6 +9,28 @@
 %>
 <link rel="stylesheet" type="text/css" href="<%= site.url_for('stylesheets/shThemeDefault.css') %>" />
 
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/lib/codemirror.js') %>" type="text/javascript"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldcode.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldgutter.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/brace-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/xml-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/comment-fold.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/display/fullscreen.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js') %>"></script>
+<script src="<%= site.url_for('javascripts/codemirror-5.18.2/addon/mode/clike.js') %>"></script>
+
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/lib/codemirror.css') %>"></style>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/addon/fold/foldgutter.css') %>">
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/theme/monokai.css') %>">
+<link rel="stylesheet" href="<%= site.url_for('javascripts/codemirror-5.18.2/addon/display/fullscreen.css') %>">
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+
 <div class="header">
 	<h1 class='article-title'><%- pid + ". " + ttl %></h1>
     <h2><%= __("I'm a slow walker, but I never walk backwards.") %></h2>
@@ -82,8 +104,40 @@
 				<div class="pure-u-1-4">
 				</div>
 				<div class="pure-u-3-4">
-					<textarea class="pure-input-1" maxlength="65536" name="paste_code0" style="font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas"></textarea>
+					<textarea class="pure-input-1" maxlength="65536" name="paste_code0" id='paste_code0' style="font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas"></textarea>
 				</div>
+				<script>
+					window.onload = function() {
+					  var te_markdown = document.getElementById("paste_code0");
+
+					  window.editor_markdown = CodeMirror.fromTextArea(te_markdown, {
+					    lineNumbers: true,
+					    lineWrapping: true,
+					    extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+					    foldGutter: true,
+					    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+					    theme: "monokai",
+					    matchBrackets: true,
+        				mode: "text/x-csrc",
+					    extraKeys: {
+					        "F11": function(cm) {
+					          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+					          if (cm.getOption("fullScreen"))
+					            $('#menu').hide();
+					          else
+					            $('#menu').show();
+					        },
+					        "Esc": function(cm) {
+					          if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+					          $('#menu').show();
+					        }
+					      }
+					  });
+					  window.editor_markdown.on("change", function() {
+					        te_markdown.value = window.editor_markdown.getValue();
+					  });
+					};
+				</script>
 			</div>
 		<% } else { %>
 			<% for (var i = 0; i < psubmit.length; i++){ %>
@@ -164,7 +218,6 @@ new Clipboard(".fw-code-copy-button", {
   }
 });
 $('.upload-switch-button').click(function(elem) {
-		console.log(this);
 		var target = $(this).attr('data-id');
 		var target2 = $(this).attr('data-file-id');
 		if ($(this).attr('data-show') == "false") {
