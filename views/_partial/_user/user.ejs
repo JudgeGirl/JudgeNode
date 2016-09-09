@@ -17,8 +17,10 @@
 			<% } else { %>
 				<% if (userinfo.info.class <= 2) { %>
 					<%= __('Class {{number}}', {number: userinfo.info.class}) %>
-				<% } else { %>
+				<% } else if (userinfo.info.class <= 4) { %>
 					<%= __('Visitor Class {{number}}', {number: userinfo.info.class-2}) %>
+				<% } else { %>
+					<%= __('Strong') %>
 				<% } %>
 			<% } %></h3>
 			</div>

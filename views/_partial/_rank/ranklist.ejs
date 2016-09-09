@@ -64,8 +64,10 @@ table .motto .abbr {
 						<% } else { %>
 							<% if (rl[i].class <= 2) { %>
 								<td><%= __('Class {{number}}', {number: __(rl[i].class == 1 ? "Tue." : "Mon.") }) %></td>
-							<% } else { %>
+							<% } else if (rl[i].class <= 4) { %>
 								<td><%= __('Visitor Class {{number}}', {number: __(rl[i].class-2 == 1 ? "Tue." : "Mon.") }) %></td>
+							<% } else { %>
+								<td><%= __('Strong') %></td>
 							<% } %>
 						<% } %>
 						<td><%- rl[i].slv %></td>

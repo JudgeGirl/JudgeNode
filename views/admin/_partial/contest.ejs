@@ -96,6 +96,7 @@
                         <input type="checkbox" name="participants" value="2"> Class 2
                         <input type="checkbox" name="participants" value="3"> Class 3
                         <input type="checkbox" name="participants" value="4"> Class 4
+                        <input type="checkbox" name="participants" value="5"> Strong
                     </div>
                 </div>
             </div>
@@ -152,9 +153,11 @@
                     <%= __('Administrator') %>
                 <% } else if (user.class <= 2) { %>
                     <%= __('Class {{number}}', {number: user.class}) %>
-                <% } else { %>
+                <% } else if (user.class <= 4) { %>
                     <%= __('Visitor Class {{number}}', {number: user.class-2}) %>
-                <% } %>
+                <% } else { %>
+		    <%= __('Strong') %>
+		<% } %>
                 </td>
             </tr>
             <% } %>
