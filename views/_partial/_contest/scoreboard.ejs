@@ -136,20 +136,30 @@
 					for (var i = 0; i < table_config.grade.length; i++) {
 						if (alluser[table_config.grade[i].uid] == undefined)
 							continue;
-						alluser[table_config.grade[i].uid][table_config.grade[i].pid] = table_config.grade[i];
+						alluser[table_config.grade[i].uid][table_config.grade[i].pid] = {};
 					}
+				%>
+				<%
 					for (var i in table_config.icpc.ac) {
 						if (alluser[table_config.icpc.ac[i].uid] == undefined)
 							continue;
-						alluser[table_config.icpc.ac[i].uid][table_config.icpc.ac[i].pid].ac = table_config.icpc.ac[i].ts;
+						var uid = table_config.icpc.ac[i].uid;
+						var pid = table_config.icpc.ac[i].pid;
+						if (alluser[uid][pid] == undefined)
+							alluser[uid][pid] = {};
+						alluser[uid][pid].ac = table_config.icpc.ac[i].ts;
 						if (firstkill_ts[table_config.icpc.ac[i].pid] == undefined ||
 							table_config.icpc.ac[i].ts < firstkill_ts[table_config.icpc.ac[i].pid])
 							firstkill_ts[table_config.icpc.ac[i].pid] = table_config.icpc.ac[i].ts;
 					}
+				%>
+				<%
 					for (var i in table_config.icpc.wa) {
 						if (alluser[table_config.icpc.wa[i].uid] == undefined)
 							continue;
-						alluser[table_config.icpc.wa[i].uid][table_config.icpc.wa[i].pid].wa = table_config.icpc.wa[i].wa;
+						var uid = table_config.icpc.wa[i].uid;
+						var pid = table_config.icpc.wa[i].pid;
+						alluser[uid][pid].wa = table_config.icpc.wa[i].wa;
 					}
 					
 				 %>
