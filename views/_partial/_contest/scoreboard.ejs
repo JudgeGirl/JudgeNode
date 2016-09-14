@@ -136,7 +136,7 @@
 					for (var i = 0; i < table_config.grade.length; i++) {
 						if (alluser[table_config.grade[i].uid] == undefined)
 							continue;
-						alluser[table_config.grade[i].uid][table_config.grade[i].pid] = {};
+						alluser[table_config.grade[i].uid][table_config.grade[i].pid] = table_config.grade[i];
 					}
 				%>
 				<%
