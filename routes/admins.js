@@ -15,10 +15,13 @@ router.get('/', function(req, res, next) {
     var uid = req.session.uid;
     dblink.helper.isAdmin(uid, function(isadmin) {
         if (isadmin) {
-            res.render('admin/layout', {
-                layout: 'dashboard',
-                subtitle: 'Dashboard',
-                user: req.session
+            dblink.admin.load_dashboard(function(system_status) {
+                res.render('admin/layout', {
+                    layout: 'dashboard',
+                    subtitle: 'Dashboard',
+                    user: req.session,
+                    system_status: system_status
+                });
             });
         } else {
             res.redirect(loginURL);
