@@ -14,16 +14,22 @@
 		score_statistic.score[i].sum = Math.ceil(score_statistic.score[i].sum);
 	}
 	var gap = 10;
-	for (var i = 0; i < 100; i += gap) {
+	score_statistic.interval = [];
+	console.log(score_statistic.score);
+	for (var i = 0; i <= 100; i += gap) {
 		var arr = score_statistic.score.filter(function(e) {
 			return e["sum"] >= i && e["sum"] < i+gap;
 		});
 		if (arr.length == 0) {
-			score_statistic.score.push({sum: '[' + i + ', ' + (i+gap) + ')', count: 0});
+			score_statistic.interval.push({sum: '[' + i + ', ' + (i+gap) + ')', count: 0});
 		} else {
-			score_statistic.score.push({sum: '[' + i + ', ' + (i+gap) + ')', count: arr.length});
+			var sum = 0;
+			for (var j in arr)
+				sum += arr[j].count;
+			score_statistic.interval.push({sum: '[' + i + ', ' + (i+gap) + ')', count: sum});
 		}
 	}
+	console.log(score_statistic.interval);
 %>
 
 <div id="bar-progress"></div>
@@ -32,7 +38,7 @@
 	Morris.Bar({
 		element: 'bar-progress',
 		data:
-			<%- JSON.stringify(score_statistic.score) %>
+			<%- JSON.stringify(score_statistic.interval) %>
 		,
 		xkey: 'sum',
   		ykeys: ['count'],
