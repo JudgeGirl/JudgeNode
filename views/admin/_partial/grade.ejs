@@ -57,7 +57,8 @@
 	}
     */
 	for (var i = 0; tbody && i < tbody.length; i++) {
-		record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
+		if (record[tbody[i].lgn] != undefined)
+			record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
 	}
 %>
 <% for (var i in record) { %>
