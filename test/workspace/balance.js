@@ -4,9 +4,8 @@
 	$ node balance _csvfile_1 _csvfile_2 _outputfile
 */
 var mysql = require('mysql'),
-    fs = require('fs'),
-    crypto = require('crypto'),
-    randomstring = require("randomstring");
+	fs = require('fs'),
+	colors = require('colors');
 var parse = require('csv-parse');
 
 var connection = require('../../lib/mysql').connection;
@@ -32,7 +31,8 @@ var balance = function(table1, table2) {
 		factor2 = 1;
 		factor1 = avg2 / avg1;
 	}
-
+	console.log('[' + 'INFO'.green + ']' + ' ' + (class1file).cyan + ' #Participants = ' + table1.length + ', average = ' + avg1);
+	console.log('[' + 'INFO'.green + ']' + ' ' + (class2file).cyan + ' #Participants = ' + table2.length + ', average = ' + avg2);
 	// save file
 	var text = '',
 		header = ['uid', 'lgn', 'score'], 
@@ -51,13 +51,28 @@ var balance = function(table1, table2) {
 		text += '\n' + row.join(',');
 	}
 
+	console.log('[' + 'Save'.yellow + ']' + ' result store into ' + (outfilename).cyan);
 	fs.writeFileSync(outfilename, text);
+	process.exit(0);
 };
 
 parse(fs.readFileSync(class1file).toString(), {comment: '#'}, function(err, output) {
 	var table1 = output.slice(1);
+	if (!err) {
+		console.log('[' + 'INFO'.green + ']' + ' parse ' + (class1file).cyan + ' success');
+	} else {
+		console.log('[' + 'Error'.red + ']' + ' parse ' + (class1file).cyan + ' failed');
+		process.exit(1);
+	}
+		
 	parse(fs.readFileSync(class2file).toString(), {comment: '#'}, function(err, output) {
 		var table2 = output.slice(1);
+		if (!err) {
+			console.log('[' + 'INFO'.green + ']' + ' parse ' + (class2file).cyan + ' success');
+		} else {
+			console.log('[' + 'Error'.red + ']' + ' parse ' + (class2file).cyan + ' failed');
+			process.exit(1);
+		}
 		balance(table1, table2);
 	});
 });
