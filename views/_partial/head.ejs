@@ -76,10 +76,10 @@
 					<a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> <%- user.lgn %> <i class="fa fa-caret-down"></i></a>
 					<ul class="pure-menu-list">
 						<li class="pure-menu-item">
-							<a class="pure-menu-link" href="<%= site.url_for('user/' + user.uid) %>"><i class="fa fa-tasks"></i> <%= __('Status') %></a>
+							<a class="pure-menu-link" href="<%= site.url_for('user/' + user.uid) %>"><i class="fa fa-tasks"></i> <%= __('My Progress') %></a>
 						</li>
 						<li class="pure-menu-item">
-							<a class="pure-menu-link" href="<%= site.url_for('score') %>"><i class="fa fa-database"></i> <%= __('Score') %></a>
+							<a class="pure-menu-link" href="<%= site.url_for('score') %>"><i class="fa fa-database"></i> <%= __('My Score') %></a>
 						</li>
 						<li>
 							<a class="pure-menu-link" href="<%= site.url_for('edit') %>"><i class="fa fa-cogs"></i> <%= __('Profile') %></a>

@@ -4,6 +4,8 @@
 # WT: 0, CE: 1, OLE: 2, MLE: 3, RE: 4, TLE: 5, WA: 6, AC: 7, SAVING: 8, PE: -1,
 JUDGE:
     path: 'c:/Users/morris821028/Desktop/github/'
+    testdata:
+        path: 'c:/Users/morris821028/Desktop/github'
     lang: ['*', 'C']
     compiler_arg: ['none', 'gcc -std=c99 -O2']
     result_message: ['Waiting', 'Compilation Error', 'Output Limit Exceeded', 'Memory Limit Exceeded', 'Runtime Error', 'Time Limit Exceeded', 'Wrong Answer', 'Accepted', 'Uploading...', 'Presentation Error']
