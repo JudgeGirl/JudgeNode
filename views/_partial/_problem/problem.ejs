@@ -45,7 +45,7 @@
 <% } %>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('submissions?pid=' + pid) %>'><%= __('Status') %></a></li>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('statistic/problem/' + cid + '/' + pid) %>'><%= __('Statistics') %></a></li>
-	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('solution/problem/' + pid) %>'><%= __('Solution') %></a></li>
+	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('solution/problem/' + cid + '/' + pid) %>'><%= __('Solution') %></a></li>
 <% if (user["uid"] >= 0 && user["class"] == null) { %>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('statistic/grade/problem/' + cid + '/' + pid) %>'><%= __('Report') %></a></li>
 	<li class="pure-menu-item"><a class="pure-menu-link" href='<%= site.url_for('admin/edit/problem/' + pid) %>'><%= __('Edit') %></a></li>

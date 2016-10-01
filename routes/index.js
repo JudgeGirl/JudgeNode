@@ -289,13 +289,15 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
         loadPage();
     });
 });
-router.get('/solution/problem/:pid', function(req, res, next) {
-    var cid = 0,
+router.get('/solution/problem/:cid/:pid', function(req, res, next) {
+    var cid = req.params.cid,
         pid = req.params.pid,
         uid = req.session.uid;
+    console.log('canread solution ?');
     dblink.helper.canread(cid, pid, uid, function(can) {
         if (uid != undefined && req.session['class'] == null)
             can = true;
+        console.log('canread ' + can);
         if (!can)
             return res.redirect(utils.url_for('problems/domains'));
         dblink.problemManager.problemSolution(pid, function(solution_config) {
