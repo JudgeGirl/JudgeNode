@@ -15,7 +15,7 @@
 	}
 	var gap = 10;
 	score_statistic.interval = [];
-	console.log(score_statistic.score);
+	// console.log(score_statistic.score);
 	for (var i = 0; i <= 100; i += gap) {
 		var arr = score_statistic.score.filter(function(e) {
 			return e["sum"] >= i && e["sum"] < i+gap;
@@ -29,7 +29,7 @@
 			score_statistic.interval.push({sum: '[' + i + ', ' + (i+gap) + ')', count: sum});
 		}
 	}
-	console.log(score_statistic.interval);
+	// console.log(score_statistic.interval);
 %>
 
 <div id="bar-progress"></div>
