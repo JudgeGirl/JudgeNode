@@ -44,8 +44,15 @@
             if (map_class[subtask.status])
               status_class = map_class[subtask.status];
           %>
-          <span class="<%= status_class %>"><%= subtask.status %></span> 
-         (<%= subtask.cpu %> ms, <%= Math.ceil(subtask.mem/1024) %> KB)</td>
+          <% if (subtask.status == 'CE') { %> 
+	      <span class="result1">Compile Error</span>
+		<pre><%= subtask.log %></pre> 
+              </td>
+          <% } else if (subtask.status != 'X') { %>
+	      <span class="<%= status_class %>"><%= subtask.status %></span> 
+              (<%= subtask.cpu %> ms, <%= Math.ceil(subtask.mem/1024) %> KB)</td>
+	  <% } else { %>
+          <% } %>
       </tr>
   <% } %>
 </tbody>
