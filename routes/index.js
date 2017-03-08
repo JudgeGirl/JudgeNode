@@ -232,7 +232,7 @@ router.get('/live', function(req, res, next) {
         layout: 'live',
         subtitle: 'Live',
         query_filter: req.query,
-        request_hostname: req.hostname
+        request_hostname: req.get('host')
     });
 });
 router.get('/problems/domains', function(req, res, next) {
@@ -251,7 +251,7 @@ router.get('/problems/domain/:did', function(req, res, next) {
                 level_list: lvList,
                 domain_id: did,
                 level_progress: lvProgress,
-                request_hostname: req.hostname
+                request_hostname: req.get('host')
             });
         });
     });
