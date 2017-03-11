@@ -107,10 +107,10 @@
 					<textarea class="pure-input-1" maxlength="65536" name="paste_code0" id='paste_code0' style="font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas"></textarea>
 				</div>
 				<script>
-					window.onload = function() {
+					$(window).load(function() {
 					  var te_markdown = document.getElementById("paste_code0");
 
-					  window.editor_markdown = CodeMirror.fromTextArea(te_markdown, {
+					  window.editor_markdown0 = CodeMirror.fromTextArea(te_markdown, {
 					    lineNumbers: true,
 					    lineWrapping: true,
 					    extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
@@ -133,10 +133,11 @@
 					        }
 					      }
 					  });
-					  window.editor_markdown.on("change", function() {
-					        te_markdown.value = window.editor_markdown.getValue();
+					  window.editor_markdown0.on("change", function() {
+					        te_markdown.value = window.editor_markdown0.getValue();
 					  });
-					};
+					  window.editor_markdown0.refresh();
+					});
 				</script>
 			</div>
 		<% } else { %>
