@@ -146,21 +146,51 @@
 					<div class="pure-u-1-4">
 						<label for="code<%- i %>"><%- psubmit[i] %></label>
 					</div>
+
 					<div class="pure-u-3-4">
-							<input class="pure-input-1-2" name="code<%- i %>" id="code<%- i %>" type="file">
+							<input class="pure-input-1-2" name="paste_code<%- i %>" id="code<%- i %>" type="file">
 							<span class="pure-button upload-switch-button" style="background: none;" data-id="paste_code_block<%- i %>" data-file-id="code<%- i %>" data-show="false">
 								<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ...</i>
 							</span>
 					</div>
 				</div>
+
 				<div class="pure-g" id="paste_code_block<%- i %>" style="display: none;">
 					<div class="pure-u-1-4">
 					</div>
 					<div class="pure-u-3-4">
-						<textarea class="pure-input-1" maxlength="65536" name="paste_code<%- i %>" style="font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas"></textarea>
+						<textarea class="pure-input-1" maxlength="65536" name="paste_code<%- i %>" id="paste_code<%- i %>" style="font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas"></textarea>
 					</div>
 				</div>
 			<% } %>
+			<script>
+				$(window).load(function() {
+				  var n = <%= psubmit.length %>;
+				  var te_markdown = [];
+				  for (var i = 0; i < n; i++)
+				  	te_markdown.push(document.getElementById("paste_code" + i));
+				  console.log(te_markdown);
+				  window.editor_markdown = [];
+				  for (var i = 0; i < n; i++) {
+				   	window.editor_markdown.push(CodeMirror.fromTextArea(te_markdown[i], {
+					    lineNumbers: true,
+					    lineWrapping: true,
+					    extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+					    foldGutter: true,
+					    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+					    theme: "monokai",
+					    matchBrackets: true,
+	    				mode: "text/x-csrc"
+					  }));
+				  }
+				  <% for (var i = 0; i < psubmit.length; i++) { %>
+				  	window.editor_markdown[<%- i %>].on("change", function() {
+				    	te_markdown[<%- i %>].value = window.editor_markdown[<%- i %>].getValue();
+				  	});
+				  	window.editor_markdown[<%- i %>].refresh();
+				  <% } %>
+				});
+			</script>
 		<% } %>
 		</fieldset>
 		<div class="pure-g">
