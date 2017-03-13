@@ -180,7 +180,20 @@
 					    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
 					    theme: "monokai",
 					    matchBrackets: true,
-	    				mode: "text/x-csrc"
+	    				mode: "text/x-csrc",
+	    				extraKeys: {
+					        "F11": function(cm) {
+					          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+					          if (cm.getOption("fullScreen"))
+					            $('#menu').hide();
+					          else
+					            $('#menu').show();
+					        },
+					        "Esc": function(cm) {
+					          if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+					          $('#menu').show();
+					        }
+					      }
 					  }));
 				  }
 				  <% for (var i = 0; i < psubmit.length; i++) { %>
