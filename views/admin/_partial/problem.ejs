@@ -241,36 +241,47 @@ for (var i = 0; i < aElems.length; i++) {
 }
 
 window.onload = function() {
-    function editor(id)
+    function editor(ids)
     {
-      var te_markdown = document.getElementById(id);
-
-      var editor_markdown = CodeMirror.fromTextArea(te_markdown, {
-        mode: "markdown",
-        lineNumbers: true,
-        lineWrapping: true,
-        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
-        foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        theme: "monokai",
-        extraKeys: {
-            "F11": function(cm) {
-              cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-              if (cm.getOption("fullScreen"))
-                $('#menu').hide();
-              else
-                $('#menu').show();
-            },
-            "Esc": function(cm) {
-              if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-              $('#menu').show();
-            }
-          }
+      var te_markdown = [];
+      var n = ids.length;
+      for (var i = 0; i < n; i++)
+        te_markdown.push(document.getElementById(ids[i]));
+      window.editor_markdown = [];
+      for (var i = 0; i < n; i++) {
+        window.editor_markdown.push(CodeMirror.fromTextArea(te_markdown[i], {
+            mode: "markdown",
+            lineNumbers: true,
+            lineWrapping: true,
+            extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+            foldGutter: true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            theme: "monokai",
+            extraKeys: {
+                "F11": function(cm) {
+                  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                  if (cm.getOption("fullScreen"))
+                    $('#menu').hide();
+                  else
+                    $('#menu').show();
+                },
+                "Esc": function(cm) {
+                  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                  $('#menu').show();
+                }
+              }
+        }));
+      }
+      for (var i = 0; i < n; i++) {
+        window.editor_markdown[i].refresh();;
+      }
+      window.editor_markdown[0].on("change", function() {
+            te_markdown[0].value = window.editor_markdown[0].getValue();
       });
-      editor_markdown.on("change", function() {
-            te_markdown.value = editor_markdown.getValue();
+      window.editor_markdown[1].on("change", function() {
+            te_markdown[1].value = window.editor_markdown[1].getValue();
       });
     }
-    editor('textbox');
+    editor(['textbox', 'textbox2']);
 };
 </script>

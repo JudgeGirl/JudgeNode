@@ -751,7 +751,7 @@ abbr[title] {
   float: left;
   width: 25%;
   color: white;
-
+  padding: 10px 0px;
   background: #343434;
   cursor: pointer;
   text-decoration: none;
