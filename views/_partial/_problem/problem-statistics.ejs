@@ -19,11 +19,13 @@
 	<div class="pure-g">
 		<div class="pure-u-1-1">
 	<% 
-		var total = 0, accepted = 0;
+		var total = 0, accepted = 0, maxscore = 99;
 		for (var key in tried_config.user) {
 			total += tried_config.user[key].count;
-			if (tried_config.user[key].score == 100)
+			if (tried_config.user[key].score > maxscore) {
 				accepted = tried_config.user[key].count;
+				maxscore = tried_config.user[key].score;
+			}
 		}
 	%>
 	<table class="pure-table" style="width: 100%">
