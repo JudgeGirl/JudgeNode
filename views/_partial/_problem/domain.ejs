@@ -1,6 +1,6 @@
 <div class="header">
-	<h1><%= __('Domain') %></h1>
-	<h2><%= __("If you only do what you can do, you'll never be more than you are now.") %></h2>
+    <h1><%= __('Domain') %></h1>
+    <h2><%= __("If you only do what you can do, you'll never be more than you are now.") %></h2>
 </div>
 <div class="content">
 
@@ -22,9 +22,9 @@
 }
 </style>
 
-<div class="pure-g">
-        <div class="pure-u-1-2">
-    		<div class="custom-border pure-g">
+<div class="pure-g" data-step="7" data-intro="請選擇相關課程">
+        <div class="pure-u-1-2" data-step="8" data-intro="大學部計算機程式設計，適用於大一新生">
+            <div class="custom-border pure-g">
                 <div class="pure-u-1-1">
                     <div class="domain-icon"><svg viewBox="0 0 128 128"><path fill="#03599C" d="M117.5 33.5l.3-.2c-.6-1.1-1.5-2.1-2.4-2.6l-48.3-27.8c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.3.9 3.4l-.2.1c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4v-55.8c.1-.8 0-1.7-.4-2.6zm-53.5 55c9.1 0 17.1-5 21.3-12.4l12.9 7.6c-6.8 11.8-19.6 19.8-34.2 19.8-21.8 0-39.5-17.7-39.5-39.5s17.7-39.5 39.5-39.5c14.7 0 27.5 8.1 34.3 20l-13 7.5c-4.2-7.5-12.2-12.5-21.3-12.5-13.5 0-24.5 11-24.5 24.5s11 24.5 24.5 24.5z"></path></svg></div>
                 </div>
@@ -33,12 +33,13 @@
                 </div>
             </div>
         </div>
-        <div class="pure-u-1-2">
+        <div class="pure-u-1-2" data-step="9" data-intro="研究所平行程式設計，適用於高年級大學部、碩博生">
             <div class="custom-border">
                     <div class="pure-u-1-1">
                     <div class="domain-icon">
-                        <svg viewBox="0 0 128 128">
-                        </svg> 
+            <svg x="0px" y="0px" viewBox="0 0 87.607 87.607" style="enable-background:new 0 0 87.607 87.607;" xml:space="preserve">
+            <path fill="#000000" d="M52.173,57.876c-0.028-0.329-0.122-0.658-0.286-0.971L31.254,17.971c-0.609-1.144-1.983-1.684-3.229-1.267     c-1.248,0.423-1.993,1.674-1.756,2.95l8.041,43.173c0.063,0.343,0.196,0.65,0.377,0.93c0.078,0.369,0.173,0.736,0.3,1.104     c1.295,3.694,4.838,6.184,8.813,6.184c1.027,0,2.048-0.166,3.024-0.497c2.354-0.792,4.253-2.438,5.347-4.636     c1.095-2.198,1.251-4.68,0.444-6.994C52.492,58.555,52.34,58.21,52.173,57.876z M43.803,19.533c-1.471,0-2.662,1.17-2.662,2.613     c0,1.443,1.191,2.614,2.662,2.614c21.218,0,38.476,16.961,38.476,37.806c0,1.442,1.195,2.613,2.664,2.613     c1.473,0,2.664-1.171,2.664-2.613C87.605,38.834,67.956,19.533,43.803,19.533z M16.276,29.087C5.933,37.306,0,49.507,0,62.565     c0,1.443,1.191,2.615,2.663,2.615c1.474,0,2.665-1.172,2.665-2.615c0-11.47,5.211-22.189,14.298-29.409     c1.146-0.908,1.32-2.556,0.397-3.679C19.1,28.355,17.423,28.179,16.276,29.087z"></path>
+            </svg>
                     </div>
                     </div>
                 <div class="pure-u-1-1">
@@ -46,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="pure-u-1-2">
+        <div class="pure-u-1-2" data-step="10" data-intro="數據結構與演算法，目前為 Morris 的實驗區域，與學校課程使用無關">
             <div class="custom-border">
                     <div class="pure-u-1-1">
                     <div class="domain-icon">
@@ -60,6 +61,31 @@
                 </div>
             </div>
         </div>
+
+        <div class="pure-u-1-2">
+            <div class="custom-border">
+                    <div class="pure-u-1-1">
+                    <div class="domain-icon">
+                    </div>
+                    </div>
+                <div class="pure-u-1-1">
+                    <h2 class="text-box-head"><a href="<%= site.url_for('problems/domain/3') %>"><%= __('Lab332 Training') %></a></h2>
+                </div>
+            </div>
+        </div>
+
 </div>
 
 </div>
+<script src="<%= site.url_for('javascripts/intro/intro.js') %>"></script>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/intro/introjs.css') %>">
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.setOption('tooltipPosition', 'auto');
+    tour.goToStepNumber(7);
+    tour.start().oncomplete(function() {
+      window.location.href = '/problems/domain/0?multipage=true';
+    });
+  }
+</script>

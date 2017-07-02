@@ -36,7 +36,7 @@
 	<div class="sysmsg"><%- __('Examination in progress') %></div>
 	<% } %>
 <div class="pure-g">
-	<div class="pure-u-1-1">
+	<div class="pure-u-1-1" data-step="17" data-intro="在這可以看到其他使用者的情況，唯有獲得 <span style='color: #00AA00; font-weight: bold;'>Accepted</span> 後，才能查閱其他人的程式碼">
 	<%- include('../_widget/submission_table', {submission_list: submission_list, ac_map: ac_map}) %>
 	<%
 		var totpage = Math.ceil(submission_status.count / 25);
@@ -57,3 +57,17 @@
 	</div>
 </div>
 </div>
+
+<script src="<%= site.url_for('javascripts/intro/intro.js') %>"></script>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/intro/introjs.css') %>">
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(17);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3&multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active'; 
+  }
+</script>

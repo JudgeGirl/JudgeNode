@@ -51,17 +51,17 @@
 	            <a class="pure-menu-heading" href="#"><%= __(site.HOST.TITLE) %></a>
 
 	            <ul class="pure-menu-list">
-	                <li class="pure-menu-item"><a href="<%= site.url_for('archive') %>" class="pure-menu-link"><i class="fa fa-archive"></i> <%= __('Archive') %></a></li>
-	                <li class="pure-menu-item"><a href="<%= site.url_for('problems/domains') %>" class="pure-menu-link"><i class="fa fa-list-alt"></i> <%= __('Problems') %></a></li>
-	                <li class="pure-menu-item"><a href="<%= site.url_for('live') %>" class="pure-menu-link"><i class="fa fa-circle"></i> <%= __('Live') %></a></li>
+	                <li class="pure-menu-item" data-step="1" data-intro="系統維修與課程相關連結放置於此" data-position='right'><a href="<%= site.url_for('archive') %>" class="pure-menu-link"><i class="fa fa-archive"></i> <%= __('Archive') %></a></li>
+	                <li class="pure-menu-item" data-step="2" data-intro="各個課程相關的練習題目" data-position='right'><a href="<%= site.url_for('problems/domains') %>" class="pure-menu-link"><i class="fa fa-list-alt"></i> <%= __('Problems') %></a></li>
+	                <li class="pure-menu-item" data-step="3" data-intro="近期系統上使用者的上傳情況" data-position='right'><a href="<%= site.url_for('live') %>" class="pure-menu-link"><i class="fa fa-circle"></i> <%= __('Live') %></a></li>
 	                <li class="pure-menu-item"><a href="<%= site.url_for('ranklist') %>" class="pure-menu-link"><i class="fa fa-trophy"></i> <%= __('Rank') %></a></li>
-	                <li class="pure-menu-item"><a href="<%= site.url_for('contests') %>" class="pure-menu-link"><i class="fa fa-flag"></i> <%= __('Contest') %></a></li>
-	                <li class="pure-menu-item">
+	                <li class="pure-menu-item" data-step="4" data-intro="課程小考、轉系考請由此查閱" data-position='right'><a href="<%= site.url_for('contests') %>" class="pure-menu-link"><i class="fa fa-flag"></i> <%= __('Contest') %></a></li>
+	                <li class="pure-menu-item" data-step="5" data-intro="上傳紀錄與考場的時間以此為準" data-position='right'>
 						<a id="timer" class="pure-menu-link"> 00:00:00</a>
 					</li>
 	            </ul>
 	        </div>
-	        <div class="pure-menu">
+	        <div class="pure-menu" data-step="6" data-intro="個人資料管理頁面" data-position='right'>
 	            <a class="pure-menu-heading" href="#"><%= __('Account') %></a>
 	            <ul class="pure-menu-list">
 	    <% if (user == undefined || user == null || user.uid == undefined) { %>

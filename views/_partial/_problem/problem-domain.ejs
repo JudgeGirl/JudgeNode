@@ -50,7 +50,7 @@
 <div class="pure-g" id="level-list">
 	<div class="pure-u-1 pure-u-lg-6-24">
 		<h3><%= __('Subdomains') %></h3>
-		<div class="pure-menu custom-restricted">
+		<div class="pure-menu custom-restricted" data-step="11" data-intro="每周的課程章節">
 		    <span class="pure-menu-heading"></span>
 		    <ul class="pure-menu-list">
 		    <% for (var level = 0; level_list && level < level_list.length; level++) { %>
@@ -74,7 +74,7 @@
 	<div class="pure-u-1 pure-u-lg-1-24">
 	</div>
 	<div class="pure-u-1 pure-u-lg-17-24">
-		<h3><%= __('Problem List') %></h3>
+		<h3 data-step="12" data-intro="相應題目清單，<i class='fa fa-thumbs-o-up' aria-hidden='true'></i> 表示優先推薦、<i class='fa fa-check' style='color: green;'></i> 表示此題通過、<i class='fa fa-bug' style='color: red;'></i> 表示嘗試仍錯誤"><%= __('Problem List') %></h3>
 		<div class="pure-u-1-1" id="level-content">
 		</div>
 	</div>
@@ -222,4 +222,18 @@
 $(document).ready(function() {
 	$('#level-list').jhunt();
 });
+</script>
+
+<script src="<%= site.url_for('javascripts/intro/intro.js') %>"></script>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/intro/introjs.css') %>">
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(11);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/problem/0/3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active'; 
+  }
 </script>

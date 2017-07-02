@@ -6,6 +6,11 @@
 <div class="pure-g">
 	<div class="pure-u-1">
 		<div class="content">
+			<a id="startButton" class="pure-button pure-button-primary" href="javascript:void(0);"><i class="fa fa-bus" aria-hidden="true"></i> Show Me How to Use Judge Girl System</a>
+		</div>
+	</div>
+	<div class="pure-u-1">
+		<div class="content">
 			<%- archive_content %>
 		</div>
 	</div>
@@ -18,3 +23,15 @@
 		</div>
 	</div>
 </div>
+
+<script src="<%= site.url_for('javascripts/intro/intro.js') %>"></script>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/intro/introjs.css') %>">
+<script type="text/javascript">
+  document.getElementById('startButton').onclick = function() {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = 'problems/domains?multipage=true';
+    });
+  };
+</script>
