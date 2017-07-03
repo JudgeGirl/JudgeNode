@@ -29,7 +29,9 @@
 	</ul>
 </div>
 
+<div data-step="20" data-intro="<h3>考場注意事項</h3> <p>每一場考試的注意事項不盡相同。若有任何題目描述更改，將在此張貼 或者 由考場助教口頭說明</p>">
 <%- contest_rule_desc %>
+</div>
 
 <% if (sysmsg.length != 0) { %>
 	<h2><div class="sysmsg"><%- sysmsg %></div></h2>
@@ -39,11 +41,11 @@
 	<table class="pure-table pure-table-bordered" style="width: 100%;">
 		<thead>
 			<tr>
-				<th></th>
+				<th data-step="21" data-intro="<h3>答題狀況</h3> <p>若題目與練習題相同，仍需從此頁面連結進入題目上傳程式碼，否則通過題目，也無法在此得到通過標示 <i class='fa fa-check' style='color: green;'></i>；相反地，在嘗試卻未通過時顯示 <i class='fa fa-times' style='color: red;'></i>。</p>"></th>
 	           	<th>#</th>
 	            <th><%= __('Problem Title') %></th>
 	            <th><%= __('Subs') %></th>
-	            <th><%= __('#Remain') %></th>
+	            <th data-step="22" data-intro="<h3>提交限制</h3> <p>剩餘的嘗試次數預設為 <b>15</b> 次。當上傳次數超過限制，將由考試委員有權不紀錄該筆成績。有任何變動請聽從考場人員說明</p>"><%= __('#Remain') %></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -74,3 +76,17 @@
 </div>
 <% } %>
 </div>
+
+<script src="<%= site.url_for('javascripts/intro/intro.js') %>"></script>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/intro/introjs.css') %>">
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Complete');
+    tour.goToStepNumber(20);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/';
+    });
+    $('.introjs-bullets li a')[0].className = 'active'; 
+  }
+</script>

@@ -22,7 +22,7 @@
 <div class="pure-g">
 	<div class="pure-u-1-1">
 		<table class="pure-table pure-table-bordered" style='width: 100%'>
-			<thead>
+			<thead data-step="19" data-intro="<p>所有考試項目清單、舉行時間、考試狀態</p> <p>對於未公開的考試，只有<b>在登入相應的考試帳號</b>後，才能找到考試資訊並進入考題頁面</p>">
 		        <tr>
 		            <th>#</th>
 		            <th><%= __('Contest Title') %></th>
@@ -109,3 +109,17 @@
 	%>
 	<%- include('../pagination', {page: page, url: site.url_for('contests?page='), query: arg_query, totpage: totpage})%>
 </div>
+
+<script src="<%= site.url_for('javascripts/intro/intro.js') %>"></script>
+<link rel="stylesheet" href="<%= site.url_for('javascripts/intro/introjs.css') %>">
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(19);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/contest/57?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active'; 
+  }
+</script>

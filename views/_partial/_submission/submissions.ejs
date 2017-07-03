@@ -28,7 +28,7 @@
 	}
 %>
 <div class="header">
-	<h1 class='article-title'><%- __('Submission') %></h1>
+	<h1 class='article-title'  data-step="17" data-intro="<p>可以看到其他使用者的情況</p> <p>唯有獲得 <span style='color: #00AA00; font-weight: bold;'>Accepted</span> 後，才能查閱其他人的程式碼，考試期間此功能不開放。</p>"><%- __('Submission') %></h1>
     <h2><%- __('Update page each 60 seconds') %></h2>
 </div>
 <div class="content">
@@ -36,7 +36,7 @@
 	<div class="sysmsg"><%- __('Examination in progress') %></div>
 	<% } %>
 <div class="pure-g">
-	<div class="pure-u-1-1" data-step="17" data-intro="在這可以看到其他使用者的情況，唯有獲得 <span style='color: #00AA00; font-weight: bold;'>Accepted</span> 後，才能查閱其他人的程式碼">
+	<div class="pure-u-1-1">
 	<%- include('../_widget/submission_table', {submission_list: submission_list, ac_map: ac_map}) %>
 	<%
 		var totpage = Math.ceil(submission_status.count / 25);
@@ -66,7 +66,7 @@
     tour.goToStepNumber(17);
     tour.setOption('tooltipPosition', 'auto');
     tour.start().oncomplete(function() {
-      window.location.href = '/submissions?pid=3&multipage=true';
+      window.location.href = '/contests?multipage=true';
     });
     $('.introjs-bullets li a')[0].className = 'active'; 
   }
