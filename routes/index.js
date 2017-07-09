@@ -212,16 +212,18 @@ router.get('/progress', function(req, res, next) {
 })
 router.get('/submissions?', function(req, res, next) {
     var uid = req.session.uid;
-    dblink.submission.list(req.query, function(slist) {
-        dblink.submission.listinfo(req.query, function(slist_status) {
-            dblink.problemManager.scoreboard(uid, function(ac_list) {
-                res.render('layout', {
-                    layout: 'submissions',
-                    subtitle: 'Submission',
-                    query_filter: req.query,
-                    submission_list: slist,
-                    submission_status: slist_status,
-                    ac_list: ac_list
+    dblink.helper.isAdmin(uid, function(isadmin) {
+        dblink.submission.list(req.query, isadmin, function(slist) {
+            dblink.submission.listinfo(req.query, isadmin, function(slist_status) {
+                dblink.problemManager.scoreboard(uid, function(ac_list) {
+                    res.render('layout', {
+                        layout: 'submissions',
+                        subtitle: 'Submission',
+                        query_filter: req.query,
+                        submission_list: slist,
+                        submission_status: slist_status,
+                        ac_list: ac_list
+                    });
                 });
             });
         });

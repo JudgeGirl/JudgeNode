@@ -8,16 +8,22 @@ var fs = require('fs');
 
 
 router.get('/submissions?', function(req, res, next) {
-    dblink.api.list(req.query, function(result) {
-        res.json(result);
+    var uid = req.session.uid;
+    dblink.helper.isAdmin(uid, function(isadmin) {
+        dblink.api.list(req.query, isadmin, function(result) {
+            res.json(result);
+        });
     });
 });
 
 router.get('/result?', function(req, res, next) {
     var sid = req.query.sid;
-    if (sid == undefined || sid == null) sid = 0;
-    dblink.api.result(sid, function(result) {
-        res.json(result);
+    var uid = req.session.uid;
+    dblink.helper.isAdmin(uid, function(isadmin) {
+        if (sid == undefined || sid == null) sid = 0;
+        dblink.api.result(sid, isadmin, function(result) {
+            res.json(result);
+        });
     });
 });
 
