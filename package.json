@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodejs ./bin/www"
+    "start": "redis-cli flushall && ulimit -n 4096 && nodejs ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.13.3",
@@ -11,7 +11,7 @@
     "cookie-parser": "~1.3.5",
     "csv-parse": "^1.0.0",
     "debug": "~2.2.0",
-    "ejs": "~2.3.3",
+    "ejs": "~2.5.5",
     "escape-html": "^1.0.3",
     "express": "~4.13.1",
     "express-session": "^1.13.0",
@@ -32,7 +32,8 @@
     "swig": "^1.4.2",
     "url": "^0.11.0",
     "vue": "^1.0.25",
-    "colors": "~1.1.2"
+    "colors": "~1.1.2",
+    "connect-redis": "~3.2.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
