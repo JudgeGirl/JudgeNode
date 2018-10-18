@@ -173,6 +173,7 @@ h1, h2, h3, h4 {
     border: 1px solid #EAEAEA;
     background-color: #F8F8F8;
     border-radius: 3px;
+    font-size: 85%;
 }
 .content pre code {
     background: none;
