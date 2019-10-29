@@ -25,7 +25,9 @@ var upload = multer({
 
 /* GET users page */
 router.get('/', function(req, res, next) {
-    var uid = req.session.uid;
+    let uid = req.session.uid;
+    let showPrivate = true;
+
     dblink.user.info(uid, function(user) {
         res.render('layout', {
             layout: 'user',
@@ -33,18 +35,44 @@ router.get('/', function(req, res, next) {
             user: req.session,
             userinfo: user
         });
-    });
+    }, showPrivate);
 });
+
 router.get('/:uid', function(req, res, next) {
-    var uid = req.params.uid;
-    dblink.user.info(uid, function(user) {
+    let uid = req.params.uid;
+    let selfId = req.session.uid;
+    let isTestMode = config.CONTEST.MODE == true;
+    let hasNoClass = req.session['class'] == null;
+    let toForbidden = () => {
         res.render('layout', {
-            layout: 'user',
-            subtitle: 'User',
-            user: req.session,
-            userinfo: user
+            layout: 'forbidden',
+            subtitle: 'Forbidden',
+            sysmsg: 'This page is forbidden during a test.'
         });
-    });
+    };
+
+    if (!isTestMode || hasNoClass) {
+        let displayUser = function(user) {
+            res.render('layout', {
+                layout: 'user',
+                subtitle: 'User',
+                user: req.session,
+                userinfo: user
+            });
+        };
+
+        let callback = function(isAdmin) {
+            let showPrivate = isAdmin || uid == selfId;
+
+            if (isTestMode && !isAdmin)
+                toForbidden();
+
+            dblink.user.info(uid, displayUser, showPrivate);
+        };
+
+        dblink.helper.isAdmin(selfId, callback);
+    } else
+        toForbidden();
 });
 
 /*  */
