@@ -1,17 +1,23 @@
 /**
 .CSV file format `uid,lgn,pid,score`
 
-	$ node balance _csvfile_1 _csvfile_2 _outputfile
+	$ node balance
 */
 var mysql = require('mysql'),
 	fs = require('fs'),
 	colors = require('colors');
 var parse = require('csv-parse');
 
+const { colorConsole, toRawScoreFilename} = require("./tool");
+
 var connection = require('../../lib/mysql').connection;
 
-var args = process.argv.slice(2);
-var class1file = args[0], class2file = args[1], outfilename = args[2];
+const config = require("./config");
+const class1file = toRawScoreFilename(config.path, config.weekNumber, "tue") + "_0.csv";
+const class2file = toRawScoreFilename(config.path, config.weekNumber, "mon") + "_0.csv";
+const class1StudentNumber = config.studentNumber.Tue;
+const class2StudentNumber = config.studentNumber.Mon;
+const outfilename = config.path + "/" + config.result.filename;
 
 var balance = function(table1, table2) {
 	// calcuate factor
@@ -22,8 +28,12 @@ var balance = function(table1, table2) {
 		sum2 += parseInt(table2[i][3])
 	var avg1 = 0, avg2 = 0;
 	var factor1 = 1, factor2 = 1;
-	avg1 = sum1 / table1.length;
-	avg2 = sum2 / table2.length;
+
+    colorConsole("INFO", `class 1: total -> ${sum1}, student number -> ${class1StudentNumber}`, "green");
+    colorConsole("INFO", `class 2: total -> ${sum2}, student number -> ${class2StudentNumber}`, "green");
+
+	avg1 = sum1 / class1StudentNumber;
+	avg2 = sum2 / class2StudentNumber;
 	if (avg1 > avg2) {
 		factor1 = 1;
 		factor2 = avg1 / avg2;
@@ -31,8 +41,8 @@ var balance = function(table1, table2) {
 		factor2 = 1;
 		factor1 = avg2 / avg1;
 	}
-	console.log('[' + 'INFO'.green + ']' + ' ' + (class1file).cyan + ' #Participants = ' + table1.length + ', average = ' + avg1);
-	console.log('[' + 'INFO'.green + ']' + ' ' + (class2file).cyan + ' #Participants = ' + table2.length + ', average = ' + avg2);
+    colorConsole("INFO", class1file + ' average = ' + avg1, "green");
+    colorConsole("INFO", class2file + ' average = ' + avg2, "green");
 	// save file
 	var text = '',
 		header = ['uid', 'lgn', 'score'], 
@@ -51,7 +61,7 @@ var balance = function(table1, table2) {
 		text += '\n' + row.join(',');
 	}
 
-	console.log('[' + 'Save'.yellow + ']' + ' result store into ' + (outfilename).cyan);
+    colorConsole("Save", 'result store into ' + outfilename, "yellow");
 	fs.writeFileSync(outfilename, text);
 	process.exit(0);
 };
@@ -59,18 +69,18 @@ var balance = function(table1, table2) {
 parse(fs.readFileSync(class1file).toString(), {comment: '#'}, function(err, output) {
 	var table1 = output.slice(1);
 	if (!err) {
-		console.log('[' + 'INFO'.green + ']' + ' parse ' + (class1file).cyan + ' success');
+        colorConsole("INFO", 'parse ' + class1file + ' success', "green");
 	} else {
-		console.log('[' + 'Error'.red + ']' + ' parse ' + (class1file).cyan + ' failed');
+        colorConsole("Error", 'parse ' + class1file + ' failed', "red");
 		process.exit(1);
 	}
 		
 	parse(fs.readFileSync(class2file).toString(), {comment: '#'}, function(err, output) {
 		var table2 = output.slice(1);
 		if (!err) {
-			console.log('[' + 'INFO'.green + ']' + ' parse ' + (class2file).cyan + ' success');
+            colorConsole("INFO", 'parse ' + class2file + ' success', "green");
 		} else {
-			console.log('[' + 'Error'.red + ']' + ' parse ' + (class2file).cyan + ' failed');
+            colorConsole("Error", 'parse ' + class2file + ' failed', "red");
 			process.exit(1);
 		}
 		balance(table1, table2);

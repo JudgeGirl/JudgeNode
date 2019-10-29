@@ -1,5 +1,5 @@
 /**
-	$ node uploadcsv __gradeid _filename
+	$ node uploadcsv
 */
 var mysql = require('mysql'),
 	fs = require('fs'),
@@ -35,8 +35,9 @@ var uploadtable = function(i, gid, table) {
 	});
 };
 
-var args = process.argv.slice(2);
-var gid = parseInt(args[0]), filename = args[1];
+const config = require("./config");
+const gid = config.gradeId;
+const filename = config.path + "/" + config.scaledResult.filename;
 
 parse(fs.readFileSync(filename).toString(), {comment: '#'}, function(err, output) {
 	var table = output.slice(1);

@@ -1,18 +1,24 @@
 ## README ##
 
-```
-$ ./run.sh [week_id] [mon_cid] [tue_cid] [grade_id]
-$ nodejs uploadcsv.js [grade_id] w7/week7result.csv
-```
-
-
 ### 小考 ###
 
 ```
-$ nodejs downloadcsv.js [cid] week7mon
-$ nodejs downloadcsv.js [cid] week7tue
-$ nodejs balance.js week7mon_0.csv week7tue_0.csv result.csv
-$ nodejs uploadcsv.js [grade_id] result.csv
+1. 設定 config.js
+
+2. 下載兩班原始成績
+$ nodejs downloadcsv.js
+
+3. 調整分數使兩班平均相等
+$ nodejs balance.js
+
+4. 計算考試分數係數(由是否有完成指定題目)
+$ nodejs buildScaleTable.js
+
+5. 係數套用到考試分數
+$ nodejs applyScale.js
+
+6. 上傳考試分數
+$ nodejs uploadcsv.js
 ```
 
 ### 期中期末考 ###
