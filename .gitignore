@@ -21,3 +21,6 @@ _config.yml
 
 # gulp produce
 public/javascripts/MathJax/
+
+# vim tmp
+*.swp
