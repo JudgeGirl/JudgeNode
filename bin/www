@@ -1,5 +1,20 @@
 #!/usr/bin/env node
 
+var realFs = require('fs')
+var gracefulFs = require('graceful-fs')
+gracefulFs.gracefulify(realFs);
+
+/*
+var cluster = require('cluster');  
+var numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+	for (var i = 0; i < numCPUs && i < 4; i++)
+		cluster.fork();
+	return 0;
+}
+*/
+
 /**
  * Module dependencies.
  */
@@ -25,7 +40,9 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, function() {
+    console.log('Http server listening on port ' + port);
+});
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -93,15 +110,28 @@ function onListening() {
   https 
 */
 
+var tls = require('tls');
 var https = require('https'),
     fs = require("fs");
-var options = {
-    port: 443,
-    path: '/',
-    method: 'GET',
-    key: fs.readFileSync('./privatekey.pem'),
-    cert: fs.readFileSync('./certificate.pem')
+
+function getSecureContext(domain) {
+	return tls.createSecureContext({
+        key:  fs.readFileSync('/etc/letsencrypt/live/'+ domain + '-0004/privkey.pem'),
+        cert:  fs.readFileSync('/etc/letsencrypt/live/' + domain + '-0004/cert.pem') 
+      });
+}
+
+var secureContext = {
+	'judgegirl.csie.org': getSecureContext('judgegirl.csie.org'),
+	'judgegirl.csie.ntu.edu.tw': getSecureContext('judgegirl.csie.ntu.edu.tw')
 };
-https.createServer(options, app).listen(8000, function () {
-    console.log('Https server listening on port ' + 8000);
+
+var options = {
+	SNICallback: function(domain, cb) {
+		cb(null, secureContext[domain]);
+	}
+};
+https.createServer(options, app).listen(443, function () {
+    console.log('Https server listening on port ' + 443);
 });
+
