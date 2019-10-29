@@ -159,6 +159,8 @@
 							continue;
 						var uid = table_config.icpc.wa[i].uid;
 						var pid = table_config.icpc.wa[i].pid;
+						if (alluser[uid][pid] == undefined)
+							alluser[uid][pid] = {}
 						alluser[uid][pid].wa = table_config.icpc.wa[i].wa;
 					}
 					
