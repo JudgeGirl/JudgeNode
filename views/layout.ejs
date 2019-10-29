@@ -13,6 +13,8 @@
               <%- include('_partial/_user/signup') %> 
             <% } else if (layout == 'user') { %>
               <%- include('_partial/_user/user') %>
+            <% } else if (layout == 'forbidden') { %>
+              <%- include('_partial/_user/forbidden') %>
             <% } else if (layout == 'score') { %>
               <%- include('_partial/_user/score') %>
             <% } else if (layout == 'ranklist') { %>
