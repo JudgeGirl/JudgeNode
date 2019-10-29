@@ -33,7 +33,11 @@ app.use(function(req, res, next) {
     next();
 });
 app.use(function(req, res, next) {
-    if (req.secure || true) {
+    if (req.headers.host != 'judgegirl.csie.org') {
+        var unite = 'judgegirl.csie.org';
+        req.headers.host = unite;
+        res.redirect('https://' + req.headers.host + req.url);
+    } else if (req.secure) {
         next();
     } else {
         res.redirect('https://' + req.headers.host + req.url);
@@ -53,6 +57,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(i18n.init);
+/*
 app.use(session({
     cookie: {
         path: '/', // important !!
@@ -61,7 +66,17 @@ app.use(session({
     },
     secret: 'alskdjasjoimk'
 }));
-
+*/
+var RedisStore = require('connect-redis')(session);
+app.use(session({
+  store: new RedisStore(),
+  cookie: {
+    path: '/', // important !!
+    httpOnly: false,
+    maxAge: 6 * 60 * 60 * 1000
+  },
+  secret: 'ej3ej3su3bp6sk7'
+}));
 app.use(function(req, res, next) {
     res.locals.__ = res.__ = function() {
         return i18n.__.apply(req, arguments);
