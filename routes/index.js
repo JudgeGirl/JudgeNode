@@ -190,17 +190,45 @@ router.get('/archive', function(req, res, next) {
     res.redirect(utils.url_for('/'));
 });
 router.get('/ranklist?', function(req, res, next) {
-    dblink.rank.list(req.query, function(rlist) {
-        dblink.rank.listsize(function(rsize) {
-            res.render('layout', {
-                layout: 'ranklist',
-                subtitle: 'Rank',
-                rank_list: rlist,
-                query_filter: req.query,
-                rank_size: rsize
-            });
+    let selfId = req.session.uid;
+    let isTestMode = config.CONTEST.MODE == true;
+    let noClass = req.session['class'] == null;
+    let renderForbidden = function() {
+        res.render('layout', {
+            layout: 'forbidden',
+            subtitle: 'Forbidden',
+            sysmsg: 'This page is forbidden during a test.'
         });
-    })
+    };
+
+    if (!isTestMode || noClass) {
+        let renderRankList = function(rlist) {
+            let resizeRankList = function(rsize) {
+                let layoutObj = {
+                    layout: 'ranklist',
+                    subtitle: 'Rank',
+                    rank_list: rlist,
+                    query_filter: req.query,
+                    rank_size: rsize
+                };
+
+                res.render('layout', layoutObj);
+            };
+
+            dblink.rank.listsize(resizeRankList);
+        }
+
+        let callback = function(isAdmin) {
+            if (!isAdmin && isTestMode) {
+                renderForbidden();
+            }
+            dblink.rank.list(req.query, renderRankList);
+        }
+
+        dblink.helper.isAdmin(selfId, callback);
+
+    } else
+        renderForbidden();
 });
 router.get('/progress', function(req, res, next) {
     dblink.rank.progress(function(rlist) {
