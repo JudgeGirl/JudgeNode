@@ -197,7 +197,7 @@ router.get('/ranklist?', function(req, res, next) {
         res.render('layout', {
             layout: 'forbidden',
             subtitle: 'Forbidden',
-            sysmsg: 'This page is forbidden during a test.'
+            sysmsg: '考試中，禁止查詢 ranklist。'
         });
     };
 
