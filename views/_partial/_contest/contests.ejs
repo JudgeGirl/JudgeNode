@@ -1,10 +1,10 @@
 <div class="header">
 	<h1 class='article-title'><%= __('Contest') %></h1>
-    <h2><%= __('Contest comming soon.') %></h2>
+    <h2><%= __('Contest coming soon.') %></h2>
 </div>
 <div class="content">
 <% if (contest_list == null || contest_list.length == 0) { %>
-	<div class="sysmsg">NO AVAILABLE CONTEST</div>	
+	<div class="sysmsg">NO AVAILABLE CONTEST</div>
 <% } else { %>
 <script>
 	function calcOffset() {
@@ -32,17 +32,17 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-			<% 
+			<%
 				var nowtime = new Date().getTime();
 				var unitConvert = site.unitConvert;
 			%>
 			<% for (var i = 0; i < contest_list.length; i++) { %>
-				<% 
+				<%
 					var contest_status = '';
-					if (nowtime >= contest_list[i].ts2) { 
+					if (nowtime >= contest_list[i].ts2) {
 						contest_status = 'closed';
 					} else if (nowtime < contest_list[i].ts1) {
-						contest_status = 'comming';
+						contest_status = 'coming';
 					} else {
 						contest_status = 'running';
 					}
@@ -65,7 +65,7 @@
 						<% if (nowtime >= contest_list[i].ts2) { %>
 							<%= __('Closed') %>
 						<% } else if (nowtime < contest_list[i].ts1) { %>
-							<%= __('Comming') %>
+							<%= __('Coming') %>
 						<% } else { %>
 							<%= __('Running') %>
 						<% } %>
@@ -80,12 +80,12 @@
 							$('#contest-clock<%- i%>').countdown(ddstr, function(event) {
 									var totalHours = event.offset.totalDays * 24 + event.offset.hours;
 									$(this).html(event.strftime(totalHours + ' hr %M min %S sec'));
-								});	
+								});
 						</script>
 						<% } %>
 					</td>
 				</tr>
-				
+
 			<% } %>
 		</tbody>
 		</table>
@@ -120,6 +120,6 @@
     tour.start().oncomplete(function() {
       window.location.href = '/contest/57?multipage=true';
     });
-    $('.introjs-bullets li a')[0].className = 'active'; 
+    $('.introjs-bullets li a')[0].className = 'active';
   }
 </script>

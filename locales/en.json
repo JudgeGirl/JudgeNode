@@ -85,7 +85,7 @@
 	"Contest Date": "Contest Date",
 	"Problem Set": "Problem Set",
 	"Assign Participants": "Assign Participants",
-	"Comming": "Comming",
+	"Coming": "Coming",
 	"Solution": "Solution",
 	"Problem": "Problem",
 	"Solution Description": "Solution Description",
@@ -137,7 +137,7 @@
 	"I'm not the best but I'm trying my best.": "I'm not the best but I'm trying my best.",
 	"Progress Report": "Progress Report",
 	"Site Statistics": "Site Statistics",
-	"Contest comming soon.": "Contest comming soon.",
+	"Contest coming soon.": "Contest coming soon.",
 	"Score Distribution": "Score Distribution",
 	"Score Table": "Score Table",
 	"Retype your password": "Retype your password",
@@ -151,5 +151,6 @@
 	"Refer Problem ID": "Refer Problem ID",
 	"Contest Rule": "Contest Rule",
 	"Examination in progress": "Examination in progress",
-	"Pwd": "Pwd"
+	"Pwd": "Pwd",
+	"Coming": "Coming"
 }
