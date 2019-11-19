@@ -27,7 +27,7 @@ const createScoreBoardTask = (cid, callback, filename) => {
     };
 };
 
-const writeCsvFileForProblemI = (grade, pid, header, partfilename, table, i) => {
+const writeCsvFileForProblemI = (grade, pid, header, partfilename, table, i, cid) => {
     let text = '';
     let hasSubmit = [];
 
@@ -39,7 +39,7 @@ const writeCsvFileForProblemI = (grade, pid, header, partfilename, table, i) => 
         var entry = ptable[key];
 
         if (entry.count > 15)
-            colorConsole("WARN", `${entry.lgn} has submitted ${entry.count} times.`, "red");
+            colorConsole("WARN", `${entry.lgn} has submitted ${entry.count} times. cid: ${cid}`, "red");
 
         var row = [entry.uid, entry.lgn, entry.pid, entry['MAX(scr)']];
         text += '\n' + row.join(',');
@@ -56,7 +56,7 @@ const writeCsvFileForProblemI = (grade, pid, header, partfilename, table, i) => 
     writeFileSync(partfilename, text);
 };
 
-const writecsvfile = function(table, filename, callback) {
+const writecsvfile = function(table, filename, callback, cid) {
 	var grade = table.grade;
 
     makeSurePathExist(filename);
@@ -66,7 +66,7 @@ const writecsvfile = function(table, filename, callback) {
         const header = ['uid', 'lgn', ''+pid, 'score'];
         const partfilename = filename + '_' + i + '.csv';
 
-        writeCsvFileForProblemI(grade, pid, header, partfilename, table, i);
+        writeCsvFileForProblemI(grade, pid, header, partfilename, table, i, cid);
 	}
     callback(null, "success");
 };
@@ -109,8 +109,8 @@ const createMaxScoreCallback = (table_config, callback) => {
     };
 };
 
-const createWriteCsvFileCallback = (filename, callback) => result => {
-    writecsvfile(result, filename, callback);
+const createWriteCsvFileCallback = (filename, callback, cid) => result => {
+    writecsvfile(result, filename, callback, cid);
 }
 
 // main
@@ -120,13 +120,13 @@ const createWriteCsvFileCallback = (filename, callback) => result => {
     // Tuesday score
     let cid = config.cid.Tue;
     let filename = toRawScoreFilename(config.path, config.weekNumber, "tue");
-    const task2 = createScoreBoardTask(cid, createWriteCsvFileCallback(filename, finish), filename);
+    const task2 = createScoreBoardTask(cid, createWriteCsvFileCallback(filename, finish, cid), filename);
 
 
     // Monday score
     cid = config.cid.Mon;
     filename = toRawScoreFilename(config.path, config.weekNumber, "mon");
-    const task1 = createScoreBoardTask(cid, createWriteCsvFileCallback(filename, task2), filename);
+    const task1 = createScoreBoardTask(cid, createWriteCsvFileCallback(filename, task2, cid), filename);
 
     task1();
 })();
