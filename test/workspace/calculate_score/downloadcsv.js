@@ -5,15 +5,15 @@ const mysql = require('mysql');
 
 const connection = require('../../lib/mysql').connection;
 
-const { 
-    colorConsole,  
-    cidTag, 
-    makeSurePathExist, 
+const {
+    colorConsole,
+    cidTag,
+    makeSurePathExist,
     finish,
     writeFileSync,
     toRawScoreFilename,
     logErr
-} = require("./tool");
+} = require("../tool");
 
 const createScoreBoardTask = (cid, callback, filename) => {
 
@@ -60,7 +60,7 @@ const writecsvfile = function(table, filename, callback, cid) {
 	var grade = table.grade;
 
     makeSurePathExist(filename);
-        
+
 	for (var i in table.header) {
 		const pid = table.header[i].pid;
         const header = ['uid', 'lgn', ''+pid, 'score'];
@@ -89,11 +89,11 @@ const createUserListCallback = (table_config, cid, callback) => function(err, re
         logError(err);
         process.exit(1);
     }
-        table_config.user = result || [];	
+        table_config.user = result || [];
     colorConsole(cidTag(cid), '#Participants = ' + table_config.user.length, "green");
     colorConsole(cidTag(cid), 'Download scoreboard', "green");
     var cmd = 'SELECT uid, lgn, pid, COUNT(*) as count, MAX(scr) FROM submissions S NATURAL JOIN (SELECT uid, lgn FROM contest_user NATURAL JOIN users WHERE cid = ? AND (class = 1 OR class = 2)) Z WHERE S.uid = Z.uid AND S.cid = ? GROUP BY pid, uid ORDER BY uid, pid;';
-    
+
     connection.query(cmd, [cid, cid], createMaxScoreCallback(table_config, callback));
 };
 
