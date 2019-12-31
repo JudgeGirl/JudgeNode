@@ -40,8 +40,8 @@ var balance = function(table1, table2) {
 		factor2 = 1;
 		factor1 = avg2 / avg1;
 	}
-    colorConsole("INFO", class1file + ' average = ' + avg1, "green");
-    colorConsole("INFO", class2file + ' average = ' + avg2, "green");
+    colorConsole("INFO", `${class1file} average = ${avg1}, factor = ${factor1}`, "green");
+    colorConsole("INFO", `${class2file} average = ${avg2}, factor = ${factor2}`, "green");
 	// save file
 	var text = '',
 		header = ['uid', 'lgn', 'score'],
