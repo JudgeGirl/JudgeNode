@@ -22,6 +22,7 @@ confirm
 echo "download student score"
 pause
 nodejs downloadcsv.js
+nodejs mergeScore.js
 echo "balance"
 pause
 nodejs balance.js
