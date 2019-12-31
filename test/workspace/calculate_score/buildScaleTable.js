@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const connection = require('../../lib/mysql').connection;
+const connection = require('../../../lib/mysql').connection;
 
 const config = require("./config.js");
 
@@ -14,7 +14,7 @@ const buildSql = function(config) {
     // build query
     const cmd = `
 
-SELECT  U.uid, U.lgn, if(coalesce(max(S.scr), 0) >= ${mConfig.passLimit}, 
+SELECT  U.uid, U.lgn, if(coalesce(max(S.scr), 0) >= ${mConfig.passLimit},
             ${mConfig.passScale}, ${mConfig.failScale}) as scale
 FROM    users U
 LEFT JOIN   (
@@ -28,7 +28,7 @@ WHERE   U.class = ${mConfig.studentClass}
 GROUP BY    U.lgn
 
 UNION
-SELECT  U2.uid, U2.lgn, if(coalesce(max(S2.scr), 0) >= ${tConfig.passLimit}, 
+SELECT  U2.uid, U2.lgn, if(coalesce(max(S2.scr), 0) >= ${tConfig.passLimit},
             ${tConfig.passScale}, ${tConfig.failScale}) as scale
 FROM    users U2
 LEFT JOIN   (

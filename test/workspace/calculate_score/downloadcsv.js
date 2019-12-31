@@ -1,9 +1,7 @@
 /**
 	$ node downloadcsv
 */
-const mysql = require('mysql');
-
-const connection = require('../../lib/mysql').connection;
+const connection = require('../../../lib/mysql').connection;
 
 const {
     colorConsole,

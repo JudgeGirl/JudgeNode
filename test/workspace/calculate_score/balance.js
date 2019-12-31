@@ -3,14 +3,13 @@
 
 	$ node balance
 */
-var mysql = require('mysql'),
-	fs = require('fs'),
+var fs = require('fs'),
 	colors = require('colors');
 var parse = require('csv-parse');
 
 const { colorConsole, toRawScoreFilename} = require("../tool");
 
-var connection = require('../../lib/mysql').connection;
+var connection = require('../../../lib/mysql').connection;
 
 const config = require("./config");
 const class1file = toRawScoreFilename(config.path, config.weekNumber, "tue") + "_0.csv";
