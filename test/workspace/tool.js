@@ -28,6 +28,10 @@ tool.finish = function(err, result) {
     process.exit(0);
 };
 
+tool.readFileSync = filePath => {
+    fs.readFileSync(filePath).toString();
+};
+
 tool.writeFileSync = (filename, content) => {
     fs.writeFileSync(filename, content);
 };
