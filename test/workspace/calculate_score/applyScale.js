@@ -2,7 +2,7 @@ const fs = require('fs');
 const config = require("./config.js");
 const parse = require('csv-parse');
 
-const { readFileSync } = require("../tool");
+const { readFileSync, colorConsole } = require("../tool");
 
 const toScaleLookUp = function(scaleCSV) {
     return new Promise((resolve, reject) => {
@@ -32,7 +32,7 @@ const readScaleFile = function(filePath) {
 const readResultFile = function(filePath) {
     return function(lookup) {
         return new Promise(resolve => {
-            const file = tool.readFileSync(filePath);
+            const file = readFileSync(filePath);
 
             resolve({ lookup, resultCSV: file });
         });
@@ -69,11 +69,20 @@ const applyScale = function(payload) {
                 reject("missing row in scale lookup");
 
             let scale = payload.lookup[uid].scale;
+            let scaledScore = scale * score;
+
+            if (scaledScore != score) {
+                colorConsole(
+                    'INFO',
+                    `(${uid}, ${lgn}) before scale: ${score}, after scale ${scaledScore}`,
+                    'green'
+                )
+            }
 
             scaledResult.push({
                 uid,
                 lgn,
-                scaledScore: scale * score
+                scaledScore
             });
         }
 
