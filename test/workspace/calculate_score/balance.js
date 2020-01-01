@@ -18,6 +18,14 @@ const class1StudentNumber = config.studentNumber.Tue;
 const class2StudentNumber = config.studentNumber.Mon;
 const outfilename = config.path + "/" + config.result.filename;
 
+function calculateScore(scoreStr, factor) {
+    let score = parseInt(scoreStr)
+    score = Math.ceil(score * factor);
+    score = Math.max(Math.min(score, 100), 0);
+
+    return score
+}
+
 var balance = function(table1, table2) {
 	// calcuate factor
 	var sum1 = 0, sum2 = 0;
@@ -42,22 +50,43 @@ var balance = function(table1, table2) {
 	}
     colorConsole("INFO", `${class1file} average = ${avg1}, factor = ${factor1}`, "green");
     colorConsole("INFO", `${class2file} average = ${avg2}, factor = ${factor2}`, "green");
+
+    let uidList = [];
+
 	// save file
 	var text = '',
 		header = ['uid', 'lgn', 'score'],
 	text = header.join(',');
 	for (var i in table1) {
-		var score = Math.ceil(parseInt(table1[i][3]) * factor1);
-		score = Math.max(Math.min(score, 100), 0);
-		var row = [table1[i][0], table1[i][1], score];
+        let rawScore = table1[i][3];
+        let resultScore = calculateScore(rawScore, factor1);
+        let uid = table1[i][0];
+        let lgn = table1[i][1];
+
+		let row = [uid, lgn, resultScore];
 		text += '\n' + row.join(',');
+
+        if (uidList.includes(uid)) {
+            colorConsole('WARN', `table 1, duplicated user score: (${uid}, ${lgn}, ${rawScore})`, 'red');
+        } else {
+            uidList.push(uid);
+        }
 	}
 
 	for (var i in table2) {
-		var score = Math.ceil(parseInt(table2[i][3]) * factor2);
-		score = Math.max(Math.min(score, 100), 0);
-		var row = [table2[i][0], table2[i][1], score];
+        let rawScore = table2[i][3];
+        let resultScore = calculateScore(rawScore, factor2);
+        let uid = table2[i][0];
+        let lgn = table2[i][1];
+
+		let row = [table2[i][0], table2[i][1], resultScore];
 		text += '\n' + row.join(',');
+
+        if (uidList.includes(uid)) {
+            colorConsole('WARN', `table 2, duplicated user score: (${uid}, ${lgn}, ${rawScore})`, 'red');
+        } else {
+            uidList.push(uid);
+        }
 	}
 
     colorConsole("Save", 'result store into ' + outfilename, "yellow");
