@@ -1,7 +1,7 @@
 const {
     finish,
     logErr
-} = require("./tool");
+} = require("../tool");
 
 const config = require("./config.js");
 const { exec } = require('child_process');

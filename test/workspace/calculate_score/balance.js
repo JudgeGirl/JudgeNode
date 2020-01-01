@@ -8,7 +8,7 @@ var mysql = require('mysql'),
 	colors = require('colors');
 var parse = require('csv-parse');
 
-const { colorConsole, toRawScoreFilename} = require("./tool");
+const { colorConsole, toRawScoreFilename} = require("../tool");
 
 var connection = require('../../lib/mysql').connection;
 
@@ -45,7 +45,7 @@ var balance = function(table1, table2) {
     colorConsole("INFO", class2file + ' average = ' + avg2, "green");
 	// save file
 	var text = '',
-		header = ['uid', 'lgn', 'score'], 
+		header = ['uid', 'lgn', 'score'],
 	text = header.join(',');
 	for (var i in table1) {
 		var score = Math.ceil(parseInt(table1[i][3]) * factor1);
@@ -74,7 +74,7 @@ parse(fs.readFileSync(class1file).toString(), {comment: '#'}, function(err, outp
         colorConsole("Error", 'parse ' + class1file + ' failed', "red");
 		process.exit(1);
 	}
-		
+
 	parse(fs.readFileSync(class2file).toString(), {comment: '#'}, function(err, output) {
 		var table2 = output.slice(1);
 		if (!err) {
