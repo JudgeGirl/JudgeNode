@@ -1,12 +1,11 @@
 /**
 	$ node uploadcsv
 */
-var mysql = require('mysql'),
-	fs = require('fs'),
+var fs = require('fs'),
 	colors = require('colors');
 var parse = require('csv-parse');
 
-var connection = require('../../lib/mysql').connection;
+var connection = require('../../../lib/mysql').connection;
 
 var upload = function(gid, uid, score, callback) {
 	var cmd = 'DELETE FROM exam_scores WHERE eid = ? AND uid = ?';

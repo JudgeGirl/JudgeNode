@@ -2,9 +2,7 @@ const fs = require('fs');
 const config = require("./config.js");
 const parse = require('csv-parse');
 
-const readFile = function(filePath) {
-    return fs.readFileSync(filePath).toString();
-};
+const { readFileSync, colorConsole } = require("../tool");
 
 const toScaleLookUp = function(scaleCSV) {
     return new Promise((resolve, reject) => {
@@ -27,14 +25,14 @@ const toScaleLookUp = function(scaleCSV) {
 
 const readScaleFile = function(filePath) {
     return new Promise(resolve => {
-        resolve(readFile(filePath));
+        resolve(readFileSync(filePath));
     });
 };
 
 const readResultFile = function(filePath) {
     return function(lookup) {
         return new Promise(resolve => {
-            const file = readFile(filePath);
+            const file = readFileSync(filePath);
 
             resolve({ lookup, resultCSV: file });
         });
@@ -49,7 +47,7 @@ const parseResult = function(payload) {
 
             const result = [];
             const resultList = output.slice(1);
-    
+
             for (let i in resultList) {
                 [uid, lgn, score] = resultList[i];
                 result.push({ uid, lgn, score: parseFloat(score) });
@@ -71,11 +69,20 @@ const applyScale = function(payload) {
                 reject("missing row in scale lookup");
 
             let scale = payload.lookup[uid].scale;
+            let scaledScore = scale * score;
+
+            if (scaledScore != score) {
+                colorConsole(
+                    'INFO',
+                    `(${uid}, ${lgn}) before scale: ${score}, after scale ${scaledScore}`,
+                    'green'
+                )
+            }
 
             scaledResult.push({
                 uid,
                 lgn,
-                scaledScore: scale * score
+                scaledScore
             });
         }
 
@@ -87,13 +94,13 @@ const outputFile = filename => {
     return scaledResult => {
         return new Promise(resolve => {
             const header = ["uid", "lgn", "score"];
-            
+
             let text = header.join(",");
             for (let i in scaledResult) {
                 const obj = scaledResult[i];
                 let line = [
-                    obj.uid, 
-                    obj.lgn, 
+                    obj.uid,
+                    obj.lgn,
                     obj.scaledScore
                 ].join(",");
 
