@@ -1,38 +1,38 @@
 const config = {
-    weekNumber: "17",                            // for building path
-    gradeId: "93",
+    weekNumber: "18",                            // for building path
+    gradeId: "94",
     cid: {
-        Mon: "197",
-        Tue: "198"
+        Mon: "199",
+        Tue: "200"
     },
     studentNumber: {
-        Mon: 73,                                // for calculating average
-        Tue: 47
+        Mon: 69,                                // for calculating average
+        Tue: 40
     },
     merge: {
-        Mon: [0, 1],                            // we merge scores of two problems for some exam
-        Tue: [0, 1]                             // leave empty array([]) if not needed
+        Mon: [],                            // we merge scores of two problems for some exam
+        Tue: []                             // leave empty array([]) if not needed
     },
     scale: {
         Mon: {
             problemList: [
-                "50148"
+                "50149"
             ],                                  // can be an array of problems
             passLimit: 60,                      // quilified students have score higher than this
             passScale: 1.0,                     // scale for student qualified
             failScale: 0.5,                     // scale for student not qualified
             studentClass: 2,                    // class 2 for Mon, class 1 for Tue
-            deadline: "2019-12-29 10:30:00"     // "yyyy-mm-dd HH:ii:ss"
+            deadline: "2020-01-05 10:30:00"     // "yyyy-mm-dd HH:ii:ss"
         },
         Tue: {
             problemList: [
-                "50148"
+                "50149"
             ],
             passLimit: 60,
             passScale: 1.0,
             failScale: 0.5,
             studentClass: 1,
-            deadline: "2019-12-30 15:30:00"
+            deadline: "2020-01-06 15:30:00"
         },
         filename: "scaleTable.csv"
     },
@@ -42,7 +42,8 @@ const config = {
     scaledResult: {
         filename: "scaledResult.csv"
     },
-    courseYear: "2019"       // for building path
+    courseYear: "2019",     // for building path
+    finalEid: [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 89, 90, 91, 92, 93, 94]            // collection of all cid
 };
 
 config.path = `c${config.courseYear}/w${config.weekNumber}`;

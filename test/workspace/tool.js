@@ -29,6 +29,16 @@ tool.finish = function(err, result) {
     process.exit(0);
 };
 
+tool.finishWithMessage = () => {
+    colorConsole("INFO", "finish", "green");
+    process.exit(0);
+};
+
+tool.finishWithError = err => {
+    colorConsole("ERR", err, "red");
+    process.exit(-1);
+}
+
 tool.readFileSync = function(filePath) {
     let file = fs.readFileSync(filePath);
 
@@ -75,5 +85,11 @@ tool.renameFile = function(src, des) {
         return result;
     }
 };
+
+tool.printResult = (result) => {
+    colorConsole('RESULT', 'vvvvvvvvvv', 'yellow');
+    console.log(result);
+    return result;
+}
 
 module.exports = tool;
