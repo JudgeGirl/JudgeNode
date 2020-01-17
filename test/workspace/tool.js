@@ -61,6 +61,17 @@ tool.readFilePromise = filename => {
     })
 }
 
+tool.writeCSV = (header, body, filename) => {
+    let text = "";
+    text += header.join(',') + '\n';
+    body.forEach(row => {
+        text += row.join(',') + '\n';
+    });
+
+    console.log('filename: ', filename);
+    tool.writeFileSync(filename, text);
+}
+
 tool.parseCSV = function(file) {
     return new Promise(resolve => {
         parse(file, {comment: '#'}, function(err, output) {
@@ -69,8 +80,8 @@ tool.parseCSV = function(file) {
 
             const lookup = {};
             let csv = {
-                head: output.slice(0, 1),
-                body: output.slice(1)
+                header: output.slice(0, 1),
+                body: output.slice(1).map(row => row.map(entity => entity.trim()))
             };
 
             resolve(csv);
