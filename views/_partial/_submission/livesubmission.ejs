@@ -22,7 +22,7 @@
 <p></p>
 
 <script src="<%= site.url_for('javascripts/jquery.timeago.js') %>"></script>
-    
+
     <table id='live-submission' class="pure-table pure-table-bordered" style="width: 100%">
         <thead>
             <tr>
@@ -78,7 +78,7 @@
             $.ajax({
                 method: 'GET',
                 url: "//" + options.ip + "api/submission",
-                data: { limit: options.loadsubmit 
+                data: { limit: options.loadsubmit
                     <% if (query_filter['uid'] != undefined) { %>
                         , uid: <%- query_filter['uid'] %>
                     <% } %>
@@ -108,7 +108,7 @@
                     render(elem, options);
                     $("abbr.timeago").timeago();
                 }, Math.min(options.reloadtime, options. updatetime));
-            }); 
+            });
     }
     function render(elem, options) {
         if  (options.modify_flag == false)
@@ -127,14 +127,17 @@
             var tbody = obj.find('tbody');
             var text = '';
             var iplist = <%- JSON.stringify(site.CONTEST.VALID_IP) %>;
+
+            let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+
             for (var i in submit_list) {
                 if (submit_list[i].uid == submit_uid)
-                    text += '<tr class="pure-table-submitowner">'; 
+                    text += '<tr class="pure-table-submitowner">';
                 else
-                    text += "<tr>"; 
+                    text += "<tr>";
                 text += "<td class='sid'>" + submit_list[i].sid + "</td>";
                 text += "<td class='pid'>" + submit_list[i].pid + "</td>";
-                text += "<td class='problem-title'>" + 
+                text += "<td class='problem-title'>" +
                             "<a href='<%= site.url_for('problem/') %>" + submit_list[i].cid + "/" + submit_list[i].pid + "'>" + submit_list[i].ttl + "</a></td>";
                 text += "<td>";
                 var filter_ip = iplist.filter(function(valid_ip) {
@@ -163,7 +166,9 @@
                     text += ' <i class="fa fa-spinner fa-pulse"></i>';
                 text += '</td>';
                 text += "<td><a href='<%= site.url_for('source/highlight/') %>" + submit_list[i].sid + "'>" + options.langtext[submit_list[i].lng] + '</a></td>';
-                text += '<td><abbr class="timeago" title="' + new Date(submit_list[i].ts).toISOString() + '"></abbr></td>';
+
+                let unixTime = parseInt(submit_list[i].ts) - tzOffset;
+                text += '<td><abbr class="timeago" title="' + new Date(unixTime).toISOString().slice(0, -5) + '"></abbr></td>';
             }
             tbody.html(text);
     }
@@ -192,11 +197,11 @@
                                     options.modify_flag = true;
                                 }
                             }
-                        }); 
+                        });
                     }
                 };
                 update(ss);
-            }               
+            }
     }
     function update_submit(elem, options) {
         <% var page = query_filter['page'] %>
@@ -204,7 +209,7 @@
         $.ajax({
                 method: 'GET',
                 url: "//" + options.ip + "api/submission",
-                data: { limit: options.reloadsubmit 
+                data: { limit: options.reloadsubmit
                     <% if (query_filter['uid'] != undefined) { %>
                         , uid: <%- query_filter['uid'] %>
                     <% } %>
@@ -232,8 +237,8 @@
                         $.jhunt.submit_list.pop();
                     options.modify_flag = true;
                 }
-            });         
-            <% } %>     
+            });
+            <% } %>
     }
     var unitConvert = function(kind, bytes) {
             if (kind == 'mem') {
@@ -259,7 +264,7 @@
     }
     $.jhunt.defaults = {
         ip: '<%- request_hostname %><%= site.url_for('/') %>',
-        reloadtime: 2000,       //  how time to load 
+        reloadtime: 2000,       //  how time to load
         reloadsubmit: 5,
         loadsubmit: 20,     //  how #submission to load
         updatetime: 3000,   //  single waiting submission to update
@@ -268,7 +273,7 @@
         langtext: <%- JSON.stringify(site.JUDGE.lang) %>
     };
     $.jhunt.submit_list = [];
-})(jQuery);  
+})(jQuery);
 $(document).ready(function() {
     $('#live-submission').jhunt();
 });
