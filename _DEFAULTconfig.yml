@@ -48,3 +48,11 @@ Disqus:
 # Privilege
 Privilege:
     register_key: 'test'
+
+# Certification
+Cert: [
+    {
+        domain: 'xxxx.xxxx.xxx',
+        location: '/etc/letsencrypt/live/xxxxxxxxx.xxxx.xxx' # location of https certification
+    }
+]

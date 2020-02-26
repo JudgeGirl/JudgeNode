@@ -4,8 +4,10 @@ var realFs = require('fs')
 var gracefulFs = require('graceful-fs')
 gracefulFs.gracefulify(realFs);
 
+var _config = require('../lib/config').config;
+
 /*
-var cluster = require('cluster');  
+var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
@@ -107,24 +109,26 @@ function onListening() {
 }
 
 /*
-  https 
+  https
 */
 
 var tls = require('tls');
 var https = require('https'),
     fs = require("fs");
 
-function getSecureContext(domain) {
+function getSecureContext(dir) {
 	return tls.createSecureContext({
-        key:  fs.readFileSync('/etc/letsencrypt/live/'+ domain + '-0004/privkey.pem'),
-        cert:  fs.readFileSync('/etc/letsencrypt/live/' + domain + '-0004/cert.pem') 
+        key:  fs.readFileSync(dir + '/privkey.pem'),
+        cert:  fs.readFileSync(dir + '/cert.pem')
       });
 }
 
-var secureContext = {
-	'judgegirl.csie.org': getSecureContext('judgegirl.csie.org'),
-	'judgegirl.csie.ntu.edu.tw': getSecureContext('judgegirl.csie.ntu.edu.tw')
-};
+let secureContext = {};
+_config.Cert.forEach(site => {
+    let domain = site.domain;
+    let dir = site.location;
+    secureContext[domain] = getSecureContext(dir);
+});
 
 var options = {
 	SNICallback: function(domain, cb) {
