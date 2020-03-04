@@ -36,4 +36,13 @@ router.get('/problems?', function(req, res, next) {
     });
 });
 
+router.get('/status', (req, res, next) => {
+    let status = { message: "alive" };
+
+    dblink.api.waitingNumber()
+        .then(result => status["waiting number"] = result)
+        .then(() => res.json(status))
+        .catch(err => res.json(err));
+});
+
 module.exports = router;
