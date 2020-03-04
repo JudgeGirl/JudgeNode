@@ -37,7 +37,10 @@ router.get('/problems?', function(req, res, next) {
 });
 
 router.get('/status', (req, res, next) => {
-    let status = { message: "alive" };
+    let status = {
+        message: "alive",
+        "contest mode": _config.CONTEST.MODE
+    };
 
     dblink.api.waitingNumber()
         .then(result => status["waiting number"] = result)
