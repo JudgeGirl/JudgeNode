@@ -48,4 +48,31 @@ router.get('/status', (req, res, next) => {
         .catch(err => res.json(err));
 });
 
+router.post('/auth', (req, res, next) => {
+    const user = req.body.user;
+    const password = req.body.password;
+    const secret = req.body.secret;
+
+    if (secret != _config.Privilege.register_key) {
+        res.status(404).json({});
+        return;
+    }
+
+    let result = {};
+
+    dblink.user.verifyPassword(user, password)
+        .then(userData => {
+            result.status = 0;
+            result.user = userData;
+
+            res.json(result);
+        })
+        .catch(err => {
+            result.status = -1;
+            result.error = err;
+
+            res.status(401).json(result);
+        });
+});
+
 module.exports = router;
