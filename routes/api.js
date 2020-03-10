@@ -37,14 +37,24 @@ router.get('/problems?', function(req, res, next) {
 });
 
 router.get('/status', (req, res, next) => {
+    let uid = req.session.uid || false;
     let status = {
         message: "alive",
-        "contest mode": _config.CONTEST.MODE
+        "contest mode": _config.CONTEST.MODE,
+        uid: uid
     };
 
     dblink.api.waitingNumber()
-        .then(result => status["waiting number"] = result)
-        .then(() => res.json(status))
+        .then(result => {
+            status["waiting number"] = result;
+        })
+        .then(() => dblink.helper.getIsAdminPromise(uid))
+        .then(isAdmin => {
+            status["is admin"] = isAdmin;
+        })
+        .then(() => {
+            res.json(status);
+        })
         .catch(err => res.json(err));
 });
 

@@ -63,7 +63,9 @@ router.post('/login', function(req, res, next) {
     };
     var iplist = _config.CONTEST.VALID_IP;
     var ip = req.ip;
-    var backURL = req.session.redirect_to || utils.url_for('/'); dblink.user.login(user, req.session, function(status) {
+    var backURL = req.session.redirect_to || utils.url_for('/');
+
+    dblink.user.login(user, req.session, function(status) {
         /* login fail */
         if (status == 0) {
             return res.render('layout', {
