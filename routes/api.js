@@ -37,11 +37,11 @@ router.get('/problems?', function(req, res, next) {
 });
 
 router.get('/status', (req, res, next) => {
-    let uid = req.session.uid || false;
+    const uid = req.session.uid || false;
     let status = {
         message: "alive",
         "contest mode": _config.CONTEST.MODE,
-        uid: uid
+        uid: uid || false
     };
 
     dblink.api.waitingNumber()
@@ -59,18 +59,20 @@ router.get('/status', (req, res, next) => {
 });
 
 router.post('/auth', (req, res, next) => {
+    const uid = req.session.uid;
     const user = req.body.user;
     const password = req.body.password;
-    const secret = req.body.secret;
-
-    if (secret != _config.Privilege.register_key) {
-        res.status(404).json({});
-        return;
-    }
 
     let result = {};
 
-    dblink.user.verifyPassword(user, password)
+    dblink.helper.getIsAdminPromise(uid)
+        .then(isAdmin => {
+            if (!isAdmin) {
+                res.status(401).json({});
+                return;
+            }
+        })
+        .then(() => dblink.user.verifyPassword(user, password))
         .then(userData => {
             result.status = 0;
             result.user = userData;
