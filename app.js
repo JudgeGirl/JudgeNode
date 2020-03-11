@@ -70,13 +70,15 @@ app.use(session({
 */
 var RedisStore = require('connect-redis')(session);
 app.use(session({
-  store: new RedisStore(),
-  cookie: {
-    path: '/', // important !!
-    httpOnly: false,
-    maxAge: 6 * 60 * 60 * 1000
-  },
-  secret: 'ej3ej3su3bp6sk7'
+    store: new RedisStore(),
+    cookie: {
+        path: '/', // important !!
+        httpOnly: false,
+        maxAge: 6 * 60 * 60 * 1000
+    },
+    secret: 'ej3ej3su3bp6sk7',
+    resave: false,
+    saveUninitialized: false
 }));
 
 // logger
