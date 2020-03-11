@@ -25,7 +25,7 @@ router.get('/highlight/:sid', function(req, res, next) {
                 var text = '';
                 for (var i in source_code) {
                     text += '## ' + source_code[i].title + ' ##\n';
-                    text += '```cpp\n' + source_code[i].code + '```\n';
+                    text += '```cpp\n' + source_code[i].code + '\n```\n';
                 }
                 dblink.submission.list({
                     sid: sid
