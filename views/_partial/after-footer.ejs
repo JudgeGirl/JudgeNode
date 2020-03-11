@@ -1,9 +1,9 @@
 <!-- -->
 
-<% 
+<%
     var forbiddenLayoutList = ['login', 'edit', 'register', 'user', 'ranklist'];
     var MathJaxScriptNeed = forbiddenLayoutList.indexOf(layout) == -1;
-    console.log(MathJaxScriptNeed);
+    // console.log(`need MathJax: ${MathJaxScriptNeed}`);
 %>
 <% if (MathJaxScriptNeed) { %>
     <%- include('./MathJax') %>
@@ -45,17 +45,17 @@
     };
 
     /*  theme style css */
-    $("#styles li").click(function(){ 
+    $("#styles li").click(function(){
         var style = $(this).attr("id");
         if (style + '' == 'dark') {
-            $("link[title='default']").attr("disabled","disabled"); 
+            $("link[title='default']").attr("disabled","disabled");
             $("link[title='dark']").removeAttr('disabled');
         } else {
-            $("link[title='dark']").attr("disabled","disabled"); 
+            $("link[title='dark']").attr("disabled","disabled");
             $("link[title='default']").removeAttr('disabled');
         }
-        $.cookie("mystyle",style,{expires:30}); 
-    }); 
+        $.cookie("mystyle",style,{expires:30});
+    });
 
     /* table of contents */
     var nav_list    = $("#nav"); // navigation list id
@@ -70,10 +70,10 @@
                 }
         });
      });
-     
+
     $(nav_links).click(function() { //user click on toc links
             event.returnValue = false; //stop browser from going to href link
-            $('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500); //scroll smoothly to #id  
+            $('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500); //scroll smoothly to #id
      });
 }(this, this.document));
 
