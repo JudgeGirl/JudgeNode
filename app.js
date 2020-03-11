@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var i18n = require('i18n');
+var rfs = require('rotating-file-stream');
+var moment = require('moment');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -50,7 +52,6 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -77,6 +78,29 @@ app.use(session({
   },
   secret: 'ej3ej3su3bp6sk7'
 }));
+
+// logger
+app.use(logger('dev'));
+
+const logOption = {
+    size: "5M",
+    interval: '1d',
+    path: config.HOST.log_path,
+    compress: "gzip"
+};
+let accessLogStream = rfs.createStream('access.log', logOption);
+let logToFile = (tokens, req, res) => {
+    return [
+        moment().format('YYYY-MM-DDTHH:mm:ss'),
+        tokens.status(req, res),
+        req.session.uid,
+        tokens.method(req, res),
+        tokens.url(req, res),
+        tokens['remote-addr'](req, res)
+    ].join(' ')
+};
+app.use(logger(logToFile, { stream: accessLogStream }));
+
 app.use(function(req, res, next) {
     res.locals.__ = res.__ = function() {
         return i18n.__.apply(req, arguments);
