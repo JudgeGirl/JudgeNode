@@ -62,7 +62,7 @@ router.post('/auth', (req, res, next) => {
     const uid = req.session.uid;
     const user = req.body.user;
     const password = req.body.password;
-    const api_key = req.body.api_key;
+    const api_key = req.header("Api-Key");
 
     let result = {};
 
@@ -96,6 +96,28 @@ router.post('/auth', (req, res, next) => {
                 res.status(500).json(result);
             }
         });
+});
+
+router.get('/user/:uid', function(req, res, next) {
+    let uid = req.params.uid;
+    const api_key = req.header("Api-Key");
+    if (!api_key || api_key != _config.Privilege.API_key) {
+        res.status(401).json({});
+        return;
+    }
+
+    dblink.user.getUserByUidPromise(uid)
+        .then(userList => {
+            if (userList.length == 0) {
+                res.status(404).json({});
+            } else if (userList.length > 1) {
+                res.status(500).json("duplicated uid");
+            } else {
+                res.status(200).json(userList[0]);
+            }
+        }).catch(err => {
+            res.status(500).json(err);
+        })
 });
 
 module.exports = router;
