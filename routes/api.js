@@ -40,7 +40,7 @@ router.get('/status', (req, res, next) => {
     const uid = req.session.uid || false;
     let status = {
         message: "alive",
-        "contest mode": _config.CONTEST.MODE,
+        "test mode": _config.CONTEST.MODE,
         uid: uid || false
     };
 
@@ -62,28 +62,39 @@ router.post('/auth', (req, res, next) => {
     const uid = req.session.uid;
     const user = req.body.user;
     const password = req.body.password;
+    const api_key = req.body.api_key;
 
     let result = {};
 
-    dblink.helper.getIsAdminPromise(uid)
-        .then(isAdmin => {
-            if (!isAdmin) {
-                res.status(401).json({});
-                return;
-            }
+    if (!api_key || api_key != _config.Privilege.API_key) {
+        res.status(401).json(result);
+        return;
+    }
+
+    dblink.user.userExistsPromise(user)
+        .then(existence => {
+            if (!existence) {
+                result.message = "user does not exist";
+
+                res.status(404).json(result);
+            } else
+                return dblink.user.verifyPasswordPromise(user, password);
         })
-        .then(() => dblink.user.verifyPassword(user, password))
         .then(userData => {
-            result.status = 0;
             result.user = userData;
 
             res.json(result);
         })
         .catch(err => {
-            result.status = -1;
-            result.error = err;
+            if (err == "invalid user or password") {
+                result.message = "wrong password";
 
-            res.status(401).json(result);
+                res.status(400).json(result);
+            } else {
+                result.error = err;
+
+                res.status(500).json(result);
+            }
         });
 });
 
