@@ -64,36 +64,28 @@ router.post('/auth', (req, res, next) => {
     const password = req.body.password;
     const api_key = req.header("Api-Key");
 
-    let result = {};
-
     if (!api_key || api_key != _config.Privilege.API_key) {
-        res.status(401).json(result);
+        res.status(401).json({});
         return;
     }
 
     dblink.user.userExistsPromise(user)
         .then(existence => {
             if (!existence) {
-                result.message = "user does not exist";
-
-                res.status(404).json(result);
+                res.status(404).json("user does not exist");
             } else
                 return dblink.user.verifyPasswordPromise(user, password);
         })
         .then(userData => {
-            result.user = userData;
-
-            res.json(result);
+            res.json(userData);
         })
         .catch(err => {
             if (err == "invalid user or password") {
-                result.message = "wrong password";
 
-                res.status(400).json(result);
+                res.status(400).json("wrong password");
             } else {
-                result.error = err;
 
-                res.status(500).json(result);
+                res.status(500).json(err);
             }
         });
 });
