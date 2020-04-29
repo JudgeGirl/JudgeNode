@@ -118,8 +118,8 @@ var https = require('https'),
 
 function getSecureContext(dir) {
 	return tls.createSecureContext({
-        key:  fs.readFileSync(dir + '/privkey.pem'),
-        cert:  fs.readFileSync(dir + '/cert.pem')
+        key:  fs.readFileSync(dir + '/privkey.pem', 'utf8'),
+        cert:  fs.readFileSync(dir + '/fullchain.pem', 'utf8')
       });
 }
 
