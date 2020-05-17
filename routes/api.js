@@ -154,4 +154,46 @@ router.post('/user', async function(req, res, next) {
     return;
 });
 
+router.patch('/submission/:sid', async function(req, res, next) {
+    let sid = req.params.sid;
+    let result = req.body.result;
+    let score = req.body.score;
+
+    if (!sid || (!result && !score)) {
+        res.status(400).send("invalid submission info");
+        return;
+    }
+
+    if (invalidAPIKey(req, res))
+        return;
+
+    let sidExists = await dblink.submission.submissionExistsPromise(sid);
+    if (!sidExists) {
+        res.status(409).send("submission not exists");
+        return;
+    }
+
+    values = {};
+    if (result)
+        values["res"] = result;
+
+    if (score)
+        values["scr"] = score;
+
+    let dbResult;
+    try {
+        dbResult = await dblink.submission.setSubmissionPromise(sid, values);
+    } catch(e) {
+        console.log(e);
+        res.status(500).json(e);
+    }
+
+    if (dbResult)
+        res.status(200).send("success");
+    else
+        res.status(500).send("operation failed");
+
+    return;
+});
+
 module.exports = router;
