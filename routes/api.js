@@ -5,7 +5,17 @@ var multer = require('multer');
 var _config = require('../lib/config').config;
 var markdown = require('../lib/components/plugin/markdown');
 var fs = require('fs');
+var passwordGenerator = require('../lib/components/passwordGenerator');
 
+let invalidAPIKey = (req, res) => {
+    const api_key = req.header("Api-Key");
+    if (!api_key || api_key != _config.Privilege.API_key) {
+        res.status(401).json({});
+        return true;
+    }
+
+    return false;
+}
 
 router.get('/submissions?', function(req, res, next) {
     var uid = req.session.uid;
@@ -62,12 +72,9 @@ router.post('/auth', (req, res, next) => {
     const uid = req.session.uid;
     const user = req.body.user;
     const password = req.body.password;
-    const api_key = req.header("Api-Key");
 
-    if (!api_key || api_key != _config.Privilege.API_key) {
-        res.status(401).json({});
+    if (invalidAPIKey(req, res))
         return;
-    }
 
     dblink.user.userExistsPromise(user)
         .then(existence => {
@@ -92,11 +99,8 @@ router.post('/auth', (req, res, next) => {
 
 router.get('/user/:uid', function(req, res, next) {
     let uid = req.params.uid;
-    const api_key = req.header("Api-Key");
-    if (!api_key || api_key != _config.Privilege.API_key) {
-        res.status(401).json({});
+    if (invalidAPIKey(req, res))
         return;
-    }
 
     dblink.user.getUserByUidPromise(uid)
         .then(userList => {
@@ -110,6 +114,44 @@ router.get('/user/:uid', function(req, res, next) {
         }).catch(err => {
             res.status(500).json(err);
         })
+});
+
+router.post('/user', async function(req, res, next) {
+    if (invalidAPIKey(req, res))
+        return;
+
+    let name = req.body.name;
+    let email = req.body.email;
+    let type = req.body.type; // class
+    let password = passwordGenerator.generate();
+
+    if (!name || !type) {
+        res.status(400).send("invalid user info");
+        return;
+    }
+
+    let userExists = await dblink.user.userExistsPromise(name);
+    if (userExists) {
+        res.status(409).send("user already exists");
+        return;
+    }
+
+    let user = {
+        name: name,
+        email: email,
+        'class': type,
+        password: password,
+    };
+
+    try {
+        let dbResult = await dblink.user.addUserPromise(user);
+    } catch(e) {
+        console.log(e);
+        res.status(500).json(e);
+    }
+
+    res.status(201).json(user);
+    return;
 });
 
 module.exports = router;
