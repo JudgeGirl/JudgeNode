@@ -158,8 +158,56 @@ router.patch('/submission/:sid', async function(req, res, next) {
     let sid = req.params.sid;
     let result = req.body.result;
     let score = req.body.score;
+    let cpu = req.body.cpu;
+    let memory = req.body.memory;
+    let language = req.body.language;
+    let problemId = req.body.problemId;
+    let userId = req.body.userId;
+    let contestId = req.body.contestId;
 
-    if (!sid || (!result && !score)) {
+    values = {};
+    let valueLen = 0;
+    if (result !== undefined) {
+        values["res"] = result;
+        valueLen++;
+    }
+
+    if (score !== undefined) {
+        values["scr"] = score;
+        valueLen++;
+    }
+
+    if (cpu !== undefined) {
+        values["cpu"] = cpu;
+        valueLen++;
+    }
+
+    if (memory !== undefined) {
+        values["mem"] = memory;
+        valueLen++;
+    }
+
+    if (language !== undefined) {
+        values["lng"] = language;
+        valueLen++;
+    }
+
+    if (problemId !== undefined) {
+        values["pid"] = problemId;
+        valueLen++;
+    }
+
+    if (userId !== undefined) {
+        values["uid"] = userId;
+        valueLen++;
+    }
+
+    if (contestId !== undefined) {
+        values["cid"] = contestId;
+        valueLen++;
+    }
+
+    if (!sid || valueLen == 0) {
         res.status(400).send("invalid submission info");
         return;
     }
@@ -173,12 +221,6 @@ router.patch('/submission/:sid', async function(req, res, next) {
         return;
     }
 
-    values = {};
-    if (result)
-        values["res"] = result;
-
-    if (score)
-        values["scr"] = score;
 
     let dbResult;
     try {
