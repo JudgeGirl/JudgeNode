@@ -34,17 +34,22 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
 });
-app.use(function(req, res, next) {
-    if (req.headers.host != 'judgegirl.csie.org') {
-        var unite = 'judgegirl.csie.org';
-        req.headers.host = unite;
-        res.redirect('https://' + req.headers.host + req.url);
-    } else if (req.secure) {
-        next();
-    } else {
-        res.redirect('https://' + req.headers.host + req.url);
-    }
-});
+
+// only allow https and with domain judgegirl.csie.org
+if (config.HOST.https_only) {
+    app.use(function(req, res, next) {
+        if (req.headers.host != 'judgegirl.csie.org') {
+            var unite = 'judgegirl.csie.org';
+            req.headers.host = unite;
+            res.redirect('https://' + req.headers.host + req.url);
+        } else if (req.secure) {
+            next();
+        } else {
+            res.redirect('https://' + req.headers.host + req.url);
+        }
+    });
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
