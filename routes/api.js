@@ -123,7 +123,11 @@ router.post('/user', async function(req, res, next) {
     let name = req.body.name;
     let email = req.body.email;
     let type = req.body.type; // class
-    let password = passwordGenerator.generate();
+    let password;
+    if (req.body.password)
+        password = req.body.password;
+    else
+        password = passwordGenerator.generate();
 
     if (!name || !type) {
         res.status(400).send("invalid user info");
