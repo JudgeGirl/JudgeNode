@@ -48,24 +48,21 @@ router.get('/problems?', function(req, res, next) {
 
 router.get('/status', (req, res, next) => {
     const uid = req.session.uid || false;
-    let status = {
+    let serverStatus = {
         message: "alive",
         "test mode": _config.CONTEST.MODE,
         uid: uid || false
     };
 
-    dblink.api.waitingNumber()
-        .then(result => {
-            status["waiting number"] = result;
-        })
-        .then(() => dblink.helper.getIsAdminPromise(uid))
-        .then(isAdmin => {
-            status["is admin"] = isAdmin;
-        })
-        .then(() => {
-            res.json(status);
-        })
-        .catch(err => res.json(err));
+    let taskList = [];
+    taskList.push(dblink.api.waitingNumber());
+    taskList.push(dblink.helper.getIsAdminPromise(uid));
+
+    Promise.all(taskList).then(resArr => {
+        serverStatus["waiting number"] = resArr[0];
+        serverStatus["is admin"] = resArr[1];
+        res.json(serverStatus);
+    }).catch(err => res.json(err));
 });
 
 router.post('/auth', (req, res, next) => {
