@@ -57,10 +57,12 @@ router.get('/status', (req, res, next) => {
     let taskList = [];
     taskList.push(dblink.api.waitingNumber());
     taskList.push(dblink.helper.getIsAdminPromise(uid));
+    taskList.push(dblink.api.submissionWaitSecs());
 
     Promise.all(taskList).then(resArr => {
         serverStatus["waiting number"] = resArr[0];
         serverStatus["is admin"] = resArr[1];
+        serverStatus["waiting seconds"] = resArr[2];
         res.json(serverStatus);
     }).catch(err => res.json(err));
 });
