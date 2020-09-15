@@ -157,6 +157,31 @@ router.post('/user', async function(req, res, next) {
     return;
 });
 
+// This api just simulates the account creation. It won't actually create any account.
+router.post('/user-test', async function(req, res, next) {
+    if (invalidAPIKey(req, res))
+        return;
+
+    let name = req.body.name;
+    let email = req.body.email;
+    let type = req.body.type; // class
+    let password;
+    if (req.body.password)
+        password = req.body.password;
+    else
+        password = passwordGenerator.generate();
+
+    let user = {
+        name: name,
+        email: email,
+        'class': type,
+        password: password,
+    };
+
+    res.status(201).json(user);
+    return;
+});
+
 router.patch('/submission/:sid', async function(req, res, next) {
     let sid = req.params.sid;
     let result = req.body.result;
