@@ -71,7 +71,11 @@ router.post('/login', function(req, res, next) {
             return res.render('layout', {
                 layout: 'login',
                 subtitle: 'Login',
-                sysmsg: '帳號或密碼錯誤'
+                sysmsg: '帳號或密碼錯誤',
+                commonErrors: [
+                    '如果你是修習 109-1 工科計算機概論與程式設計的同學，請到 http://140.112.26.221:8081/ 登入。',
+                    '如果你是修習張傑帆老師的課程的同學，請到 https://jgirl.ddns.net/ 登入。'
+                ]
             });
         }
         /* login success */

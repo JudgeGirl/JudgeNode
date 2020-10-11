@@ -5,6 +5,13 @@
 <div class="content">
 <% if (sysmsg && sysmsg.length > 0) { %>
 	<div class='sysmsg'><%- sysmsg %></div>
+    <div>
+        <ul>
+            <% commonErrors.forEach(function(item,index){ %>
+                <li> <%= item %> </li>
+            <% }) %>
+        </ul>
+    </div>
 <% } %>
 <style>
 .comment {
