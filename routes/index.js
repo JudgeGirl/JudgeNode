@@ -598,10 +598,12 @@ router.get('/score', function(req, res, next) {
 
 var sourceRouter = require('./source'),
     apiRouter = require('./api'),
-    testdataRouter = require('./testdata');
+    testdataRouter = require('./testdata'),
+    reportRouter = require('./report');
 
 router.use('/source', sourceRouter);
 router.use('/api', apiRouter);
 router.use('/testdata', testdataRouter);
+router.use('/report', reportRouter);
 
 module.exports = router;
