@@ -33,6 +33,7 @@
                 <th style="">Verdict</th>
                 <th style=""></th>
                 <th class='date-header' style="">Submit Time</th>
+				<th class='report-header'>Style</th>
             </tr>
         </thead>
         <tbody>
@@ -165,10 +166,22 @@
                 if (submit_list[i].res == 0 || submit_list[i].res == 8)
                     text += ' <i class="fa fa-spinner fa-pulse"></i>';
                 text += '</td>';
+
+                // source code link
                 text += "<td><a href='<%= site.url_for('source/highlight/') %>" + submit_list[i].sid + "'>" + options.langtext[submit_list[i].lng] + '</a></td>';
 
+                // submit time
                 let unixTime = parseInt(submit_list[i].ts) - tzOffset;
                 text += '<td><abbr class="timeago" title="' + new Date(unixTime).toISOString().slice(0, -5) + '"></abbr></td>';
+
+                // style
+                let report = '';
+                if(submit_list[i].hasReport) {
+                    let link = '<%= site.url_for('report/') %>' + submit_list[i].sid;
+                    report = `<a href="${link}"><i class="fa fa-file-text"></i></a>`;
+                }
+
+                text += '<td class="report">' + report + '</td>';
             }
             tbody.html(text);
     }
