@@ -31,13 +31,14 @@
 				<th></th>
 				<th class='codelen-header'>Len</th>
 				<th class='date-header'>Date</th>
+				<th class='report-header'>Style</th>
 			</tr>
 		</thead>
 		<tbody>
 		<% var sl = submission_list; %>
-		<% for (var i = 0; i < sl.length; i++) { 
+		<% for (var i = 0; i < sl.length; i++) {
 			var submit_owner = false;
-			if (user.uid && user.uid == sl[i].uid) 
+			if (user.uid && user.uid == sl[i].uid)
 				submit_owner = true;
 		%>
 			<tr class='<%= submit_owner ? "pure-table-submitowner" : "" %>'>
@@ -45,43 +46,51 @@
 				<td><%- sl[i].pid %></td>
 				<td class='problem-title'><a href='<%= site.url_for('problem/' + sl[i].cid + '/' + sl[i].pid) %>'><%- sl[i].ttl %></a></td>
 				<td><a href='<%= site.url_for('user/' + sl[i].uid) %>'><%- sl[i].lgn %></td>
-				<% 
-					var text = '';
+				<%
+                    // build content of verdict column
+					var verdictCol = '';
 					var judge_res = site.JUDGE.result_message,
 					    judge_lng = site.JUDGE.lang;
 					var unitConvert = site.unitConvert;
-					text += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
-					text += "<span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";
+					verdictCol += "<td class='status' data-res=" + sl[i].res + " data-sid=" + sl[i].sid + ">";
+					verdictCol += "<span class='result" + sl[i].res + "'>" + judge_res[(sl[i].res+judge_res.length)%judge_res.length] + "</span>";
 					if (sl[i].res != 0 && sl[i].res != 1 && sl[i].res != 8) {
-						text += " (";
+						verdictCol += " (";
 						if (sl[i].res != 7) {
-							text += "score: " + sl[i].scr;
+							verdictCol += "score: " + sl[i].scr;
 						} else {
-							text += unitConvert('cpu', sl[i].cpu);
-							text += ", "
-							text += unitConvert('mem', sl[i].mem);
+							verdictCol += unitConvert('cpu', sl[i].cpu);
+							verdictCol += ", "
+							verdictCol += unitConvert('mem', sl[i].mem);
 						}
-						text += ")";
+						verdictCol += ")";
 					}
 					if (sl[i].res == 0 || sl[i].res == 8)
-						text += ' <i class="fa fa-spinner fa-pulse"></i>';
+						verdictCol += ' <i class="fa fa-spinner fa-pulse"></i>';
+
+                    // add rejudge button for administor
 					if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) {
-						text += ' <a class="pid-rejudge" href="' + site.url_for('/admin/api/rejudge?pid=') + sl[i].pid + '&sid=' + sl[i].sid + '" style="color: #b6c17b;" title="rejudge"><i class="fa fa-refresh"></i></a>';
+						verdictCol += ' <a class="pid-rejudge" href="' + site.url_for('/admin/api/rejudge?pid=') + sl[i].pid + '&sid=' + sl[i].sid + '" style="color: #b6c17b;" title="rejudge"><i class="fa fa-refresh"></i></a>';
 					}
-					text += '</td>';
+					verdictCol += '</td>';
 				%>
-				<%- text %>
+				<%- verdictCol %>
 				<td>
 					<% if (user.uid && (user.uid == sl[i].uid || user["class"] === null)) { %>
-					<a href='<%= site.url_for('source/highlight/' + sl[i].sid) %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
+					    <a href='<%= site.url_for('source/highlight/' + sl[i].sid) %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
 					<% } else if (typeof(ac_map) != 'undefined' && ac_map[sl[i].pid] != undefined) { %>
-					<a href='<%= site.url_for('source/highlight/' + sl[i].sid) %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
+    					<a href='<%= site.url_for('source/highlight/' + sl[i].sid) %>'><%- judge_lng[sl[i].lng] %> <i class="fa fa-unlock-alt"></i></a>
 					<% } else { %>
-					<%- judge_lng[sl[i].lng] %>
+    					<%- judge_lng[sl[i].lng] %>
 					<% } %>
 				</td>
 				<td class='codelen'><%- unitConvert('mem', sl[i].len) %></td>
 				<td class='date'><%- unitConvert('date', new Date(sl[i].ts)) %></td>
+				<td class='report'>
+                    <% if (sl[i].hasReport) { %>
+                        <a href="<%= site.url_for('report/' + sl[i].sid) %>"><i class="fa fa-file-text"></i></a>
+                    <% } %>
+                </td>
 			</tr>
 		<% } %>
 		</tbody>
