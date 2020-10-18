@@ -10,7 +10,7 @@
             <% } else if (layout == 'edit') { %>
               <%- include('_partial/_user/edit') %>
             <% } else if (layout == 'signup') { %>
-              <%- include('_partial/_user/signup') %> 
+              <%- include('_partial/_user/signup') %>
             <% } else if (layout == 'user') { %>
               <%- include('_partial/_user/user') %>
             <% } else if (layout == 'forbidden') { %>
@@ -51,6 +51,8 @@
               <%- include('_partial/_submission/judgeresult') %>
             <% } else if (layout == 'testdata_download') { %>
               <%- include('_partial/_testdata/download') %>
+            <% } else if (layout == 'report') { %>
+              <%- include('_partial/_report/report') %>
             <% } %>
           </section>
       </div>
