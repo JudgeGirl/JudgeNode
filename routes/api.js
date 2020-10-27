@@ -6,15 +6,28 @@ var _config = require('../lib/config').config;
 var markdown = require('../lib/components/plugin/markdown');
 var fs = require('fs');
 var passwordGenerator = require('../lib/components/passwordGenerator');
+let { exec } = require('child_process');
 
 let invalidAPIKey = (req, res) => {
     const api_key = req.header("Api-Key");
     if (!api_key || api_key != _config.Privilege.API_key) {
-        res.status(401).json({});
+        res.status(401).json("api key required");
         return true;
     }
 
     return false;
+}
+
+let rejectNonAdmin = async function(req, res) {
+    let uid = req.session.uid;
+    let isAdmin = await dblink.helper.getIsAdminPromise(uid);
+
+    if (!isAdmin) {
+        res.status(401).json("administrator only");
+        return false;
+    }
+
+    return true;
 }
 
 router.get('/submissions?', function(req, res, next) {
@@ -264,6 +277,41 @@ router.patch('/submission/:sid', async function(req, res, next) {
         res.status(500).send("operation failed");
 
     return;
+});
+
+router.put('/report/:sid', async function(req, res, next) {
+    if (invalidAPIKey(req, res))
+        return;
+
+    let isAdmin = await rejectNonAdmin(req, res);
+    if (!isAdmin)
+        return;
+
+    // wow. such dirty code
+    let sid = req.params.sid;
+	let command = `poetry run python scripts/send_style_check_task.py ${sid}`;
+    let cwd = '/home/judgesister/Judge-sender';
+
+    let options = { cwd: cwd }
+    const process = exec(command, options, function(error, stdout, stderr) {
+        if (error) {
+            console.log(error.stack);
+            console.log('Error code: '+error.code);
+            console.log('Signal received: '+error.signal);
+        }
+
+          console.log('Child Process STDOUT: '+stdout);
+          console.log('Child Process STDERR: '+stderr);
+    });
+
+	process.on('exit', function (code) {
+        console.log('Child process exited with exit code '+code);
+        if (code == 0)
+            res.status(200).json('success');
+        else
+            res.status(500).json('failed');
+	});
+
 });
 
 module.exports = router;
