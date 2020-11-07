@@ -10,7 +10,7 @@
 			<img class="pure-u-1-1" src="<%= site.url_for('images/avatar/thumb--' + userinfo.info.uid) %>" onerror="this.src='http://i.imgur.com/mV053DI.png'"/>
 		</div>
 		<div class="pure-u-1-1">
-			<div class="header">				
+			<div class="header">
 				<h3><%- userinfo.info.lgn  %></h2>
 				<h3><% if (userinfo.info.class == null || userinfo.info.class == '') { %>
 				<%= __('Administrator') %>
@@ -97,10 +97,10 @@
 		<div class="pure-u-1-1">
 	<!-- Live2D Library -->
     <script src="<%= site.url_for('javascripts/live2d/live2d.min.js') %>"></script>
-    
+
     <!-- Live2D Framework -->
     <script src="<%= site.url_for('javascripts/live2d/Live2DFramework.js') %>"></script>
-    
+
     <!-- User's Script -->
     <script src="<%= site.url_for('javascripts/live2d/src/utils/MatrixStack.js') %>"></script>
     <script src="<%= site.url_for('javascripts/live2d/src/utils/ModelSettingJson.js') %>"></script>
@@ -114,12 +114,12 @@
         <button id="btnChange" class="active">Change Model</button>
     </p>
     -->
-    
+
     <div style="width: 100%:">
         <canvas id="glcanvas" width="360" height="480" style="">
         </canvas>
     </div>
-    
+
     <div id="myconsole" style="color:#000; display: none;">---- Log ----</div>
 
 <script>sampleApp1();</script>
@@ -127,8 +127,14 @@
 	</div>
 </div>
 
-<h2><%- __('Recent Submission') %></h2>
-
+<div>
+    <h2>
+        <%- __('Recent Submission') %>
+        <span>
+            <a href="<%= site.url_for('submissions?uid=' + userinfo.info.uid) %>">(all)</a>
+        </span>
+    </h2>
+</div>
 <%- include('../_widget/submission_table', {submission_list: userinfo.recent}) %>
 
 </div>
