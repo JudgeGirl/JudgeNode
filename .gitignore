@@ -13,7 +13,7 @@ _config.yml
 *.csv
 
 # server upload temporary file dictionary
-/files
+files
 
 # https SSL
 *.pem
@@ -21,6 +21,3 @@ _config.yml
 
 # gulp produce
 public/javascripts/MathJax/
-
-# vim tmp
-*.swp
