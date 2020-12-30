@@ -121,6 +121,9 @@ app.use(function(req, res, next) {
 
 app.use(utils.url_for('/'), express.static(path.join(__dirname, 'public')));
 
+// For files that is not part of the website.
+app.use(utils.url_for('/'), express.static(config.HOST.resource));
+
 app.use(utils.url_for('admin'), admins);
 app.use(utils.url_for('user'), users);
 app.use(utils.url_for('/'), routes);
