@@ -21,7 +21,7 @@
 			    <ul class="pure-menu-list">
 				<% for (var i in downloadList) { %>
 					<li class="pure-menu-item">
-						<a class="pure-menu-link" href='<%- site.url_for('downloads/testdata/' + pid + '/' + downloadList[i]) %>' download><i class="fa fa-file"></i> <%= downloadList[i] %></a>
+						<a class="pure-menu-link" href='<%- site.url_for(site.HOST.testdata + '/' + pid + '/' + downloadList[i]) %>' download><i class="fa fa-file"></i> <%= downloadList[i] %></a>
 					</li>
 				<% } %>
 				</ul>

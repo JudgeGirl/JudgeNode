@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
 });
 
 // only allow https and with domain judgegirl.csie.org
-if (config.HOST.https_only) {
+if (_config.HOST.https_only) {
     app.use(function(req, res, next) {
         if (req.headers.host != 'judgegirl.csie.org') {
             var unite = 'judgegirl.csie.org';
@@ -55,7 +55,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -92,7 +92,7 @@ app.use(logger('dev'));
 const logOption = {
     size: "5M",
     interval: '1d',
-    path: config.HOST.log_path,
+    path: _config.HOST.log_path,
     compress: "gzip"
 };
 let accessLogStream = rfs.createStream('access.log', logOption);
@@ -108,6 +108,7 @@ let logToFile = (tokens, req, res) => {
 };
 app.use(logger(logToFile, { stream: accessLogStream }));
 
+// Injection
 app.use(function(req, res, next) {
     res.locals.__ = res.__ = function() {
         return i18n.__.apply(req, arguments);
@@ -122,7 +123,7 @@ app.use(function(req, res, next) {
 app.use(utils.url_for('/'), express.static(path.join(__dirname, 'public')));
 
 // For files that is not part of the website.
-app.use(utils.url_for('/'), express.static(config.HOST.resource));
+app.use(utils.url_for('/'), express.static(_config.HOST.resource));
 
 app.use(utils.url_for('admin'), admins);
 app.use(utils.url_for('user'), users);
@@ -154,6 +155,7 @@ if ( _config.JUDGE.env === 'development') {
             error: err,
             user: null
         });
+        next();
     });
 }
 
@@ -166,6 +168,7 @@ app.use(function(err, req, res, next) {
         error: {},
         user: null
     });
+    next();
 });
 
 
