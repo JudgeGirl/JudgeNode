@@ -38,6 +38,7 @@
     "vue": "^1.0.25"
   },
   "devDependencies": {
+    "eslint": "^7.16.0",
     "gulp": "^4.0.2"
   }
 }
