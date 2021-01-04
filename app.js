@@ -73,9 +73,10 @@ app.use(session({
     secret: 'alskdjasjoimk'
 }));
 */
-var RedisStore = require('connect-redis')(session);
+const RedisStore = require('connect-redis')(session);
+const redisClient = require("./lib/components/RedisClient");
 app.use(session({
-    store: new RedisStore(),
+    store: new RedisStore({ client: redisClient.getClient() }),
     cookie: {
         path: '/', // important !!
         httpOnly: false,
