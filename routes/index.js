@@ -298,6 +298,15 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
         uid = req.session.uid;
     var loadPage = function() {
         dblink.problemManager.problemContent(pid, function(pcontent, pinfo, psubmit) {
+            // 404 if no static problem found.
+            if (pinfo === null || pinfo === undefined) {
+                let err = new Error(pcontent);
+                err.status = 404;
+
+                next(err);
+                return;
+            }
+
             dblink.problemManager.testdataList(pid, function(tconfig) {
                 dblink.helper.cansubmit(cid, pid, uid, function(cansubmit) {
                     if (uid != undefined && req.session['class'] == null)
