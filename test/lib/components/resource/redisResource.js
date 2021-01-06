@@ -7,7 +7,7 @@ const redisClient = require('lib/components/RedisClient');
 const cacheKeyFactory = new StaticCacheKeyFactory('test');
 const content = 'hello 你好';
 
-describe("resources", async function(){
+describe("redis resource", async function(){
     before(async function() {
         await redisClient.deleteKey(cacheKeyFactory.getCacheKey());
     });
@@ -16,7 +16,7 @@ describe("resources", async function(){
         await redisClient.deleteKey(cacheKeyFactory.getCacheKey());
     })
 
-    it("redis resource", async function(){
+    it("RedisResource", async function(){
         let response;
 
         let resource = new RedisResource(cacheKeyFactory, 10);

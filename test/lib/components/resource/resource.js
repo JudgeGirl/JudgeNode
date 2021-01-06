@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const ReadOnlyFileResource = require('lib/components/resource/ReadOnlyFileResource');
 const FileResource = require('lib/components/resource/FileResource');
+const StaticResource = require('lib/components/resource/StaticResource');
 const RawFileLocator = require('lib/components/resource/fileLocator/RawFileLocator');
 
 const tmpDir = `${__dirname}/tmp`;
@@ -25,7 +26,6 @@ describe("resources", async function(){
         let resource = new ReadOnlyFileResource(fileLocator);
         let content = await resource.get(readFile);
 
-
         expect(content).to.equal(content);
     });
 
@@ -36,5 +36,16 @@ describe("resources", async function(){
         let fileContent = await resource.get(writeFile);
 
         expect(fileContent).to.equal(content);
+    });
+
+    it('StaticResource', async function() {
+        let resource = new StaticResource(content);
+        let staticContent = await resource.get();
+        expect(staticContent).to.equal(content);
+
+        let newContent = 'marko polo';
+        await resource.set(undefined, newContent);
+        staticContent = await resource.get();
+        expect(staticContent).to.equal(newContent);
     });
 });
