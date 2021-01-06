@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "redis-cli flushall && ulimit -n 4096 && nodejs ./bin/www"
+    "start": "redis-cli flushall && ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
