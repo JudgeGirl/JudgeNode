@@ -15,7 +15,6 @@ router.get('/download/:pid', function(req, res, next) {
                 pid: pid,
                 downloadList: file_list
             });
-            next();
         });
     });
 });
