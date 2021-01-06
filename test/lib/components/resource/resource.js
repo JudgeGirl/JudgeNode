@@ -11,7 +11,7 @@ const content = "hello world, 你好 世界";
 const writeFile = `${tmpDir}/write.txt`;
 const fileLocator = new RawFileLocator();
 
-describe("Resource", async function(){
+describe("resources", async function(){
     before(function() {
         fs.mkdirSync(tmpDir);
         fs.writeFileSync(readFile, content);

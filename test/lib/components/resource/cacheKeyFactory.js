@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const StaticCacheKeyFactory = require('lib/components/resource/cacheKeyFactory/StaticCacheKeyFactory');
 const TemplateCacheKeyFactory = require('lib/components/resource/cacheKeyFactory/TemplateCacheKeyFactory');
 
-describe("file locators", function(){
+describe("cache key factories", function(){
     it("StaticCacheKeyFactory", function(){
         const staticKey = 'announcement.md'
         const cacheKeyFactory = new StaticCacheKeyFactory(staticKey);
