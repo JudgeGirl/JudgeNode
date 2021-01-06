@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "redis-cli flushall && ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www"
+    "start": "redis-cli flushall && ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www",
+    "test": "NODE_PATH=./ mocha --recursive --exit"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -39,7 +40,9 @@
     "vue": "^1.0.25"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^7.16.0",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "mocha": "^8.2.1"
   }
 }
