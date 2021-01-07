@@ -23,7 +23,7 @@ describe("file locators", function(){
     });
 
     it("TemplateFileLocator", function(){
-        const fileLocator = new TemplateFileLocator('path/../', '.extension');
+        const fileLocator = new TemplateFileLocator('path/../${this.key}.extension');
 
         let key = "name";
 
