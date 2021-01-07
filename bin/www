@@ -29,7 +29,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '80');
+var port = normalizePort(_config.HOST.PORT || '80');
 app.set('port', port);
 
 /**
@@ -135,7 +135,9 @@ var options = {
 		cb(null, secureContext[domain]);
 	}
 };
-https.createServer(options, app).listen(443, function () {
-    console.log('Https server listening on port ' + 443);
-});
 
+if (_config.HOST.https_only) {
+    https.createServer(options, app).listen(443, function () {
+        console.log('Https server listening on port ' + 443);
+    });
+}

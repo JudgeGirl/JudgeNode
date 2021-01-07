@@ -74,7 +74,7 @@ app.use(session({
 }));
 */
 const RedisStore = require('connect-redis')(session);
-const redisClient = require("./lib/components/RedisClient");
+const { redisClient } = require("./lib/components/RedisClient");
 app.use(session({
     store: new RedisStore({ client: redisClient.getClient() }),
     cookie: {
