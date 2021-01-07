@@ -14,7 +14,7 @@ describe("cache key factories", function(){
     });
 
     it("TemplateCacheKeyFactory", function(){
-        const cacheKeyFactory = new TemplateCacheKeyFactory('problem', '.md');
+        const cacheKeyFactory = new TemplateCacheKeyFactory('problem', '{}.md');
 
         let key = "50123";
 

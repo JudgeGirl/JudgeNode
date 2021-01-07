@@ -12,7 +12,7 @@ const content = "hello world, 你好 世界";
 const writeFile = `${tmpDir}/write.txt`;
 const fileLocator = new RawFileLocator();
 
-describe("resources", async function(){
+describe("resources", async function() {
     before(function() {
         fs.mkdirSync(tmpDir);
         fs.writeFileSync(readFile, content);
@@ -22,14 +22,14 @@ describe("resources", async function(){
         fs.rmSync(tmpDir, {force: true, recursive: true});
     })
 
-    it("ReadOnlyFileResource", async function(){
+    it("ReadOnlyFileResource", async function() {
         let resource = new ReadOnlyFileResource(fileLocator);
         let content = await resource.get(readFile);
 
         expect(content).to.equal(content);
     });
 
-    it("FileResource", async function(){
+    it("FileResource", async function() {
         let resource = new FileResource(fileLocator);
 
         await resource.set(writeFile, content);
