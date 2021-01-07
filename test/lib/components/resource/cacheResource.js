@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const RedisCacheResource = require('lib/components/resource/RedisCacheResource');
 const DictionaryCacheResource = require('lib/components/resource/DictionaryCacheResource');
 const StaticCacheKeyFactory = require('lib/components/resource/cacheKeyFactory/StaticCacheKeyFactory');
-const redisClient = require('lib/components/RedisClient');
+const { redisClient } = require('lib/components/RedisClient');
 
 const cacheKeyFactory = new StaticCacheKeyFactory('test-redis-cache');
 const content = 'hello 你好';
