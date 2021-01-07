@@ -6,11 +6,9 @@ const TemplateCacheKeyFactory = require('lib/components/resource/cacheKeyFactory
 describe("cache key factories", function(){
     it("StaticCacheKeyFactory", function(){
         const staticKey = 'announcement.md'
-        const cacheKeyFactory = new StaticCacheKeyFactory(staticKey);
+        const cacheKeyFactory = new StaticCacheKeyFactory('test', staticKey);
 
-        let key = "whatever";
-
-        expect(cacheKeyFactory.getCacheKey(key)).to.equal(`cache:${staticKey}`);
+        expect(cacheKeyFactory.getCacheKey(null)).to.equal(`cache-test:${staticKey}`);
     });
 
     it("TemplateCacheKeyFactory", function(){
