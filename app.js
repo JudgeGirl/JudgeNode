@@ -1,23 +1,19 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var i18n = require('i18n');
-var rfs = require('rotating-file-stream');
-var moment = require('moment');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admins = require('./routes/admins');
 var _config = require('./lib/config').config;
 var utils = require('./lib/components/utils');
+const { loggerFactory } = require('lib/components/LoggerFactory');
 
 var app = express();
-
-// chat room
 
 i18n.configure({
     // setup some locales - other locales default to en silently
@@ -38,8 +34,8 @@ app.use(function(req, res, next) {
 // only allow https and with domain judgegirl.csie.org
 if (_config.HOST.https_only) {
     app.use(function(req, res, next) {
-        if (req.headers.host != 'judgegirl.csie.org') {
-            var unite = 'judgegirl.csie.org';
+        if (req.headers.host != _config.HOST.HOSTNAME) {
+            var unite = _config.HOST.HOSTNAME;
             req.headers.host = unite;
             res.redirect('https://' + req.headers.host + req.url);
         } else if (req.secure) {
@@ -63,16 +59,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(i18n.init);
-/*
-app.use(session({
-    cookie: {
-        path: '/', // important !!
-        httpOnly: false,
-        maxAge: 6 * 60 * 60 * 1000
-    },
-    secret: 'alskdjasjoimk'
-}));
-*/
+
+// session
 const RedisStore = require('connect-redis')(session);
 const { redisClient } = require("./lib/components/RedisClient");
 app.use(session({
@@ -87,29 +75,10 @@ app.use(session({
     saveUninitialized: false
 }));
 
-// logger
-app.use(logger('dev'));
+// Register access logger.
+app.use(loggerFactory.getAccessLogMiddleware());
 
-const logOption = {
-    size: "5M",
-    interval: '1d',
-    path: _config.HOST.log_path,
-    compress: "gzip"
-};
-let accessLogStream = rfs.createStream('access.log', logOption);
-let logToFile = (tokens, req, res) => {
-    return [
-        moment().format('YYYY-MM-DDTHH:mm:ss'),
-        tokens.status(req, res),
-        req.session.uid,
-        tokens.method(req, res),
-        tokens.url(req, res),
-        tokens['remote-addr'](req, res)
-    ].join(' ')
-};
-app.use(logger(logToFile, { stream: accessLogStream }));
-
-// Injection
+// Inject user, config
 app.use(function(req, res, next) {
     res.locals.__ = res.__ = function() {
         return i18n.__.apply(req, arguments);
