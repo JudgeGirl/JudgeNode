@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "redis-cli flushall && ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www",
+    "start": "ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www",
+    "fresh-start": "redis-cli flushall && ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www",
     "test": "NODE_PATH=./ mocha --recursive --exit"
   },
   "dependencies": {
