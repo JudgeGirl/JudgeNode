@@ -6,6 +6,7 @@ var _config = require('../lib/config').config;
 var markdown = require('../lib/components/plugin/markdown');
 var utils = require('../lib/components/utils');
 var fs = require('fs');
+const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 
 /* limit upload file size = 64 KB */
 var upload = multer({
@@ -105,6 +106,10 @@ router.post('/login', function(req, res, next) {
 });
 /* User Logout and regenerate session */
 router.get('/logout', function(req, res, next) {
+    let uid = req.session.uid;
+    if (uid)
+        loggerFactory.getLogger(module.id).info(`logout: ${uid} ${req.session.lgn}.`);
+
     req.session.regenerate(function(err) {
         res.redirect(utils.url_for('/'));
     });
