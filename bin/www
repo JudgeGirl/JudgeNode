@@ -5,6 +5,7 @@ var gracefulFs = require('graceful-fs')
 gracefulFs.gracefulify(realFs);
 
 var _config = require('../lib/config').config;
+const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 
 /*
 var cluster = require('cluster');
@@ -123,20 +124,23 @@ function getSecureContext(dir) {
       });
 }
 
-let secureContext = {};
-_config.Cert.forEach(site => {
-    let domain = site.domain;
-    let dir = site.location;
-    secureContext[domain] = getSecureContext(dir);
-});
-
-var options = {
-	SNICallback: function(domain, cb) {
-		cb(null, secureContext[domain]);
-	}
-};
 
 if (_config.HOST.https_only) {
+    loggerFactory.getLogger(module.id).info(`open https server on 443.`);
+
+    let secureContext = {};
+    _config.Cert.forEach(site => {
+        let domain = site.domain;
+        let dir = site.location;
+        secureContext[domain] = getSecureContext(dir);
+    });
+
+    let options = {
+        SNICallback: function(domain, cb) {
+            cb(null, secureContext[domain]);
+        }
+    };
+
     https.createServer(options, app).listen(443, function () {
         console.log('Https server listening on port ' + 443);
     });
