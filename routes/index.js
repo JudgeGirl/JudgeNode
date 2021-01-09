@@ -116,6 +116,10 @@ router.get('/logout', function(req, res, next) {
 });
 router.get('/edit', function(req, res, next) {
     var uid = req.session.uid;
+
+    if (uid === undefined)
+        throw new Error('Try to edit user profile without login.');
+
     dblink.user.info(uid, function(user) {
         var wrongmsg = '';
         res.render('layout', {
