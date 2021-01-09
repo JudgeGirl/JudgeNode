@@ -11,7 +11,7 @@ var users = require('./routes/users');
 var admins = require('./routes/admins');
 var _config = require('./lib/config').config;
 var utils = require('./lib/components/utils');
-const { loggerFactory } = require('lib/components/LoggerFactory');
+const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 
 var app = express();
 
@@ -110,31 +110,27 @@ app.get(utils.url_for('/i18n/:locale'), function(req, res) {
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
+
     next(err);
 });
 
 // error handlers
-
-// development error handler
-// will print stacktrace
-if ( _config.JUDGE.env === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err,
-            user: null
-        });
-        next();
-    });
-}
+// log error
+app.use(function(err, req, res, next) {
+    if (err.status === 404) {
+        loggerFactory.getLogger(module.id).silly(`not found: ${req.originalUrl}`);
+    } else {
+        loggerFactory.getLogger(module.id).debug(err, { status: err.status });
+    }
+    next(err);
+});
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
-        message: err.message,
+        message: 'Error.',
         error: {},
         user: null
     });
