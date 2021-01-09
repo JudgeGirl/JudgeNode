@@ -120,7 +120,7 @@ app.use(function(err, req, res, next) {
     if (err.status === 404) {
         loggerFactory.getLogger(module.id).silly(`not found: ${req.originalUrl}`);
     } else {
-        loggerFactory.getLogger(module.id).debug(err, { status: err.status });
+        loggerFactory.getLogger(module.id).error(err, { status: err.status });
     }
     next(err);
 });
