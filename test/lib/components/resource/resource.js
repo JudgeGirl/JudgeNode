@@ -4,6 +4,7 @@ const fs = require('fs');
 const ReadOnlyFileResource = require('lib/components/resource/ReadOnlyFileResource');
 const FileResource = require('lib/components/resource/FileResource');
 const StaticResource = require('lib/components/resource/StaticResource');
+const FileTreeResource = require('lib/components/resource/FileTreeResource');
 const RawFileLocator = require('lib/components/resource/fileLocator/RawFileLocator');
 
 const tmpDir = `${__dirname}/tmp`;
@@ -47,5 +48,35 @@ describe("resources", async function() {
         await resource.set(undefined, newContent);
         staticContent = await resource.get();
         expect(staticContent).to.equal(newContent);
+    });
+
+    it('FileTreeResource', async function() {
+        const  fileLocator = new RawFileLocator();
+        const  resource = new FileTreeResource(fileLocator);
+        const  content = [
+            'a',
+            'layer1/b',
+            'layer1/c'
+        ];
+        expect(await resource.get('test/data/downloadList')).to.deep.equal(content);
+        expect(await resource.get('test/data/downloadList/')).to.deep.equal(content);
+        expect(await resource.get('test/data/downloadList/layer1-1')).to.deep.equal([]);
+        expect(await resource.get('test/data/downloadList/not-exist')).to.equal(null);
+
+        try {
+            await resource.get('test/data/downloadList/a');
+            expect(true).to.equal(false);
+        } catch (err) {
+            expect(err.code).to.equal('ENOTDIR');
+        }
+    });
+
+    it('FileTreeResource with directory level', async function() {
+        const  fileLocator = new RawFileLocator();
+        const  resource = new FileTreeResource(fileLocator, 1);
+        const  content = [
+            'a'
+        ];
+        expect(await resource.get('test/data/downloadList')).to.deep.equal(content);
     });
 });

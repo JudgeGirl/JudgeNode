@@ -3,6 +3,9 @@ const expect = require('chai').expect;
 const ToJsonConverter = require('lib/components/resource/resourceConverter/ToJsonConverter');
 const FromJsonConverter = require('lib/components/resource/resourceConverter/FromJsonConverter');
 const LineToListConverter = require('lib/components/resource/resourceConverter/LineToListConverter');
+const ListMapperConverter = require('lib/components/resource/resourceConverter/ListMapperConverter');
+const TransferNullConverter = require('lib/components/resource/resourceConverter/TransferNullConverter');
+
 const StaticResource = require('lib/components/resource/StaticResource');
 
 describe("resource converter", function () {
@@ -31,12 +34,39 @@ describe("resource converter", function () {
         expect(() => converter.converter(123)).to.throw();
     });
 
+    it("ListMapperConverter", function () {
+        const content = ['aaa', 'aab', 'aac'];
+        const mapper = element => element.slice(2);
+        const converter = new ListMapperConverter(mapper);
+
+        expect(converter.convert(content)).to.deep.equal(['a', 'b', 'c']);
+        expect(converter.convert([])).to.deep.equal([]);
+        expect(converter.convert(null)).to.equal(null);
+        expect(() => converter.convert('string')).to.throw();
+        expect(() => converter.convert()).to.throw();
+    });
+
     it('LineToListConverter in resource.', async function() {
         const lines = 'set.c\nset.h\n';
         const resource = new StaticResource(lines);
         resource.setOutputConverter(new LineToListConverter());
 
         expect(await resource.get()).to.deep.equal(['set.c', 'set.h']);
+    });
+
+    it("TransferNullConverter", function () {
+        let converter = new TransferNullConverter([]);
+
+        expect(converter.convert('a')).to.equal('a');
+        expect(converter.convert([])).to.deep.equal([]);
+        expect(converter.convert(123)).to.equal(123);
+        expect(converter.convert(null)).to.deep.equal([]);
+
+        converter = new TransferNullConverter('');
+        expect(converter.convert('a')).to.equal('a');
+        expect(converter.convert([])).to.deep.equal([]);
+        expect(converter.convert(123)).to.equal(123);
+        expect(converter.convert(null)).to.equal('');
     });
 
     it("In resource.", async function() {
