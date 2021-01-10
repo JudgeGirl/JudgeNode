@@ -5,6 +5,7 @@ const FromJsonConverter = require('lib/components/resource/resourceConverter/Fro
 const LineToListConverter = require('lib/components/resource/resourceConverter/LineToListConverter');
 const ListMapperConverter = require('lib/components/resource/resourceConverter/ListMapperConverter');
 const FilterListConverter = require('lib/components/resource/resourceConverter/FilterListConverter');
+const CompositeConverter = require('lib/components/resource/resourceConverter/CompositeConverter');
 const TransferNullConverter = require('lib/components/resource/resourceConverter/TransferNullConverter');
 
 const StaticResource = require('lib/components/resource/StaticResource');
@@ -84,6 +85,23 @@ describe("resource converter", function () {
         expect(() => converter.convert(null)).to.throw();
         expect(() => converter.convert('')).to.throw();
         expect(() => converter.convert(123)).to.throw();
+    });
+
+    it("CompositeConverter", function () {
+        const converter = new CompositeConverter(new ToJsonConverter(), new FromJsonConverter());
+
+        let obj = 5;
+        expect(converter.convert(obj)).to.equal(obj);
+        obj = '';
+        expect(converter.convert(obj)).to.equal(obj);
+        obj = null;
+        expect(converter.convert(obj)).to.equal(obj);
+        obj = {};
+        expect(converter.convert(obj)).to.deep.equal(obj);
+        obj = [];
+        expect(converter.convert(obj)).to.deep.equal(obj);
+        obj = [123];
+        expect(converter.convert(obj)).to.deep.equal(obj);
     });
 
     it("In resource.", async function() {
