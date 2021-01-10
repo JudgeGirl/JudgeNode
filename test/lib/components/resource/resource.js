@@ -69,4 +69,13 @@ describe("resources", async function() {
             expect(err.code).to.equal('ENOTDIR');
         }
     });
+
+    it('FileTreeResource with directory level', async function() {
+        const  fileLocator = new RawFileLocator();
+        const  resource = new FileTreeResource(fileLocator, 1);
+        const  content = [
+            'test/data/downloadList/a'
+        ];
+        expect(await resource.get('test/data/downloadList')).to.deep.equal(content);
+    });
 });
