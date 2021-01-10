@@ -3,6 +3,8 @@ const expect = require('chai').expect;
 const ToJsonConverter = require('lib/components/resource/resourceConverter/ToJsonConverter');
 const FromJsonConverter = require('lib/components/resource/resourceConverter/FromJsonConverter');
 const LineToListConverter = require('lib/components/resource/resourceConverter/LineToListConverter');
+const ListMapperConverter = require('lib/components/resource/resourceConverter/ListMapperConverter');
+
 const StaticResource = require('lib/components/resource/StaticResource');
 
 describe("resource converter", function () {
@@ -29,6 +31,18 @@ describe("resource converter", function () {
         expect(converter.convert(null)).to.deep.equal([]);
         expect(() => converter.converter()).to.throw();
         expect(() => converter.converter(123)).to.throw();
+    });
+
+    it("ListMapperConverter", function () {
+        const content = ['aaa', 'aab', 'aac'];
+        const mapper = element => element.slice(2);
+        const converter = new ListMapperConverter(mapper);
+
+        expect(converter.convert(content)).to.deep.equal(['a', 'b', 'c']);
+        expect(converter.convert([])).to.deep.equal([]);
+        expect(converter.convert(null)).to.equal(null);
+        expect(() => converter.convert('string')).to.throw();
+        expect(() => converter.convert()).to.throw();
     });
 
     it('LineToListConverter in resource.', async function() {
