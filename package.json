@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www",
     "fresh-start": "redis-cli flushall && ulimit -n 4096 && NODE_PATH=./ nodejs ./bin/www",
-    "test": "NODE_PATH=./ NODE_ENV=test mocha --recursive --exit"
+    "test": "NODE_PATH=./ NODE_ENV=test mocha --recursive --exit",
+    "test-log": "NODE_PATH=./ NODE_ENV=test-log mocha --recursive --exit"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
