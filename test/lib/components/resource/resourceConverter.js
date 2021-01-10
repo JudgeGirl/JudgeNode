@@ -4,6 +4,7 @@ const ToJsonConverter = require('lib/components/resource/resourceConverter/ToJso
 const FromJsonConverter = require('lib/components/resource/resourceConverter/FromJsonConverter');
 const LineToListConverter = require('lib/components/resource/resourceConverter/LineToListConverter');
 const ListMapperConverter = require('lib/components/resource/resourceConverter/ListMapperConverter');
+const FilterListConverter = require('lib/components/resource/resourceConverter/FilterListConverter');
 const TransferNullConverter = require('lib/components/resource/resourceConverter/TransferNullConverter');
 
 const StaticResource = require('lib/components/resource/StaticResource');
@@ -67,6 +68,22 @@ describe("resource converter", function () {
         expect(converter.convert([])).to.deep.equal([]);
         expect(converter.convert(123)).to.equal(123);
         expect(converter.convert(null)).to.equal('');
+    });
+
+    it("FilterListConverter", function () {
+        const filterList = [
+            123,
+            'abc',
+            null
+        ];
+
+        let converter = new FilterListConverter(filterList);
+        let content = ['123', 123, 'ab', 'abc', null, 0];
+        expect(converter.convert(content)).to.deep.equal(['123', 'ab', 0]);
+        expect(converter.convert([123])).to.deep.equal([]);
+        expect(() => converter.convert(null)).to.throw();
+        expect(() => converter.convert('')).to.throw();
+        expect(() => converter.convert(123)).to.throw();
     });
 
     it("In resource.", async function() {
