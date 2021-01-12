@@ -521,7 +521,7 @@ router.post('/submit',
                     if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
                         req.files['code' + i][0] == null || req.files['code' + i][0] == undefined) {
                         if (req.body['paste_code' + i].length > 65536 || req.body['paste_code' + i].trim().length == 0) {
-                            console.log('NOT FOUND FILE ' + i);
+                            loggerFactory.getLogger(module.id).debug('NOT FOUND FILE ' + i);
                             return res.redirect(utils.url_for('/'));
                         } else {
                             file_size = req.body['paste_code' + i].length;
@@ -546,6 +546,8 @@ router.post('/submit',
                     cpu: 0,
                     mem: 0
                 };
+
+                loggerFactory.getLogger(module.id).info(`User ${req.session.lgn} submits to problem ${pid}`, { subinfo });
                 dblink.judge.insert_submission(subinfo, function(sid) {
                     for (var i = 0; i < source_list.length; i++) {
                         if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
