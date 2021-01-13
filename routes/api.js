@@ -289,7 +289,7 @@ router.put('/report/:sid', async function(req, res, next) {
 
     // wow. such dirty code
     let sid = req.params.sid;
-	let command = `poetry run python scripts/send_style_check_task.py ${sid}`;
+    let command = `poetry run python scripts/send_style_check_task.py ${sid}`;
     let cwd = '/home/judgesister/Judge-sender';
 
     let options = { cwd: cwd }
@@ -300,17 +300,17 @@ router.put('/report/:sid', async function(req, res, next) {
             console.log('Signal received: '+error.signal);
         }
 
-          console.log('Child Process STDOUT: '+stdout);
-          console.log('Child Process STDERR: '+stderr);
+        console.log('Child Process STDOUT: '+stdout);
+        console.log('Child Process STDERR: '+stderr);
     });
 
-	process.on('exit', function (code) {
+    process.on('exit', function (code) {
         console.log('Child process exited with exit code '+code);
         if (code == 0)
             res.status(200).json('success');
         else
             res.status(500).json('failed');
-	});
+    });
 
 });
 
