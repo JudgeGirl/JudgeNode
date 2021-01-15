@@ -1,13 +1,9 @@
-var gulp = require('gulp');
+const { src, dest, series } = require('gulp');
 
-/*
-	
- */
+function build() {
+    return src('bower_components/MathJax/**/*')
+        .pipe(dest('public/javascripts/MathJax'));
+}
 
-gulp.task('vendor', function() {
-	return gulp.src([
-		'bower_components/MathJax/**/*'
-	]).pipe(gulp.dest('public/javascripts/MathJax'));
-});
-
-gulp.task('build', ['vendor']);
+exports.build = build;
+exports.default = series(build);
