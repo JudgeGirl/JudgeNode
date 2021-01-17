@@ -137,6 +137,29 @@ router.get('/user/:uid', function(req, res, next) {
         })
 });
 
+router.get('/user', function(req, res, next) {
+    if (invalidAPIKey(req, res))
+        return;
+
+    if (req.query.name !== undefined) {
+        dblink.user.promises.getUserByLoginName(req.query.name)
+            .then(userList => {
+                if (userList.length == 0) {
+                    res.status(404).json({});
+                } else if (userList.length > 1) {
+                    res.status(500).json("Duplicated uid");
+                } else {
+                    res.status(200).json(userList[0]);
+                }
+            }).catch(err => {
+                loggerFactory.getLogger(module.id).info(new Error('Error while getting the user info.'), { err });
+                res.status(500).json(err);
+            })
+    } else {
+        res.status(404).json({});
+    }
+});
+
 router.post('/user', async function(req, res, next) {
     if (invalidAPIKey(req, res))
         return;
@@ -170,9 +193,9 @@ router.post('/user', async function(req, res, next) {
 
     try {
         let dbResult = await dblink.user.addUserPromise(user);
-    } catch(e) {
-        console.log(e);
-        res.status(500).json(e);
+    } catch(err) {
+        loggerFactory.getLogger(module.id).debug(new Error('Failed to create user with api.'), { err });
+        res.status(500).json(err);
     }
 
     res.status(201).json(user);
@@ -180,28 +203,25 @@ router.post('/user', async function(req, res, next) {
 });
 
 router.post('/user/password/reset', async function(req, res, next) {
-    // if (invalidAPIKey(req, res))
-    //     return;
-    //
-    // let name = req.body.name;
-    // let email = req.body.email;
-    // let type = req.body.type; // class
-    // let password;
-    // if (req.body.password)
-    //     password = req.body.password;
-    // else
-    //     password = passwordGenerator.generate();
-    //
-    // if (!name || !type) {
-    //     res.status(400).send("invalid user info");
-    //     return;
-    // }
-    //
-    // let userExists = await dblink.user.userExistsPromise(name);
-    // if (userExists) {
-    //     res.status(409).send("user already exists");
-    //     return;
-    // }
+    if (invalidAPIKey(req, res))
+        return;
+
+    const name = req.body.name;
+    const password = passwordGenerator.generate();
+
+    if (!name) {
+        res.status(400).send("Empty user name.");
+        return;
+    }
+
+    let userExists = await dblink.user.userExistsPromise(name);
+    if (!userExists) {
+        res.status(404).send("Non-exist user name.");
+        return;
+    }
+
+    res.status(201).json("ok");
+    return;
     //
     // let user = {
     //     name: name,
