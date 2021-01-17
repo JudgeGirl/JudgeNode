@@ -7,10 +7,19 @@ var markdown = require('../lib/components/plugin/markdown');
 var fs = require('fs');
 var passwordGenerator = require('../lib/components/passwordGenerator');
 let { exec } = require('child_process');
+const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 
 let invalidAPIKey = (req, res) => {
-    const api_key = req.header("Api-Key");
-    if (!api_key || api_key != _config.Privilege.API_key) {
+    const apiKey = req.header("Api-Key");
+    if (!apiKey || apiKey != _config.Privilege.API_key) {
+        const url = req.originalUrl;
+
+        if (!apiKey) {
+            loggerFactory.getLogger(module.id).info('Trying to access api without the api key.', { url });
+        } else {
+            loggerFactory.getLogger(module.id).info('Recevied an invalid api key.', { apy_key, url });
+        }
+
         res.status(401).json("api key required");
         return true;
     }
@@ -168,6 +177,48 @@ router.post('/user', async function(req, res, next) {
 
     res.status(201).json(user);
     return;
+});
+
+router.post('/user/password/reset', async function(req, res, next) {
+    // if (invalidAPIKey(req, res))
+    //     return;
+    //
+    // let name = req.body.name;
+    // let email = req.body.email;
+    // let type = req.body.type; // class
+    // let password;
+    // if (req.body.password)
+    //     password = req.body.password;
+    // else
+    //     password = passwordGenerator.generate();
+    //
+    // if (!name || !type) {
+    //     res.status(400).send("invalid user info");
+    //     return;
+    // }
+    //
+    // let userExists = await dblink.user.userExistsPromise(name);
+    // if (userExists) {
+    //     res.status(409).send("user already exists");
+    //     return;
+    // }
+    //
+    // let user = {
+    //     name: name,
+    //     email: email,
+    //     'class': type,
+    //     password: password,
+    // };
+    //
+    // try {
+    //     let dbResult = await dblink.user.addUserPromise(user);
+    // } catch(e) {
+    //     console.log(e);
+    //     res.status(500).json(e);
+    // }
+    //
+    // res.status(201).json(user);
+    // return;
 });
 
 // This api just simulates the account creation. It won't actually create any account.
