@@ -17,7 +17,7 @@ let invalidAPIKey = (req, res) => {
         if (!apiKey) {
             loggerFactory.getLogger(module.id).info('Trying to access api without the api key.', { url });
         } else {
-            loggerFactory.getLogger(module.id).info('Recevied an invalid api key.', { apy_key, url });
+            loggerFactory.getLogger(module.id).info('Recevied an invalid api key.', { apiKey, url });
         }
 
         res.status(401).json("api key required");
@@ -133,7 +133,11 @@ router.get('/user/:uid', function(req, res, next) {
                 res.status(200).json(userList[0]);
             }
         }).catch(err => {
-            res.status(500).json(err);
+            const logger = loggerFactory.getLogger(module.id);
+            logger.debug(new Error(`Error while getting the user info with uid ${uid}.`), { err });
+            logger.debug(err);
+
+            res.status(500).json({});
         })
 });
 
@@ -174,13 +178,13 @@ router.post('/user', async function(req, res, next) {
         password = passwordGenerator.generate();
 
     if (!name || !type) {
-        res.status(400).send("invalid user info");
+        res.status(400).send("Invalid user info.");
         return;
     }
 
     let userExists = await dblink.user.userExistsPromise(name);
     if (userExists) {
-        res.status(409).send("user already exists");
+        res.status(409).send("User already exists.");
         return;
     }
 
@@ -194,8 +198,12 @@ router.post('/user', async function(req, res, next) {
     try {
         let dbResult = await dblink.user.addUserPromise(user);
     } catch(err) {
-        loggerFactory.getLogger(module.id).debug(new Error('Failed to create user with api.'), { err });
+        const logger = loggerFactory.getLogger(module.id);
+        logger.debug(new Error('Failed to create user with api.'));
+        logger.debug(err);
+
         res.status(500).json(err);
+        return;
     }
 
     res.status(201).json(user);
@@ -206,39 +214,40 @@ router.post('/user/password/reset', async function(req, res, next) {
     if (invalidAPIKey(req, res))
         return;
 
-    const name = req.body.name;
-    const password = passwordGenerator.generate();
-
-    if (!name) {
-        res.status(400).send("Empty user name.");
+    const uid = req.body.uid;
+    if (!uid) {
+        res.status(400).send("Uid required.");
         return;
     }
 
-    let userExists = await dblink.user.userExistsPromise(name);
+    const userExists = await dblink.user.promises.userExistsByUid(uid);
     if (!userExists) {
-        res.status(404).send("Non-exist user name.");
+        res.status(404).send("User not exists.");
         return;
     }
 
-    res.status(201).json("ok");
+    const password = passwordGenerator.generate();
+    try {
+        const dbResult = await dblink.user.promises.setPassword(uid, password);
+        if (!dbResult) {
+            loggerFactory.getLogger(module.id).debug(new Error(`Wrong result.`));
+        }
+    } catch (err) {
+        const logger = loggerFactory.getLogger(module.id);
+        logger.debug(new Error(`Failed to reset password of user with uid ${uid}.`));
+        logger.debug(err);
+
+        res.status(500).json(err);
+        return;
+    }
+
+    const user = {
+        uid,
+        password
+    };
+
+    res.status(200).json(user);
     return;
-    //
-    // let user = {
-    //     name: name,
-    //     email: email,
-    //     'class': type,
-    //     password: password,
-    // };
-    //
-    // try {
-    //     let dbResult = await dblink.user.addUserPromise(user);
-    // } catch(e) {
-    //     console.log(e);
-    //     res.status(500).json(e);
-    // }
-    //
-    // res.status(201).json(user);
-    // return;
 });
 
 // This api just simulates the account creation. It won't actually create any account.
