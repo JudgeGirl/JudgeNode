@@ -1,13 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var dblink = require('../lib/components/dblink');
-var multer = require('multer');
-var _config = require('../lib/config').config;
-var markdown = require('../lib/components/plugin/markdown');
-var fs = require('fs');
-var passwordGenerator = require('../lib/components/passwordGenerator');
 let { exec } = require('child_process');
+const { StatusCodes } = require('http-status-codes');
+
 const { loggerFactory } = require('lib/components/logger/LoggerFactory');
+const passwordGenerator = require('../lib/components/passwordGenerator');
+const _config = require('../lib/config').config;
+const dblink = require('../lib/components/dblink');
 
 let invalidAPIKey = (req, res) => {
     const apiKey = req.header("Api-Key");
@@ -20,7 +19,7 @@ let invalidAPIKey = (req, res) => {
             loggerFactory.getLogger(module.id).info('Recevied an invalid api key.', { apiKey, url });
         }
 
-        res.status(401).json("api key required");
+        res.status(StatusCodes.UNAUTHORIZED).json("api key required");
         return true;
     }
 
@@ -32,7 +31,7 @@ let rejectNonAdmin = async function(req, res) {
     let isAdmin = await dblink.helper.getIsAdminPromise(uid);
 
     if (!isAdmin) {
-        res.status(401).json("administrator only");
+        res.status(StatusCodes.UNAUTHORIZED).json("administrator only");
         return false;
     }
 
@@ -100,7 +99,7 @@ router.post('/auth', (req, res, next) => {
     dblink.user.userExistsPromise(user)
         .then(existence => {
             if (!existence) {
-                res.status(404).json("user does not exist");
+                res.status(StatusCodes.NOT_FOUND).json("user does not exist");
             } else
                 return dblink.user.verifyPasswordPromise(user, password);
         })
@@ -110,10 +109,10 @@ router.post('/auth', (req, res, next) => {
         .catch(err => {
             if (err == "invalid user or password") {
 
-                res.status(400).json("wrong password");
+                res.status(StatusCodes.BAD_REQUEST).json("Wrong password");
             } else {
 
-                res.status(500).json(err);
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
             }
         });
 });
@@ -126,18 +125,18 @@ router.get('/user/:uid', function(req, res, next) {
     dblink.user.getUserByUidPromise(uid)
         .then(userList => {
             if (userList.length == 0) {
-                res.status(404).json({});
+                res.status(StatusCodes.NOT_FOUND).json({});
             } else if (userList.length > 1) {
-                res.status(500).json("duplicated uid");
+                res.status(StatusCodes.BAD_REQUEST).json("Duplicated uid");
             } else {
-                res.status(200).json(userList[0]);
+                res.status(StatusCodes.OK).json(userList[0]);
             }
         }).catch(err => {
             const logger = loggerFactory.getLogger(module.id);
             logger.debug(new Error(`Error while getting the user info with uid ${uid}.`), { err });
             logger.debug(err);
 
-            res.status(500).json({});
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({});
         })
 });
 
@@ -149,18 +148,18 @@ router.get('/user', function(req, res, next) {
         dblink.user.promises.getUserByLoginName(req.query.name)
             .then(userList => {
                 if (userList.length == 0) {
-                    res.status(404).json({});
+                    res.status(StatusCodes.NOT_FOUND).json({});
                 } else if (userList.length > 1) {
-                    res.status(500).json("Duplicated uid");
+                    res.status(StatusCodes.BAD_REQUEST).json("Duplicated uid");
                 } else {
-                    res.status(200).json(userList[0]);
+                    res.status(StatusCodes.OK).json(userList[0]);
                 }
             }).catch(err => {
                 loggerFactory.getLogger(module.id).info(new Error('Error while getting the user info.'), { err });
-                res.status(500).json(err);
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
             })
     } else {
-        res.status(404).json({});
+        res.status(StatusCodes.NOT_FOUND).json({});
     }
 });
 
@@ -178,13 +177,13 @@ router.post('/user', async function(req, res, next) {
         password = passwordGenerator.generate();
 
     if (!name || !type) {
-        res.status(400).send("Invalid user info.");
+        res.status(StatusCodes.BAD_REQUEST).send("Invalid user info.");
         return;
     }
 
     let userExists = await dblink.user.userExistsPromise(name);
     if (userExists) {
-        res.status(409).send("User already exists.");
+        res.status(StatusCodes.CONFLICT).send("User already exists.");
         return;
     }
 
@@ -202,11 +201,11 @@ router.post('/user', async function(req, res, next) {
         logger.debug(new Error('Failed to create user with api.'));
         logger.debug(err);
 
-        res.status(500).json(err);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         return;
     }
 
-    res.status(201).json(user);
+    res.status(StatusCodes.CREATED).json(user);
     return;
 });
 
@@ -216,13 +215,13 @@ router.post('/user/password/reset', async function(req, res, next) {
 
     const uid = req.body.uid;
     if (!uid) {
-        res.status(400).send("Uid required.");
+        res.status(StatusCodes.BAD_REQUEST).send("Uid required.");
         return;
     }
 
     const userExists = await dblink.user.promises.userExistsByUid(uid);
     if (!userExists) {
-        res.status(404).send("User not exists.");
+        res.status(StatusCodes.NOT_FOUND).send("User not exists.");
         return;
     }
 
@@ -237,7 +236,7 @@ router.post('/user/password/reset', async function(req, res, next) {
         logger.debug(new Error(`Failed to reset password of user with uid ${uid}.`));
         logger.debug(err);
 
-        res.status(500).json(err);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         return;
     }
 
@@ -246,7 +245,7 @@ router.post('/user/password/reset', async function(req, res, next) {
         password
     };
 
-    res.status(200).json(user);
+    res.status(StatusCodes.OK).json(user);
     return;
 });
 
@@ -271,7 +270,7 @@ router.post('/user-test', async function(req, res, next) {
         password: password,
     };
 
-    res.status(201).json(user);
+    res.status(StatusCodes.CREATED).json(user);
     return;
 });
 
@@ -329,7 +328,7 @@ router.patch('/submission/:sid', async function(req, res, next) {
     }
 
     if (!sid || valueLen == 0) {
-        res.status(400).send("invalid submission info");
+        res.status(StatusCodes.BAD_REQUEST).send("Invalid submission info");
         return;
     }
 
@@ -338,7 +337,7 @@ router.patch('/submission/:sid', async function(req, res, next) {
 
     let sidExists = await dblink.submission.submissionExistsPromise(sid);
     if (!sidExists) {
-        res.status(409).send("submission not exists");
+        res.status(StatusCodes.CONFLICT).send("Submission not exists");
         return;
     }
 
@@ -346,15 +345,15 @@ router.patch('/submission/:sid', async function(req, res, next) {
     let dbResult;
     try {
         dbResult = await dblink.submission.setSubmissionPromise(sid, values);
-    } catch(e) {
-        console.log(e);
-        res.status(500).json(e);
+    } catch(err) {
+        console.log(err);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
     }
 
     if (dbResult)
-        res.status(200).send("success");
+        res.status(StatusCodes.OK).send("success");
     else
-        res.status(500).send("operation failed");
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("operation failed");
 
     return;
 });
@@ -387,9 +386,9 @@ router.put('/report/:sid', async function(req, res, next) {
     process.on('exit', function (code) {
         console.log('Child process exited with exit code '+code);
         if (code == 0)
-            res.status(200).json('success');
+            res.status(StatusCodes.OK).json('success');
         else
-            res.status(500).json('failed');
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json('failed');
     });
 
 });
