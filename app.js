@@ -5,12 +5,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var i18n = require('i18n');
+const { StatusCodes } = require('http-status-codes');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admins = require('./routes/admins');
 var _config = require('./lib/config').config;
 var utils = require('./lib/components/utils');
+
 const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 
 var app = express();
@@ -109,7 +111,7 @@ app.get(utils.url_for('/i18n/:locale'), function(req, res) {
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
-    err.status = 404;
+    err.status = StatusCodes.NOT_FOUND;
 
     next(err);
 });
@@ -117,10 +119,11 @@ app.use(function(req, res, next) {
 // error handlers
 // log error
 app.use(function(err, req, res, next) {
-    if (err.status === 404) {
+    if (err.status === StatusCodes.NOT_FOUND) {
         loggerFactory.getLogger(module.id).silly(`not found: ${req.originalUrl}`);
     } else {
-        loggerFactory.getLogger(module.id).error(err, { status: err.status });
+        loggerFactory.getLogger(module.id).debug(err, { status: err.status });
+        loggerFactory.getLogger(module.id).warn(err.message);
     }
     next(err);
 });
@@ -128,7 +131,7 @@ app.use(function(err, req, res, next) {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
+    res.status(err.status || StatusCodes.INTERNAL_SERVER_ERROR);
     res.render('error', {
         message: 'Error.',
         error: {},

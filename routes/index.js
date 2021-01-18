@@ -6,6 +6,8 @@ var _config = require('../lib/config').config;
 var markdown = require('../lib/components/plugin/markdown');
 var utils = require('../lib/components/utils');
 var fs = require('fs');
+const { StatusCodes } = require('http-status-codes');
+
 const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 
 /* limit upload file size = 64 KB */
@@ -310,7 +312,7 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
             // 404 if no static problem found.
             if (pinfo === null || pinfo === undefined) {
                 let err = new Error(pcontent);
-                err.status = 404;
+                err.status = StatusCodes.NOT_FOUND;
 
                 next(err);
                 return;
