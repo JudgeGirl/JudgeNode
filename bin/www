@@ -44,7 +44,7 @@ var server = http.createServer(app);
  */
 
 server.listen(port, function() {
-    console.log('Http server listening on port ' + port);
+    loggerFactory.getLogger(module.id).info('Http server listening on port ' + port);
 });
 server.on('error', onError);
 server.on('listening', onListening);
@@ -126,7 +126,7 @@ function getSecureContext(dir) {
 
 
 if (_config.HOST.https_only) {
-    loggerFactory.getLogger(module.id).info(`open https server on 443.`);
+    loggerFactory.getLogger(module.id).info(`Open https server on 443.`);
 
     let secureContext = {};
     _config.Cert.forEach(site => {
@@ -142,6 +142,6 @@ if (_config.HOST.https_only) {
     };
 
     https.createServer(options, app).listen(443, function () {
-        console.log('Https server listening on port ' + 443);
+        loggerFactory.getLogger(module.id).info('Https server listening on port ' + 443);
     });
 }
