@@ -40,7 +40,7 @@ router.get('/restart', function(req, res, next) {
     var uid = req.session.uid;
     dblink.helper.isAdmin(uid, function(isAdmin) {
         if (isAdmin) {
-            msg = `Restart server with throwing an error. admin: ${uid}.`;
+            const msg = `Restart server with throwing an error. admin: ${uid}.`;
             loggerFactory.getLogger(module.id).info(msg);
             throw new Error(msg);
         } else {
@@ -92,7 +92,7 @@ router.post('/login', function(req, res, next) {
               1. contest not running
               2. contest running and user is a participant
          */
-        if (config.CONTEST.MODE == false || filter_ip.length != 0 || req.session['class'] == null) {
+        if (_config.CONTEST.MODE == false || filter_ip.length != 0 || req.session['class'] == null) {
             dblink.user.update_login(uid, ip, function() {
                 res.redirect(backURL);
             });
@@ -209,7 +209,7 @@ router.get('/archive', function(req, res, next) {
 });
 router.get('/ranklist?', function(req, res, next) {
     let selfId = req.session.uid;
-    let isTestMode = config.CONTEST.MODE == true;
+    let isTestMode = _config.CONTEST.MODE == true;
     let noClass = req.session['class'] == null;
     let renderForbidden = function() {
         res.render('layout', {
@@ -555,9 +555,9 @@ router.post('/submit',
                     for (var i = 0; i < source_list.length; i++) {
                         if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
                             req.files['code' + i][0] == null || req.files['code' + i][0] == undefined) {
-                            fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i, req.body['paste_code' + i]);
+                            fs.writeFileSync(_config.JUDGE.path + "submission/" + sid + "-" + i, req.body['paste_code' + i]);
                         } else {
-                            fs.writeFileSync(config.JUDGE.path + "submission/" + sid + "-" + i, fs.readFileSync(req.files['code' + i][0].path));
+                            fs.writeFileSync(_config.JUDGE.path + "submission/" + sid + "-" + i, fs.readFileSync(req.files['code' + i][0].path));
                             fs.unlinkSync(req.files['code' + i][0].path);
                         }
                     }
