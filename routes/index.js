@@ -3,7 +3,6 @@ var router = express.Router();
 var dblink = require('../lib/components/dblink');
 var multer = require('multer');
 var _config = require('../lib/config').config;
-var markdown = require('../lib/components/plugin/markdown');
 var utils = require('../lib/components/utils');
 var fs = require('fs');
 const { StatusCodes } = require('http-status-codes');
@@ -41,7 +40,9 @@ router.get('/restart', function(req, res, next) {
     var uid = req.session.uid;
     dblink.helper.isAdmin(uid, function(isAdmin) {
         if (isAdmin) {
-            throw new Exception();
+            msg = `Restart server with throwing an error. admin: ${uid}.`;
+            loggerFactory.getLogger(module.id).info(msg);
+            throw new Error(msg);
         } else {
             res.redirect(utils.url_for('/'));
         }
