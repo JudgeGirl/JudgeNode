@@ -549,7 +549,7 @@ router.post('/submit',
                     mem: 0
                 };
 
-                loggerFactory.getLogger(module.id).info(`User ${req.session.lgn} submits to problem ${pid}`, { subinfo });
+                loggerFactory.getLogger(module.id).info(`User ${req.session.lgn} submits to problem ${pid}.`, { subinfo });
                 dblink.judge.insert_submission(subinfo, function(sid) {
                     for (var i = 0; i < source_list.length; i++) {
                         if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
