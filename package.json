@@ -43,7 +43,8 @@
     "swig": "^1.4.2",
     "url": "^0.11.0",
     "vue": "^1.0.25",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
