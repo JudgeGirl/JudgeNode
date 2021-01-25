@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var dblink = require('../lib/components/dblink');
-var multer = require('multer');
-var _config = require('../lib/config').config;
 var markdown = require('../lib/components/plugin/markdown');
-var fs = require('fs');
+const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 
 router.get('/:sid', function(req, res, next) {
     var sid = req.params.sid;
@@ -19,6 +17,9 @@ router.get('/:sid', function(req, res, next) {
 router.get('/highlight/:sid', function(req, res, next) {
     var sid = req.params.sid;
     var uid = req.session.uid;
+
+    loggerFactory.getLogger(module.id).debug(`Fetching highlight. sid: ${sid}. uid: ${uid}`);
+
     dblink.helper.isAdmin(uid, function(isadmin) {
         dblink.submission.source_result(sid, req.session.uid, req.session["class"], function(source_result_json) {
             dblink.submission.source_code(sid, req.session.uid, req.session["class"], function(source_code) {
@@ -30,6 +31,7 @@ router.get('/highlight/:sid', function(req, res, next) {
                 dblink.submission.list({
                     sid: sid
                 }, isadmin, function(slist) {
+                    loggerFactory.getLogger(module.id).debug(`Log slist.`, { slist });
                     res.render('layout', {
                         layout: 'highlight',
                         user: req.session,
