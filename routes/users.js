@@ -4,7 +4,6 @@ var dblink = require('../lib/components/dblink');
 var config = require('../lib/config').config;
 var MAU = require('../lib/components/modify-and-upload');
 var multer = require('multer');
-var fs = require('fs');
 var utils = require('../lib/components/utils');
 
 var storage = multer.diskStorage({
@@ -26,16 +25,13 @@ var upload = multer({
 /* GET users page */
 router.get('/', function(req, res, next) {
     let uid = req.session.uid;
-    let showPrivate = true;
 
-    dblink.user.info(uid, function(user) {
-        res.render('layout', {
-            layout: 'user',
-            subtitle: 'User',
-            user: req.session,
-            userinfo: user
-        });
-    }, showPrivate);
+    if (uid == undefined) {
+        res.redirect(utils.url_for('/'));
+        return;
+    }
+
+    res.redirect(utils.url_for(`/user/${uid}`));
 });
 
 router.get('/:uid', function(req, res, next) {
