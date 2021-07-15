@@ -311,7 +311,7 @@ router.get('/problem/:cid/:pid', function(req, res, next) {
 
     let judge_compiler_arg, judge_lng;
     if (pid == "4") {
-        judge_compiler_arg = ['none', 'gcc -std=c99 -O2', 'g++ -std=c++98 -O2'];
+        judge_compiler_arg = ['none', 'gcc -std=c99 -O2', 'g++ -std=c++11'];
         judge_lng = ['*', 'C', 'C++'];
     } else {
         judge_compiler_arg = _config.JUDGE.compiler_arg;
