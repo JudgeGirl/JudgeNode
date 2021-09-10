@@ -45,7 +45,19 @@
 				<td class='sid'><%- sl[i].sid %></td>
 				<td><%- sl[i].pid %></td>
 				<td class='problem-title'><a href='<%= site.url_for('problem/' + sl[i].cid + '/' + sl[i].pid) %>'><%- sl[i].ttl %></a></td>
-				<td><a href='<%= site.url_for('user/' + sl[i].uid) %>'><%- sl[i].lgn %></td>
+				<td>
+                    <%
+                        // guild icon
+                        var guildIcon;
+                        if (sl[i].guildTitle === null) {
+                            guildIcon = '';
+                        } else {
+                            guildIcon = `<img src="/images/guilds/${sl[i].guildIcon}" alt="{${sl[i].guildTitle}}" height="28" width="28" style="vertical-align:middle">`;
+                        }
+                    %>
+                    <%- guildIcon %>
+                    <a href='<%= site.url_for('user/' + sl[i].uid) %>'><%- sl[i].lgn %>
+                </td>
 				<%
                     // build content of verdict column
 					var verdictCol = '';

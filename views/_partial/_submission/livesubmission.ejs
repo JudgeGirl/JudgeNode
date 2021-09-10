@@ -147,8 +147,14 @@
                 if (filter_ip.length != 0) {
                     text += '<i class="fa fa-check" style="color: green;"></i> ';
                 } else {
-                    text += '<i class="fa fa-exclamation-triangle" style="color: orange;"></i> ';
+                    text += '<i class="fa fa-exclamation-triangle" style="color: orange; vertical-align:middle;"></i> ';
                 }
+
+                // guild icon
+                if (submit_list[i].guildTitle !== null) {
+                    text += `<img src="/images/guilds/${submit_list[i].guildIcon}" alt="{${submit_list[i].guildTitle}}" height="32" width="32" style="vertical-align:middle">`;
+                }
+
                 text += "<a href='<%= site.url_for('user/') %>" + submit_list[i].uid + "'>" + submit_list[i].lgn + "</td>";
                 text += "<td class='status' data-res=" + submit_list[i].res + " data-sid=" + submit_list[i].sid + ">";
                 text += "<span class='result" + submit_list[i].res + "'>" + options.restext[(submit_list[i].res+options.restext.length)%options.restext.length] + "</span>";
