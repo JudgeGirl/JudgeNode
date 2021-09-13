@@ -393,4 +393,31 @@ router.put('/report/:sid', async function(req, res, next) {
 
 });
 
+router.post('/guild', async function(req, res, next) {
+    if (invalidAPIKey(req, res))
+        return;
+
+    let isAdmin = await rejectNonAdmin(req, res);
+    if (!isAdmin)
+        return;
+
+    let title = req.body.title;
+    let icon = req.body.icon;
+
+    if (!title || !icon) {
+        res.status(StatusCodes.BAD_REQUEST).json({});
+        return;
+    }
+
+    try {
+        let gid = await dblink.guild.createGuild(title, icon);
+        res.status(StatusCodes.OK).json({ gid: gid });
+    } catch(err) {
+        const logger = loggerFactory.getLogger(module.id);
+        logger.debug(new Error(`Failed to create guild: ("${title}", "${icon}")`), { err });
+        logger.debug(err);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    }
+});
+
 module.exports = router;
