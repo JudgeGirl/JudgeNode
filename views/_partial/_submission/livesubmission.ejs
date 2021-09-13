@@ -152,7 +152,7 @@
 
                 // guild icon
                 if (submit_list[i].guildTitle !== null) {
-                    text += `<img src="/images/guilds/${submit_list[i].guildIcon}" alt="{${submit_list[i].guildTitle}}" height="32" width="32" style="vertical-align:middle">`;
+                    text += `<img src="/images/guilds/${submit_list[i].guildIcon}" title="${submit_list[i].guildTitle}" height="48" width="48" style="vertical-align:middle">`;
                 }
 
                 text += "<a href='<%= site.url_for('user/') %>" + submit_list[i].uid + "'>" + submit_list[i].lgn + "</td>";
