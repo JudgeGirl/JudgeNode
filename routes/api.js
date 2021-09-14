@@ -209,6 +209,43 @@ router.post('/user', async function(req, res, next) {
     return;
 });
 
+router.put('/user/:uid/guild', async function(req, res, next) {
+    let uid = req.params.uid;
+    let gid = req.body.gid;
+
+    if (!uid || ! gid) {
+        res.status(StatusCodes.BAD_REQUEST).json({});
+        return;
+    }
+
+    let isAdmin = await rejectNonAdmin(req, res);
+
+    if (invalidAPIKey(req, res))
+        return;
+
+    try {
+        let guildList = await dblink.guild.promises.getGuild(gid);
+        if (guildList.length !== 1)
+            throw `invalid guild number: ${guildList.length}`;
+
+        let userExists = dblink.user.promises.userExistsByUid(uid);
+        if (!userExists)
+            throw `user ${uid} not exists`;
+
+        await dblink.user.setGid(uid, gid);
+
+        res.status(StatusCodes.OK).json({});
+    } catch (err) {
+        const logger = loggerFactory.getLogger(module.id);
+        logger.debug(new Error(`Failed insert a user into a guild.`));
+        logger.debug(err);
+
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        return;
+    }
+});
+
+
 router.post('/user/password/reset', async function(req, res, next) {
     if (invalidAPIKey(req, res))
         return;
