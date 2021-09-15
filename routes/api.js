@@ -219,6 +219,8 @@ router.put('/user/guild', async function(req, res, next) {
     }
 
     let isAdmin = await rejectNonAdmin(req, res);
+    if (!isAdmin)
+        return;
 
     if (invalidAPIKey(req, res))
         return;
@@ -264,6 +266,8 @@ router.put('/user/:uid/guild', async function(req, res, next) {
     }
 
     let isAdmin = await rejectNonAdmin(req, res);
+    if (!isAdmin)
+        return;
 
     if (invalidAPIKey(req, res))
         return;
