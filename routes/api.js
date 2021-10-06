@@ -209,9 +209,78 @@ router.post('/user', async function(req, res, next) {
     return;
 });
 
-/*
- *      Update guild id for an user with its login name.
- * */
+/**
+* Create a new guild.
+*/
+router.post('/guild', async function(req, res, next) {
+    if (invalidAPIKey(req, res))
+        return;
+
+    let isAdmin = await rejectNonAdmin(req, res);
+    if (!isAdmin)
+        return;
+
+    let title = req.body.title;
+    let icon = req.body.icon;
+
+    if (!title || !icon) {
+        res.status(StatusCodes.BAD_REQUEST).json({});
+        return;
+    }
+
+    const logger = loggerFactory.getLogger(module.id);
+    logger.info(`Create a guild: (${title}, ${icon}) by ${req.session.uid}`);
+
+    try {
+        let gid = await dblink.guild.createGuild(title, icon);
+        res.status(StatusCodes.OK).json({ gid: gid });
+    } catch(err) {
+        let errorMessage = `Failed to create guild: ("${title}", "${icon}")`;
+
+        logger.info(errorMessage);
+        logger.info(err.message);
+        logger.debug(err);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    }
+});
+
+/**
+* Clear members of a guild.
+*/
+router.delete('/guild/:gid/clear', async function(req, res, next) {
+    if (invalidAPIKey(req, res))
+        return;
+
+    let isAdmin = await rejectNonAdmin(req, res);
+    if (!isAdmin)
+        return;
+
+    let gid = req.params.gid;
+
+    if (!gid) {
+        res.status(StatusCodes.BAD_REQUEST).json({});
+        return;
+    }
+
+    const logger = loggerFactory.getLogger(module.id);
+    logger.info(`Clear members in the guild: (${gid}) by ${req.session.uid}`);
+
+    try {
+        await dblink.user.unsetGidByGid(gid);
+        res.status(StatusCodes.OK).json({ gid: gid });
+    } catch(err) {
+        let errorMessage = `Failed to clear members in the guild: ("${gid}")`;
+
+        logger.info(errorMessage);
+        logger.info(err.message);
+        logger.debug(err);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    }
+});
+
+/**
+* Update guild id for an user with its login name.
+*/
 router.put('/user/guild', async function(req, res, next) {
     let gid = req.body.gid;
     let lgn = req.body.lgn;
@@ -229,7 +298,7 @@ router.put('/user/guild', async function(req, res, next) {
         return;
 
     const logger = loggerFactory.getLogger(module.id);
-    logger.info(`set user guild: (${lgn}, ${gid}) by ${req.session.uid}`);
+    logger.info(`Set guild of an user: (${lgn}, ${gid}) by ${req.session.uid}`);
 
     try {
         let lgnList = await dblink.user.promises.getUserByLoginName(lgn);
@@ -260,9 +329,9 @@ router.put('/user/guild', async function(req, res, next) {
     }
 });
 
-/*
- *      Update guild id for an user with its uid.
- * */
+/**
+* Update guild id for an user with its uid.
+*/
 router.put('/user/:uid/guild', async function(req, res, next) {
     let uid = req.params.uid;
     let gid = req.body.gid;
@@ -280,7 +349,7 @@ router.put('/user/:uid/guild', async function(req, res, next) {
         return;
 
     const logger = loggerFactory.getLogger(module.id);
-    logger.info(`set user guild: (${uid}, ${gid}) by ${req.session.uid}`);
+    logger.info(`Set guild of an user: (${uid}, ${gid}) by ${req.session.uid}`);
 
     try {
         // uid check
@@ -351,7 +420,9 @@ router.post('/user/password/reset', async function(req, res, next) {
     return;
 });
 
-// This api just simulates the account creation. It won't actually create any account.
+/*
+ *      Simulates account creation. Won't actually create any account.
+ */
 router.post('/user-test', async function(req, res, next) {
     if (invalidAPIKey(req, res))
         return;
@@ -460,6 +531,9 @@ router.patch('/submission/:sid', async function(req, res, next) {
     return;
 });
 
+/**
+* Force update style check report for a submission.
+*/
 router.put('/report/:sid', async function(req, res, next) {
     if (invalidAPIKey(req, res))
         return;
@@ -493,33 +567,6 @@ router.put('/report/:sid', async function(req, res, next) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json('failed');
     });
 
-});
-
-router.post('/guild', async function(req, res, next) {
-    if (invalidAPIKey(req, res))
-        return;
-
-    let isAdmin = await rejectNonAdmin(req, res);
-    if (!isAdmin)
-        return;
-
-    let title = req.body.title;
-    let icon = req.body.icon;
-
-    if (!title || !icon) {
-        res.status(StatusCodes.BAD_REQUEST).json({});
-        return;
-    }
-
-    try {
-        let gid = await dblink.guild.createGuild(title, icon);
-        res.status(StatusCodes.OK).json({ gid: gid });
-    } catch(err) {
-        const logger = loggerFactory.getLogger(module.id);
-        logger.debug(new Error(`Failed to create guild: ("${title}", "${icon}")`), { err });
-        logger.debug(err);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
-    }
 });
 
 module.exports = router;
