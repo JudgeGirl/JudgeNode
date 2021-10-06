@@ -209,6 +209,9 @@ router.post('/user', async function(req, res, next) {
     return;
 });
 
+/*
+ *      Update guild id for an user with its login name.
+ * */
 router.put('/user/guild', async function(req, res, next) {
     let gid = req.body.gid;
     let lgn = req.body.lgn;
@@ -231,7 +234,7 @@ router.put('/user/guild', async function(req, res, next) {
     try {
         let lgnList = await dblink.user.promises.getUserByLoginName(lgn);
         if (lgnList.length !== 1)
-            throw `invalid user with lgn ${lgn}`;
+            throw Error(`invalid user with lgn ${lgn}`);
         let uid = lgnList[0].uid;
 
         if (gid == undefined || gid == "") {
@@ -241,14 +244,15 @@ router.put('/user/guild', async function(req, res, next) {
             // set user's gid
             let guildList = await dblink.guild.promises.getGuild(gid);
             if (guildList.length !== 1)
-                throw `invalid guild number: ${guildList.length}`;
+                throw Error(`invalid guild number: ${guildList.length}`);
 
             await dblink.user.setGid(uid, gid);
         }
 
         res.status(StatusCodes.OK).json({});
     } catch (err) {
-        logger.debug(new Error(`Failed insert a user into a guild with login name.`));
+        logger.warn(`Failed to add user ${lgn} into the guild.`);
+        logger.warn(err.message);
         logger.debug(err);
 
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -256,6 +260,9 @@ router.put('/user/guild', async function(req, res, next) {
     }
 });
 
+/*
+ *      Update guild id for an user with its uid.
+ * */
 router.put('/user/:uid/guild', async function(req, res, next) {
     let uid = req.params.uid;
     let gid = req.body.gid;
@@ -279,7 +286,7 @@ router.put('/user/:uid/guild', async function(req, res, next) {
         // uid check
         let userExists = dblink.user.promises.userExistsByUid(uid);
         if (!userExists)
-            throw `user ${uid} not exists`;
+            throw Error(`user ${uid} not exists`);
 
         if (gid == undefined || gid == "") {
             await dblink.user.unsetGid(uid);
@@ -287,7 +294,7 @@ router.put('/user/:uid/guild', async function(req, res, next) {
             // guild check
             let guildList = await dblink.guild.promises.getGuild(gid);
             if (guildList.length !== 1)
-                throw `invalid guild number: ${guildList.length}`;
+                throw Error(`invalid guild number: ${guildList.length}`);
 
             await dblink.user.setGid(uid, gid);
         }
@@ -295,8 +302,8 @@ router.put('/user/:uid/guild', async function(req, res, next) {
         res.status(StatusCodes.OK).json({});
     } catch (err) {
         const logger = loggerFactory.getLogger(module.id);
-        logger.debug(new Error(`Failed insert a user into a guild.`));
-        logger.debug(err);
+        logger.info(new Error(`Failed insert a user into a guild.`));
+        logger.info(err.message);
 
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         return;
