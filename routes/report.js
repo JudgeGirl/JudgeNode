@@ -2,8 +2,19 @@ var express = require('express');
 var router = express.Router();
 var dblink = require('../lib/components/dblink');
 
+function escapeHtml(unsafe) {
+	return unsafe
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#039;");
+}
+
 function renderReportContent(content) {
-    return content.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    content = escapeHtml(content);
+
+    return content;
 }
 
 function buildReportLayout(report) {
