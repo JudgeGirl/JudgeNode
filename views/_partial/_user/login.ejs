@@ -3,7 +3,9 @@
 	<h2>If you have any login problem, please contact TA.</h2>
 </div>
 <div class="content">
-<% if (sysmsg && sysmsg.length > 0) { %>
+<%
+    let commonErrors = [];
+    if (sysmsg && sysmsg.length > 0) { %>
 	<div class='sysmsg'><%- sysmsg %></div>
     <div>
         <ul>

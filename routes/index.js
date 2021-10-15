@@ -69,17 +69,15 @@ router.post('/login', function(req, res, next) {
     var ip = req.ip;
     var backURL = req.session.redirect_to || utils.url_for('/');
 
+    loggerFactory.getLogger(module.id).info(`Login request: (${user["lgn"]}, ${ip})`);
+
     dblink.user.login(user, req.session, function(status) {
         /* login fail */
         if (status == 0) {
             return res.render('layout', {
                 layout: 'login',
                 subtitle: 'Login',
-                sysmsg: '帳號或密碼錯誤',
-                commonErrors: [
-                    // '如果你是修習 109-1 工科計算機概論與程式設計的同學，請到 http://140.112.26.221:8081/ 登入。',
-                    // '如果你是修習張傑帆老師的課程的同學，請到 https://jgirl.ddns.net/ 登入。'
-                ]
+                sysmsg: '帳號或密碼錯誤'
             });
         }
         /* login success */
@@ -562,7 +560,7 @@ router.post('/submit',
                     mem: 0
                 };
 
-                loggerFactory.getLogger(module.id).info(`User ${req.session.lgn} submits to problem ${pid}.`, { subinfo });
+                loggerFactory.getLogger(module.id).info(`User ${req.session.lgn}(${req.ip}) submits to problem ${pid}.`, { subinfo });
                 dblink.judge.insert_submission(subinfo, function(sid) {
                     for (var i = 0; i < source_list.length; i++) {
                         if (req.files['code' + i] == null || req.files['code' + i] == undefined ||
