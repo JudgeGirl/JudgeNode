@@ -39,10 +39,13 @@ let rejectNonAdmin = async function(req, res) {
 }
 
 router.get('/submissions?', function(req, res, next) {
-    var uid = req.session.uid;
-    dblink.helper.isAdmin(uid, function(isadmin) {
-        dblink.api.list(req.query, isadmin, function(result) {
-            res.json(result);
+    let uid = req.session.uid;
+    let lgn = req.session.lgn;
+    dblink.helper.isAdmin(uid, function(isAdmin) {
+        dblink.helper.isStrong(uid, function(isStrong) {
+            dblink.api.list(req.query, isAdmin, isStrong, function(result) {
+                res.json(result);
+            });
         });
     });
 });
@@ -50,9 +53,9 @@ router.get('/submissions?', function(req, res, next) {
 router.get('/result?', function(req, res, next) {
     var sid = req.query.sid;
     var uid = req.session.uid;
-    dblink.helper.isAdmin(uid, function(isadmin) {
+    dblink.helper.isAdmin(uid, function(isAdmin) {
         if (sid == undefined || sid == null) sid = 0;
-        dblink.api.result(sid, isadmin, function(result) {
+        dblink.api.result(sid, isAdmin, function(result) {
             res.json(result);
         });
     });

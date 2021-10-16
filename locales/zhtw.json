@@ -138,5 +138,10 @@
 	"Strong": "Strong",
 	"Grade": "Grade",
 	"Exam": "Exam",
-	"Note": "Note"
+	"Note": "Note",
+	"Reference": "Reference",
+	"Refer Problem ID": "Refer Problem ID",
+	"Contest Rule": "Contest Rule",
+	"Pwd": "Pwd",
+	"New Scores": "New Scores"
 }
