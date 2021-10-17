@@ -1,0 +1,34 @@
+<div class="header">
+    <h1 class='article-title'>Report for Problem <%- problemReport['pid'] %></h1>
+</div>
+<div class="content">
+    <h2><%- problemReport['title'] %></h2>
+    <p>Average cyclomatic complexity: <%- problemReport['average_cyclomatic_complexity'] %></p>
+    <div class="pure-g">
+        <div class="pure-u-5-5">
+            <table class="pure-table pure-table-bordered" sytle="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Submission ID</th>
+                        <th>User</th>
+                        <th>Cyclomatic Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        let submissionList = problemReport['submission_list'];
+                        for (let i = 0; i < submissionList.length; i++) {
+                            let row = submissionList[i];
+                    %>
+                        <tr>
+                            <td><%- row['sid'] %></td>
+                            <td><%- row['lgn'] %></td>
+                            <td><%- row['cyclomatic_complexity'] %></td>
+                        </tr>
+                    <%  } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

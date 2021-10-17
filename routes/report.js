@@ -34,6 +34,27 @@ function buildErrorLayout(message) {
     };
 }
 
+router.get('/problem/:pid', async function(req, res) {
+    let pid = req.params.pid;
+    let uid = req.session.uid;
+    let viewPrivilege = await dblink.permission.problemReportViewPrivilege(uid, pid);
+
+    if (!viewPrivilege) {
+        res.render('error', {
+            message: 'For administrator and strong only.',
+            error: {}
+        });
+        return;
+    }
+
+    let problemReport = await dblink.report.getProblemReport(pid);
+    res.render('layout', {
+        layout: 'problem_report',
+        problemReport: problemReport
+    });
+    return;
+})
+
 router.get('/:sid', async function(req, res, next) {
     let sid = req.params.sid;
     let uid = req.session.uid;
@@ -48,7 +69,7 @@ router.get('/:sid', async function(req, res, next) {
         return;
     }
 
-    dblink.report.getBySidPromise(sid).then(reportRow => {
+    dblink.report.promise.getBySid(sid).then(reportRow => {
         let report = reportRow[0].content
         report = renderReportContent(report);
 
