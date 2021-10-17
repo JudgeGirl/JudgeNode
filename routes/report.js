@@ -37,7 +37,7 @@ function buildErrorLayout(message) {
 router.get('/problem/:pid', async function(req, res) {
     let pid = req.params.pid;
     let uid = req.session.uid;
-    let viewPrivilege = await dblink.permission.problemReportViewPrivilege(uid, pid);
+    let viewPrivilege = await dblink.permission.problemReportViewPrivilege(uid);
 
     if (!viewPrivilege) {
         res.render('error', {
