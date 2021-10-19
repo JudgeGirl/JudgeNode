@@ -69,11 +69,13 @@ router.post('/login', function(req, res, next) {
     var ip = req.ip;
     var backURL = req.session.redirect_to || utils.url_for('/');
 
-    loggerFactory.getLogger(module.id).info(`Login request: (${user["lgn"]}, ${ip})`);
+    let logger = loggerFactory.getLogger(module.id);
+    logger.info(`Login request: (${user["lgn"]}, ${ip})`);
 
     dblink.user.login(user, req.session, function(status) {
         /* login fail */
         if (status == 0) {
+            logger.info('Wrong password.');
             return res.render('layout', {
                 layout: 'login',
                 subtitle: 'Login',
@@ -95,6 +97,7 @@ router.post('/login', function(req, res, next) {
                 res.redirect(backURL);
             });
         } else {
+            logger.info('Blocked by test mode.');
             req.session.regenerate(function(err) {
                 res.render('layout', {
                     layout: 'login',
