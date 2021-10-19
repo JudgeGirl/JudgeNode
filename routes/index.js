@@ -605,6 +605,12 @@ router.get('/score', function(req, res, next) {
     var uid = req.session.uid;
     dblink.helper.isAdmin(uid, function(isAdmin) {
         dblink.user.info(req.session.uid, function(user) {
+            if (user.info == undefined)
+                return res.render('error', {
+                    message: 'Invalid user.',
+                    error: {}
+                });
+
             dblink.score.statistic(function(score_statistic) {
                 if (isAdmin) {
                     dblink.score.getAll(function(score) {

@@ -6,12 +6,12 @@
 
 <div class="header">
 	<h1 class='article-title'>Scoreboard</h1>
-	<h2> Contest. <%- table_config.cid %> <%- table_config.icpc.contest[0].ttl %></h2>
+	<h2> Contest. <%- table_config.cid %> <%- table_config.icpc.contest.ttl %></h2>
 </div>
 <div class="content">
 	<div class="pure-g">
 		<% for (var ri = 0; ri < (table_config.header.length+1)/2; ri++) { %>
-			<% 
+			<%
 				var l = ri*2, r = ri*2 +2;
 				var i;
 			%>
@@ -48,7 +48,7 @@
 				<% } %>
 			</tr>
 			<% } %>
-			<% 
+			<%
 				var alluser = {};
 				var chart_json = [];
 				var probuser = {};
@@ -68,7 +68,7 @@
 						var counter = 0;
 						var chart = '';
 						for (var i = 0; i < table_config.stats.length; i++) {
-							counter += table_config.stats[i].pid == table_config.header[col].pid 
+							counter += table_config.stats[i].pid == table_config.header[col].pid
 									&& table_config.stats[i]['MAX(scr)'] == table_config.scorekind[row].max_res;
 							alluser[table_config.stats[i].uid] = 0;
 						}
@@ -163,14 +163,14 @@
 							alluser[uid][pid] = {}
 						alluser[uid][pid].wa = table_config.icpc.wa[i].wa;
 					}
-					
+
 				 %>
 				<% for (var row = 0; row < table_config.user.length; row++) { %>
 				<tr style="height: 4.4em;">
 					<td><a href="<%= site.url_for('user/' + table_config.user[row].uid) %>"><%- table_config.user[row].lgn %></a></td>
 					<% for (var col = 0; col < table_config.header.length; col++) { %>
-						<% 
-							if (alluser[table_config.user[row].uid][table_config.header[col].pid] != undefined) { 
+						<%
+							if (alluser[table_config.user[row].uid][table_config.header[col].pid] != undefined) {
 								var score = alluser[table_config.user[row].uid][table_config.header[col].pid]['MAX(scr)'];
 								var times = alluser[table_config.user[row].uid][table_config.header[col].pid]['COUNT(*)'];
 								var ac = alluser[table_config.user[row].uid][table_config.header[col].pid]['ac'];
@@ -184,7 +184,7 @@
 								<% if (score != 100) { %>
 									-<%- times %>
 								<% } else { %>
-									+<%- wa == undefined ? "" : wa %><br/><%- Math.floor((ac-table_config.icpc.contest[0].ts1)/1000/60) %>
+									+<%- wa == undefined ? "" : wa %><br/><%- Math.floor((ac-table_config.icpc.contest.ts1)/1000/60) %>
 								<% } %>
 								</a></td>
 								<td><%- score %></td>
