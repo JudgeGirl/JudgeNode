@@ -4,7 +4,7 @@
 		for (var row = 0 ; row < problem_list.length; row++)
 			problem_list[row].score = -1;
 		for (var row = 0 ; row < problem_config.score.length; row++ ) {
-			var tmp = problem_list.filter(function(x) { 
+			var tmp = problem_list.filter(function(x) {
 				return x.pid === problem_config.score[row].pid
 			});
 			if (tmp.length == 0)
@@ -46,13 +46,14 @@
 	            <th><%= __('Problem Title') %></th>
 	            <th><%= __('Subs') %></th>
 	            <th data-step="22" data-intro="<h3>提交限制</h3> <p>剩餘的嘗試次數預設為 <b>15</b> 次。當上傳次數超過限制，將由考試委員有權不紀錄該筆成績。有任何變動請聽從考場人員說明</p>"><%= __('#Remain') %></th>
+	            <th><%= __('Average Cyclomatic Number') %></th>
 			</tr>
 		</thead>
 		<tbody>
 
 <% for(var row = 0; row < problem_list.length; row++) { %>
-	<% 
-		var score = problem_list[row].score; 
+	<%
+		var score = problem_list[row].score;
 		var submits = problem_list[row].submits == undefined ? 0 : problem_list[row].submits;
 	%>
 	<tr>
@@ -67,6 +68,7 @@
 		<td><a href="<%= site.url_for('problem/' + contest_config.cid + '/' + problem_list[row].pid) %>" ><%- problem_list[row].ttl %></a></td>
 		<td></td>
 		<td><%- site.CONTEST.SUBMIT_LIMIT - submits %></td>
+		<td><%- problem_list[row].standard_cyclomatic_complexity %></td>
 	</tr>
 <% } %>
 
@@ -87,6 +89,6 @@
     tour.start().oncomplete(function() {
       window.location.href = '/';
     });
-    $('.introjs-bullets li a')[0].className = 'active'; 
+    $('.introjs-bullets li a')[0].className = 'active';
   }
 </script>
