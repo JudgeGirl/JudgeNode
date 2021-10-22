@@ -185,6 +185,10 @@
                 if(submit_list[i].hasReport) {
                     let link = '<%= site.url_for('report/') %>' + submit_list[i].sid;
                     report = `<a href="${link}"><i class="fa fa-file-text"></i></a>`;
+
+                    if (submit_list[i].factor !== null) {
+                        report += `\n<small>(${submit_list[i].factor.toFixed(2)})</small>`;
+                    }
                 }
 
                 text += '<td class="report">' + report + '</td>';
@@ -214,6 +218,7 @@
                                     tmp[i].cpu = submit_list[i].cpu;
                                     tmp[i].mem = submit_list[i].mem;
                                     tmp[i].hasReport = submit_list[i].hasReport;
+                                    tmp[i].factor = submit_list[i].factor;
                                     options.modify_flag = true;
                                 }
                             }
