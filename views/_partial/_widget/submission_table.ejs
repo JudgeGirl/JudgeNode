@@ -101,6 +101,9 @@
 				<td class='report'>
                     <% if (sl[i].hasReport) { %>
                         <a href="<%= site.url_for('report/' + sl[i].sid) %>"><i class="fa fa-file-text"></i></a>
+                        <% if (sl[i].factor !== null) { %>
+                            <small>(<%=sl[i].factor.toFixed(2) %>)</small>
+                        <% } %>
                     <% } %>
                 </td>
 			</tr>
