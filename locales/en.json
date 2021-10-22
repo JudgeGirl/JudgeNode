@@ -152,5 +152,6 @@
 	"Contest Rule": "Contest Rule",
 	"Examination in progress": "Examination in progress",
 	"Pwd": "Pwd",
-	"Average Cyclomatic Number": "Average Cyclomatic Number"
+	"Average Cyclomatic Number": "Average Cyclomatic Number",
+	"Average Cyclomatic Number(C)": "Average Cyclomatic Number(C)"
 }

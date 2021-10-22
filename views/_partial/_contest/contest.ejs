@@ -44,9 +44,11 @@
 				<th data-step="21" data-intro="<h3>答題狀況</h3> <p>若題目與練習題相同，仍需從此頁面連結進入題目上傳程式碼，否則通過題目，也無法在此得到通過標示 <i class='fa fa-check' style='color: green;'></i>；相反地，在嘗試卻未通過時顯示 <i class='fa fa-times' style='color: red;'></i>。</p>"></th>
 	           	<th>#</th>
 	            <th><%= __('Problem Title') %></th>
+                <% if (problem_config.enableStyleFactor) { %>
+                    <th><%= __('Average Cyclomatic Number(C)') %></th>
+                <% } %>
 	            <th><%= __('Subs') %></th>
 	            <th data-step="22" data-intro="<h3>提交限制</h3> <p>剩餘的嘗試次數預設為 <b>15</b> 次。當上傳次數超過限制，將由考試委員有權不紀錄該筆成績。有任何變動請聽從考場人員說明</p>"><%= __('#Remain') %></th>
-	            <th><%= __('Average Cyclomatic Number') %></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -66,9 +68,11 @@
 		</td>
 		<td><%- problem_list[row].pid %></td>
 		<td><a href="<%= site.url_for('problem/' + contest_config.cid + '/' + problem_list[row].pid) %>" ><%- problem_list[row].ttl %></a></td>
+        <% if (problem_config.enableStyleFactor) { %>
+            <td><%- problem_list[row].standard_cyclomatic_complexity %></td>
+        <% } %>
 		<td></td>
 		<td><%- site.CONTEST.SUBMIT_LIMIT - submits %></td>
-		<td><%- problem_list[row].standard_cyclomatic_complexity %></td>
 	</tr>
 <% } %>
 
