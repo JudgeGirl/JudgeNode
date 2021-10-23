@@ -10,18 +10,27 @@
 </div>
 <div class="content">
 	<div class="pure-g">
-		<% for (var ri = 0; ri < (table_config.header.length+1)/2; ri++) { %>
+        <%
+            let problemNumber = table_config.header.length;
+            let enableSummary = table_config.summaryChartData !== null;
+            if (enableSummary) {
+                var summaryChartDataJson = JSON.stringify(table_config.summaryChartData);
+        %>
+                <div class="pure-u-1-1"><div id="bar-progress-summary"></div></div>
+                <div class="pure-u-1-1"><h4 style='text-align: center;'>Total Score</h4></div>
+        <% } %>
+		<% for (var ri = 0; ri < (problemNumber + 1)/2; ri++) { %>
 			<%
 				var l = ri*2, r = ri*2 +2;
 				var i;
 			%>
-			<% for (i = l; i < table_config.header.length && i < r; i++) { %>
+			<% for (i = l; i < problemNumber && i < r; i++) { %>
 				<div class="pure-u-1-2"><div id="bar-progress<%= i %>"></div></div>
 			<% } %>
 			<% for (; i < r; i++) { %>
 				<div class="pure-u-1-2"></div>
 			<% } %>
-			<% for (i = l; i < table_config.header.length && i < r; i++) { %>
+			<% for (i = l; i < problemNumber && i < r; i++) { %>
 				<div class="pure-u-1-2"><h4 style='text-align: center;'><%- table_config.header[i].ttl %></h4></div>
 			<% } %>
 			<% for (; i < r; i++) { %>
@@ -33,8 +42,8 @@
 		<thead>
 			<tr>
 				<th style="width: 15%;">Score</th>
-				<% var width = 85 / Math.max(table_config.header.length, 1); %>
-				<% for (var row = 0; row < table_config.header.length; row++) { %>
+				<% var width = 85 / Math.max(problemNumber, 1); %>
+				<% for (var row = 0; row < problemNumber; row++) { %>
 					<th style="width:<%- width %>%"><a href="<%= site.url_for('problem/' + table_config.cid + '/' + table_config.header[row].pid) %>"><%- table_config.header[row].pid %>. <%- table_config.header[row].ttl %></a></th>
 				<% } %>
 			</tr>
@@ -43,7 +52,7 @@
 			<% if (table_config.scorekind == undefined || table_config.scorekind == null || table_config.scorekind.length == 0 || table_config.scorekind[0].max_res != 100) { %>
 			<tr class="normal">
 				<th>100</th>
-				<% for (var col = 0; col < table_config.header.length; col++) { %>
+				<% for (var col = 0; col < problemNumber; col++) { %>
 					<td>0</td>
 				<% } %>
 			</tr>
@@ -55,7 +64,7 @@
 				var score_sum = 0;
 				for (var i = 0; i < table_config.user.length; i++)
 					alluser[table_config.user[i].uid] = 0;
-				for (var i = 0; i < table_config.header.length; i++) {
+				for (var i = 0; i < problemNumber; i++) {
 					probuser[i] = 0;
 					chart_json.push('');
 				}
@@ -63,7 +72,7 @@
 			<% for (var row = 0; row < table_config.scorekind.length; row++) { %>
 			<tr class="normal">
 				<td><%- table_config.scorekind[row].max_res %></td>
-				<% for (var col = 0; col < table_config.header.length; col++) { %>
+				<% for (var col = 0; col < problemNumber; col++) { %>
 					<%
 						var counter = 0;
 						var chart = '';
@@ -87,31 +96,43 @@
 					for (var key in alluser)
 						alluser_size++;
 				 %>
-				<% for (var i = 0; i < table_config.header.length; i++) { %>
+				<% for (var i = 0; i < problemNumber; i++) { %>
 					<td><%- alluser_size-probuser[i] %></td>
 				<% } %>
 			</tr>
 			<tr class="normal">
 				<td>#User</td>
-				<td colspan='<%- table_config.header.length %>'><%- alluser_size %></td>
+				<td colspan='<%- problemNumber %>'><%- alluser_size %></td>
 			</tr>
 			<tr class="normal">
 				<td>Avg. score</td>
-				<td colspan='<%- table_config.header.length %>'><%- (score_sum / alluser_size / table_config.header.length).toFixed(2) %></td>
+				<td colspan='<%- problemNumber %>'><%- (score_sum / alluser_size / problemNumber).toFixed(2) %></td>
 			</tr>
 		</tbody>
 	</table>
 	<script>
-		<% for (var i = 0; i < table_config.header.length; i++) { %>
+		<% for (var i = 0; i < problemNumber; i++) { %>
 			Morris.Bar({
 			  element: 'bar-progress<%- i %>',
 			  data: [<%- chart_json[i] %>].reverse(),
 			  xkey: 'score',
 			  ykeys: ['user'],
 			  labels: ['#users'],
-			  yLabelFormat: function(y){return y != Math.round(y)?'':y;}
+			  yLabelFormat: function(y){return y != Math.round(y)?'':y;} // hide non interger label
 			});
 		<% } %>
+
+        <% if (enableSummary) { %>
+            Morris.Bar({
+              element: 'bar-progress-summary',
+              data: <%- summaryChartDataJson %>,
+              xkey: 'score',
+              ykeys: ['user'],
+              labels: ['#users'],
+              yLabelFormat: function(y){return y != Math.round(y)?'':y;},
+              barColors: ['CadetBlue']
+            });
+        <% } %>
 	</script>
 	<% if (user["uid"] >= 0 && user["class"] == null) { %>
 		<h2>Grade</h2>
@@ -119,8 +140,8 @@
 			<thead>
 				<tr>
 					<th data-type="string" data-sortable="true" data-name="User" style="width: 15%;"></th>
-					<% var width = 85 / Math.max(table_config.header.length, 1); %>
-					<% for (var row = 0; row < table_config.header.length; row++) { %>
+					<% var width = 85 / Math.max(problemNumber, 1); %>
+					<% for (var row = 0; row < problemNumber; row++) { %>
 						<th data-type="string" data-sortable="true" data-name="P<%- String.fromCharCode(65 + row)  %>"></th>
 						<th data-type="int" data-sortable="true" data-name="Score">Score</th>
 					<% } %>
@@ -168,7 +189,7 @@
 				<% for (var row = 0; row < table_config.user.length; row++) { %>
 				<tr style="height: 4.4em;">
 					<td><a href="<%= site.url_for('user/' + table_config.user[row].uid) %>"><%- table_config.user[row].lgn %></a></td>
-					<% for (var col = 0; col < table_config.header.length; col++) { %>
+					<% for (var col = 0; col < problemNumber; col++) { %>
 						<%
 							if (alluser[table_config.user[row].uid][table_config.header[col].pid] != undefined) {
 								var score = alluser[table_config.user[row].uid][table_config.header[col].pid]['MAX(scr)'];
