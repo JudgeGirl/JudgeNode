@@ -547,7 +547,7 @@ router.put('/report/:sid', async function(req, res, next) {
 
     // wow. such dirty code
     let sid = req.params.sid;
-    let command = `poetry run python scripts/send_style_check_task.py ${sid}`;
+    let command = `poetry run python scripts/send_style_check_task/send_by_sid.py ${sid}`;
     let cwd = '/home/judgesister/Judge-sender';
 
     let options = { cwd: cwd }
