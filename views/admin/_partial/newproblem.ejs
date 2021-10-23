@@ -23,9 +23,13 @@
                             <option value="0" selected> <%= __('Private') %> </option>
                         </select>
                     </div>
-                    <div class="pure-u-1-1">
+                    <div class="pure-u-4-5">
                         <label for="ttl"><%= __('Problem Title') %></label>
-                        <input type="text" name="ttl" id="ttl" class="pure-input-1" value="" placeholder="input problem title, like `A + B problem`">
+                        <input class="pure-u-23-24" type="text" name="ttl" id="ttl" class="pure-input-1" value="" placeholder="input problem title, like `A + B problem`">
+                    </div>
+                    <div class="pure-u-1-5">
+                        <label for="cyclomatic_complexity"><%= __('Cyclomatic Complexity') %></label>
+                        <input class="pure-u-21-24" type="text" name="cyclomatic_complexity" id="cyclomatic_complexity" class="pure-input-1" value="" placeholder="edit later" disabled>
                     </div>
                 </div>
             </div>

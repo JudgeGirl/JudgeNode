@@ -32,8 +32,10 @@ router.post('/problem/:pid', function(req, res, next) {
         porder: req.body.porder,
         dependency: req.body.dependency.split(','),
         md: req.body.textbox,
-        solution_md: req.body.textbox2
+        solution_md: req.body.textbox2,
+        cyclomatic_complexity: req.body.cyclomatic_complexity || null
     };
+
     if (req.body.dependency.trim().length == 0)
         config.dependency = [];
     dblink.helper.isAdmin(uid, function(isadmin) {

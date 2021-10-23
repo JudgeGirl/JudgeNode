@@ -9,7 +9,7 @@
 		<div class="pure-u-1">
 			<form class="pure-form" style="position: relative">
 				<label for="search" style="position: absolute; left: 12px; top: -2px">
-					<i class="fa fa-search"></i> 
+					<i class="fa fa-search"></i>
 				</label>
 				<input id="search" class="pure-input-rounded pure-input-1" placeholder="Search Problems, like :public, :private" style="padding-left: 36px; margin: 2px" type="text">
 			</form>
@@ -48,12 +48,15 @@
 				<td>
 				<span>
 					<a class="" href="<%= site.url_for('admin/edit/problem/' + prob.pid) %>"><i class="fa fa-cog"></i></a>
-				</span> | 
+				</span> |
 				<span>
 					<a class="pid-rejudge" href="<%= site.url_for('admin/api/rejudge?pid=' + prob.pid) %>" title="重測所有上傳程式碼"><i class="fa fa-refresh"></i></a>
 				</span> |
 				<span>
 					<a class="pid-delete" href="#" title="刪除問題"><i class="fa fa-trash"></i></a>
+				</span> |
+				<span>
+					<a class="" href="<%= site.url_for('report/problem/' + prob.pid) %>" title="average cyclomatic complexity from the strong"><i class="fa fa-file-text"></i></a>
 				</span>
 				</td>
 			</tr>
@@ -66,35 +69,35 @@
 var list = document.getElementsByClassName("pid-rejudge");
 
 for (var i = 0; i < list.length; i++) {
-	list[i].addEventListener("click", 
+	list[i].addEventListener("click",
         function (event) {
             event.preventDefault();
             if (confirm('Are you sure ? Rejuge maybe need a lot of time.')) {
                 window.location = this.href;
             }
-        }, 
+        },
         false);
 }
 
 list = document.getElementsByClassName("pid-delete");
 
 for (var i = 0; i < list.length; i++) {
-	list[i].addEventListener("click", 
+	list[i].addEventListener("click",
         function (event) {
             event.preventDefault();
             if (confirm('Are you sure ? Delete problem.')) {
                 window.location = this.href;
             }
-        }, 
+        },
         false);
 }
-</script>	
+</script>
 
 <script>
 var $rows = $('tbody > tr');
 $('#search').keyup(function() {
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-    
+
     $rows.show().filter(function() {
         var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
         return !~text.indexOf(val);
