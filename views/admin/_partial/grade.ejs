@@ -1,97 +1,97 @@
 <div class="header">
-	<h1 class='article-title'><%= __('Manage Grade') %></h1>
+    <h1 class='article-title'><%= __('Manage Grade') %></h1>
     <h2>Administrator</h2>
 </div>
 <div class="content">
-	<%- include('../_partial/widget/nav')%>
+    <%- include('../_partial/widget/nav')%>
 
-	<div class="pure-g">
-		<div class="pure-u-1-3">
-			<a class="pure-button pure-button-primary" class="pure-u-1-1" href="<%= site.url_for('admin/new/grade') %>">+ <%= __('New Scores') %></a>
-		</div>
-	</div>
+    <div class="pure-g">
+        <div class="pure-u-1-3">
+            <a class="pure-button pure-button-primary" class="pure-u-1-1" href="<%= site.url_for('admin/new/grade') %>">+ <%= __('New Scores') %></a>
+        </div>
+    </div>
 
 <style>
 .grade-table th, .grade-table td {
-	padding: 0em;
-	min-width: 70px;
+    padding: 0em;
+    min-width: 70px;
 }
 </style>
 
 <ul>
-	<li><i class="fa fa-calendar-check-o"></i> = 特殊事由請假，不列入學期成績。輸入 $-2$</li>
-	<li><i class="fa fa-times"></i> = 沒有成績，該場考試為有效，成績以零分計算。輸入 $-1$</li>
+    <li><i class="fa fa-calendar-check-o"></i> = 特殊事由請假，不列入學期成績。輸入 $-2$</li>
+    <li><i class="fa fa-times"></i> = 沒有成績，該場考試為有效，成績以零分計算。輸入 $-1$</li>
 </ul>
 
 <table class="pure-table pure-table-bordered grade-table" style='width: 100%;' id="grade-table">
-	<thead>
-	<tr>
-		<th data-type="string" data-sortable="true" data-name="Student">ID</th>
-		<%
-			var thead = score_list.thead;
-			var tbody = score_list.tbody;
-			var userlst = score_list.user;
-		%>
-		<% for (var i in thead) { %>
-			<th>
-				<a href="<%= site.url_for('admin/edit/gradettl/' + thead[i].eid) %>" class="custom-mf-title">
-					<%- thead[i].ttl %>
-				</a>
-			</th>
-		<% } %>
-		<th>
-		</th>
-	</tr>
-	</thead>
-	<tbody>
+    <thead>
+    <tr>
+        <th data-type="string" data-sortable="true" data-name="Student">ID</th>
+        <%
+            var thead = score_list.thead;
+            var tbody = score_list.tbody;
+            var userlst = score_list.user;
+        %>
+        <% for (var i in thead) { %>
+            <th>
+                <a href="<%= site.url_for('admin/edit/gradettl/' + thead[i].eid) %>" class="custom-mf-title">
+                    <%- thead[i].ttl %>
+                </a>
+            </th>
+        <% } %>
+        <th>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
 <%
-	var record = {};
-	for (var i = 0; userlst && i < userlst.length; i++) {
-		record[userlst[i].lgn] = {};
-		record[userlst[i].lgn].uid = userlst[i].uid;
-	}
+    var record = {};
+    for (var i = 0; userlst && i < userlst.length; i++) {
+        record[userlst[i].lgn] = {};
+        record[userlst[i].lgn].uid = userlst[i].uid;
+    }
     /*
-	for (var i in record) {
-		for (var j = 0; j < thead.length; j++)
-			record[i][thead[j].eid] = {};
-	}
+    for (var i in record) {
+        for (var j = 0; j < thead.length; j++)
+            record[i][thead[j].eid] = {};
+    }
     */
-	for (var i = 0; tbody && i < tbody.length; i++) {
-		if (record[tbody[i].lgn] != undefined)
-			record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
-	}
+    for (var i = 0; tbody && i < tbody.length; i++) {
+        if (record[tbody[i].lgn] != undefined)
+            record[tbody[i].lgn][tbody[i].eid] = tbody[i].score;
+    }
 %>
 <% for (var i in record) { %>
-	<tr>
-		<td><a href="<%= site.url_for('user/' + record[i].uid) %>"><strong><%- i %></strong></a></td>
-		<td colspan="<%= thead.length+1 %>">
-			<form id="form-<%- record[i].uid %>" action="<%= site.url_for('admin/update/grade/' + record[i].uid) %>" method="post" class="pure-form pure-form-stacked" style="padding: 0em;">
-			<fieldset style="padding: 0em;">
-				<table class="pure-table" style='width: 100%;'>
-				<tbody>
-				<tr>
-				<%
-					for (var j = 0; j < thead.length; j++) {
+    <tr>
+        <td><a href="<%= site.url_for('user/' + record[i].uid) %>"><strong><%- i %></strong></a></td>
+        <td colspan="<%= thead.length+1 %>">
+            <form id="form-<%- record[i].uid %>" action="<%= site.url_for('admin/update/grade/' + record[i].uid) %>" method="post" class="pure-form pure-form-stacked" style="padding: 0em;">
+            <fieldset style="padding: 0em;">
+                <table class="pure-table" style='width: 100%;'>
+                <tbody>
+                <tr>
+                <%
+                    for (var j = 0; j < thead.length; j++) {
                         let score = record[i][thead[j].eid];
                         if (score === undefined)
                             score = -1;
-				%>
-						<td>
-							 <input type="text" name="<%- thead[j].eid %>" class="pure-u-23-24" value="<%- score %>">
-						</td>
-				<% } %>
-					<td>
-					<button onclick="document.getElementById('form-<%- record[i].uid %>').submit();" class="pure-button pure-button-primary button-warning pure-u-23-24"><i class="fa fa-pencil-square-o"></i></button>
-					</td>
-				</tr>
-				</tbody>
-				</table>
-		    </fieldset>
-			</form>
-		</td>
-	</tr>
+                %>
+                        <td>
+                             <input type="text" name="<%- thead[j].eid %>" class="pure-u-23-24" value="<%- score %>">
+                        </td>
+                <% } %>
+                    <td>
+                    <button onclick="document.getElementById('form-<%- record[i].uid %>').submit();" class="pure-button pure-button-primary button-warning pure-u-23-24"><i class="fa fa-pencil-square-o"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+                </table>
+            </fieldset>
+            </form>
+        </td>
+    </tr>
 <% } %>
-	</tbody>
+    </tbody>
 </table>
 </div>
 </div>
