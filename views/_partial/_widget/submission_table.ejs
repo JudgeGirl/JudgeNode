@@ -60,6 +60,8 @@
                 </td>
 				<%
                     // build content of verdict column
+                    let isAdmin = (user.uid && user["class"] === null);
+
 					var verdictCol = '';
 					var judge_res = site.JUDGE.result_message,
 					    judge_lng = site.JUDGE.lang;
@@ -81,7 +83,7 @@
 						verdictCol += ' <i class="fa fa-spinner fa-pulse"></i>';
 
                     // add rejudge button for administor
-					if (user.uid && user["class"] === null) {
+					if (isAdmin) {
 						verdictCol += ' <a class="pid-rejudge" href="' + site.url_for('/admin/api/rejudge?pid=') + sl[i].pid + '&sid=' + sl[i].sid + '" style="color: #b6c17b;" title="rejudge"><i class="fa fa-refresh"></i></a>';
 					}
 					verdictCol += '</td>';
@@ -105,6 +107,9 @@
                             <small>(<%=sl[i].factor.toFixed(2) %>)</small>
                         <% } %>
                     <% } %>
+                    <% if (isAdmin) { %>
+                        <a id="resend-style-<%= sl[i].sid %>" class="pid-resend-report" href="#" onclick="sendStyleCheckTask(<%= sl[i].sid %>); return false;" style="color: #b6c17b;" title="resend style check task"><i class="fa fa-refresh"></i></a>
+                    <% } %>
                 </td>
 			</tr>
 		<% } %>
@@ -112,3 +117,16 @@
 	</table>
 	</div>
 </div>
+
+<script>
+    function sendStyleCheckTask(sid) {
+        $(`#resend-style-${sid}`).hide();
+        $.ajax({
+            url: `/api/report/${sid}`,
+            type: 'PUT',
+            success: function(result) {
+                window.location.reload();
+            }
+        });
+    }
+</script>
