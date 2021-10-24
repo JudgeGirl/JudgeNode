@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-let { exec } = require('child_process');
 const { StatusCodes } = require('http-status-codes');
 
 const { loggerFactory } = require('lib/components/logger/LoggerFactory');
 const passwordGenerator = require('../lib/components/passwordGenerator');
 const _config = require('../lib/config').config;
 const dblink = require('../lib/components/dblink');
+const { getSendStyleCheckTaskRunner } = require('../lib/components/ScriptRunner');
 
 let invalidAPIKey = (req, res) => {
     const apiKey = req.header("Api-Key");
@@ -538,38 +538,22 @@ router.patch('/submission/:sid', async function(req, res, next) {
 * Force update style check report for a submission.
 */
 router.put('/report/:sid', async function(req, res, next) {
-    if (invalidAPIKey(req, res))
-        return;
-
     let isAdmin = await rejectNonAdmin(req, res);
     if (!isAdmin)
         return;
 
-    // wow. such dirty code
     let sid = req.params.sid;
-    let command = `poetry run python scripts/send_style_check_task/send_by_sid.py ${sid}`;
-    let cwd = '/home/judgesister/Judge-sender';
 
-    let options = { cwd: cwd }
-    const process = exec(command, options, function(error, stdout, stderr) {
-        if (error) {
-            console.log(error.stack);
-            console.log('Error code: '+error.code);
-            console.log('Signal received: '+error.signal);
-        }
+    logger = loggerFactory.getLogger(module.id);
+    logger.info(`Send style check task: (${sid}) by ${req.session.uid}`)
 
-        console.log('Child Process STDOUT: '+stdout);
-        console.log('Child Process STDERR: '+stderr);
-    });
+    let sendStyleCheckTaskRunner = getSendStyleCheckTaskRunner(sid);
 
-    process.on('exit', function (code) {
-        console.log('Child process exited with exit code '+code);
-        if (code == 0)
-            res.status(StatusCodes.OK).json('success');
-        else
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json('failed');
-    });
-
+    let exitCode = await sendStyleCheckTaskRunner.run();
+    if (exitCode == 0)
+        res.status(StatusCodes.OK).json('success');
+    else
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json('failed');
 });
 
 module.exports = router;
