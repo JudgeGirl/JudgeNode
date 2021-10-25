@@ -8,7 +8,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-<% 
+<%
 	for (var i in score_statistic.score) {
 		score_statistic.score[i].sum /= score_statistic.exams_cnt;
 		score_statistic.score[i].sum = Math.ceil(score_statistic.score[i].sum);
@@ -63,7 +63,7 @@
 %>
 
 <ul>
-	<li><i class="fa fa-calendar-check-o"></i> = 特殊事由請假，不列入學期成績。$\text{學期成績 Fin} = \frac{\text{學期總分 108}}{\text{有效考試場數 N}} \times \frac{累計考試總分 S}{小考滿分 100}$</li>
+	<li><i class="fa fa-calendar-check-o"></i> = 特殊事由請假，不列入學期成績。學期成績為考試成績平均。</li>
 	<li><i class="fa fa-times"></i> = 沒有成績，該場考試為有效，成績以零分計算。</li>
 </ul>
 
@@ -82,7 +82,7 @@
 	</tr>
 	</thead>
 	<tbody>
-		<% 
+		<%
 			var record = {};
 			for (var i = 0; tbody && i < tbody.length; i++) {
 				record[tbody[i].lgn] = {};
@@ -98,18 +98,18 @@
 				record[i].avg = sum / thead.length;
 			}
 
-            function roundToTwo(num) {    
+            function roundToTwo(num) {
                 return +(Math.round(num + "e+2")  + "e-2");
             }
 		%>
-		<% 
-			for (var i in record) { 
-				var valid_record = 0;				
+		<%
+			for (var i in record) {
+				var valid_record = 0;
 		%>
 			<tr>
 				<td class="headcol"><strong><%- i %></strong></td>
-				<% 
-				for (var j = 0; j < thead.length; j++) { 
+				<%
+				for (var j = 0; j < thead.length; j++) {
 					columnsum[thead[j].eid] += (record[i][thead[j].eid] !== undefined || record[i][thead[j].eid] === 0) ? Math.ceil(record[i][thead[j].eid]) : 0;
 				%>
 					<td>
@@ -126,7 +126,7 @@
 					<% } %>
 					</td>
 				<% } %>
-				<% 
+				<%
 
 					var expect_fill_count = 18;
 					var expect_fill_score = 108;
@@ -172,7 +172,7 @@
 		</tr>
 		</thead>
 		<tbody>
-			
+
 		</tbody>
 	</table>
 	</div>
@@ -201,7 +201,7 @@
 		<tbody>
 			<tr>
 				<td><strong>Average</strong></td>
-				<% for (var i = 0; i < thead.length; i++) { 
+				<% for (var i = 0; i < thead.length; i++) {
 					var rows = Object.keys(record).length;
 				%>
 				<td><%= rows ? Math.ceil(columnsum[thead[i].eid]/rows) : 0 %></td>
