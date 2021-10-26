@@ -115,7 +115,7 @@
 					<td>
 					<% if (record[i][thead[j].eid] !== undefined && record[i][thead[j].eid] >= 0) { %>
 						<% valid_record++; %>
-						<%= Math.ceil(record[i][thead[j].eid]) %>
+						<%= record[i][thead[j].eid] %>
 					<% } else { %>
 						<% if (record[i][thead[j].eid] == undefined || record[i][thead[j].eid] == -1) { %>
 							<% valid_record++; %>

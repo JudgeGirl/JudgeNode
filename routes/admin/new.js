@@ -91,7 +91,8 @@ router.post('/contest', function(req, res, next) {
         ts1: new Date(req.body.ts1).getTime(),
         ts2: new Date(req.body.ts2).getTime(),
         pid: req.body.pid.split(','),
-        participants: req.body.participants
+        participants: req.body.participants,
+        style_factor_rule_id: '2'
     };
     if (req.body.pid.trim().length == 0)
         config.pid = [];
