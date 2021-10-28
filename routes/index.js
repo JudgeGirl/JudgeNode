@@ -473,22 +473,20 @@ router.get('/contest/:cid', function(req, res, next) {
         }
     });
 });
-router.get('/scoreboard/contest/:cid', function(req, res, next) {
+router.get('/scoreboard/contest/:cid', async function(req, res, next) {
     var cid = req.params.cid,
         uid = req.session.uid;
-    dblink.contest.enable(cid, uid, function(status, contest_config, sysmsg) {
-        if (status == 0) {
-            res.redirect(utils.url_for('/contest/' + cid));
-        } else {
-            dblink.contest.scoreboard(cid, uid, function(table_config) {
-                res.render('layout', {
-                    layout: 'scoreboard',
-                    subtitle: 'Scoreboard',
-                    table_config: table_config
-                });
-            });
-        }
-    })
+
+    let permission = await dblink.contest.promise.canViewContest(cid, uid);
+    if (permission.statusCode !== 1)
+        return res.redirect(utils.url_for('/contest/' + cid));
+
+    let scoreboard = await dblink.contest.promise.getScoreboard(cid, uid);
+    res.render('layout', {
+        layout: 'scoreboard',
+        subtitle: 'Scoreboard',
+        table_config: scoreboard
+    });
 });
 
 router.post('/submit',
