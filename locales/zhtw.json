@@ -144,5 +144,6 @@
 	"Contest Rule": "Contest Rule",
 	"Pwd": "Pwd",
 	"New Scores": "New Scores",
-	"Average Cyclomatic Number(C)": "Average Cyclomatic Number(C)"
+	"Average Cyclomatic Number(C)": "Average Cyclomatic Number(C)",
+	"Cyclomatic Complexity": "Cyclomatic Complexity"
 }
