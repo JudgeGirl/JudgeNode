@@ -49,7 +49,16 @@ router.get('/:uid', function(req, res, next) {
 
     if (!isTestMode || hasNoClass) {
         let displayUser = function(user) {
-            res.render('layout', {
+
+            if (user.info === undefined) {
+                return res.render('error', {
+                    message: 'User not found.',
+                    error: {},
+                    user: null
+                });
+            }
+
+            return res.render('layout', {
                 layout: 'user',
                 subtitle: 'User',
                 user: req.session,

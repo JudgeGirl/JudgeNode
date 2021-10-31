@@ -163,11 +163,6 @@ router.post('/edit', function(req, res, next) {
         });
     }
 });
-router.get('/user', function(req, res, next) {
-    res.render('layout', {
-        layout: 'user'
-    });
-});
 
 router.get('/signup', function(req, res, next) {
     res.render('layout', {
@@ -176,6 +171,7 @@ router.get('/signup', function(req, res, next) {
         sysmsg: ''
     });
 });
+
 router.post('/register', function(req, res, next) {
     var user = {
         lgn: req.body.lgn,
