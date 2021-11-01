@@ -22,6 +22,16 @@ var upload = multer({
     }
 });
 
+function renderError({
+    res,
+    title = "NOT FOUND",
+    message = "Error.",
+    status = "",
+    extraMessage = ""
+}={}) {
+    return res.render('error2', { title, message, status, extraMessage });
+}
+
 /* GET home page, default /archive */
 router.get('/', function(req, res, next) {
     dblink.archive.list(function(content) {
@@ -151,6 +161,13 @@ router.post('/edit', function(req, res, next) {
             pwd: req.body.pwd,
             motto: req.body.motto
         };
+
+        let mottoLenghtLimit = _config.JUDGE.MOTTO_LENGTH_LIMIT;
+        if (user.motto.length > mottoLenghtLimit) {
+            let message = `Mottos should contain no more than ${mottoLenghtLimit} characters. The new motto has ${user.motto.length} characters.`
+            return renderError({ res, title: "Forbidden", message });
+        }
+
         dblink.user.update_info(user, function(status) {
             dblink.user.info(user.uid, function(user) {
                 res.render('layout', {
@@ -600,10 +617,7 @@ router.get('/score', function(req, res, next) {
     dblink.helper.isAdmin(uid, function(isAdmin) {
         dblink.user.info(req.session.uid, function(user) {
             if (user.info == undefined)
-                return res.render('error', {
-                    message: 'Invalid user.',
-                    error: {}
-                });
+                return renderError({res, title: 'Invalid user'});
 
             dblink.score.statistic(function(score_statistic) {
                 if (isAdmin) {
