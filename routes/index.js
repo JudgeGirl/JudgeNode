@@ -455,9 +455,15 @@ router.get('/contests?', function(req, res, next) {
         });
     });
 });
-router.get('/contest/:cid', function(req, res, next) {
+router.get('/contest/:cid', async function(req, res, next) {
     var cid = req.params.cid,
         uid = req.session.uid;
+
+    // to prevent the following error caused by invalid cid
+    let contest = await dblink.contest.promise.getContest(cid);
+    if (contest.length !== 1)
+        return renderError({ res, title: `Invalid contest id: ${cid}` });
+
     dblink.contest.enable(cid, uid, function(status, contest_config, sysmsg) {
         if (uid != undefined && req.session['class'] == null)
             status = 1; // can
