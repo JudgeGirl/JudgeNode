@@ -76,9 +76,9 @@
 			</tr>
 			<% } %>
 			<tr class="normal">
-				<td>#NoSubmission</td>
+				<td>Attendance</td>
 				<% for (var col = 0; col < problemNumber; col++) { %>
-					<td><%= problemScoreTable['tableCols'][col]['noSubmit'] %></td>
+					<td><%= problemScoreTable['tableCols'][col]['attendance'] %></td>
 				<% } %>
 			</tr>
             <tr class="normal">
@@ -88,12 +88,12 @@
                 <% } %>
             </tr>
 			<tr class="normal">
-				<td>#User</td>
-				<td colspan='<%- problemNumber %>'><%- problemScoreTable.totalUser %></td>
+				<td>Attendance</td>
+				<td colspan='<%- problemNumber %>'><%- problemScoreTable.totalAttendance %></td>
 			</tr>
             <% if (problemNumber > 1) { %>
                 <tr class="normal">
-                    <td>Avg. score</td>
+                    <td>Average</td>
                     <td colspan='<%- problemNumber %>'><%- (problemScoreTable.totalAverage).toFixed(2) %></td>
                 </tr>
             <% } %>
