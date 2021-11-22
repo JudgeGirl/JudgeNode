@@ -59,7 +59,6 @@
 		columnsum[thead[i].eid] = 0;
 	}
 	columnsum['Avg.'] = 0;
-	columnsum['Fin.'] = 0;
 %>
 
 <ul>
@@ -78,7 +77,6 @@
 			</th>
 		<% } %>
 		<th data-type="int" data-sortable="true" data-name="Avg."><div>Avg.</div></th>
-		<th data-type="int" data-sortable="true" data-name="Final Grade"><div>Final Grade</div></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -143,10 +141,8 @@
 					var finalgrade = Math.ceil(record[i].sum / 100*contribute_each);
 
 					columnsum['Avg.'] += record[i].avg;
-					columnsum['Fin.'] += finalgrade;
 				%>
 				<td><%- Math.ceil(record[i].avg) %></td>
-				<td style="color: <%- finalgrade < 60 ? "#F00" : "#0A0" %>; font-weight: bold;"><%- finalgrade %></td>
 			</tr>
 		<% } %>
 	</tbody>
@@ -174,7 +170,6 @@
 				</th>
 			<% } %>
 			<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
-			<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -201,7 +196,6 @@
 				</th>
 			<% } %>
 			<th data-type="int" data-sortable="true" data-name="Avg.">Avg.</th>
-			<th data-type="int" data-sortable="true" data-name="Final Grade">Final Grade</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -213,7 +207,6 @@
 				<td><%= rows ? Math.ceil(columnsum[thead[i].eid]/rows) : 0 %></td>
 				<% } %>
 				<td><%= rows ? Math.ceil(columnsum['Avg.']/rows) : 0 %></td>
-				<td><%= rows ? Math.ceil(columnsum['Fin.']/rows) : 0 %></td>
 			</tr>
 		</tbody>
 	</table>
