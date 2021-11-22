@@ -9,6 +9,7 @@ var upload = multer({
 var fs = require('fs');
 var utils = require('../../lib/components/utils');
 var loginURL = utils.url_for('login');
+var _config = require('../../lib/config').config;
 
 /* new page */
 router.get('/problem', function(req, res, next) {
@@ -92,7 +93,7 @@ router.post('/contest', function(req, res, next) {
         ts2: new Date(req.body.ts2).getTime(),
         pid: req.body.pid.split(','),
         participants: req.body.participants,
-        style_factor_rule_id: '2'
+        style_factor_rule_id: _config["JUDGE"]["DEFAULT_STYLE_FACTOR_RULE"]
     };
     if (req.body.pid.trim().length == 0)
         config.pid = [];
