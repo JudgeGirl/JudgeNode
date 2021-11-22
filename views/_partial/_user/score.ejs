@@ -114,8 +114,14 @@
 				%>
 					<td>
 					<% if (record[i][thead[j].eid] !== undefined && record[i][thead[j].eid] >= 0) { %>
-						<% valid_record++; %>
-						<%= record[i][thead[j].eid] %>
+                        <%
+                            valid_record++;
+                            let scoreEntity = parseFloat(record[i][thead[j].eid]);
+                            if (Number.isInteger(scoreEntity)) { %>
+                            <%= scoreEntity %>
+                        <%  } else { %>
+                            <%= scoreEntity.toFixed(2) %>
+                        <%  } %>
 					<% } else { %>
 						<% if (record[i][thead[j].eid] == undefined || record[i][thead[j].eid] == -1) { %>
 							<% valid_record++; %>
