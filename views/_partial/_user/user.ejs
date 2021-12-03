@@ -80,7 +80,8 @@
 		<div class="pure-u-1-1">
 			<table class="pure-table pure-table-bordered" style='width: 100%;'>
 			<thead>
-				<th><%= __('Solved List') %></td>
+                <% let sovledListLink = site.url_for(`user/${userinfo.info.uid}/solved-list`); %>
+				<th><a href="<%= sovledListLink %>"><%= __('Solved List') %></a></td>
 			</thead>
 			<tbody>
 			<tr>

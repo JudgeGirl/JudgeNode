@@ -1,0 +1,33 @@
+<div class="header">
+    <h1 class='article-title'>Solved List</h1>
+</div>
+<div class="content">
+    <h3><%= lgn %>'s Solved List</h3>
+    <div class="pure-g">
+        <div class="pure-u-5-5">
+            <table class="pure-table pure-table-bordered" sytle="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Problem ID</th>
+                        <th>Problem Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        for (let rowIndex = 0; rowIndex < solvedList.length; rowIndex++) {
+                            let row = solvedList[rowIndex];
+                            let query = `?pid=${row.pid}&uid=${uid}`;
+                            let submissionLink = site.url_for("submissions") + query;
+                            let problemLink = site.url_for(`problem/0/${row.pid}`);
+                    %>
+                        <tr>
+                            <td><a href="<%= problemLink %>"><%= solvedList[rowIndex].pid %></a></td>
+                            <td><a href="<%= submissionLink %>"><%= solvedList[rowIndex].title %></a></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div/
+    </div>
+</div>
+
