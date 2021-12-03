@@ -65,11 +65,10 @@ router.get('/:uid/solved-list', async function(req, res, next) {
 
     // mode check
     if (isTestMode && !isAdmin) {
-        return res.render('layout', {
-            layout: 'forbidden',
-            subtitle: 'Forbidden',
-            sysmsg: 'This page is not availabe during examination.'
-        });
+        return helper.renderForbidden({
+            res,
+            message: 'This page is not availabe during examination.'
+        })
     }
 
     // display mode: private/public
