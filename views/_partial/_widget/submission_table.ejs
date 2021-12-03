@@ -104,6 +104,9 @@
                     <% if (sl[i].hasReport) { %>
                         <a href="<%= site.url_for('report/' + sl[i].sid) %>"><i class="fa fa-file-text"></i></a>
                         <% if (sl[i].factor !== null) { %>
+                            <% if (sl[i].factor == 1.0) { %>
+                                <i class="fa fa-smile-o" aria-hidden="true" style="color: green"></i>
+                            <% } %>
                             <small>(<%=sl[i].factor.toFixed(2) %>)</small>
                         <% } %>
                     <% } %>

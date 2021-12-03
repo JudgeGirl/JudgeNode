@@ -81,7 +81,10 @@
 			<table class="pure-table pure-table-bordered" style='width: 100%;'>
 			<thead>
                 <% let sovledListLink = site.url_for(`user/${userinfo.info.uid}/solved-list`); %>
-				<th><a href="<%= sovledListLink %>"><%= __('Solved List') %></a></td>
+				<th>
+                    <a href="<%= sovledListLink %>"><i class="fa fa-check-square-o" aria-hidden="true"></i> <%= __('Solved List') %>
+                    </a>
+                </td>
 			</thead>
 			<tbody>
 			<tr>
@@ -132,7 +135,9 @@
     <h2>
         <%- __('Recent Submission') %>
         <span>
-            <a href="<%= site.url_for('submissions?uid=' + userinfo.info.uid) %>">(all)</a>
+            <a href="<%= site.url_for('submissions?uid=' + userinfo.info.uid) %>">
+                (all)
+            </a>
         </span>
     </h2>
 </div>

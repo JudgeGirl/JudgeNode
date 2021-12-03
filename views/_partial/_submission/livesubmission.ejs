@@ -187,6 +187,9 @@
                     report = `<a href="${link}"><i class="fa fa-file-text"></i></a>`;
 
                     if (submit_list[i].factor !== null) {
+                        if (submit_list[i].factor == 1.0)
+                            report += ' <i class="fa fa-smile-o" aria-hidden="true" style="color: green"></i>';
+
                         report += `\n<small>(${submit_list[i].factor.toFixed(2)})</small>`;
                     }
                 }
