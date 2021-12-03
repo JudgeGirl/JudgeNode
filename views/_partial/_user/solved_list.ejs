@@ -2,7 +2,7 @@
     <h1 class='article-title'>Solved List</h1>
 </div>
 <div class="content">
-    <h3><%= lgn %></h3>
+    <h3><%= lgn %>'s Solved List</h3>
     <div class="pure-g">
         <div class="pure-u-5-5">
             <table class="pure-table pure-table-bordered" sytle="width: 100%">
@@ -17,11 +17,12 @@
                         for (let rowIndex = 0; rowIndex < solvedList.length; rowIndex++) {
                             let row = solvedList[rowIndex];
                             let query = `?pid=${row.pid}&uid=${uid}`;
-                            let problemLink = site.url_for("submissions") + query;
+                            let submissionLink = site.url_for("submissions") + query;
+                            let problemLink = site.url_for(`problem/0/${row.pid}`);
                     %>
                         <tr>
-                            <td><%= solvedList[rowIndex].pid %></td>
-                            <td><a href="<%= problemLink %>"><%= solvedList[rowIndex].title %></a></td>
+                            <td><a href="<%= problemLink %>"><%= solvedList[rowIndex].pid %></a></td>
+                            <td><a href="<%= submissionLink %>"><%= solvedList[rowIndex].title %></a></td>
                         </tr>
                     <% } %>
                 </tbody>
