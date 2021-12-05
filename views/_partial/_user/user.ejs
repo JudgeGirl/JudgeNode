@@ -1,6 +1,12 @@
 <div class="header">
 	<h1 class='article-title'><%= __('User') %></h1>
-	<h2><%- userinfo.info.lgn  %></h2>
+    <h2>
+        <div style="display: block; margin: auto">
+            <form id="navigate-form" action="javascript:void(0);" method="get">
+                <input id="navigate-lgn" placeholder="User ID" value="<%- userinfo.info.lgn %>" style="text-align:center; color: Gray; border: none" />
+            </form>
+        </div>
+    </h2>
 </div>
 <div class="content">
 
@@ -144,3 +150,14 @@
 <%- include('../_widget/submission_table', {submission_list: userinfo.recent}) %>
 
 </div>
+
+<script type="text/javascript">
+    $("#navigate-form").submit(function() {
+        let userUrl = "/user/" + $("#navigate-lgn").val();
+        let e = document.createElement("a");
+        e.href = userUrl;
+        e.click();
+
+        return false;
+    });
+</script>
