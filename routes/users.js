@@ -100,7 +100,7 @@ router.get('/', function(req, res, next) {
     res.redirect(utils.url_for(`/user/${uid}`));
 });
 
-router.get('/:uid', function(req, res, next) {
+router.get('/:uid', async function(req, res, next) {
     let uid = req.params.uid;
     let selfId = req.session.uid;
     let isTestMode = config.CONTEST.MODE == true;
@@ -112,6 +112,31 @@ router.get('/:uid', function(req, res, next) {
             sysmsg: '考試中，禁止查詢其他 users。'
         });
     };
+
+    // validate if uid is a legal string
+    if (!helper.isLegalLgn(uid)) {
+        return helper.renderError({
+            res,
+            title: "Invalid User",
+            message: ""
+        });
+    }
+
+    // check if the uid is actually lgn
+    let userRecords = await dblink.user.promises.getUser(uid);
+    if (userRecords.length == 0) {
+        userRecords = await dblink.user.promises.getUserByLoginName(uid);
+        if (userRecords.length == 1) {
+            return res.redirect(utils.url_for(`/user/${userRecords[0].uid}`));
+        } else {
+            return helper.renderError({
+                res,
+                title: "User not found",
+                message: "",
+                httpCode: 404
+            });
+        }
+    }
 
     if (!isTestMode || hasNoClass) {
         let displayUser = function(user) {

@@ -17,8 +17,10 @@ const renderError = function({
     title = "NOT FOUND",
     message = "Error.",
     status = "",
-    extraMessage = ""
+    extraMessage = "",
+    httpCode = 500
 }={}) {
+    res.status(httpCode);
     return res.render('error2', { title, message, status, extraMessage });
 }
 
@@ -32,8 +34,13 @@ const renderForbidden = function({
     });
 }
 
+const isLegalLgn = function(lgn) {
+    return /^[ a-zA-Z0-9_]+$/.test(lgn);
+}
+
 module.exports = {
     renderDebug,
     renderError,
-    renderForbidden
+    renderForbidden,
+    isLegalLgn
 };
