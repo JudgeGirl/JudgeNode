@@ -115,11 +115,7 @@ router.get('/:uid', async function(req, res, next) {
 
     // validate if uid is a legal string
     if (!helper.isLegalLgn(uid)) {
-        return helper.renderError({
-            res,
-            title: "Invalid User",
-            message: ""
-        });
+        return helper.renderInvalidArgurment("User", res);
     }
 
     // check if the uid is actually lgn

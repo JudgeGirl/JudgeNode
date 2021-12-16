@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dblink = require('../lib/components/dblink');
+var helper = require('./helper');
 
 function escapeHtml(unsafe) {
 	return unsafe
@@ -58,6 +59,11 @@ router.get('/problem/:pid', async function(req, res) {
 router.get('/:sid', async function(req, res, next) {
     let sid = req.params.sid;
     let uid = req.session.uid;
+
+    if (!helper.isLegalArgument("sid", sid)) {
+        return helper.renderInvalidArgurment("submission", res);
+    }
+
     let viewPrivilege = await dblink.permission.sourceCodeVeiwPrivilege(uid, sid);
 
     if (!viewPrivilege) {

@@ -34,13 +34,32 @@ const renderForbidden = function({
     });
 }
 
+const isLegalArgument = function(type, value) {
+    if (type == "lgn")
+        return /^[ a-zA-Z0-9_]+$/.test(value);
+
+    if (type == "sid")
+        return /^[0-9]+$/.test(value);
+}
+
 const isLegalLgn = function(lgn) {
-    return /^[ a-zA-Z0-9_]+$/.test(lgn);
+    return isLegalArgument("lgn", lgn);
+}
+
+const renderInvalidArgurment = function(type, res) {
+    type = type.charAt(0).toUpperCase() + type.slice(1);
+    return renderError({
+        res,
+        title: `Invalid ${type}`,
+        message: ""
+    });
 }
 
 module.exports = {
     renderDebug,
     renderError,
     renderForbidden,
-    isLegalLgn
+    renderInvalidArgurment,
+    isLegalLgn,
+    isLegalArgument
 };
