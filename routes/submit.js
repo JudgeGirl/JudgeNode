@@ -93,7 +93,7 @@ function submitFunction(req, res) {
 
   // prevent multiple unsettled submission waiting
   const unsettledSubmisionAmount = 5; // TODO: implement query
-  if (unsettledSubmisionAmount > 0)
+  if (_config.JUDGE.LIMIT_EXCESSIVE_SUBMISSIONS && unsettledSubmisionAmount > 0)
     return renderError({
       res,
       title: "Submission Limited",
