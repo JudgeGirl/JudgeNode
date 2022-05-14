@@ -1,16 +1,18 @@
 const { Router } = require('express');
 const router = Router();
-
-const { loggerFactory } = require('lib/components/logger/LoggerFactory');
-const utils = require('../lib/components/utils');
-const dblink = require('../lib/components/dblink');
 const multer = require('multer');
 const fs = require('fs');
+const { StatusCodes } = require('http-status-codes');
+
+const utils = require('../lib/components/utils');
+const dblink = require('../lib/components/dblink');
 var _config = require('../lib/config').config;
+const { loggerFactory } = require('lib/components/logger/LoggerFactory');
+const { renderError } = require('./helper');
 
 var upload = multer({
   dest: 'files/',
-  onFileUploadStart: function(file, req, res) {
+  onFileUploadStart: function(file, req) {
       if (req.files.file.length > 64 * 1024)
           return false;
       return true;
@@ -69,7 +71,7 @@ function submitStep(req, res, uid, pid, cid, lng) {
         }
       }
 
-      dblink.judge.update_waiting_submission(sid, function (err) {
+      dblink.judge.update_waiting_submission(sid, function () {
         if (cid === "0")
           return res.redirect(utils.url_for('live'));
         else
@@ -77,16 +79,27 @@ function submitStep(req, res, uid, pid, cid, lng) {
       });
     });
   });
-};
+}
 
-function submitFunction(req, res, next) {
+function submitFunction(req, res) {
+  // assure user logs in
   if (req.session.uid === undefined || req.session.uid < 0)
     return res.redirect(utils.url_for('/login'));
 
   const uid = req.session.uid,
     pid = req.body.pid,
-    cid = req.body.cid,
-    lng = req.body.lng;
+    cid = req.body.cid;
+  let lng = req.body.lng;
+
+  // prevent multiple unsettled submission waiting
+  const unsettledSubmisionAmount = 5; // TODO: implement query
+  if (unsettledSubmisionAmount > 0)
+    return renderError({
+      res,
+      title: "Submission Limited",
+      message: `You still have ${unsettledSubmisionAmount} submission waiting for the result. No more new submissions.`,
+      httpCode: StatusCodes.FORBIDDEN
+    })
 
   if (lng == undefined) // multi file
     lng = 0;

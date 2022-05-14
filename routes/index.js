@@ -4,7 +4,6 @@ var dblink = require('../lib/components/dblink');
 var multer = require('multer');
 var _config = require('../lib/config').config;
 var utils = require('../lib/components/utils');
-var fs = require('fs');
 const { StatusCodes } = require('http-status-codes');
 
 const { loggerFactory } = require('lib/components/logger/LoggerFactory');
