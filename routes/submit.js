@@ -81,7 +81,7 @@ function submitStep(req, res, uid, pid, cid, lng) {
   });
 }
 
-function submitFunction(req, res) {
+async function submitFunction(req, res) {
   // assure user logs in
   if (req.session.uid === undefined || req.session.uid < 0)
     return res.redirect(utils.url_for('/login'));
@@ -92,14 +92,18 @@ function submitFunction(req, res) {
   let lng = req.body.lng;
 
   // prevent multiple unsettled submission waiting
-  const unsettledSubmisionAmount = 5; // TODO: implement query
-  if (_config.JUDGE.LIMIT_EXCESSIVE_SUBMISSIONS && unsettledSubmisionAmount > 0)
+  const unsettledSubmisionAmount = await dblink.submission.promises.getAmountOfWaitingSubmission(uid, pid);
+  if (_config.JUDGE.LIMIT_EXCESSIVE_SUBMISSIONS && unsettledSubmisionAmount > 0) {
+    const infoMessage = `Decline a submission of problem ${pid} from user ${uid}. There are already ${unsettledSubmisionAmount} submissions waiting to judge.`;
+    loggerFactory.getLogger(module.id).info(infoMessage);
+
     return renderError({
       res,
       title: "Submission Limited",
       message: `You still have ${unsettledSubmisionAmount} submission waiting for the result. No more new submissions.`,
       httpCode: StatusCodes.FORBIDDEN
     })
+  }
 
   if (lng == undefined) // multi file
     lng = 0;
